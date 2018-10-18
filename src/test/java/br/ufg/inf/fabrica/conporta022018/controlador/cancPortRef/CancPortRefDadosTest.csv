@@ -1,3 +1,12 @@
+pessoa
+PKpes;nomePes; cpfPes; emailPes; senhaUsu; ehUsuAtivo
+1;José Carlos Santos; 123.456.789-12; jose@exemplo.com; 123456; true
+undAdm
+PKundAdm;nomeUnd; siglaUnd; tipoUnd; minInat; ultPort; anoPort; ultNumExped; ultNumProp
+1;Instituto de Informática; INF; Unidade Acadêmica; 15; 201800; 2018; 0; -1
+designado
+PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
+1;12/11/2018; Coordenador; Novo coordenador de curso; 220; ;1;1
 portaria
 PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf;
 1;INF201800; INF; 2018; 00; Ativa; Novo coordenador de curso; 12/11/2018; 01/01/201931/12/2021; 01/01/2019; 31/12/2021; 12/12/2018; 220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.; Representa uma unidade que comp�e a estrutura acad�mica e administrativa da universidade. Conforme o Art. 7� do Estatuto da UFG;;
@@ -13,7 +22,6 @@ PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; perio
 13;INF201812; INF; 2018; 12; Ativa; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019; 220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.; Representa uma unidade que comp�e a estrutura acad�mica e administrativa da universidade. Conforme o Art. 7� do Estatuto da UFG;;
 PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf;
 14;INF201813; INF; 2018; 13; Ativa; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019; 220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.; Representa uma unidade que comp�e a estrutura acad�mica e administrativa da universidade. Conforme o Art. 7� do Estatuto da UFG;;
-
 portariaReferenciada
 PKportariaReferenciada; idPortaria; idPortariaReferenciada; ehCancelamento;
 1;INF201810;INF201800;true;
