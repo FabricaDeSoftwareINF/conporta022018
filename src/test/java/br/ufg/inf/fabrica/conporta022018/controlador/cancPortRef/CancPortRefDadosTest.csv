@@ -7,6 +7,20 @@ PKundAdm;nomeUnd; siglaUnd; tipoUnd; minInat; ultPort; anoPort; ultNumExped; ult
 designado
 PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
 1;12/11/2018; Coordenador; Novo coordenador de curso; 220; ;1;1
+PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
+2;12/11/2018; Coordenador; Novo coordenador de curso; 220; ;3;1
+PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
+3;12/11/2018; Coordenador; Novo coordenador de curso; 220; ;4;1
+PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
+4;12/11/2018; Coordenador; Novo coordenador de curso; 220; ;4;1
+PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
+5;12/11/2018; Coordenador; Novo coordenador de curso; 220; ;11;1
+PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
+6;12/11/2018; Coordenador; Novo coordenador de curso; 220; ;12;1
+PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
+7;12/11/2018; Coordenador; Novo coordenador de curso; 220; ;13;1
+PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
+8;12/11/2018; Coordenador; Novo coordenador de curso; 220; ;14;1
 portaria
 PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf;
 1;INF201800; INF; 2018; 00; Ativa; Novo coordenador de curso; 12/11/2018; 01/01/201931/12/2021; 01/01/2019; 31/12/2021; 12/12/2018; 220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.; Representa uma unidade que comp�e a estrutura acad�mica e administrativa da universidade. Conforme o Art. 7� do Estatuto da UFG;;
