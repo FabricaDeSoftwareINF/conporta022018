@@ -113,13 +113,19 @@ public class ControladorCancPortRefTest {
 
     }
 
-    @Test
-    public void casoTestDadosExcecoes() throws IOException {
+    @Test(expected = Exception.class)
+    public void casoTestDadosExcecoes() throws Exception {
 
-        // Grupo de teste DadosExcecoes.
+        // Grupo de teste DadosExceções.
+        
+        controladorCancPortRef.cancelarPortariaReferenciada(2);
+        // O cenario acima testa parâmetro inválido. A exceção esperada é IllegalArgumentException
+        
+        // A exeção atribuida para as chamadas abaixo é UnsupportedOperationException, mas um tipo de Error
+        // expecífico pode ser implemantado e utilizado posteriormente.
         
         controladorCancPortRef.cancelarPortariaReferenciada("INF201801");
-        // O cenario acima testa a primeira exceção do caso de uso, onde a portaria não é localizada.
+        // O cenario acima testa a primeira exceção do caso de uso, onde a portaria não é localizada na base de dados.
 
         controladorCancPortRef.cancelarPortariaReferenciada("INF201811");
         // O cenario acima testa a segunda exceção do caso de uso, onde uma das portarias referenciadas para
@@ -144,6 +150,10 @@ public class ControladorCancPortRefTest {
         // se são iguais à "cancelada".
 
         // Assert.assertEquals(status, rodaSQLparaPegarOsStatusDasPortariasReferenciadasParaCancelamentoBancoDeDados);
+        
+        // Como o caso de uso realiza alterações nos dados manipulados apenas caso exceções não sejam lançadas, verificar
+        // a verificação do resultado das chamadas que geram exceção é basicamente averiguar a igualdade das portarias
+        // manipuladas antes e depois da chamada do método.
     }
 
 }
