@@ -52,10 +52,30 @@ public class ControladorCancPortRefTest {
             }
 
             switch (tabelaAtual) {
+                case "pessoa" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    //Aqui colocar os comandos para popular a tabela pessoa no Banco de Dados.
+                    break;
                 case "portaria" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    // Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
+                    //Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
+                    break;
+                case "portariaDesignada" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    //Aqui colocar os comandos para popular a tabela portaria designadas no Banco de dados.
+                    break;
+                case "undAdm" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    //Aqui colocar os comandos para popular a tabela unidade administrativa no Banco de Dados.
+                    break;
+                case "designado" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
                     break;
             }
         }
