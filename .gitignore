@@ -1,3 +1,20 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ @samuelrcosta Sign out
+22
+0 1 FabricaDeSoftwareINF/conporta022018
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
+conporta022018/.gitignore
+4f185bf  17 days ago
+@antoni-s antoni-s [regCiencDesig] - Código exemplo.
+     
+143 lines (109 sloc)  1.91 KB
 /reports
 /bin
 /target
@@ -128,9 +145,9 @@ local.properties
 .cproject
 
 # JDT-specific (Eclipse Java Development Tools)
-#.project
-#.settings/
-#.classpath
+.project
+.settings/
+.classpath
 
 # PDT-specific
 .buildpath
@@ -140,3 +157,16 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Press h to open a hovercard with more details.
