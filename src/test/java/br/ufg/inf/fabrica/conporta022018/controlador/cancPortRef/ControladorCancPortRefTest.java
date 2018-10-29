@@ -60,7 +60,12 @@ public class ControladorCancPortRefTest {
                 case "portaria" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
+                    // Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
+                    break;
+                case "portariaReferenciada" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    // Aqui colocar os comandos para popular a tabela portariaReferenciada no Banco de Dados.
                     break;
                 case "portariaDesignada" :
                     extrator.setTexto(linha);
