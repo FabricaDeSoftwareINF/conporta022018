@@ -25,12 +25,12 @@ public class ControladorCancPortRef {
         }
 
         List<PortariaReferenciada> portariasReferenciadas = portaria.getPortariasReferenciadas();
+        List<PortariaReferenciada> portRefCancelamento = getPortRefCancelamento(portariasReferenciadas);
 
-        if (portariasReferenciadas.size() == 0) {
+        if (portRefCancelamento.size() == 0) {
             throw new UnsupportedOperationException("Não existem portarias para cancelamento.");
         }
 
-        List<PortariaReferenciada> portRefCancelamento = getPortRefCancelamento(portariasReferenciadas);
         Iterator<PortariaReferenciada> iterator = portRefCancelamento.iterator();
 
         PortariaReferenciada portariaReferenciada;
@@ -41,13 +41,12 @@ public class ControladorCancPortRef {
             portariaParaCancelamento = portariaDAO.buscarUm("idPortaria = " + portariaReferenciada.getIdPortariaReferenciada());
 
             if (portariaParaCancelamento.getStatus() != PortariaStatus.Ativa) {
-                throw new UnsupportedOperationException("Apenas portarias ativas podem ser canceladas");
+                throw new UnsupportedOperationException("Apenas portarias ativas podem ser canceladas.");
             }
 
             portariaParaCancelamento.setStatus(PortariaStatus.Cancelada);
             portariaDAO.atualizar(portariaParaCancelamento);
         }
-
 
         return true;
     }
