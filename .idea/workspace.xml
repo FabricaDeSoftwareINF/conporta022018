@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03d58c6e-5aef-4e87-9095-d97159275f17" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Assunto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Pessoa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/DesignadoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/RecebedoraDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PortariaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PortariaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/UndAdmDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/UndAdmDAO.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,37 +23,40 @@
     <session id="692766418">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.24" value="2" />
           <entry key="project.open.time.52" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="csv" value="1" />
-          <entry key="java" value="4" />
+          <entry key="java" value="17" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="4" />
+          <entry key="JAVA" value="17" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="759" />
+          <entry key="dummy" value="2" />
+          <entry key="java" value="1347" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="759" />
+          <entry key="JAVA" value="1347" />
+          <entry key="PLAIN_TEXT" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -54,31 +65,52 @@
       <usages-collector id="statistics.spring.boot.run.usages" />
     </session>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="conporta022018" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaDadosTest.csv">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Portaria.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+            <state relative-caret-position="109">
+              <caret line="238" column="75" selection-start-line="238" selection-start-column="62" selection-end-line="238" selection-end-column="75" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/EdiPorta.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Designado.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+            <state relative-caret-position="-570">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/UndAdm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1140">
-              <caret line="79" selection-start-line="79" selection-end-line="79" />
+            <state relative-caret-position="-555">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/FuncaoDesig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PortariaDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="42" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -87,28 +119,49 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/util/Extrator.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/UndAdmDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
-              <caret line="10" column="25" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="25" />
+              <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="42" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/util/LerArquivo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            <state relative-caret-position="120">
+              <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="42" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/RecebedoraDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="18" selection-start-line="42" selection-start-column="6" selection-end-line="42" selection-end-column="18" />
+            <state relative-caret-position="-90">
+              <caret line="21" column="61" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/DesignadoDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -119,8 +172,17 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Arquillian JUnit Test Class" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>portariasrefe</find>
+      <find>GETE</find>
+      <find>referenciadas</find>
+      <find>Portaria</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -130,6 +192,14 @@
       <list>
         <option value="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/util/RegCienDesigDadosTest.csv" />
         <option value="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Portaria.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Pessoa.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Assunto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PortariaDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/UndAdmDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/RecebedoraDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/DesignadoDAO.java" />
       </list>
     </option>
   </component>
@@ -151,23 +221,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="conporta022018" type="58d84e3e:PackageViewProjectNode" />
-              <item name="conporta022018" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="58d84e3e:PackageViewProjectNode" />
-              <item name="conporta022018" type="616d4139:PackageViewModuleNode" />
-              <item name="br.ufg.inf.fabrica.conporta022018" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -254,160 +307,35 @@
               <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="controlador" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="modelo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="persistencia" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="util" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="visao" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="controlador" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="controlador" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ediPorta" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="conporta022018" type="58d84e3e:PackageViewProjectNode" />
+              <item name="conporta022018" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="conporta022018" type="58d84e3e:PackageViewProjectNode" />
+              <item name="conporta022018" type="616d4139:PackageViewModuleNode" />
+              <item name="br.ufg.inf.fabrica.conporta022018" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540161555358" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542403208507" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="Arquillian JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -451,16 +379,18 @@
       <workItem from="1540159146138" duration="2432000" />
       <workItem from="1540161619808" duration="1320000" />
       <workItem from="1540845833893" duration="872000" />
+      <workItem from="1542399533491" duration="4115000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8776000" />
+    <option name="totallyTimeSpent" value="12906000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27134877" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4939173" visible="true" weight="0.30007982" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -508,13 +438,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/EdiPorta.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/EdiPorta.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/util/Extrator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -540,6 +464,141 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1140">
           <caret line="79" selection-start-line="79" selection-end-line="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Pessoa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#104#105#0" expanded="true" />
+            <element signature="e#134#135#0" expanded="true" />
+            <element signature="e#180#181#0" expanded="true" />
+            <element signature="e#218#219#0" expanded="true" />
+            <element signature="e#251#252#0" expanded="true" />
+            <element signature="e#280#281#0" expanded="true" />
+            <element signature="e#324#325#0" expanded="true" />
+            <element signature="e#360#361#0" expanded="true" />
+            <element signature="e#395#396#0" expanded="true" />
+            <element signature="e#426#427#0" expanded="true" />
+            <element signature="e#474#475#0" expanded="true" />
+            <element signature="e#514#515#0" expanded="true" />
+            <element signature="e#549#550#0" expanded="true" />
+            <element signature="e#580#581#0" expanded="true" />
+            <element signature="e#628#629#0" expanded="true" />
+            <element signature="e#668#669#0" expanded="true" />
+            <element signature="e#706#707#0" expanded="true" />
+            <element signature="e#739#740#0" expanded="true" />
+            <element signature="e#792#793#0" expanded="true" />
+            <element signature="e#836#837#0" expanded="true" />
+            <element signature="e#872#873#0" expanded="true" />
+            <element signature="e#906#907#0" expanded="true" />
+            <element signature="e#958#959#0" expanded="true" />
+            <element signature="e#1004#1005#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/PortariaReferenciada.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Assunto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+          <folding>
+            <element signature="e#105#106#0" expanded="true" />
+            <element signature="e#135#136#0" expanded="true" />
+            <element signature="e#181#182#0" expanded="true" />
+            <element signature="e#219#220#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Recebedora.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Portaria.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="238" column="75" selection-start-line="238" selection-start-column="62" selection-end-line="238" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Designado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-570">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/UndAdm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-555">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/FuncaoDesig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PortariaDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="42" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/UndAdmDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="42" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="42" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/RecebedoraDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <caret line="21" column="61" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/DesignadoDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
