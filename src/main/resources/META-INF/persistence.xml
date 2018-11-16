@@ -8,6 +8,9 @@
       Configuração do Persistence unit para JPA do projeto Comporta
     </description>
 
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <shared-cache-mode>ALL</shared-cache-mode>
+    <validation-mode>AUTO</validation-mode>
 
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />

@@ -1,5 +1,7 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+import java.util.List;
+
 public class UndAdm {
     private String siglaUnAdm;
     private Integer minInat;

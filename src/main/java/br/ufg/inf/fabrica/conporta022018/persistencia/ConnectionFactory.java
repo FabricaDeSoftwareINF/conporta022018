@@ -34,7 +34,7 @@ public class ConnectionFactory {
    *
    * @return instância do {@link EntityManager}
    */
-  public static EntityManager getEntityManager() {
+  public static EntityManager obterManager() {
     EntityManager em = threadLocal.get();
 
     if (em == null) {
