@@ -1,10 +1,18 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
-public class Portaria {
+public class Portaria implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private int anoId;
     private int seqId;
     private String assunto;
@@ -24,6 +32,14 @@ public class Portaria {
     private List<Designado> designados;
     private Pessoa expedidor;
     private UndAdm unidadeExpedidora;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getAnoId() {
         return anoId;
