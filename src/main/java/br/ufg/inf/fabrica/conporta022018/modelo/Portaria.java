@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Portaria {
     private int anoId;
-    private int segId;
+    private int seqId;
     private String assunto;
     private Date dtExped;
     private Date dtIniVig;
@@ -33,12 +33,12 @@ public class Portaria {
         this.anoId = anoId;
     }
 
-    public int getSegId() {
-        return segId;
+    public int getSeqId() {
+        return seqId;
     }
 
-    public void setSegId(int segId) {
-        this.segId = segId;
+    public void setSeqId(int seqId) {
+        this.seqId = seqId;
     }
 
     public String getAssunto() {

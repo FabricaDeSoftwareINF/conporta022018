@@ -1,5 +1,7 @@
 package br.ufg.inf.fabrica.conporta022018.persistencia;
 
-public class PortariaDAO extends GenericoDAO{
+import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
+
+public class PortariaDAO extends GenericoDAO<Portaria> {
 
 }
