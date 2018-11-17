@@ -12,6 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 /**
  * Modelo da Entidade de Lotação.
@@ -29,13 +33,18 @@ public class Lotacao {
 
   @Column
   @Temporal(TemporalType.DATE)
+  @NotNull
+  @PastOrPresent
   private Date dtIniLotServ;
 
   @Column
   @Temporal(TemporalType.DATE)
+  @NotNull
+  @Future
   private Date dtFimLotServ;
 
   @Column
+  @NotBlank
   private String descrCargoServ;
 
   @JoinColumn
