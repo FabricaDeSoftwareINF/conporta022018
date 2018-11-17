@@ -1,8 +1,20 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
 public class UndAdm {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String siglaUnAdm;
     private Integer minInat;
     private String nomeUnd;

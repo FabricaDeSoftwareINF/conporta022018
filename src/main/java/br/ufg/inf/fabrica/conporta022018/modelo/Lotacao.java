@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,9 +42,9 @@ public class Lotacao {
   @ManyToOne
   private Cargo cargoServ;
 
-//  @JoinColumn
-//  @ManyToOne
-//  private UndAdm undAdm;
+  @JoinColumn
+  @ManyToOne
+  private UndAdm undAdm;
 
 
   public Long getId() {
@@ -88,6 +87,14 @@ public class Lotacao {
     this.cargoServ = cargoServ;
   }
 
+  public UndAdm getUndAdm() {
+    return undAdm;
+  }
+
+  public void setUndAdm(UndAdm undAdm) {
+    this.undAdm = undAdm;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -101,11 +108,12 @@ public class Lotacao {
         Objects.equals(dtIniLotServ, lotacao.dtIniLotServ) &&
         Objects.equals(dtFimLotServ, lotacao.dtFimLotServ) &&
         Objects.equals(descrCargoServ, lotacao.descrCargoServ) &&
-        Objects.equals(cargoServ, lotacao.cargoServ);
+        Objects.equals(cargoServ, lotacao.cargoServ) &&
+        Objects.equals(undAdm, lotacao.undAdm);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, dtIniLotServ, dtFimLotServ, descrCargoServ, cargoServ);
+    return Objects.hash(id, dtIniLotServ, dtFimLotServ, descrCargoServ, cargoServ, undAdm);
   }
 }

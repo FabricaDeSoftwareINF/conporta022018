@@ -12,7 +12,7 @@ public class Gestao {
     private Date dtFim;
     private Date dtIniSubChefe;
     private Date dtFimSubChefe;
-    private UnAdm unAdm;
+    private UndAdm unAdm;
     private Tipo funcao;
     /**
      * @return the dtInicio
@@ -58,7 +58,7 @@ public class Gestao {
         return dtFim;
     }
 
-    public void setUnAdm(UnAdm unAdm) {
+    public void setUnAdm(UndAdm unAdm) {
         this.unAdm = unAdm;
     }
 
