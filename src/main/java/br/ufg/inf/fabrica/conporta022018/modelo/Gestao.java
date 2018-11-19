@@ -14,30 +14,20 @@ public class Gestao {
     private Date dtFimSubChefe;
     private UndAdm unAdm;
     private Tipo funcao;
-    /**
-     * @return the dtInicio
-     */
+    private Tipo tipo;
+
     public Date getdtInicio() {
         return dtInicio;
     }
 
-    /**
-     * @param dtInicio the dtInicio to set
-     */
     public void setdtInicio(Date dtInicio) {
         this.dtInicio = dtInicio;
     }
 
-    /**
-     * @return the dtFim
-     */
     public Date getdtFim() {
         return dtFim;
     }
 
-    /**
-     * @param dtFim the dFim to set
-     */
     public void setdtFim(Date dtFim) {
         this.dtFim = dtFim;
     }
@@ -62,17 +52,18 @@ public class Gestao {
         this.unAdm = unAdm;
     }
 
-    public String getUnAdm() {
+    public UnAdm getUnAdm() {
         return unAdm;
     }
 
     public void setFuncao(Tipo funcao) {
-        this.funcao = funcao
+        this.funcao = funcao;
      }
 
-    public Tipo getUnAdm() {
-        return unAdm;
+    public Tipo getTipo() {
+        return tipo;
     }
+    
 
 }
 
