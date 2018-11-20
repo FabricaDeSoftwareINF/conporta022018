@@ -1,5 +1,6 @@
 package br.ufg.inf.fabrica.conporta022018.persistencia;
 
+import br.ufg.inf.fabrica.conporta022018.modelo.ModeloAbstrato;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import javax.persistence.TypedQuery;
  *
  * @param <T> modelo que será persistido e cosnultado
  */
-public abstract class GenericoDAO<T> {
+public abstract class GenericoDAO<T extends ModeloAbstrato> {
 
   private Class<T> classType = ((Class<T>) ((ParameterizedType) getClass()
       .getGenericSuperclass()).getActualTypeArguments()[0]);
