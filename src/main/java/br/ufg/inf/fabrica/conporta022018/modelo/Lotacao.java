@@ -25,11 +25,7 @@ import javax.validation.constraints.PastOrPresent;
  */
 @Entity
 @Table
-public class Lotacao {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+public class Lotacao extends ModeloAbstrato {
 
   @Column
   @Temporal(TemporalType.DATE)
@@ -54,15 +50,6 @@ public class Lotacao {
   @JoinColumn
   @ManyToOne
   private UndAdm undAdm;
-
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   public Date getDtIniLotServ() {
     return dtIniLotServ;
@@ -109,20 +96,21 @@ public class Lotacao {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof Lotacao)) {
       return false;
     }
     Lotacao lotacao = (Lotacao) o;
-    return Objects.equals(id, lotacao.id) &&
-        Objects.equals(dtIniLotServ, lotacao.dtIniLotServ) &&
-        Objects.equals(dtFimLotServ, lotacao.dtFimLotServ) &&
-        Objects.equals(descrCargoServ, lotacao.descrCargoServ) &&
-        Objects.equals(cargoServ, lotacao.cargoServ) &&
-        Objects.equals(undAdm, lotacao.undAdm);
+    return Objects.equals(getDtIniLotServ(), lotacao.getDtIniLotServ()) &&
+        Objects.equals(getDtFimLotServ(), lotacao.getDtFimLotServ()) &&
+        Objects.equals(getDescrCargoServ(), lotacao.getDescrCargoServ()) &&
+        Objects.equals(getCargoServ(), lotacao.getCargoServ()) &&
+        Objects.equals(getUndAdm(), lotacao.getUndAdm());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, dtIniLotServ, dtFimLotServ, descrCargoServ, cargoServ, undAdm);
+    return Objects
+        .hash(getDtIniLotServ(), getDtFimLotServ(), getDescrCargoServ(), getCargoServ(),
+            getUndAdm());
   }
 }
