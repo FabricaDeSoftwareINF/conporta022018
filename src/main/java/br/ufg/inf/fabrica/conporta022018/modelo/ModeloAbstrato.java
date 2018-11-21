@@ -1,5 +1,6 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+import java.util.Objects;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,5 +27,20 @@ public abstract class ModeloAbstrato {
     this.id = id;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof ModeloAbstrato)) {
+      return false;
+    }
+    ModeloAbstrato that = (ModeloAbstrato) o;
+    return Objects.equals(getId(), that.getId());
+  }
 
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId());
+  }
 }
