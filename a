@@ -1,0 +1,125 @@
+[1mdiff --git a/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Pessoa.java b/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Pessoa.java[m
+[1mindex a23509e..e43b2ec 100644[m
+[1m--- a/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Pessoa.java[m
+[1m+++ b/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Pessoa.java[m
+[36m@@ -1,4 +1,91 @@[m
+ package br.ufg.inf.fabrica.conporta022018.modelo;[m
+ [m
+[31m-public class Pessoa {[m
+[31m-}[m
+[32m+[m[32mimport java.io.Serializable;[m
+[32m+[m[32mimport java.util.List;[m
+[32m+[m
+[32m+[m[32mpublic class Pessoa implements Serializable {[m
+[32m+[m
+[32m+[m[32m    private String nomePes;[m
+[32m+[m[32m    private String cpfPes;[m
+[32m+[m[32m    private String emailPes;[m
+[32m+[m[32m    private String senhaUsu;[m
+[32m+[m[32m    private Boolean ehUsuAtivo;[m
+[32m+[m[32m    private List<Gestao> gestao;[m
+[32m+[m[32m    private List<Lotacao> servidor;[m
+[32m+[m[32m    private List<Matricula> discente;[m
+[32m+[m
+[32m+[m[32m    public String getNomePes() {[m
+[32m+[m[32m        return nomePes;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setNomePes(String nomePes) {[m
+[32m+[m[32m        this.nomePes = nomePes;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public String getCpfPes() {[m
+[32m+[m[32m        return cpfPes;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setCpfPes(String cpfPes) {[m
+[32m+[m[32m        this.cpfPes = cpfPes;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public String getEmailPes() {[m
+[32m+[m[32m        return emailPes;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setEmailPes(String emailPes) {[m
+[32m+[m[32m        this.emailPes = emailPes;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public String getSenhaUsu() {[m
+[32m+[m[32m        return senhaUsu;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setSenhaUsu(String senhaUsu) {[m
+[32m+[m[32m        this.senhaUsu = senhaUsu;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public Boolean getEhUsuAtivo() {[m
+[32m+[m[32m        return ehUsuAtivo;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public Boolean validarSenha(String credential) {[m
+[32m+[m[32m        if(!credential.isEmpty() && credential.length() >= 6)[m
+[32m+[m[32m            return  true;[m
+[32m+[m[32m        return false;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setEhUsuAtivo(Boolean ehUsuAtivo) {[m
+[32m+[m[32m        this.ehUsuAtivo = ehUsuAtivo;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public Boolean isUsuAtivo() {[m
+[32m+[m[32m        return this.isUsuAtivo();[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setGestao(Gestao gestor) {[m
+[32m+[m[32m        this.gestao.add(gestor);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public List<Gestao> getGestao() {[m
+[32m+[m[32m        return this.gestao;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setServidor(Lotacao servidor) {[m
+[32m+[m[32m        this.servidor.add(servidor);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public List<Lotacao> getServidor() {[m
+[32m+[m[32m        return this.servidor;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void setDiscente(Matricula discente) {[m
+[32m+[m[32m        this.discente.add(discente);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public List<Matricula> getDiscente() {[m
+[32m+[m[32m        return this.discente;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/MensagemDAO.java b/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/MensagemDAO.java[m
+[1mindex fb90a8c..779275b 100644[m
+[1m--- a/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/MensagemDAO.java[m
+[1m+++ b/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/MensagemDAO.java[m
+[36m@@ -1,5 +1,7 @@[m
+ ﻿package br.ufg.inf.fabrica.conporta022018.modelo;[m
+ [m
+[32m+[m[32mimport br.ufg.inf.fabrica.conporta022018.persistencia.GenericoDAO;[m[41m[m
+[32m+[m[41m[m
+ public class Mensagem extends GenericoDAO {[m
+    [m
+     private Mensagem mensagem;[m
+[1mdiff --git a/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java b/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java[m
+[1mindex ee624d1..3c6044f 100644[m
+[1m--- a/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java[m
+[1m+++ b/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java[m
+[36m@@ -1,5 +1,7 @@[m
+ package br.ufg.inf.fabrica.conporta022018.persistencia;[m
+ [m
+[31m-public class PessoaDAO extends GenericoDAO{[m
+[32m+[m[32mimport br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;[m
+ [m
+[32m+[m[32mpublic class PessoaDAO extends GenericoDAO{[m
+[32m+[m[32m    private Pessoa pessoa;[m
+ }[m
+\ No newline at end of file[m
