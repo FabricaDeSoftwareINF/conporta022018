@@ -1,9 +1,18 @@
-portaria
+Portaria
 PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
 1;001; inf; 2018; 0001; Ativa; Novo coordenador de curso; 12/11/2018; 12/01/201812/11/2018; 12/01/2018; 12/11/2018; 12/01/2018; 220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.; Representa uma unidade que comp�e a estrutura acad�mica e administrativa da universidade. Conforme o Art. 7� do Estatuto da UFG;;
 2;002; inf; 2018; 0001; Ativa; Novo coordenador de curso; 12/11/2018; 01/01/201931/12/2021; 01/01/2019; 31/12/2021; 12/12/2018; 220; Representa um ... ;;
-filtroDTO
+PortariaStatus
 codigoDesignado; codigoUnidadeAdm; anoPortaria; inicioVigencia; fimVigencia;
 1;001; 2018; 12/01/2018; 12/11/2018
 ;003;;;
 2;002; 2018; 12/01/2018; 12/11/2018
+PortariaReferenciada
+
+Recebedora
+
+Designado
+
+Pessoa
+
+UndAdm

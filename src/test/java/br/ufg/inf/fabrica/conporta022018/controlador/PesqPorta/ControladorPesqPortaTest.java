@@ -47,7 +47,7 @@ public class ControladorPesqPortaTest {
             linha = dadosSoftware.get(index);
 
             //Definir as tabelas que serão populadas no Banco de Dados.
-            if (linha.equals("portaria") || linha.equals("filtroDTO")) {
+            if (linha.equals("portaria")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
@@ -59,7 +59,7 @@ public class ControladorPesqPortaTest {
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
                     break;
-                case "filtroDTO" :
+                case "PortariaStatus" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
