@@ -2,19 +2,34 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
-public class Designado {
+/**
+ * Modelo da Entidade de DESIGNADO.
+ *
+ * @author Edionay Aguiar
+ * @since 1.0
+ */
+
+@Entity
+@Table
+public class Designado extends ModeloAbstrato {
+
+    private static final long serialVersionUID = 1L;
 
     private Date dtCienciaDesig;
     private String descrFuncDesig;
     private int horasDefFuncDesig;
     private int horasExecFuncDesig;
+
+    @ManyToOne
     private Pessoa pessoa;
     private FuncaoDesig funcaoDesig;
-    private Portaria portaria;
-    private DesignadoDAO designadoDAO;
 
     /**
      * @return Date return the dtCienciaDesig
