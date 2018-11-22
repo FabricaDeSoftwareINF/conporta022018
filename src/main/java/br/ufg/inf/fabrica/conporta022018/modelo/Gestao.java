@@ -52,7 +52,7 @@ public class Gestao {
         this.unAdm = unAdm;
     }
 
-    public UnAdm getUnAdm() {
+    public UndAdm getUnAdm() {
         return unAdm;
     }
 
