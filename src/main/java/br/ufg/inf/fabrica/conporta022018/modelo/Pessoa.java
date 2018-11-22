@@ -4,7 +4,10 @@ import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.List;
 
-public class Pessoa implements Serializable {
+@Entity
+public class Pessoa extends ModeloAbstrato {
+
+    private static final long serialVersionUID = 1L;
 
     private String nomePes;
     private String cpfPes;
