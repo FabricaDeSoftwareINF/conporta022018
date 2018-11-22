@@ -1,45 +1,89 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
-public class Portaria implements Serializable {
+@Entity
+@Table
+public class Portaria extends ModeloAbstrato {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
+    @Column
+    @NotBlank
     private int anoId;
+
+    @Column
+    @NotBlank
     private int seqId;
+
+    @Column
     private String assunto;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    @PastOrPresent
     private Date dtExped;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    @FutureOrPresent
     private Date dtIniVig;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    @FutureOrPresent
     private Date dtFimVig;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    @FutureOrPresent
     private Date dtPublicDou;
+
+    @Column
     private int horasDesig;
+
+    @Column
     private String resumo;
+
+    @Column
     private String textoCompleto;
+
+    @Column
     private Blob arqPdf;
+
+    @Column
+    @NotBlank
     private String siglaUndId;
+
+    @Column
     private String assinatura;
+
+    @Column
+    @NotBlank
     private PortariaStatus status;
+
+    @JoinColumn
+    @OneToMany
     private List<PortariaReferenciada> portariasReferenciadas;
+
+    @JoinColumn
+    @OneToMany
     private List<Recebedora> undRecebedora;
+
+    @JoinColumn
+    @OneToMany
     private List<Designado> designados;
+
+    @JoinColumn
+    @ManyToOne
     private Pessoa expedidor;
+
+    @JoinColumn
+    @ManyToOne
     private UndAdm unidadeExpedidora;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public int getAnoId() {
         return anoId;
