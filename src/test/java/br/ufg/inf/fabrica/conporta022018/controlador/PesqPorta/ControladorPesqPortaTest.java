@@ -107,6 +107,8 @@ public class ControladorPesqPortaTest {
         //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
         // irá fica as suas pós-condições. Exemplo:
 
+        //Dados do caso de teste de sucesso para a data atual.
+        
         //Busca a data atual.
         Date hoje = new Date();
         SimpleDateFormat df;
@@ -116,6 +118,7 @@ public class ControladorPesqPortaTest {
         //pega a data que foi armazenada no banco de dados e verifica com a data de execução do teste, ou seja,
         // a data de hoje.
 
+        //Verifica o caso de teste que retorna resultados
         //Assert.assertEquals(dataHoje, rodaSQLparaPegarADataGravadaNoBancoDeDados);
     }
 
