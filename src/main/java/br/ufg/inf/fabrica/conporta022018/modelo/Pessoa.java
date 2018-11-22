@@ -1,5 +1,6 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,8 +11,11 @@ public class Pessoa implements Serializable {
     private String emailPes;
     private String senhaUsu;
     private Boolean ehUsuAtivo;
+    @OneToMany
     private List<Gestao> gestao;
+    @OneToMany
     private List<Lotacao> servidor;
+    @OneToMany
     private List<Matricula> discente;
 
     public String getNomePes() {
