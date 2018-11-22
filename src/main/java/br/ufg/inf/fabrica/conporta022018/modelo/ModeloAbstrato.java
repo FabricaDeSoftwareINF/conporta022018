@@ -1,5 +1,6 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,7 @@ import javax.persistence.MappedSuperclass;
  * @since 1.0
  */
 @MappedSuperclass
-public abstract class ModeloAbstrato {
+public abstract class ModeloAbstrato implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
