@@ -12,6 +12,8 @@ import java.util.List;
 @Entity
 public class Sessao extends ModeloAbstrato  {
 
+    private static final long serialVersionUID = 1L;
+
     private Long timeOut;
 
     @ManyToMany
@@ -28,7 +30,7 @@ public class Sessao extends ModeloAbstrato  {
 
     public boolean verificarAcesso(String urlFuncionalidade, String unidadeAdm){
         for (Permissao obj : permissoes) {
-            if((urlFuncionalidade.equalsIgnoreCase(obj.getUrlFuncionalidade())) && (unidadeAdm.equalsIgnoreCase(obj.getUnidadeAdm()))) {
+            if((urlFuncionalidade.equalsIgnoreCase(obj.getUrlFuncionalidade())) && (unidadeAdm.equalsIgnoreCase(obj.getOperacao()))) {
                 return true;
             }
         }
