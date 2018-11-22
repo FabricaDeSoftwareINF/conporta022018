@@ -23,7 +23,7 @@ public class ControladorCancPortRefTest {
 
     /*
      * Preparação do ambiente para teste.
-     * População do banco de Dados para atendam os pré-requisitos do caso de uso.
+     * População do banco de Dados para atendam os pré-requisitos da seção de caso de uso.
      */
 
     @BeforeClass
@@ -97,7 +97,7 @@ public class ControladorCancPortRefTest {
     /*
      * Criar os cenários de testes para a aplicação:
      * Os cenarios de testes devem obrigatóriamente ser divididos em dois grupos.
-     * DadosValidos : Grupo destinado ao cenatio típico e aos cenarios alternativos do caso de uso.
+     * DadosValidos : Grupo destinado ao cenatio típico e aos cenarios alternativos da seção de caso de uso.
      * DadosExcecoes : Grupo destinado as exceções do cenario típico e dos cenarios alternativos.
      * Cada cenário e cada exceção deve necessáriamente ser testado no minimo uma vez, cada entrada e/ou combinação
      * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
@@ -129,18 +129,18 @@ public class ControladorCancPortRefTest {
         // expecífico pode ser implemantado e utilizado posteriormente.
         
         controladorCancPortRef.cancelarPortariaReferenciada("INF201801");
-        // O cenario acima testa a primeira exceção do caso de uso, onde a portaria não é localizada na base de dados.
+        // O cenario acima testa a primeira exceção da seção de caso de uso, onde a portaria não é localizada na base de dados.
 
         controladorCancPortRef.cancelarPortariaReferenciada("INF201811");
-        // O cenario acima testa a segunda exceção do caso de uso, onde uma das portarias referenciadas para
+        // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
         // cancelamento possui o status "Proposta".
 
         controladorCancPortRef.cancelarPortariaReferenciada("INF201812");
-        // O cenario acima testa a segunda exceção do caso de uso, onde uma das portarias referenciadas para
+        // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
         // cancelamento possui o status "Cancelada".
 
         controladorCancPortRef.cancelarPortariaReferenciada("INF201813");
-        // O cenario acima testa a "exceção interna" do caso de uso, onde não existem portarias referenciadas.
+        // O cenario acima testa a "exceção interna" da seção de caso de uso, onde não existem portarias referenciadas.
     }
 
     @AfterClass
