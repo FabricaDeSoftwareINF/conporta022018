@@ -12,6 +12,8 @@ import java.util.List;
 @Entity
 public class Sessao extends ModeloAbstrato  {
 
+    private static final long serialVersionUID = 1L;
+
     private Long timeOut;
 
     @ManyToMany
