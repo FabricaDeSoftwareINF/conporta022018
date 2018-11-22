@@ -6,13 +6,35 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Table
 public class Matricula extends ModeloAbstrato{
-    private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1343L;
+
+    @JoinColumn
+    @ManyToMany
     private Curso curso;
-    private int matrDiscCur;
+
+    @Column
+    private Integer matrDiscCur;
+
+    @Temporal(TemporalType.DATE)
+    @Column
     private Date dtFimMatrCur;
+
+    @Temporal(TemporalType.DATE)
+    @Column
     private Date cdIniMatrCur;
-    
+
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
     public int getMatrDiscCur() {
         return matrDiscCur;
     }
