@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class Recebedora extends ModeloAbstrato {
      
-    private static final long serialVersionUID = 1L; 
+    private static final long serialVersionUID = 97L; 
      
     private Date dtCienciaReeb;
     private UndAdm unidadeRecebedora;
