@@ -24,6 +24,8 @@ import javax.validation.constraints.PastOrPresent;
 @Table
 public class Lotacao extends ModeloAbstrato {
 
+  private static final long serialVersionUID = 371L;
+
   @Column
   @Temporal(TemporalType.DATE)
   @NotNull
