@@ -1,28 +1,20 @@
-﻿package br.ufg.inf.fabrica.conporta022018.modelo;
+package br.ufg.inf.fabrica.conporta022018.modelo;
 
+/**
+ * @author David
+ * @since 1.0
+ */
+public class Mensagem extends ModeloAbstrato {
 
-public class Mensagem {
+  private String titulo;
 
-    private String titulo;
-    
-    private String descricao;
+  private String descricao;
 
-    public void setTitulo(String titulo){
-      this.titulo = titulo;
-    }
-    
-    public String getTitulo() {
-        return titulo;
-    }
-    
-    public void setDescricao(String descricao){
-      this.descricao = descricao;
-    }
-    
-    public String getDescricao() {
-        return descricao;
-    }
-    
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public void setTitulo(String titulo) {
+    this.titulo = titulo;
+  }
 }
-
-

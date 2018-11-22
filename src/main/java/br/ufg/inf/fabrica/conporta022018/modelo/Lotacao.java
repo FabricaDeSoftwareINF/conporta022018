@@ -42,8 +42,7 @@ public class Lotacao extends ModeloAbstrato {
   @NotBlank
   private String descrCargoServ;
 
-  @JoinColumn
-  @ManyToOne
+  @Column
   private Cargo cargoServ;
 
   @JoinColumn

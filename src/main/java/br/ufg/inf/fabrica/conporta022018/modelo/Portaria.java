@@ -8,7 +8,7 @@ import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
-public class Portaria implements Serializable {
+public class Portaria extends ModeloAbstrato implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
