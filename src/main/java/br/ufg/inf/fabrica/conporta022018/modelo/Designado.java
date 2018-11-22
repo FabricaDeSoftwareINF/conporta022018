@@ -1,13 +1,7 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import java.util.Date;
-import java.util.List;
+import javax.persistence.*;
 
 /**
  * Modelo da Entidade de DESIGNADO.
