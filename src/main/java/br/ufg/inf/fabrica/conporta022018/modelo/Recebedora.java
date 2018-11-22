@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,7 +22,7 @@ public class Recebedora extends ModeloAbstrato {
     private Date dtCienciaReeb;
     
     @JoinColumn
-    @ManyToMany
+    @ManyToOne
     private UndAdm unidadeRecebedora;
 
     public void setDtCienciaReeb(Date dtCienciaReeb){
