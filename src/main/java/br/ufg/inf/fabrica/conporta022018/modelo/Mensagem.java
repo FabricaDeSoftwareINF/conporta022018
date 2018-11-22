@@ -1,5 +1,7 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+import javax.persistence.*;
+
 /**
  * @author David
  * @since 1.0

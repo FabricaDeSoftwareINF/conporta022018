@@ -1,6 +1,6 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
