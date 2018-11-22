@@ -1,6 +1,8 @@
-﻿package br.ufg.inf.fabrica.conporta022018.modelo;
+﻿package br.ufg.inf.fabrica.conporta022018.persistencia;
 
-public class Mensagem extends GenericoDAO {
+import br.ufg.inf.fabrica.conporta022018.modelo.Mensagem;
+
+public class MensagemDAO extends GenericoDAO {
    
     private Mensagem mensagem;
     
