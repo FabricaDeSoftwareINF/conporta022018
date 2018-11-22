@@ -1,14 +1,39 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import javax.persistence.Entity;
 import java.util.Date;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
-public class Matricula {
-    int matrDiscCur;
-    Date dtFimMatrCur;
-    Date cdIniMatrCur;
+@Table
+public class Matricula extends ModeloAbstrato{
 
+    private static final long serialVersionUID = 1343L;
+
+    @JoinColumn
+    @ManyToMany
+    private Curso curso;
+
+    @Column
+    private Integer matrDiscCur;
+
+    @Temporal(TemporalType.DATE)
+    @Column
+    private Date dtFimMatrCur;
+
+    @Temporal(TemporalType.DATE)
+    @Column
+    private Date cdIniMatrCur;
+
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 
     public int getMatrDiscCur() {
         return matrDiscCur;
