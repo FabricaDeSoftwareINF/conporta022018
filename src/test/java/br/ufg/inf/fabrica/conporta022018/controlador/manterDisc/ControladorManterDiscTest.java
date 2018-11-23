@@ -4,9 +4,8 @@
  * Creative Commons Attribution 4.0 International License.
  */
 
-package br.ufg.inf.fabrica.conporta022018.controlador.regCiencDesig;
+package br.ufg.inf.fabrica.conporta022018.controlador.manterDisc;
 
-import br.ufg.inf.fabrica.conporta022018.controlador.ControladorDisc;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
