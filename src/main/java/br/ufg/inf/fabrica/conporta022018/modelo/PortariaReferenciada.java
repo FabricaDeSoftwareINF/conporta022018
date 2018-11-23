@@ -1,25 +1,25 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaReferenciadaDAO;
+import br.ufg.inf.fabrica.conporta022018.persistencia.ReferenciaDAO;
 
-public class PortariaReferenciada {
+public class Referencia {
 
-    private Portaria PortariaReferenciada;
+    private Portaria Referencia;
     private boolean ehCancelamento;
-    private PortariaReferenciadaDAO portariaReferenciadaDAO;
+    private ReferenciaDAO referenciaDAO;
 
     /**
-     * @return Portaria return the PortariaReferenciada
+     * @return Portaria return the Referencia
      */
-    public Portaria getPortariaReferenciada() {
-        return PortariaReferenciada;
+    public Portaria getReferencia() {
+        return Referencia;
     }
 
     /**
-     * @param PortariaReferenciada the PortariaReferenciada to set
+     * @param Referencia the Referencia to set
      */
-    public void setPortariaReferenciada(Portaria PortariaReferenciada) {
-        this.PortariaReferenciada = PortariaReferenciada;
+    public void setReferencia(Portaria Referencia) {
+        this.Referencia = Referencia;
     }
 
     /**
