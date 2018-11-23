@@ -1,17 +1,18 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
-/**
- *
- * @author João Pedro Salgado
- */
-public class Gestao {
+@Entity
+public class Gestao extends ModeloAbstrato {
 
     private Date dtInicio;
     private Date dtFim;
     private Date dtIniSubChefe;
     private Date dtFimSubChefe;
+    
+    @ManyToOne
     private UndAdm unAdm;
     private Tipo funcao;
     private Tipo tipo;
@@ -66,5 +67,7 @@ public class Gestao {
     
 
 }
+
+
 
 
