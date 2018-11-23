@@ -44,14 +44,24 @@ public class ControladorManterDiscTest {
             linha = dadosSoftware.get(index);
 
             //Definir as tabelas que serão populadas no Banco de Dados.
-            if (linha.equals("discente")) {
+            if (linha.equals("pessoa") || linha.equals("matricula") ||  linha.equals("curso")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
             }
 
             switch (tabelaAtual) {
-                case "discente" :
+                case "pessoa" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    //Aqui colocar os comandos para popular a tabela discente no Banco de Dados.
+                    break;
+                case "matricula" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    //Aqui colocar os comandos para popular a tabela discente no Banco de Dados.
+                    break;
+                case "curso" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela discente no Banco de Dados.
@@ -79,6 +89,7 @@ public class ControladorManterDiscTest {
     @Test
     public void casoTestDadosValidos() throws IOException {
 
+        
         //Grupo de teste DadosValidos, exemplo:
 //        controladorDisc.regCiencDesig("123.456.789-12", "INF", 2018, 0001);
 
@@ -95,6 +106,8 @@ public class ControladorManterDiscTest {
     @AfterClass
     public static void casoTestResultados() throws IOException {
 
+        controladorDisc.criarDiscente("");
+        
         //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
         // irá fica as suas pós-condições. Exemplo:
 
