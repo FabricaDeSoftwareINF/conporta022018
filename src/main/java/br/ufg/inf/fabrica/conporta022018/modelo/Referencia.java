@@ -1,12 +1,17 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import br.ufg.inf.fabrica.conporta022018.persistencia.ReferenciaDAO;
+import javax.persistence.*;
+import java.io.Serializable;
 
-public class Referencia {
+@Entity
+public class Referencia extends ModeloAbstrato {
 
+    private static final long serialVersionUID = 1L;
+    
+    @ManyToOne
     private Portaria Referencia;
     private boolean ehCancelamento;
-    private ReferenciaDAO referenciaDAO;
+      
 
     /**
      * @return Portaria return the Referencia

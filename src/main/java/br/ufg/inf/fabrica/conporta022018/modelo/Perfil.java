@@ -9,9 +9,18 @@ public class Perfil extends ModeloAbstrato {
 
     private static final long serialVersionUID = 1L;
 
+    private String nome;
     private String descricao;
     @ManyToMany
     private List<Permissao> permissoes;
+    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
 
     public String getDescricao() {
         return descricao;
@@ -21,16 +30,11 @@ public class Perfil extends ModeloAbstrato {
         this.descricao = descricao;
     }
 
-    public boolean getPermicao(String urlFuncionalidade, String operacao) {
-        for (Permissao obj : permissoes) {
-            if((urlFuncionalidade.equalsIgnoreCase(obj.getUrlFuncionalidade())) && (operacao.equalsIgnoreCase(obj.getOperacao()))) {
-                return true;
-            }
-        }
-        return false;
+    public List<Permissao> getPermissoes() {
+        return permissoes;
     }
 
-    public void Acesso(){
-
+    public void setPermissoes(List<Permissao> permissoes){
+        this.permissoes = permissoes;
     }
 }
