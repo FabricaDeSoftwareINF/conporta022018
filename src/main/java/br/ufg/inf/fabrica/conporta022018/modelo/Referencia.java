@@ -1,6 +1,5 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import br.ufg.inf.fabrica.conporta022018.persistencia.ReferenciaDAO;
 import javax.persistence.*;
 import java.io.Serializable;
 
