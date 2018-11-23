@@ -85,7 +85,10 @@ public class ControladorPesqPortaTest {
      */
     @Test
     public void casoTestDadosValidos() throws IOException {
-        //Grupo de teste DadosValidos, exemplo:
+        
+        //CENÁRIO TÍPICO
+        //O sistema retorna apenas as portarias expedidas pela unidade expeditora definida
+        //O sistema retorna apenas as portarias expedidas no período de data definido
         Filtro filtro = new Filtro("Instituto de Informática", 01/01/2018, 05/11/2018, null, null, null, null, null);
         List<Portaria> portarias =  controladorGraFiltros.graFiltros(filtro);
         Assert.assertNotNull(portarias);
@@ -94,7 +97,11 @@ public class ControladorPesqPortaTest {
     @Test
     public void casoTestDadosExcecoes() throws IOException {
 
-        //Grupo de teste DadosValidos, exemplo:
+        //CENÁRIOS ALTERNATIVOS 3 e 7
+        //O sistema retorna apenas as portarias expedidas pela unidade expeditora definida
+        //O sistema retorna apenas as portarias expedidas no período de data definido
+        //O sistema retorna apenas as portarias que estavam vigentes no período definido
+        //O sistema retorna apenas as portarias cujo designado é do tipo DISCENTE
         Filtro filtro = new Filtro("Instituto de Informática", 01/01/2018, 05/11/2018, 02/01/2018, 05/11/18, null, null, true);
         List<Portaria> portarias =  controladorPesqPorta.graFiltros(filtro);
         Assert.assertNotNull(portarias);
@@ -103,7 +110,10 @@ public class ControladorPesqPortaTest {
     @Test
     public void casoTestDadosExcecoes() throws IOException {
 
-        //Grupo de teste DadosValidos, exemplo:
+        //CENÁRIO ALTERNATIVO 7
+        //O sistema retorna apenas as portarias expedidas pela unidade expeditora definida
+        //O sistema retorna apenas as portarias expedidas no período de data definido
+        //O sistema retorna apenas as portarias que estavam vigentes no período definido
         Filtro filtro = new Filtro("Instituto de Informática", 01/01/2018, 05/11/2018, 02/01/2018, 05/11/18, null, null, null);
         List<Portaria> portarias =  controladorPesqPorta.graFiltros(filtro);
         Assert.assertNotNull(portarias);
@@ -112,7 +122,11 @@ public class ControladorPesqPortaTest {
     @Test
     public void casoTestDadosExcecoes() throws IOException {
 
-        //Grupo de teste DadosValidos, exemplo:
+        //CENÁRIOS ALTERNATIVOS 3 e 7
+        //O sistema retorna apenas as portarias expedidas pela unidade expeditora definida
+        //O sistema retorna apenas as portarias expedidas no período de data definido
+        //O sistema retorna apenas as portarias que estavam vigentes no período definido
+        //O sistema retorna apenas as portarias cujo designado é do tipo DOCENTE
         Filtro filtro = new Filtro("Faculdade de Contabilidade, Administração e Economia", 01/01/2018, 05/11/2018, 01/01/2019, 01/05/2019, true, "docente", null);
         List<Portaria> portarias =  controladorPesqPorta.graFiltros(filtro);
         Assert.assertNotNull(portarias);
@@ -121,8 +135,11 @@ public class ControladorPesqPortaTest {
     @Test
     public void casoTestDadosExcecoes() throws IOException {
 
-        //Grupo de teste DadosValidos, exemplo:
-        Filtro filtro = new Filtro("Instituto de Informática", 01/01/2018, 05/11/2018, 01/01/2018, 01/12/2018, true, "docente", null);
+        //CENÁRIOS ALTERNATIVOS 3 e 7
+        //O sistema não encontra nenhuma portaria com esse filtro
+        /*O sistema deve retornar a mensagem:
+        "Não há portarias com essas especificações. Por favor altere o período ou utize outros filtros"*/
+        Filtro filtro = new Filtro("Instituto de Informática", 01/01/2017, 05/11/2017, 01/01/2017, 01/12/2017, true, "docente", null);
         List<Portaria> portarias =  controladorPesqPorta.graFiltros(filtro);
         Assert.assertNotNull(portarias);
     }
