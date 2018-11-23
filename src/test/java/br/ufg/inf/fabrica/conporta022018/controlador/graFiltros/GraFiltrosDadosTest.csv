@@ -1,5 +1,5 @@
 nomeUnd;nomePes;cpfPes;idPortaria;dtExped;dtInVig;dtFimVig;horasDesig;isServidor;cargoServ;isDiscente
 Instituto de Informática;Ana Luísa Alves Burjack;05686632170;INF180002;13/01/2018;25/07/2018;25/09/2018;200;false;null;true
 Instituto de Informática;Natália Marufuji Aoki;14528659822;INF180002;13/01/2018;25/07/2018;25/09/2018;200;false;null;true
-Instituto de Informática;Rubens Alvs;05686632170;INF181236;14/10/2018;29/10/2018;29/11/2018;50;true;docente;false
+Instituto de Informática;Rubens Alves;05686632170;INF181236;14/10/2018;29/10/2018;29/11/2018;50;true;docente;false
 Faculdade de Contabilidade, Administração e Economia;Tiago Camarinha;45879612356;FACE0203050;20/10/2018;12/01/2019;30/04/2019;300;true;docente;false
