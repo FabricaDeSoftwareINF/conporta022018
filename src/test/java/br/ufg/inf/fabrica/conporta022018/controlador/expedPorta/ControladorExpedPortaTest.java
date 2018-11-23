@@ -143,8 +143,9 @@ public class ControladorExpedPortaTest {
     @Test
     public void casoTestDadosValidos() throws IOException {
 
-        // O código retornado para um caso de sucesso é 1
-
+        /*
+        O código retornado para um caso de sucesso é 1
+*/
         // Portaria com data final de vigência, sem designados:
         Assert.assertEquals(controladorExpedPorta.expedPorta(1), 1);
 
@@ -154,8 +155,8 @@ public class ControladorExpedPortaTest {
         // Portaria sem data final de vigência, sem designados:
         Assert.assertEquals(controladorExpedPorta.expedPorta(2), 1);
 
-        /* ---------- testes a serem feitos posteriormente ---------- */
         // Portaria com data final de vigência e com referências a portarias existentes e ativas:
+        Assert.assertEquals(controladorExpedPorta.expedPorta(91), 1);
 
     }
 
