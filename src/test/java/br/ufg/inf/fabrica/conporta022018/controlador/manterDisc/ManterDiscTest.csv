@@ -1,6 +1,9 @@
 pessoa
-nomePes;cpfPes;emailPes;senhaUsu;ehUsuarioAtivo
+nomePes;cpfPes;emailPes;senhaUsu;ehUsuarioAtivo;discente
 Angel Almeida;12345678912;angel@exemplo.com;;true
 matricula
-discente;matDiscCur;dtIniMatrCur
-12345678912;03/03/2015;03/03/2015
+matDiscCur;dtIniMatrCur
+12345678912;03/03/2015;03/03/2015;curso
+curso
+nivelCurso
+2
