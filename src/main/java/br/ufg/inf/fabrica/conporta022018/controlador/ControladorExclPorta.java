@@ -7,13 +7,22 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
  */
 public class ControladorExclPort {
 	
-	private portaria;
+	private Portaria portaria;
 	
-	public ControladorExclPort() {
-		this.portaria = new Portaria();
+	public ControladorExclPort() {}
+	
+	public boolean validaStatusPortaria(PortariaStatus status) {
+		return status == PortariaStatus.PROPOSTA;
 	}
 	
-    public int exclPorta(int i) {
-        return 0;
+    public boolean exclPorta(Portaria portaria) throws Exception{
+    	this.portaria = portaria;
+    	
+    	try {
+    		
+    	}catch(Exception ex) {
+    		
+    	}
+    	
     }
 }
