@@ -4,7 +4,7 @@
  * Creative Commons Attribution 4.0 International License.
  */
 
-package br.ufg.inf.fabrica.conporta022018.controlador.notPortSemCiencia;
+package br.ufg.inf.fabrica.conporta022018.controlador.notifPortSemCiencia;
 
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorNorifPortSemCiencia;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ControladorNorifPortSemCienciaTest {
+public class ControladorNotifPortSemCienciaTest {
 
     private static ControladorNorifPortSemCiencia controladorNorifPortSemCiencia;
 
@@ -97,6 +97,7 @@ public class ControladorNorifPortSemCienciaTest {
 
         //Grupo de teste DadosValidos, exemplo:
         controladorNorifPortSemCiencia.notifPortSemCiencia();
+        //Testa o cenário típico do caso de uso, onde há designados sem ciência.
 
     }
 
