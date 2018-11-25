@@ -6,19 +6,17 @@
 
 package br.ufg.inf.fabrica.conporta022018.controlador.expedPorta;
 
-        import br.ufg.inf.fabrica.conporta022018.controlador.ControladorExpedPorta;
-        import br.ufg.inf.fabrica.conporta022018.util.Extrator;
-        import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
-        import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
-        import org.junit.*;
-        import java.io.IOException;
-        import java.text.SimpleDateFormat;
-        import java.util.ArrayList;
-        import java.util.Date;
-        import java.util.List;
-
-        import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
-
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorExpedPorta;
+import br.ufg.inf.fabrica.conporta022018.util.Extrator;
+import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
+import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
+import org.junit.*;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 
 public class ControladorExpedPortaTest {
 
@@ -157,6 +155,17 @@ public class ControladorExpedPortaTest {
         /* ---------- testes a serem feitos posteriormente ---------- */
         // Portaria com data final de vigência e com referências a portarias existentes e ativas:
 
+    }
+
+    @Test
+    public void casoTesteAssinaturaValidos(){
+        // Todos os casos abaixo são de sucesso, eles precisam apenas apresentarem a assinatura esperada
+        Assert.assertEquals(controladorExpedPorta.assinar(new Integer[]{20376, 372469}),
+                new char[]{'A', '7', '4', 'C', '8', '2', '5', '7', 'F', 'A'});
+        Assert.assertEquals(controladorExpedPorta.assinar(new Integer[]{15487, 156546}),
+                new char[]{'1', 'E', 'B', 'F', '0', '1', 'B', '1', '4', '1'});
+        Assert.assertEquals(controladorExpedPorta.assinar(new Integer[]{2514, 21548}),
+                new char[]{'0', 'A', '2', 'F', '0', '0', '2', 'A', '1', '6'});
     }
 
     @Test

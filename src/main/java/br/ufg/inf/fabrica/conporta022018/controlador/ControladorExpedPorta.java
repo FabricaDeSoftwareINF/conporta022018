@@ -1,5 +1,8 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
+import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -12,6 +15,15 @@ public class ControladorExpedPorta {
 
     private final short[] chaveAssinatura = new short[]{1, 1, 1, 1, 1};
 
+    public int expedPorta(int idPorta){
+
+        Portaria portaria = new Portaria();
+        PortariaDAO portaDAO = new PortariaDAO();
+
+        
+        return 1;
+    }
+
     /**
      * Faz a assinatura de uma portaria expedida, concatenando os identificadores recebidos e fazendo operações de
      * deslocamento de bits no vetor de bytes resultante da concatenação. Estas operações são feitas baseadas na chave,
@@ -22,7 +34,7 @@ public class ControladorExpedPorta {
      *                        identificadores do expedidor e da portaria.
      * @return Cadeia de caracteres que representa o código hexadecimal da assinatura gerada.
      */
-    private char[] assinar(Integer[] identificadores){
+    public char[] assinar(Integer[] identificadores){
 
         ByteBuffer identificadoresEmBytes = ByteBuffer.allocate(8);
         ByteBuffer assinaturaEmBytes = ByteBuffer.allocate(5);
