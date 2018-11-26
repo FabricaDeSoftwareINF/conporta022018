@@ -67,7 +67,7 @@ public class Portaria extends ModeloAbstrato {
 
     @JoinColumn
     @OneToMany
-    private List<PortariaReferenciada> portariasReferenciadas;
+    private List<Referencia> portariasReferenciadas;
 
     @JoinColumn
     @OneToMany
@@ -197,11 +197,11 @@ public class Portaria extends ModeloAbstrato {
         this.status = status;
     }
 
-    public List<PortariaReferenciada> getPortariasReferenciadas() {
+    public List<Referencia> getPortariasReferenciadas() {
         return portariasReferenciadas;
     }
 
-    public void setPortariasReferenciadas(List<PortariaReferenciada> portariasReferenciadas) {
+    public void setPortariasReferenciadas(List<Referencia> portariasReferenciadas) {
         this.portariasReferenciadas = portariasReferenciadas;
     }
 
