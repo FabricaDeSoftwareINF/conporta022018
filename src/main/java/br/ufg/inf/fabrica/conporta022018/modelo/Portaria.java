@@ -52,7 +52,8 @@ public class Portaria extends ModeloAbstrato {
     private String textoCompleto;
 
     @Column
-    private Blob arqPdf;
+    @Lob
+    private byte[] arqPdf;
 
     @Column
     @NotBlank
@@ -165,11 +166,11 @@ public class Portaria extends ModeloAbstrato {
         this.textoCompleto = textoCompleto;
     }
 
-    public Blob getArqPdf() {
+    public byte[] getArqPdf() {
         return arqPdf;
     }
 
-    public void setArqPdf(Blob arqPdf) {
+    public void setArqPdf(byte[] arqPdf) {
         this.arqPdf = arqPdf;
     }
 
