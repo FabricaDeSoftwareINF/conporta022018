@@ -7,9 +7,10 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
-import br.ufg.inf.fabrica.conporta022018.modelo.PortariaReferenciada;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
+import br.ufg.inf.fabrica.conporta022018.modelo.Referencia;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
+import com.sun.xml.internal.bind.v2.TODO;
 
 import java.util.Iterator;
 import java.util.List;
@@ -17,53 +18,67 @@ import java.util.List;
 public class ControladorCancPortRef {
     private PortariaDAO portariaDAO = new PortariaDAO();
 
-    public boolean cancelarPortariaReferenciada(String idPortaria) {
-        Portaria portaria = portariaDAO.buscarUm("idPotaria = " + idPortaria);
-
+    public boolean cancelarPortariaReferenciada(Portaria portaria) {
         if (portaria.getStatus() != PortariaStatus.Ativa) {
             throw new UnsupportedOperationException("Operação não permitida para portaria não ativa.");
         }
 
-        List<PortariaReferenciada> portariasReferenciadas = portaria.getPortariasReferenciadas();
-        List<PortariaReferenciada> portRefCancelamento = getPortRefCancelamento(portariasReferenciadas);
+        List<Referencia> portariasReferenciadas = portaria.getReferencias();
+        List<Referencia> portRefCancelamento = getPortRefCancelamento(portariasReferenciadas);
 
         if (portRefCancelamento.size() == 0) {
-            throw new UnsupportedOperationException("Não existem portarias para cancelamento.");
+//            throw new UnsupportedOperationException("Não existem portarias para cancelamento.");
+            return true;
         }
 
-        Iterator<PortariaReferenciada> iterator = portRefCancelamento.iterator();
+        Iterator<Referencia> iterator = portRefCancelamento.iterator();
 
-        PortariaReferenciada portariaReferenciada;
+        Referencia referencia;
+        Portaria portariaReferenciada;
         Portaria portariaParaCancelamento;
 
-        while (iterator.hasNext()) {
-            portariaReferenciada = iterator.next();
-            portariaParaCancelamento = portariaDAO.buscarUm("idPortaria = " + portariaReferenciada.getIdPortariaReferenciada());
+        try {
+            portariaDAO.abrirTransacao();
 
-            if (portariaParaCancelamento.getStatus() != PortariaStatus.Ativa) {
-                throw new UnsupportedOperationException("Apenas portarias ativas podem ser canceladas.");
+            while (iterator.hasNext()) {
+                referencia = iterator.next();
+                portariaReferenciada = referencia.getReferencia();
+                portariaParaCancelamento = portariaDAO.buscar(portariaReferenciada.getId());
+
+                if (portariaParaCancelamento == null) {
+                    throw new UnsupportedOperationException("Apenas portarias existentes na base de dados podem ser canceladas.");
+                }
+
+                if (portariaParaCancelamento.getStatus() != PortariaStatus.Ativa) {
+                    throw new UnsupportedOperationException("Apenas portarias ativas podem ser canceladas.");
+                }
+
+                portariaParaCancelamento.setStatus(PortariaStatus.Cancelada);
+                portariaDAO.salvar(portariaParaCancelamento);
             }
 
-            portariaParaCancelamento.setStatus(PortariaStatus.Cancelada);
-            portariaDAO.atualizar(portariaParaCancelamento);
+            portariaDAO.commitarTransacao();
+        } catch (Exception e) {
+            portariaDAO.rollBackTransacao();
+            return false;
         }
 
         return true;
     }
 
-    public List<PortariaReferenciada> getPortRefCancelamento(List<PortariaReferenciada> portariasReferenciadas) {
-        Iterator<PortariaReferenciada> iterator = portariasReferenciadas.iterator();
-        PortariaReferenciada portariaReferenciada;
+    public List<Referencia> getPortRefCancelamento(List<Referencia> referencias) {
+        Iterator<Referencia> iterator = referencias.iterator();
+        Referencia referencia;
 
         while (iterator.hasNext()) {
-            portariaReferenciada = iterator.next();
+            referencia = iterator.next();
 
-            if (portariaReferenciada.getEhCancelamento() != true) {
-                portariasReferenciadas.remove(portariaReferenciada);
+            if (referencia.isEhCancelamento() != true) {
+                referencias.remove(referencia);
             }
         }
 
-        return portariasReferenciadas;
+        return referencias;
     }
 
 }
