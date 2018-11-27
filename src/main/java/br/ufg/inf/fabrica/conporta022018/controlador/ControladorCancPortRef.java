@@ -23,8 +23,8 @@ public class ControladorCancPortRef {
             throw new UnsupportedOperationException("Operação não permitida para portaria não ativa.");
         }
 
-        List<Referencia> portariasReferenciadas = portaria.getReferencias();
-        List<Referencia> portRefCancelamento = getPortRefCancelamento(portariasReferenciadas);
+        List<Referencia> referencias = portaria.getReferencias();
+        List<Referencia> portRefCancelamento = getPortRefCancelamento(referencias);
 
         if (portRefCancelamento.size() == 0) {
 //            throw new UnsupportedOperationException("Não existem portarias para cancelamento.");
