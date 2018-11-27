@@ -107,6 +107,10 @@ public class ControladorCancPortRefTest {
     public void casoTestDadosValidos() throws IOException {
 
         // Grupo de teste DadosValidos
+
+        // O parâmetro para a função será a instância de um Portaria (contendo suas referâncias) ou uma
+        // lista de referências... Isso será confirmado dia 29/12 com os responsáveis pela expedição de portaria.
+        // Apesar disso, os testes abaixo ainda podem ser compreendidos.
         
         controladorCancPortRef.cancelarPortariaReferenciada("INF201810");
         // O cenário acima testa o cancelamento de uma portaria referenciada com indicativo de cancelamento
