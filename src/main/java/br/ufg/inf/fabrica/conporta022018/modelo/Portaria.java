@@ -2,7 +2,6 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
@@ -68,7 +67,7 @@ public class Portaria extends ModeloAbstrato {
 
     @JoinColumn
     @OneToMany
-    private List<Referencia> portariasReferenciadas;
+    private List<Referencia> referencias;
 
     @JoinColumn
     @OneToMany
@@ -198,12 +197,12 @@ public class Portaria extends ModeloAbstrato {
         this.status = status;
     }
 
-    public List<Referencia> getPortariasReferenciadas() {
-        return portariasReferenciadas;
+    public List<Referencia> getReferencias() {
+        return referencias;
     }
 
-    public void setPortariasReferenciadas(List<Referencia> portariasReferenciadas) {
-        this.portariasReferenciadas = portariasReferenciadas;
+    public void setReferencias(List<Referencia> referencias) {
+        this.referencias = referencias;
     }
 
     public List<Recebedora> getUndRecebedora() {
