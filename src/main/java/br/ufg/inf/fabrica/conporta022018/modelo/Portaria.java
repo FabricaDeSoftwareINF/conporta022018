@@ -1,100 +1,142 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import java.sql.Blob;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
 
-public class Portaria {
-    private String idPortaria;
-    private Integer anoId;
-    private Integer segId;
+@Entity
+@Table
+public class Portaria extends ModeloAbstrato {
+    private static final long serialVersionUID = 1L;
+
+    @Column
+    @NotBlank
+    private int anoId;
+
+    @Column
+    @NotBlank
+    private int seqId;
+
+    @Column
     private String assunto;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    @PastOrPresent
     private Date dtExped;
-    private String periodVig;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    @FutureOrPresent
     private Date dtIniVig;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    @FutureOrPresent
     private Date dtFimVig;
-    private Date dPublicDou;
-    private Integer horasDesig;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    @FutureOrPresent
+    private Date dtPublicDou;
+
+    @Column
+    private int horasDesig;
+
+    @Column
     private String resumo;
+
+    @Column
     private String textoCompleto;
-    private Blob arqPdf;
+
+    @Column
+    @Lob
+    private byte[] arqPdf;
+
+    @Column
+    @NotBlank
+    private String siglaUndId;
+
+    @Column
     private String assinatura;
-    private Enum<PortariaStatus> status;
-    private List<PortariaReferenciada> portariasReferenciadas;
+
+    @Column
+    @NotBlank
+    private PortariaStatus status;
+
+    @JoinColumn
+    @OneToMany
+    private List<Referencia> referencias;
+
+    @JoinColumn
+    @OneToMany
+    private List<Recebedora> undRecebedora;
+
+    @JoinColumn
+    @OneToMany
     private List<Designado> designados;
-    private List<Recebedora> recebedoras;
-    private UndAdm expedidora;
 
-    /**
-     * @return String return the idPortaria
-     */
-    public String getIdPortaria() {
-        return idPortaria;
-    }
+    @JoinColumn
+    @ManyToOne
+    private Pessoa expedidor;
 
-    /**
-     * @param idPortaria the idPortaria to set
-     */
-    public void setIdPortaria(String idPortaria) {
-        this.idPortaria = idPortaria;
-    }
+    @JoinColumn
+    @ManyToOne
+    private UndAdm unidadeExpedidora;
 
-    /**
-     * @return Integer return the anoId
-     */
-    public Integer getAnoId() {
+    public int getAnoId() {
         return anoId;
     }
 
-    /**
-     * @param anoId the anoId to set
-     */
-    public void setAnoId(Integer anoId) {
+    public void setAnoId(int anoId) {
         this.anoId = anoId;
     }
 
-    /**
-     * @return Integer return the segId
-     */
-    public Integer getSegId() {
-        return segId;
+    public int getSeqId() {
+        return seqId;
     }
 
-    /**
-     * @param segId the segId to set
-     */
-    public void setSegId(Integer segId) {
-        this.segId = segId;
+    public void setSeqId(int seqId) {
+        this.seqId = seqId;
     }
 
-    /**
-     * @return String return the assunto
-     */
+>>>>>>> dev
     public String getAssunto() {
         return assunto;
     }
 
+<<<<<<< HEAD
     /**
      * @param assunto the assunto to set
      */
+=======
+>>>>>>> dev
     public void setAssunto(String assunto) {
         this.assunto = assunto;
     }
 
+<<<<<<< HEAD
     /**
      * @return Date return the dtExped
      */
+=======
+>>>>>>> dev
     public Date getDtExped() {
         return dtExped;
     }
 
+<<<<<<< HEAD
     /**
      * @param dtExped the dtExped to set
      */
+=======
+>>>>>>> dev
     public void setDtExped(Date dtExped) {
         this.dtExped = dtExped;
     }
 
+<<<<<<< HEAD
     /**
      * @return String return the periodVig
      */
@@ -112,31 +154,43 @@ public class Portaria {
     /**
      * @return Date return the dtIniVig
      */
+=======
+>>>>>>> dev
     public Date getDtIniVig() {
         return dtIniVig;
     }
 
+<<<<<<< HEAD
     /**
      * @param dtIniVig the dtIniVig to set
      */
+=======
+>>>>>>> dev
     public void setDtIniVig(Date dtIniVig) {
         this.dtIniVig = dtIniVig;
     }
 
+<<<<<<< HEAD
     /**
      * @return Date return the dtFimVig
      */
+=======
+>>>>>>> dev
     public Date getDtFimVig() {
         return dtFimVig;
     }
 
+<<<<<<< HEAD
     /**
      * @param dtFimVig the dtFimVig to set
      */
+=======
+>>>>>>> dev
     public void setDtFimVig(Date dtFimVig) {
         this.dtFimVig = dtFimVig;
     }
 
+<<<<<<< HEAD
     /**
      * @return Date return the dPublicDou
      */
@@ -168,31 +222,59 @@ public class Portaria {
     /**
      * @return String return the resumo
      */
+=======
+    public Date getDtPublicDou() {
+        return dtPublicDou;
+    }
+
+    public void setDtPublicDou(Date dtPublicDou) {
+        this.dtPublicDou = dtPublicDou;
+    }
+
+    public int getHorasDesig() {
+        return horasDesig;
+    }
+
+    public void setHorasDesig(int horasDesig) {
+        this.horasDesig = horasDesig;
+    }
+
+>>>>>>> dev
     public String getResumo() {
         return resumo;
     }
 
+<<<<<<< HEAD
     /**
      * @param resumo the resumo to set
      */
+=======
+>>>>>>> dev
     public void setResumo(String resumo) {
         this.resumo = resumo;
     }
 
+<<<<<<< HEAD
     /**
      * @return String return the textoCompleto
      */
+=======
+>>>>>>> dev
     public String getTextoCompleto() {
         return textoCompleto;
     }
 
+<<<<<<< HEAD
     /**
      * @param textoCompleto the textoCompleto to set
      */
+=======
+>>>>>>> dev
     public void setTextoCompleto(String textoCompleto) {
         this.textoCompleto = textoCompleto;
     }
 
+<<<<<<< HEAD
     /**
      * @return Blob return the arqPdf
      */
@@ -210,17 +292,39 @@ public class Portaria {
     /**
      * @return String return the assinatura
      */
+=======
+    public byte[] getArqPdf() {
+        return arqPdf;
+    }
+
+    public void setArqPdf(byte[] arqPdf) {
+        this.arqPdf = arqPdf;
+    }
+
+    public String getSiglaUndId() {
+        return siglaUndId;
+    }
+
+    public void setSiglaUndId(String siglaUndId) {
+        this.siglaUndId = siglaUndId;
+    }
+
+>>>>>>> dev
     public String getAssinatura() {
         return assinatura;
     }
 
+<<<<<<< HEAD
     /**
      * @param assinatura the assinatura to set
      */
+=======
+>>>>>>> dev
     public void setAssinatura(String assinatura) {
         this.assinatura = assinatura;
     }
 
+<<<<<<< HEAD
     /**
      * @return Enum<PortariaStatus> return the status
      */
@@ -252,17 +356,47 @@ public class Portaria {
     /**
      * @return List<Designado> return the designados
      */
+=======
+    public PortariaStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PortariaStatus status) {
+        this.status = status;
+    }
+
+    public List<Referencia> getReferencias() {
+        return referencias;
+    }
+
+    public void setReferencias(List<Referencia> referencias) {
+        this.referencias = referencias;
+    }
+
+    public List<Recebedora> getUndRecebedora() {
+        return undRecebedora;
+    }
+
+    public void setUndRecebedora(List<Recebedora> undRecebedora) {
+        this.undRecebedora = undRecebedora;
+    }
+
+>>>>>>> dev
     public List<Designado> getDesignados() {
         return designados;
     }
 
+<<<<<<< HEAD
     /**
      * @param designados the designados to set
      */
+=======
+>>>>>>> dev
     public void setDesignados(List<Designado> designados) {
         this.designados = designados;
     }
 
+<<<<<<< HEAD
     /**
      * @return List<Recebedora> return the recebedoras
      */
@@ -292,3 +426,21 @@ public class Portaria {
     }
 
 }
+=======
+    public Pessoa getExpedidor() {
+        return expedidor;
+    }
+
+    public void setExpedidor(Pessoa expedidor) {
+        this.expedidor = expedidor;
+    }
+
+    public UndAdm getUnidadeExpedidora() {
+        return unidadeExpedidora;
+    }
+
+    public void setUnidadeExpedidora(UndAdm unidadeExpedidora) {
+        this.unidadeExpedidora = unidadeExpedidora;
+    }
+}
+>>>>>>> dev

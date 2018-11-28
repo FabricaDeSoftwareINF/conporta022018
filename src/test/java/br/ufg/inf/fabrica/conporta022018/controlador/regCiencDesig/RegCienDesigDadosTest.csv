@@ -1,0 +1,12 @@
+pessoa
+PKpes;nomePes; cpfPes; emailPes; senhaUsu; ehUsuAtivo
+1;José Carlos Santos; 123.456.789-12; jose@exemplo.com; 123456; true
+portaria
+PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
+1;001; inf; 2018; 0001; Ativa; Novo coordenador de curso; 12/11/2018; 01/01/201931/12/2021; 01/01/2019; 31/12/2021; 12/12/2018; 220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.; Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;;
+undAdm
+PKundAdm;nomeUnd; siglaUnd; tipoUnd; minInat; ultPort; anoPort; ultNumExped; ultNumProp
+1;Instituto de Informática; INF; Unidade Acadêmica; 15; 2018001; 2018; 1; -1
+designado
+PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
+1;; Coordenador; Novo coordenador de curso; 220; ;1;1
