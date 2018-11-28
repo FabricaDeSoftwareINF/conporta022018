@@ -84,21 +84,35 @@ public class ControladorEdiTemTimTest {
     public void casoTestDadosValidos() throws IOException {
 
         //Grupo de teste DadosValidos, exemplo:   
-        //caso 1
+        //Limite máximo do tempo válido uma sessão.
         UndAdm undAdm = new UndAdm();            
-        controladorEdiTemTim.editarTimeOut(10, "INF");
-        //caso 2
+        controladorEdiTemTim.editarTimeOut(60, "INF");
+        //Limite máximo do tempo válido uma sessão menos um.
         UndAdm undAdm2 = new UndAdm();              
-        controladorEdiTemTim.editarTimeOut(30, "INF");;
+        controladorEdiTemTim.editarTimeOut(59, "INF");
+        //Limite mínimo do tempo válido uma sessão.
+        UndAdm undAdm3 = new UndAdm();              
+        controladorEdiTemTim.editarTimeOut(15, "INF");
+        //Limite mínimo do tempo válido uma sessão mais um .
+        UndAdm undAdm4 = new UndAdm();              
+        controladorEdiTemTim.editarTimeOut(16, "INF");
 
     }
 
     @Test
     public void casoTestDadosExcecoes() throws IOException {
-        //O cenario abaixo testa que a mudança do tempo de sessão para mais de uma hora não é permitido        
-        controladorEdiTemTim.editarTimeOut(70, "INF");
-        //O cenario abaixo testa que a mudança do tempo de sessão para menos de 1 minito não é permitido             
-        controladorEdiTemTim.editarTimeOut(-10, "INF");                     
+        //O cenario abaixo testa que a mudança do tempo de sessão para mais de uma período superior em um ao permitido.       
+        controladorEdiTemTim.editarTimeOut(61, "INF");
+        //O cenario abaixo testa que a mudança do tempo de sessão para um período inferior em um ao permitido.             
+        controladorEdiTemTim.editarTimeOut(14, "INF");                     
+        //O cenario abaixo testa que a mudança do tempo válido de sessão para uma unidade academica que não existe na base de dados.             
+        controladorEdiTemTim.editarTimeOut(30, "FAV");  
+        //O cenario abaixo testa que a mudança do tempo de sessão para um período inferior em um ao permitido de sessão para uma unidade
+        // academica que não existe na base de dados.             
+        controladorEdiTemTim.editarTimeOut(14, "FAV");  
+        //O cenario abaixo testa que a mudança do tempo de sessão para um período superior em um ao permitido de sessão para uma unidade
+        // academica que não existe na base de dados.             
+        controladorEdiTemTim.editarTimeOut(61, "FAV");  
     }
 
     @AfterClass

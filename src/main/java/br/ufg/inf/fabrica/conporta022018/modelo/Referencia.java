@@ -1,25 +1,30 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaReferenciadaDAO;
+import javax.persistence.*;
+import java.io.Serializable;
 
-public class PortariaReferenciada {
+@Entity
+public class Referencia extends ModeloAbstrato {
 
-    private Portaria PortariaReferenciada;
+    private static final long serialVersionUID = 1L;
+    
+    @ManyToOne
+    private Portaria portariaReferenciada;
     private boolean ehCancelamento;
-    private PortariaReferenciadaDAO portariaReferenciadaDAO;
+      
 
     /**
-     * @return Portaria return the PortariaReferenciada
+     * @return Portaria return the Referencia
      */
     public Portaria getPortariaReferenciada() {
-        return PortariaReferenciada;
+        return portariaReferenciada;
     }
 
     /**
-     * @param PortariaReferenciada the PortariaReferenciada to set
+     * @param Referencia the Referencia to set
      */
-    public void setPortariaReferenciada(Portaria PortariaReferenciada) {
-        this.PortariaReferenciada = PortariaReferenciada;
+    public void setReferencia(Portaria portariaReferenciada) {
+        this.portariaReferenciada = portariaReferenciada;
     }
 
     /**
