@@ -1,24 +1,21 @@
 package br.ufg.inf.fabrica.conporta022018.controlador.ediPorta;
 
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorEdiPorta;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
-import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import java.util.ArrayList;
-import java.io.IOException;
-import java.util.List;
 
-import static org.junit.Assert.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(Arquillian.class)
 public class EdiPortaTest {
+    ControladorEdiPorta controladorEdiPorta;
 
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException {
