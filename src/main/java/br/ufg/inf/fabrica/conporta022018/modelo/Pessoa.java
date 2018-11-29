@@ -63,6 +63,10 @@ public class Pessoa extends ModeloAbstrato {
         return false;
     }
 
+    public String getSenhaUsu() {
+        return this.senhaUsu;
+    }
+
     public void setEhUsuAtivo(Boolean ehUsuAtivo) {
         this.ehUsuAtivo = ehUsuAtivo;
     }
