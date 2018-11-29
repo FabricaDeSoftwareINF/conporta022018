@@ -8,10 +8,6 @@ import br.ufg.inf.fabrica.conporta022018.modelo.Referencia;
 import java.util.Iterator;
 import java.util.List;
 
-
-/**
- * Created by Alunoinf_2 on 25/10/2018.
- */
 public class ControladorExclPort {
 	
     private Portaria portaria;
@@ -26,7 +22,7 @@ public class ControladorExclPort {
     public boolean excluirPortaria(Portaria portaria) throws Exception{
     	this.portaria = portaria;
         
-        List<Referencia> listaPortariasReferenciadas = this.portaria.getReferencias();
+        List<Referencia> listaReferenciadas = this.portaria.getReferencias();
         List<Designado> listaDesignados = this.portaria.getDesignados();
     	
     	try {
@@ -36,15 +32,14 @@ public class ControladorExclPort {
                 this.portaria.setDesignados(null);
             }
 
-            if(listaPortariasReferenciadas.size() > 0){
-                for (Referencia referencia : listaPortariasReferenciadas) {
+            if(listaReferenciadas.size() > 0){
+                for (Referencia referencia : listaReferenciadas) {
                     referencia.setReferencia(null);
                 }
-                this.portaria.setReferencias(listaPortariasReferenciadas);
+                this.portaria.setReferencias(listaReferenciadas);
             }
             
             this.portariaDAO.salvar(this.portaria);
-
             portariaDAO.commitarTransacao();
         } catch (Exception e) {
             portariaDAO.rollBackTransacao();
