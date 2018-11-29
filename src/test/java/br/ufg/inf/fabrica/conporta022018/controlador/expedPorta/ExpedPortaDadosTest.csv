@@ -24,13 +24,22 @@ PKportaria,idPortaria,siglaUndId,anoId,seqId,status,assunto,dtExped,periodVig,dt
 5,inf20185,inf,2018,5,Cancelada,Novo coordenador de curso,12/11/2018,01/01/201931/12/2021,01/01/2019,31/12/2021,12/12/2018,220,Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.,Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG
 portaComFinalVig,,,,,,,,,,,,,,
 PKportaria,idPortaria,siglaUndId,anoId,seqId,status,assunto,dtExped,periodVig,dtIniVig,dtFimVig. dPublicDou,horasDesig,resumo,textoCompleto,arqPdf
-1,inf2018-1,inf,2018,-1,Proposta,Novo coordenador de curso,,01/01/201931/12/2021,01/01/2019,31/12/2021,12/12/2018,220,Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.,Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG
+9,inf2018-1,inf,2018,-1,Proposta,Novo coordenador de curso,,01/01/201931/12/2021,01/01/2019,31/12/2021,12/12/2018,220,Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.,Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG
 portaComFinalVig,,,,,,,,,,,,,,
 PKportaria,idPortaria,siglaUndId,anoId,seqId,status,assunto,dtExped,periodVig,dtIniVig,dtFimVig. dPublicDou,horasDesig,resumo,textoCompleto,arqPdf
-1,inf2018-1,inf,2018,-1,Proposta,Novo coordenador de curso,,01/01/201931/12/2021,01/01/2019,31/12/2021,12/12/2018,220,Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.,Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG
+10,inf2018-1,inf,2018,-1,Proposta,Novo coordenador de curso,,01/01/201931/12/2021,01/01/2019,31/12/2021,12/12/2018,220,Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.,Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG
 refAtiva,,,,,,,,,,,,,,
 PKportaria,Pkreferenciada,ehCancelamento,,,,,,,,,,,,
 91,7,FALSE,,,,,,,,,,,,
+refCancelada,,,,,,,,,,,,,,
+PKportaria,Pkreferenciada,ehCancelamento,,,,,,,,,,,,
+92,5,FALSE,,,,,,,,,,,,
+refProposta,,,,,,,,,,,,,,
+PKportaria,Pkreferenciada,ehCancelamento,,,,,,,,,,,,
+93,9,FALSE,,,,,,,,,,,,
+refProposta,,,,,,,,,,,,,,
+PKportaria,Pkreferenciada,ehCancelamento,,,,,,,,,,,,
+999,8888,FALSE,,,,,,,,,,,,
 desigExist,,,,,,,,,,,,,,
 PKdesg,dtCienciaDesig,tipFuncDesig,descrFuncDesig,horasDefFuncDesig,horasExecFuncDesig,PKportaria,PKpes,,,,,,,
 1,,Coordenador,Novo coordenador de curso,220,,6,1,,,,,,,
