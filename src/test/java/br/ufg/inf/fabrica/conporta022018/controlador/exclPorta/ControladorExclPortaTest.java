@@ -162,17 +162,33 @@ public class ControladorExclPortaTest {
     @Test
     public void casoTestDadosExcecoes() throws IOException {
 
-        // Tentativa de exclusão de portaria ativa
-        portaria = portariaDAO.buscar(Long.parseLong("INF201810"));
-        controladorExclPort.excluirPortaria(portaria);
+        try{
+            // Tentativa de exclusão de portaria ativa
+            portaria = portariaDAO.buscar(Long.parseLong("INF201810"));
+            controladorExclPort.excluirPortaria(portaria);
 
-        // Tentativa de exclusão de portaria cancelada
-        portaria = portariaDAO.buscar(Long.parseLong("INF201810"));
-        controladorExclPort.excluirPortaria(portaria);
+        }catch(Exception ex){
+            System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
+        }
 
-        // Tentativa de exclusão de portaria expirada
-        portaria = portariaDAO.buscar(Long.parseLong("INF201815"));
-        controladorExclPort.excluirPortaria(portaria);
+
+        try{
+            // Tentativa de exclusão de portaria cancelada
+            portaria = portariaDAO.buscar(Long.parseLong("INF201810"));
+            controladorExclPort.excluirPortaria(portaria);
+
+        }catch(Exception ex){
+            System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
+        }
+
+
+        try{
+            // Tentativa de exclusão de portaria expirada
+            portaria = portariaDAO.buscar(Long.parseLong("INF201815"));
+            controladorExclPort.excluirPortaria(portaria);
+        }catch(Exception ex){
+            System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
+        }
 
     }
 
@@ -224,14 +240,14 @@ public class ControladorExclPortaTest {
     public static Referencia trataDadosDaPortariaReferenciadaParaPersistencia(String dados[], PortariaDAO portariaDAO){
         
         Portaria portaria = new Portaria();
-        Referencia portariaReferenciada = new Referencia();
+        Referencia referenciada = new Referencia();
    
         portaria = portariaDAO.buscar(Long.parseLong(dados[2]));
+
+        referenciada.setReferencia(portaria);
+        referenciada.setEhCancelamento(Boolean.parseBoolean(dados[3]));
         
-        portariaReferenciada.setReferencia(portaria);
-        portariaReferenciada.setEhCancelamento(Boolean.parseBoolean(dados[3]));
-        
-        return portariaReferenciada;
+        return referenciada;
     } 
 
 }
