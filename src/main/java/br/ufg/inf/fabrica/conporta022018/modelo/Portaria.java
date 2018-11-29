@@ -2,7 +2,6 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
@@ -52,7 +51,8 @@ public class Portaria extends ModeloAbstrato {
     private String textoCompleto;
 
     @Column
-    private Blob arqPdf;
+    @Lob
+    private byte[] arqPdf;
 
     @Column
     @NotBlank
@@ -67,7 +67,7 @@ public class Portaria extends ModeloAbstrato {
 
     @JoinColumn
     @OneToMany
-    private List<PortariaReferenciada> portariasReferenciadas;
+    private List<Referencia> referencias;
 
     @JoinColumn
     @OneToMany
@@ -165,11 +165,11 @@ public class Portaria extends ModeloAbstrato {
         this.textoCompleto = textoCompleto;
     }
 
-    public Blob getArqPdf() {
+    public byte[] getArqPdf() {
         return arqPdf;
     }
 
-    public void setArqPdf(Blob arqPdf) {
+    public void setArqPdf(byte[] arqPdf) {
         this.arqPdf = arqPdf;
     }
 
@@ -197,12 +197,12 @@ public class Portaria extends ModeloAbstrato {
         this.status = status;
     }
 
-    public List<PortariaReferenciada> getPortariasReferenciadas() {
-        return portariasReferenciadas;
+    public List<Referencia> getReferencias() {
+        return referencias;
     }
 
-    public void setPortariasReferenciadas(List<PortariaReferenciada> portariasReferenciadas) {
-        this.portariasReferenciadas = portariasReferenciadas;
+    public void setReferencias(List<Referencia> referencias) {
+        this.referencias = referencias;
     }
 
     public List<Recebedora> getUndRecebedora() {
