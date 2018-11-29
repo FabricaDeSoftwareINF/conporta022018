@@ -19,7 +19,7 @@ public class ControladorProPortaTest{
 
     @BeforeClass
     public static void casoTestPrepararCenario() throws IOException{
-        final String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/regCiencDesig/ProPortaTest.csv";
+        final String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/proPorta/ProPortaTest.csv";
         final String REGRA = ";";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();

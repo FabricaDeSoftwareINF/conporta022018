@@ -6,7 +6,7 @@
 
 package br.ufg.inf.fabrica.conporta022018.controlador.expedPorta;
 
-        import br.ufg.inf.fabrica.conporta022018.controlador.ControladorExpedPorta;
+        //import br.ufg.inf.fabrica.conporta022018.controlador.ControladorExpedPorta;
         import br.ufg.inf.fabrica.conporta022018.util.Extrator;
         import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
         import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
@@ -17,17 +17,17 @@ package br.ufg.inf.fabrica.conporta022018.controlador.expedPorta;
         import java.util.Date;
         import java.util.List;
 
-        import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
+        //import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 
 
 public class ControladorExpedPortaTest {
 
-    private static ControladorExpedPorta controladorExpedPorta;
+    /*private static ControladorExpedPorta controladorExpedPorta;
 
-    /*
+    
      * Preparação do ambiente para teste.
      * População do banco de Dados para atendam os pré-requisitos do caso de uso.
-     */
+     
 
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException {
@@ -131,14 +131,14 @@ public class ControladorExpedPortaTest {
         controladorExpedPorta = new ControladorExpedPorta();
     }
 
-    /*
+    
      * Criar os cenários de testes para a aplicação:
      * Os cenarios de testes devem obrigatóriamente ser divididos em dois grupos.
      * DadosValidos : Grupo destinado ao cenatio típico e aos cenarios alternativos do caso de uso.
      * DadosExcecoes : Grupo destinado as exceções do cenario típico e dos cenarios alternativos.
      * Cada cenário e cada exceção deve necessáriamente ser testado no minimo uma vez, cada entrada e/ou combinação
      * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
-     */
+     
 
     @Test
     public void casoTestDadosValidos() throws IOException {
@@ -154,7 +154,7 @@ public class ControladorExpedPortaTest {
         // Portaria sem data final de vigência, sem designados:
         Assert.assertEquals(controladorExpedPorta.expedPorta(2), 1);
 
-        /* ---------- testes a serem feitos posteriormente ---------- */
+         ---------- testes a serem feitos posteriormente ---------- 
         // Portaria com data final de vigência e com referências a portarias existentes e ativas:
 
     }
@@ -162,14 +162,14 @@ public class ControladorExpedPortaTest {
     @Test
     public void casoTestDadosExcecoes() throws IOException {
 
-        /* Os códigos de erro são os seguintes:
+         Os códigos de erro são os seguintes:
         *
         * 2 - Portaria inválida - Cancelada ou Expedida
         * 3 - Portaria inválida - Período de vigência sem início ou expirado
         * 4 - Designado inválido - Inexistente
         * 5 - Portaria inexistente
         * 6 - Portaria referenciada - Inexistentes, canceladas ou propostas
-        * */
+        * 
 
         // Portaria com designado inexistente:
         Assert.assertEquals(controladorExpedPorta.expedPorta(8), 4);
@@ -189,7 +189,7 @@ public class ControladorExpedPortaTest {
         // Portaria inexistente
         Assert.assertEquals(controladorExpedPorta.expedPorta(2469), 5);
 
-        /* ---------- testes a serem feitos posteriormente ---------- */
+         ---------- testes a serem feitos posteriormente ---------- 
 
         // Portaria com referências a portarias canceladas:
 
@@ -214,6 +214,6 @@ public class ControladorExpedPortaTest {
         // a data de hoje.
 
         //Assert.assertEquals(dataHoje, rodaSQLparaPegarADataGravadaNoBancoDeDados);
-    }
+    }*/
 
 }
