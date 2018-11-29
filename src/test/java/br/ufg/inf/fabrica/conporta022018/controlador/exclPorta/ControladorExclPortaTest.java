@@ -163,13 +163,16 @@ public class ControladorExclPortaTest {
     public void casoTestDadosExcecoes() throws IOException {
 
         // Tentativa de exclusão de portaria ativa
-        //controladorExclPort.excluirPortaria("INF201810");
+        portaria = portariaDAO.buscar(Long.parseLong("INF201810"));
+        controladorExclPort.excluirPortaria(portaria);
 
         // Tentativa de exclusão de portaria cancelada
-        //controladorExclPort.excluirPortaria("INF201814");
+        portaria = portariaDAO.buscar(Long.parseLong("INF201810"));
+        controladorExclPort.excluirPortaria(portaria);
 
         // Tentativa de exclusão de portaria expirada
-        //controladorExclPort.excluirPortaria("INF201815");
+        portaria = portariaDAO.buscar(Long.parseLong("INF201815"));
+        controladorExclPort.excluirPortaria(portaria);
 
     }
 
@@ -177,18 +180,17 @@ public class ControladorExclPortaTest {
     public static void casoTestResultados() throws IOException {
 
         //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
-        // irá fica as suas pós-condições. Exemplo:
-
-        //Busca a data atual.
-        Date hoje = new Date();
-        SimpleDateFormat df;
-        df = new SimpleDateFormat("dd/MM/yyyy");
-        String dataHoje = df.format(hoje);
-
-        //pega a data que foi armazenada no banco de dados e verifica com a data de execução do teste, ou seja,
-        // a data de hoje.
-
-        //Assert.assertEquals(dataHoje, rodaSQLparaPegarADataGravadaNoBancoDeDados);
+        // irá fica as suas pós-condições.
+        
+        //resultados devem ser nulos visto que nestes casos as portarias devem ter sido excluídas
+        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201813")));
+        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201800")));
+        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201803")));
+        
+         //resultados devem retornar um objeto visto que nestes casos as portarias não devem ter sido excluídas
+        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201810")));
+        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201810")));
+        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201815")));
     }
     
     public static Portaria trataDadosDaPortariaParaPersistencia(String dados[]){
