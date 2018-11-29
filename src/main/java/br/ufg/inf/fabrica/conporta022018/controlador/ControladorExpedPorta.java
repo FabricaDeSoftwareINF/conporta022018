@@ -69,7 +69,6 @@ public class ControladorExpedPorta {
                 designadosExistem = false;
             }
         }
-
         if (!designadosExistem) {
             return 5;
         } else {
@@ -85,7 +84,7 @@ public class ControladorExpedPorta {
             portaria.setDtExped(new Date());
 
             // Assinatura da expedição, persistência da portaria, encaminhamento para ciência e cancelamento de referenciadas
-            portaria.setAssinatura(assinar(/*id do Expedidor*/, portaria.getId()));
+            portaria.setAssinatura(assinar(new Long[]{pessoa.getServidor().getId(), portaria.getId()}));
             portaDAO.salvar(portaria);
             controladorEncPortaria.encPortariaCiencia(idPorta);
             controladorCancPortRef.cancelarPortarias(idPorta);
@@ -103,7 +102,7 @@ public class ControladorExpedPorta {
      *                        identificadores do expedidor e da portaria.
      * @return Cadeia de caracteres que representa o código hexadecimal da assinatura gerada.
      */
-    public char[] assinar(Long[] identificadores){
+    public String assinar(Long[] identificadores){
 
         ByteBuffer identificadoresEmBytes = ByteBuffer.allocate(8);
         ByteBuffer assinaturaEmBytes = ByteBuffer.allocate(5);
@@ -129,7 +128,10 @@ public class ControladorExpedPorta {
         for (byte b : assinaturaEmBytes.array()) {
             sb.append(String.format("%02X ", b));
         }
-        return sb.toString().trim().toCharArray();
+        /* A cadeia de caracteres gerada possui espaços entre cada par de caracteres hexadecimais, portanto é necessário
+        retirar todos os espaços em branco da assinatura.
+        String.trim() não funcionou, por algum motivo desconhecido, portanto foi usado String.replace()*/
+        return sb.toString().replace(" ", "");
     }
 
     /**
