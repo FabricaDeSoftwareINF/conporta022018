@@ -1,28 +1,29 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import java.util.Date;
-import java.util.List;
+import javax.persistence.*;
 
-public class Designado {
-    private String idPortaria;
+/**
+ * Modelo da Entidade de DESIGNADO.
+ *
+ * @author Edionay Aguiar
+ * @since 1.0
+ */
+
+@Entity
+@Table
+public class Designado extends ModeloAbstrato {
+
+    private static final long serialVersionUID = 1L;
+
     private Date dtCienciaDesig;
     private String descrFuncDesig;
-    private Integer horasDefFuncDesig;
-    private Integer horasExecFuncDesig;
+    private int horasDefFuncDesig;
+    private int horasExecFuncDesig;
 
-    /**
-     * @return String return the idPortaria
-     */
-    public String getIdPortaria() {
-        return idPortaria;
-    }
-
-    /**
-     * @param idPortaria the idPortaria to set
-     */
-    public void setIdPortaria(String idPortaria) {
-        this.idPortaria = idPortaria;
-    }
+    @ManyToOne
+    private Pessoa pessoa;
+    private FuncaoDesig funcaoDesig;
 
     /**
      * @return Date return the dtCienciaDesig

@@ -1,45 +1,26 @@
 package br.ufg.inf.fabrica.conporta022018.persistencia;
-
-
 import br.ufg.inf.fabrica.conporta022018.modelo.Recebedora;
 
-import java.util.List;
-import java.util.Map;
+public class RecebedoraDAO extends GenericoDAO<Recebedora>{
+	
+	private Recebedora recebedora;
+	private ConnectionFactory entityManager;
 
-public class RecebedoraDAO {
-    public Recebedora salvar(Recebedora recebedora) {
+	@Override
+	public Recebedora salvar(Recebedora recebedora) {
+	    return new Recebedora();
+	}
 
+    public void remover(Long id) {}
+
+    public Recebedora buscar(Long id) {
+      return new Recebedora();
     }
 
-    public  void remover(Recebedora recebedora) {
+    public void abrirTransacao() {}
 
-    }
+	public void commitarTransacao() {}
 
-    public Recebedora buscar(long id) {
-
-    }
-
-    public List<Recebedora> buscarTodos(Recebedora recebedora) {
-
-    }
-
-    public Recebedora pesquisarUmJPQLCustomizada(String jpql, Map<String, Object> parametros) {
-
-    }
-
-    public List<Recebedora> pesquisarJPQLCustomizada(String jpql, Map<String, Object> parametros) {
-
-    }
-
-    public void abrirTransacao() {
-
-    }
-
-    public void commitarTransacao(){
-
-    }
-
-    public void rollBackTransacao(){
-
-    }
+    public void rollBackTransacao() {}
+    
 }

@@ -1,13 +1,25 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-public class Pessoa {
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
+
+@Entity
+public class Pessoa extends ModeloAbstrato {
+
+    private static final long serialVersionUID = 1L;
 
     private String nomePes;
     private String cpfPes;
     private String emailPes;
     private String senhaUsu;
     private Boolean ehUsuAtivo;
-    private long ultimoLogin;
+    @OneToMany
+    private List<Gestao> gestao;
+    @OneToMany
+    private List<Lotacao> servidor;
+    @OneToMany
+    private List<Matricula> discente;
 
     public String getNomePes() {
         return nomePes;
@@ -45,16 +57,42 @@ public class Pessoa {
         return ehUsuAtivo;
     }
 
+    public Boolean validarSenha(String credential) {
+        if(!credential.isEmpty() && credential.length() >= 6)
+            return  true;
+        return false;
+    }
+
     public void setEhUsuAtivo(Boolean ehUsuAtivo) {
         this.ehUsuAtivo = ehUsuAtivo;
     }
 
-    public long getUltimoLogin() {
-        return ultimoLogin;
+    public Boolean isUsuAtivo() {
+        return this.isUsuAtivo();
     }
 
-    public void setUltimoLogin(long ultimoLogin) {
-        this.ultimoLogin = ultimoLogin;
+    public void setGestao(Gestao gestor) {
+        this.gestao.add(gestor);
+    }
+
+    public List<Gestao> getGestao() {
+        return this.gestao;
+    }
+
+    public void setServidor(Lotacao servidor) {
+        this.servidor.add(servidor);
+    }
+
+    public List<Lotacao> getServidor() {
+        return this.servidor;
+    }
+
+    public void setDiscente(Matricula discente) {
+        this.discente.add(discente);
+    }
+
+    public List<Matricula> getDiscente() {
+        return this.discente;
     }
 
 }

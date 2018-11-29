@@ -1,6 +1,22 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class UndAdm {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String siglaUnAdm;
     private Integer minInat;
     private String nomeUnd;
@@ -9,6 +25,9 @@ public class UndAdm {
     private Integer anoPort;
     private Integer ultNumExped;
     private Integer ultNumProp;
+
+    @OneToMany
+    private List<UndAdm> subordinadas;
 
     /**
      * @return String return the siglaUnAdm
@@ -120,6 +139,20 @@ public class UndAdm {
      */
     public void setUltNumProp(Integer ultNumProp) {
         this.ultNumProp = ultNumProp;
+    }
+
+    /**
+     * @return List<UndAdm> return the subordinadas
+     */
+    public List<UndAdm> getSubordinadas() {
+        return subordinadas;
+    }
+
+    /**
+     * @param subordinadas the subordinadas to set
+     */
+    public void setSubordinadas(List<UndAdm> subordinadas) {
+        this.subordinadas = subordinadas;
     }
 
 }
