@@ -6,16 +6,23 @@
 
 package br.ufg.inf.fabrica.conporta022018.controlador.exclPorta;
 
-        import br.ufg.inf.fabrica.conporta022018.controlador.ControladorExclPort;
-        import br.ufg.inf.fabrica.conporta022018.util.Extrator;
-        import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
-        import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
-        import org.junit.*;
-        import java.io.IOException;
-        import java.text.SimpleDateFormat;
-        import java.util.ArrayList;
-        import java.util.Date;
-        import java.util.List;
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorExclPort;
+import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
+import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
+import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
+import br.ufg.inf.fabrica.conporta022018.modelo.Referencia;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
+import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaReferenciadaDAO;
+import br.ufg.inf.fabrica.conporta022018.util.Extrator;
+import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
+import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
+import org.junit.*;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class ControladorExclPortaTest {
 
@@ -37,6 +44,12 @@ public class ControladorExclPortaTest {
         String tabelaAtual = " ";
         String dados[];
         String linha;
+        PortariaDAO portariaDAO = new PortariaDAO();
+        Portaria portaria = new Portaria();
+        DesignadoDAO designadoDAO = new DesignadoDAO();
+        Designado designado = new Designado();
+        Referencia portariaReferenciada = new Referencia();
+        PortariaReferenciadaDAO portariaReferenciadaDAO = new PortariaReferenciadaDAO();
 
         //Criar as instâncias de todos os objetos DAO's necessários para preparar o cenario.
 
@@ -61,12 +74,18 @@ public class ControladorExclPortaTest {
                 case "portaria" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    // Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
+                    
+                    portaria = trataDadosDaPortariaParaPersistencia(dados);
+                    portariaDAO.salvar(portaria);
+  
                     break;
                 case "portariaReferenciada" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    // Aqui colocar os comandos para popular a tabela portariaReferenciada no Banco de Dados.
+                    
+                    portariaReferenciada = trataDadosDaPortariaReferenciadaParaPersistencia(dados, portariaDAO);
+                    portariaReferenciadaDAO.salvar(portariaReferenciada);
+                    
                     break;
                 case "portariaDesignada" :
                     extrator.setTexto(linha);
@@ -81,7 +100,10 @@ public class ControladorExclPortaTest {
                 case "designado" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
+                    
+                    designado = trataDadosDoDesignadoParaPersistencia(dados);
+                    designadoDAO.salvar(designado);
+                    
                     break;
             }
         }
@@ -109,13 +131,13 @@ public class ControladorExclPortaTest {
         //ainda será complementado, o parâmetro de excluirPortaria será uma instância de Portaria e não uma string.
         
         // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados:
-        controladorExclPort.excluirPortaria("INF201813");
+        //controladorExclPort.excluirPortaria("INF201813");
         
         // Portaria sem data final de vigência, proposta, com portarias referenciadas e sem designados:
-        controladorExclPort.excluirPortaria("INF201800");
+       // controladorExclPort.excluirPortaria("INF201800");
         
         // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados:
-        controladorExclPort.excluirPortaria("INF201803");
+        //controladorExclPort.excluirPortaria("INF201803");
 
     }
 
@@ -123,13 +145,13 @@ public class ControladorExclPortaTest {
     public void casoTestDadosExcecoes() throws IOException {
 
         // Tentativa de exclusão de portaria ativa
-        controladorExclPort.excluirPortaria("INF201810");
+        //controladorExclPort.excluirPortaria("INF201810");
 
         // Tentativa de exclusão de portaria cancelada
-        controladorExclPort.excluirPortaria("INF201814");
+        //controladorExclPort.excluirPortaria("INF201814");
 
         // Tentativa de exclusão de portaria expirada
-        controladorExclPort.excluirPortaria("INF201815");
+        //controladorExclPort.excluirPortaria("INF201815");
 
     }
 
@@ -150,5 +172,46 @@ public class ControladorExclPortaTest {
 
         //Assert.assertEquals(dataHoje, rodaSQLparaPegarADataGravadaNoBancoDeDados);
     }
+    
+    public static Portaria trataDadosDaPortariaParaPersistencia(String dados[]){
+        Portaria portaria = new Portaria();
+        portaria.setSiglaUndId(dados[2]);
+        portaria.setAnoId(Integer.parseInt(dados[3]));
+        portaria.setSeqId(Integer.parseInt(dados[4]));
+        //portaria.setStatus((PortariaStatus)dados[5]);
+        portaria.setAssunto(dados[6]);
+        portaria.setDtExped(new Date(dados[7]));
+        portaria.setDtIniVig(new Date(dados[9]));
+        portaria.setDtFimVig(new Date(dados[10]));
+        portaria.setDtPublicDou(new Date(dados[11]));
+        portaria.setHorasDesig(Integer.parseInt(dados[12]));
+        portaria.setResumo(dados[13]);
+        portaria.setTextoCompleto(dados[14]);
+        
+        return portaria;
+    }
+    
+     public static Designado trataDadosDoDesignadoParaPersistencia(String dados[]){
+        Designado designado = new Designado();
+        designado.setDtCienciaDesig(new Date(dados[1]));
+        designado.setDescrFuncDesig(dados[3]);
+        designado.setHorasDefFuncDesig(Integer.parseInt(dados[4]));
+        designado.setHorasExecFuncDesig(Integer.parseInt(dados[5]));
+        
+        return designado;
+    }
+     
+    public static Referencia trataDadosDaPortariaReferenciadaParaPersistencia(String dados[], PortariaDAO portariaDAO){
+        
+        Portaria portaria = new Portaria();
+        Referencia portariaReferenciada = new Referencia();
+   
+        portaria = portariaDAO.buscar(Long.parseLong(dados[2]));
+        
+        portariaReferenciada.setReferencia(portaria);
+        portariaReferenciada.setEhCancelamento(Boolean.parseBoolean(dados[3]));
+        
+        return portariaReferenciada;
+    } 
 
 }

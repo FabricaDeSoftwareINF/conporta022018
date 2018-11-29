@@ -2,7 +2,7 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaReferenciadaDAO;
 
-public class PortariaReferenciada {
+public class PortariaReferenciada extends ModeloAbstrato {
 
     private Portaria PortariaReferenciada;
     private boolean ehCancelamento;

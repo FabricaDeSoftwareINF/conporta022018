@@ -15,8 +15,8 @@ public class ControladorManterUndAdm {
     public void editarTimeOut(int timeOut, String sigla) {
         //verificar se a unidade adm existe
         UndAdmDAO undAdmDao = new UndAdmDAO();
-        if (undAdmDao.pesquisarUndAdm(sigla) != null) {            
-            undAdmDao.editarTimeOut(timeOut);
-        }
+        //if (undAdmDao.pesquisarUndAdm(sigla) != null) {            
+         //   undAdmDao.editarTimeOut(timeOut);
+        //}
     }
 }

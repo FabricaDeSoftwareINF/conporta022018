@@ -21,13 +21,13 @@ import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
 public class ControladorEdiTemTimTest {
 
     private static ControladorManterUndAdm controladorEdiTemTim;
-    private dadosAcesso[]
+   // private dadosAcesso[]
     /*
      * Preparação do ambiente para teste.
      * População do banco de Dados para atendam os pré-requisitos do caso de uso.
      */
 
-    @BeforeClass
+    //@BeforeClass
     public static void casoTestPepararCenario() throws IOException {
 
         String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/editTemTim/ControladorEdiTemTim.csv";
@@ -56,7 +56,7 @@ public class ControladorEdiTemTimTest {
                 case "undAdm" :
                     extrator.setTexto(linha);
                     dadosUndAdm = extrator.getResultado(REGRA);  
-                    undAdm.setSiglaUndAdm(dadosUndAdm[0]);
+         //           undAdm.setSiglaUndAdm(dadosUndAdm[0]);
                     //Aqui colocar comandos para envia ao BD
                     
                     break;         
