@@ -141,3 +141,6 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+*.prefs
+.project
+.classpath
