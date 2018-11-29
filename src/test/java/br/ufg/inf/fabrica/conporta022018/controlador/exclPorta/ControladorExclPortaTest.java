@@ -27,6 +27,12 @@ import java.util.List;
 public class ControladorExclPortaTest {
 
     private static ControladorExclPort controladorExclPort;
+    private static PortariaDAO portariaDAO = new PortariaDAO();
+    private static Portaria portaria = new Portaria();
+    private static DesignadoDAO designadoDAO = new DesignadoDAO();
+    private static Designado designado = new Designado();
+    private static Referencia portariaReferenciada = new Referencia();
+    private static PortariaReferenciadaDAO portariaReferenciadaDAO = new PortariaReferenciadaDAO();
 
     /*
      * Preparação do ambiente para teste.
@@ -44,12 +50,6 @@ public class ControladorExclPortaTest {
         String tabelaAtual = " ";
         String dados[];
         String linha;
-        PortariaDAO portariaDAO = new PortariaDAO();
-        Portaria portaria = new Portaria();
-        DesignadoDAO designadoDAO = new DesignadoDAO();
-        Designado designado = new Designado();
-        Referencia portariaReferenciada = new Referencia();
-        PortariaReferenciadaDAO portariaReferenciadaDAO = new PortariaReferenciadaDAO();
 
         //Criar as instâncias de todos os objetos DAO's necessários para preparar o cenario.
 
@@ -129,16 +129,34 @@ public class ControladorExclPortaTest {
     public void casoTestDadosValidos() throws IOException {
 
         //ainda será complementado, o parâmetro de excluirPortaria será uma instância de Portaria e não uma string.
-        
-        // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados:
-        //controladorExclPort.excluirPortaria("INF201813");
-        
-        // Portaria sem data final de vigência, proposta, com portarias referenciadas e sem designados:
-       // controladorExclPort.excluirPortaria("INF201800");
-        
-        // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados:
-        //controladorExclPort.excluirPortaria("INF201803");
+        Portaria portaria = new Portaria();
 
+        try{
+            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados:
+            portaria = portariaDAO.buscar(Long.parseLong("INF201813"));
+            controladorExclPort.excluirPortaria(portaria);
+            
+        }catch(Exception ex){
+            System.out.println("Erro ao excluir portaria proposta, sem referencias e designados");
+        }
+        
+        try{
+            // Portaria sem data final de vigência, proposta, com portarias referenciadas e sem designados:
+            portaria = portariaDAO.buscar(Long.parseLong("INF201800"));
+            controladorExclPort.excluirPortaria(portaria);
+            
+        }catch(Exception ex){
+            System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
+        }
+        
+        try{
+            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados:
+            portaria = portariaDAO.buscar(Long.parseLong("INF201803"));
+            controladorExclPort.excluirPortaria(portaria);
+
+        }catch(Exception ex){
+            System.out.println("Erro ao excluir portaria proposta com designados");
+        }
     }
 
     @Test
