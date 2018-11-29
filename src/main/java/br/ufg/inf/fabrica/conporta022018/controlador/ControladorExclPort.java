@@ -23,7 +23,7 @@ public class ControladorExclPort {
             return status == PortariaStatus.Proposta;
     }
 	
-    public boolean exclPorta(Portaria portaria) throws Exception{
+    public boolean excluirPortaria(Portaria portaria) throws Exception{
     	this.portaria = portaria;
         
         List<Referencia> listaPortariasReferenciadas = this.portaria.getReferencias();

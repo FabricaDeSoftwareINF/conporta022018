@@ -6,7 +6,7 @@
 
 package br.ufg.inf.fabrica.conporta022018.controlador.exclPorta;
 
-        import br.ufg.inf.fabrica.conporta022018.controlador.ControladorExclPorta;
+        import br.ufg.inf.fabrica.conporta022018.controlador.ControladorExclPort;
         import br.ufg.inf.fabrica.conporta022018.util.Extrator;
         import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
         import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
@@ -19,7 +19,7 @@ package br.ufg.inf.fabrica.conporta022018.controlador.exclPorta;
 
 public class ControladorExclPortaTest {
 
-    private static ControladorExclPorta controladorExclPorta;
+    private static ControladorExclPort controladorExclPort;
 
     /*
      * Preparação do ambiente para teste.
@@ -53,27 +53,32 @@ public class ControladorExclPortaTest {
             }
 
             switch (tabelaAtual) {
-                case "portaExpedida" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
-                    break;
-                case "portaCancelada" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
-                    break;
-                case "portaProposta" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
-                    break;
                 case "pessoa" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
+                    //Aqui colocar os comandos para popular a tabela pessoa no Banco de Dados.
+                    break;
+                case "portaria" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    // Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
+                    break;
+                case "portariaReferenciada" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    // Aqui colocar os comandos para popular a tabela portariaReferenciada no Banco de Dados.
+                    break;
+                case "portariaDesignada" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    //Aqui colocar os comandos para popular a tabela portaria designadas no Banco de dados.
                     break;
                 case "undAdm" :
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+                    //Aqui colocar os comandos para popular a tabela unidade administrativa no Banco de Dados.
+                    break;
+                case "designado" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
@@ -86,7 +91,7 @@ public class ControladorExclPortaTest {
     public void casoTestPrepararExecucao() {
 
         //Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
-        controladorExclPorta = new ControladorExclPorta();
+        controladorExclPort = new ControladorExclPort();
     }
 
     /*
@@ -101,28 +106,30 @@ public class ControladorExclPortaTest {
     @Test
     public void casoTestDadosValidos() throws IOException {
 
-        // Portaria sem data final de vigência, proposta e sem designados:
-        Assert.assertEquals(1, controladorExclPorta.exclPorta(2));
+        //ainda será complementado, o parâmetro de excluirPortaria será uma instância de Portaria e não uma string.
+        
+        // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados:
+        controladorExclPort.excluirPortaria("INF201813");
+        
+        // Portaria sem data final de vigência, proposta, com portarias referenciadas e sem designados:
+        controladorExclPort.excluirPortaria("INF201800");
+        
+        // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados:
+        controladorExclPort.excluirPortaria("INF201803");
 
     }
 
     @Test
     public void casoTestDadosExcecoes() throws IOException {
 
-        /* Os códigos de erro são os seguintes:
-        *
-        * 2 - Portaria inválida - Cancelada ou Expedida
-        * 5 - Portaria inexistente
-        * */
+        // Tentativa de exclusão de portaria ativa
+        controladorExclPort.excluirPortaria("INF201810");
 
-        // Portaria expedida
-        Assert.assertEquals(2, controladorExclPorta.exclPorta(7));
+        // Tentativa de exclusão de portaria cancelada
+        controladorExclPort.excluirPortaria("INF201814");
 
-        // Portaria cancelada
-        Assert.assertEquals(2, controladorExclPorta.exclPorta(5));
-
-        // Portaria inexistente
-        Assert.assertEquals(5, controladorExclPorta.exclPorta(2469));
+        // Tentativa de exclusão de portaria expirada
+        controladorExclPort.excluirPortaria("INF201815");
 
     }
 
