@@ -1,16 +1,24 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Table
 public class Perfil extends ModeloAbstrato {
 
     private static final long serialVersionUID = 1L;
 
+    @NotNull
+    @Column
     private String nome;
+    @NotNull
+    @Column
     private String descricao;
+    @JoinColumn
     @ManyToMany
     private List<Permissao> permissoes;
     

@@ -62,32 +62,34 @@ public class ControladorConAcess {
             if (gestao.getDtFimSubChefe() == null) {
                 if (gestao.getTipo() == Tipo.COORDENADOR_ADM)
                     restrito = true;
-                if (gestao.getTipo() == Tipo.CHEFIA || gestao.getTipo() == Tipo.SUBSTITUTO)
+                if (gestao.getTipo() == Tipo.CHEFIA || gestao.getTipo() == Tipo.SUBSTITUTO) {
                     superRestrito = true;
+                    restrito = true;
+                }
             }
         }
 
         List<Permissao> temporario = new ArrayList();
         if (moderado) {
-            map.put("nome","ROLE_MOD");
+            map.put("nome","ROLE_MODERADO");
             temporario = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map).getPermissoes();
             for (Permissao permissao : temporario)
                 permissoes.add(permissao);
-            map.remove("ROLE_MOD");
+            map.remove("ROLE_MODERADO");
         }
         if (restrito) {
-            map.put("nome","ROLE_REST");
+            map.put("nome","ROLE_RESTRITO");
             temporario = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map).getPermissoes();
             for (Permissao permissao : temporario)
                 permissoes.add(permissao);
-            map.remove("ROLE_REST");
+            map.remove("ROLE_RESTRITO");
         }
         if (superRestrito) {
-            map.put("nome","ROLE_REST_MASTER");
+            map.put("nome","ROLE_RESTRITO_ESPECIFICO");
             temporario = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map).getPermissoes();
             for (Permissao permissao : temporario)
                 permissoes.add(permissao);
-            map.remove("ROLE_REST_MASTER");
+            map.remove("ROLE_RESTRITO_ESPECIFICO");
         }
 
         return permissoes;
