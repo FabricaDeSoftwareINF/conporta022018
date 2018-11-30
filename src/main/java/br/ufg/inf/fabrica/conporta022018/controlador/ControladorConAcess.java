@@ -37,7 +37,7 @@ public class ControladorConAcess {
         return usuario;
     }
 
-    public List<Permissao> buscarPerfil(Pessoa usuario) {
+    public List<Permissao> buscarPermissao(Pessoa usuario) {
 
         boolean moderado = false;
         boolean restrito = false;
@@ -93,6 +93,44 @@ public class ControladorConAcess {
         }
 
         return permissoes;
+    }
+
+    public List<Perfil> buscarPerfil(Pessoa usuario) {
+
+        List<Perfil> perfilList = new ArrayList<>();
+        PerfilDAO dao = new PerfilDAO();
+
+        for (Matricula matricula : usuario.getDiscente()) {
+            Date data = matricula.getDtFimMatrCur();
+
+            if (data == null) {
+                map.put("nome","ROLE_MODERADO");
+                perfilList.add(dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map));
+            }
+        }
+
+        for (Lotacao lotacao : usuario.getServidor()) {
+            Date data = lotacao.getDtFimLotServ();
+            if (data == null) {
+                map.put("nome","ROLE_MODERADO");
+                perfilList.add(dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map));
+            }
+        }
+
+        for (Gestao gestao : usuario.getGestao()) {
+            if (gestao.getDtFimSubChefe() == null) {
+                if (gestao.getTipo() == Tipo.COORDENADOR_ADM) {
+                    map.put("nome","ROLE_RESTRITO");
+                    perfilList.add(dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map));
+                }
+                if (gestao.getTipo() == Tipo.CHEFIA || gestao.getTipo() == Tipo.SUBSTITUTO) {
+                    map.put("nome","ROLE_RESTRITO_ESPECIFICO");
+                    perfilList.add(dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map));
+                }
+            }
+        }
+
+        return perfilList;
     }
 
 }

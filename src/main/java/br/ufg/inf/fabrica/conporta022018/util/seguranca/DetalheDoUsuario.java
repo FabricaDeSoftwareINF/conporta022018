@@ -5,6 +5,8 @@
  */
 package br.ufg.inf.fabrica.conporta022018.util.seguranca;
 
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorConAcess;
+import br.ufg.inf.fabrica.conporta022018.modelo.Perfil;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,14 +23,17 @@ public class DetalheDoUsuario implements UserDetails {
         if(usuario==null){
             throw new InstantiationError("Required User in Instantiation of UserDetails in Security Library");
         }
+        
         this.usuario = usuario;
         this.papeis = new ArrayList<>();
+        ControladorConAcess controlador = new ControladorConAcess();
+        List<Perfil> perfilList = controlador.buscarPerfil(usuario);
 
-        //Buscar os papeis do usuário.
-        //for (Papel papel : usuario.getPapeis()) {
-            //Autoridade autoridade = new Autoridade(papel);
-            //papeis.add(autoridade);
-        //}
+        for (Perfil perfil : perfilList) {
+            Autoridade autoridade = new Autoridade(perfil);
+            papeis.add(autoridade);
+        }
+
     }
     
     public Pessoa getUsuario(){

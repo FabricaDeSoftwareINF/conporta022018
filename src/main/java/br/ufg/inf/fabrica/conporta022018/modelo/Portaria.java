@@ -11,11 +11,11 @@ public class Portaria extends ModeloAbstrato {
     private static final long serialVersionUID = 1L;
 
     @Column
-    @NotBlank
+    //@NotBlank
     private int anoId;
 
     @Column
-    @NotBlank
+    //@NotBlank
     private int seqId;
 
     @Column
@@ -23,22 +23,22 @@ public class Portaria extends ModeloAbstrato {
 
     @Column
     @Temporal(TemporalType.DATE)
-    @PastOrPresent
+    //@PastOrPresent
     private Date dtExped;
 
     @Column
     @Temporal(TemporalType.DATE)
-    @FutureOrPresent
+    //@FutureOrPresent
     private Date dtIniVig;
 
     @Column
     @Temporal(TemporalType.DATE)
-    @FutureOrPresent
+    //@FutureOrPresent
     private Date dtFimVig;
 
     @Column
     @Temporal(TemporalType.DATE)
-    @FutureOrPresent
+    //@FutureOrPresent
     private Date dtPublicDou;
 
     @Column
@@ -55,14 +55,14 @@ public class Portaria extends ModeloAbstrato {
     private byte[] arqPdf;
 
     @Column
-    @NotBlank
+    //@NotBlank
     private String siglaUndId;
 
     @Column
     private String assinatura;
 
     @Column
-    @NotBlank
+    //@NotBlank
     private PortariaStatus status;
 
     @JoinColumn

@@ -10,9 +10,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.NotBlank;
+//import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+//import javax.validation.constraints.PastOrPresent;
 
 /**
  * Modelo da Entidade de Lotação.
@@ -29,7 +29,7 @@ public class Lotacao extends ModeloAbstrato {
   @Column
   @Temporal(TemporalType.DATE)
   @NotNull
-  @PastOrPresent
+  //@PastOrPresent
   private Date dtIniLotServ;
 
   @Column
@@ -39,7 +39,7 @@ public class Lotacao extends ModeloAbstrato {
   private Date dtFimLotServ;
 
   @Column
-  @NotBlank
+  //@NotBlank
   private String descrCargoServ;
 
   @Column
