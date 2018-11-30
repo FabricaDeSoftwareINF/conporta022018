@@ -21,7 +21,7 @@ import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
 public class ControladorEdiTemTimTest {
 
     private static ControladorManterUndAdm controladorEdiTemTim;
-    private dadosAcesso[]
+    private dadosAcesso[];
     /*
      * Preparação do ambiente para teste.
      * População do banco de Dados para atendam os pré-requisitos do caso de uso.

@@ -94,7 +94,6 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
    * @return instância de T caso pesquisa traga resultados, caso contrário, null.
    */
   public T pesquisarUmJPQLCustomizada(String jpql, Map<String, Object> parametros) {
-
     try {
       return criarQuery(jpql, parametros).getSingleResult();
     } catch (Exception e) {
