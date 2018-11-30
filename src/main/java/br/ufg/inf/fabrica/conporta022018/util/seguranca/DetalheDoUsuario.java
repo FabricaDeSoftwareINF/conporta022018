@@ -47,7 +47,7 @@ public class DetalheDoUsuario implements UserDetails {
 
     @Override
     public String getUsername() {
-        return usuario.getCpfPes;
+        return usuario.getCpfPes();
     }
 
     @Override

@@ -45,10 +45,6 @@ public class Pessoa extends ModeloAbstrato {
         this.emailPes = emailPes;
     }
 
-    public String getSenhaUsu() {
-        return senhaUsu;
-    }
-
     public void setSenhaUsu(String senhaUsu) {
         this.senhaUsu = senhaUsu;
     }

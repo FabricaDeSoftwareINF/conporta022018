@@ -35,24 +35,24 @@ public class SecurancaConfig extends WebSecurityConfigurerAdapter {
 
         //Colocar as urls liberadas para todos, ou seja, não necessita de autenticação.
         http
-                .authorizeRequests().antMatchers("/faces/javax.faces.resource/**",
+                .authorizeRequests().antMatchers("/javax.faces.resource/**",
                         "/resources/**",
-                        "/faces/index.xhtml",
-                        "/faces/trocarSenha.xhtml",
-                        "/faces/login.xhtml",
-                        "/faces/esqueciSenha.xhtml",
-                        "/faces/error.xhtml")
+                        "/index.xhtml",
+                        "/trocarSenha.xhtml",
+                        "/login.xhtml",
+                        "/esqueciSenha.xhtml",
+                        "/error.xhtml")
                 .permitAll()
                 .anyRequest().authenticated();
         //Colocar a url de login com sucesso e com erro.
         http
-                .formLogin().loginPage("/faces/login.xhtml")
+                .formLogin().loginPage("/login.xhtml")
                 .successHandler(getGestorDeAutenticacoesComSucesso())
                 .permitAll()
-                .failureUrl("/faces/login.xhtml?error=true");
+                .failureUrl("/login.xhtml?error=true");
         //Para deslocar.
         http
-                .logout().logoutSuccessUrl("/faces/login.xhtml");
+                .logout().logoutSuccessUrl("/login.xhtml");
         http
                 .csrf().disable();
     }

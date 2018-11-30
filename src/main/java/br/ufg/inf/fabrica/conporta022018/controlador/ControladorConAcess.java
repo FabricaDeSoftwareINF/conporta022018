@@ -5,14 +5,16 @@
  */
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
-import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
+import br.ufg.inf.fabrica.conporta022018.modelo.*;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PerfilDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
-import br.ufg.inf.fabrica.conporta022018.modelo.Sessao;
-import br.ufg.inf.fabrica.conporta022018.modelo.Permissao;
 
-public void ControladorConAcess {
+import java.util.*;
 
-    private final String JPQL_BUSCAR_USUARIO_POR_CPF = "select u UndAdm u where u.CPF = :cpfPes";
+public class ControladorConAcess {
+
+    private final String JPQL_BUSCAR_USUARIO_POR_CPF = "select u Pessoa u where u.CPF = :cpfPes";
+    private final String JPQL_BUSCAR_PERFIL = "select u Perfil u where u.TIPO_PERFIL = :nome";
     private Map<String, Object> map;
 
     public ControladorConAcess() {
@@ -21,6 +23,7 @@ public void ControladorConAcess {
 
     public boolean checarLogin(String CPF, String senha) {
 
+        return true;
     }
 
     public Pessoa buscarPorCPF(String CPF) {
@@ -29,37 +32,65 @@ public void ControladorConAcess {
         PessoaDAO dao = new PessoaDAO();
 
         map.put("cpfPes", CPF);
-        usuario = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCA_USUARIO_POR_CPF, map);
+        usuario = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_USUARIO_POR_CPF, map);
 
         return usuario;
     }
 
     public List<Permissao> buscarPerfil(Pessoa usuario) {
 
-        boolean moderado = restrito = superRestrito = false;
+        boolean moderado = false;
+        boolean restrito = false;
+        boolean superRestrito = false;
         List<Permissao> permissoes = new ArrayList();
+        PerfilDAO dao = new PerfilDAO();
 
-        for (Date data : usuario.getDiscente.getDtFimMatrCur() && usuario.getDiscente() != null) {
+        for (Matricula matricula : usuario.getDiscente()) {
+            Date data = matricula.getDtFimMatrCur();
+
             if (data == null)
                 moderado = true;
         }
 
-        for (Date data : usuario.getServidor.getDtFimLotServ() && usuario.getServidor() != null) {
+        for (Lotacao lotacao : usuario.getServidor()) {
+            Date data = lotacao.getDtFimLotServ();
             if (data == null)
                 moderado = true;
         } 
     
-        for (Gestao gestao : usuario.getGestao() && usuario.getGestao() != null) {
+        for (Gestao gestao : usuario.getGestao()) {
             if (gestao.getDtFimSubChefe() == null) {
-                if (gestao.getFuncao() == Funcao.COORDENADOR_ADM)
-                    restrito == true;
-                if (gestao.getFuncao() == Funcao.CHEFIA || gestao.getFuncao() == Funcao.SUBSTITUTO)
-                    superRestrito == true;
+                if (gestao.getTipo() == Tipo.COORDENADOR_ADM)
+                    restrito = true;
+                if (gestao.getTipo() == Tipo.CHEFIA || gestao.getTipo() == Tipo.SUBSTITUTO)
+                    superRestrito = true;
             }
         }
 
-        //Criar a sessão para pegar as permissoes.
+        List<Permissao> temporario = new ArrayList();
+        if (moderado) {
+            map.put("nome","ROLE_MOD");
+            temporario = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map).getPermissoes();
+            for (Permissao permissao : temporario)
+                permissoes.add(permissao);
+            map.remove("ROLE_MOD");
+        }
+        if (restrito) {
+            map.put("nome","ROLE_REST");
+            temporario = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map).getPermissoes();
+            for (Permissao permissao : temporario)
+                permissoes.add(permissao);
+            map.remove("ROLE_REST");
+        }
+        if (superRestrito) {
+            map.put("nome","ROLE_REST_MASTER");
+            temporario = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map).getPermissoes();
+            for (Permissao permissao : temporario)
+                permissoes.add(permissao);
+            map.remove("ROLE_REST_MASTER");
+        }
 
+        return permissoes;
     }
 
 }

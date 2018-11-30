@@ -5,7 +5,9 @@
  */
 package br.ufg.inf.fabrica.conporta022018.util.seguranca;
 
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorConAcess;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,10 +20,11 @@ public class ServicoDeDetalhesUsuario implements UserDetailsService {
             return null;
         }
 
-        //Chamar o controlador.
-        //UsuarioController controller = new UsuarioController();
-        //Usuario usuario = controller.buscarPorCPF(username);
-        if(usuario!=null){
+        Pessoa usuario;
+        ControladorConAcess controlador = new ControladorConAcess();
+        usuario = controlador.buscarPorCPF(username);
+
+        if(usuario!= null){
             return new DetalheDoUsuario(usuario);
         }
         return null;
