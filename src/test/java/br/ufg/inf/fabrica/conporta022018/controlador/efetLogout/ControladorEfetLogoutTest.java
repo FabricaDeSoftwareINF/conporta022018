@@ -13,6 +13,8 @@ import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
 import br.ufg.inf.fabrica.conporta022018.util.exception.EfetLogoutException;
 import org.junit.*;
+
+import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,7 +79,7 @@ public class ControladorEfetLogoutTest {
     }
 
     @Test
-    public void casoTestDadosValidos() throws IOException, EfetLogoutException {
+    public void casoTestDadosValidos() throws IOException, EfetLogoutException, ServletException {
 
         //Grupo de teste DadosValidos:
         String retorno = controladorEfetLogout.efetuarLogout();
@@ -89,7 +91,7 @@ public class ControladorEfetLogoutTest {
     }
 
     @Test
-    public void casoTestDadosExcecoes() throws IOException, EfetLogoutException {
+    public void casoTestDadosExcecoes() throws IOException, EfetLogoutException, ServletException {
 
         //Grupo de teste DadosExcecoes:
         String retorno = controladorEfetLogout.efetuarLogout();

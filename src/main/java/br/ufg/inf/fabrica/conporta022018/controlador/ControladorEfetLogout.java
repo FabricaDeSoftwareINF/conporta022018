@@ -6,12 +6,21 @@
 
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
-import br.ufg.inf.fabrica.conporta022018.modelo.RetornoEfetLogoutEnum.*;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import java.io.IOException;
+
+import static br.ufg.inf.fabrica.conporta022018.modelo.RetornoEfetLogoutEnum.*;
 
 public class ControladorEfetLogout {
 
-    public String efetuarLogout() {
-        String retorno = OK;
+    public String efetuarLogout() throws ServletException, IOException {
+        String retorno = OK.getRetorno();
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("/logout");
         dispatcher.forward((ServletRequest) context.getRequest(), (ServletResponse) context.getResponse());
