@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ControladorExclPortaTest {
+public class ControladorExclPortTest {
 
     private static ControladorExclPort controladorExclPort;
     private static PortariaDAO portariaDAO = new PortariaDAO();
