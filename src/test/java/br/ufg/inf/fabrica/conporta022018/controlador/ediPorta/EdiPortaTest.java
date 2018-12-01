@@ -1,26 +1,30 @@
 package br.ufg.inf.fabrica.conporta022018.controlador.ediPorta;
 
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorEdiPorta;
+import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
+import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
 import org.jboss.arquillian.junit.Arquillian;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(Arquillian.class)
 public class EdiPortaTest {
-    ControladorEdiPorta controladorEdiPorta;
+    ControladorEdiPorta controladorEdiPorta = new ControladorEdiPorta();
 
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException {
 
-        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/idSoft/IdSoftTest.csv";
+        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaDadosTest.csv";
         String REGRA = ";";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
@@ -69,42 +73,57 @@ public class EdiPortaTest {
 
     @Test
     public void ediPortaParametrosValidosTest() {
-
+        boolean newWorld = controladorEdiPorta.validarCampos("assunto", new Date(), "resumo");
+        Assert.assertTrue("Message", false);
     }
 
     @Test
-    public void ediPortaUsuarioNaoAdministradorTest() {
-
+    public void buscarPortariaDesejadaTest() {
+        Long idPortaria = null;
+        Portaria portaria = controladorEdiPorta.editarPortaria(idPortaria);
+        Assert.assertEquals(idPortaria, portaria.getId());
     }
 
     @Test
-    public  void ediPortaStatusNaoPropostaTest() {
-
+    public  void salvarPortariaSemReferenciaSemDesignadoTest() {
+        Portaria portaria = new Portaria();
+        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        Assert.assertTrue(isSaved);
     }
 
     @Test
-    public void ediPortaDadosObrigatoriosNaoPreenchidosTest() {
-
+    public void salvarPortariaComReferenciaSemDesignadoTest() {
+        Portaria portaria = new Portaria();
+        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        Assert.assertTrue(isSaved);
     }
 
     @Test
-    public  void ediPortaReferenciaInvalidaTest() {
-
+    public  void salvarPortariaSemReferenciaComDesignadoTest() {
+        Portaria portaria = new Portaria();
+        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        Assert.assertTrue(isSaved);
     }
 
     @Test
-    public void ediPortaReferenciaValidaTest() {
-
+    public void salvarPortariaComReferenciaComDesignadoTest() {
+        Portaria portaria = new Portaria();
+        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        Assert.assertTrue(isSaved);
     }
 
     @Test
-    public void ediPortaDesignadosValidosTest() {
-
+    public void salvarPortariaDadosInvalidos() {
+        Portaria portaria = new Portaria();
+        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        Assert.assertTrue(isSaved);
     }
 
     @Test
     public void ediPortaDesignadosInvalidosTest() {
-
+        Portaria portaria = new Portaria();
+        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        Assert.assertTrue(isSaved);
     }
 
 }
