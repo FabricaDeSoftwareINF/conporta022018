@@ -12,6 +12,8 @@ public class ControladorVisuPort {
 
     public static String conversorPortariaJson(Portaria portaria) {
         
+        this.portaria = portaria;
+        
         Gson gson = new GsonBuilder()
                 .addSerializationExclusionStrategy(new ExclusionStrategy() {
                     @Override
@@ -27,7 +29,7 @@ public class ControladorVisuPort {
                 })
                 .create();
 
-        String jsoncr = gson.toJson(portaria);
+        String jsoncr = gson.toJson(this.portaria);
         System.out.println(jsoncr);
         return jsoncr;
 
