@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class UndAdm {
+public class UndAdm extends ModeloAbstrato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
