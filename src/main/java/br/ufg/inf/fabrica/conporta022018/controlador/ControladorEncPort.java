@@ -9,6 +9,8 @@ import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 
+import java.util.List;
+
 public class ControladorEncPort {
 
     private PortariaDAO portariaDAO = new PortariaDAO();
@@ -20,5 +22,25 @@ public class ControladorEncPort {
 
         return true;
 
-    ss}
+    }
+
+    public boolean temDesignados(Portaria portaria){
+        //verificar se a portaria tem designado
+
+        return  true;
+    }
+
+    public void getEmailDesignados(Portaria portaria){
+        if (temDesignados(portaria) == true){
+            // pega email dos desgniados daquela portaria
+        }
+    }
+
+    public void getEmailResponsavelUnidAdm (Portaria portaria){
+        List undRecebedora = portaria.getUndRecebedora();
+
+    }
+
+
+
 }
