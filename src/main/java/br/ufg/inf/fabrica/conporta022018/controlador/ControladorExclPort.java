@@ -4,6 +4,7 @@ import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaReferenciadaDAO;
 import br.ufg.inf.fabrica.conporta022018.modelo.Referencia;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +13,7 @@ public class ControladorExclPort {
 	
     private Portaria portaria;
     private PortariaDAO portariaDAO = new PortariaDAO();
+    private PortariaReferenciadaDAO referenciaDAO = new PortariaReferenciadaDAO();
 
     public ControladorExclPort() {}
 
@@ -35,6 +37,7 @@ public class ControladorExclPort {
             if(listaReferenciadas.size() > 0){
                 for (Referencia referencia : listaReferenciadas) {
                     referencia.setReferencia(null);
+                    referenciaDAO.remover(referencia);
                 }
                 this.portaria.setReferencias(listaReferenciadas);
             }
