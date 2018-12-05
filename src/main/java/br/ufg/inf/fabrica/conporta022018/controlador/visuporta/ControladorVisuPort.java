@@ -1,6 +1,8 @@
 package br.ufg.inf.fabrica.conporta022018.controlador.visuporta;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
+import br.ufg.inf.fabrica.conporta022018.modelo.Recebedora;
+import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -8,18 +10,30 @@ import com.google.gson.GsonBuilder;
 
 public class ControladorVisuPort {
     
-    private Portaria portaria;
 
     public static String conversorPortariaJson(Portaria portaria) {
-        
-        this.portaria = portaria;
+      
         
         Gson gson = new GsonBuilder()
                 .addSerializationExclusionStrategy(new ExclusionStrategy() {
                     @Override
                     public boolean shouldSkipField(FieldAttributes f) {
-                        return f.getName().toLowerCase().contains("modelo")
-                                || f.getName().toLowerCase().contains("cor");
+                        return     f.getName().equals("assunto")
+                                || f.getName().equals("arqPdf")
+                                || f.getName().equals("assinatura")
+                                || f.getName().equals("seqId")
+                                || f.getName().equals("horasDesig")
+                                || f.getName().equals("nivel")
+                                || f.getName().equals("horasDefFuncDesig")
+                                || f.getName().equals("horasExecFuncDesig")
+                                || f.getName().equals("Perfil")
+                                || f.getName().equals("Permissao")
+                                || f.getName().equals("Pessoa")
+                                || f.getName().equals("Sessao")
+                                || f.getName().equals("Tipo")
+                                || f.getName().equals("ultNumExped")
+                                || f.getName().equals("ultNumProp")
+                                || f.getName().equals("minInat");                               
                     }
 
                     @Override
@@ -29,40 +43,9 @@ public class ControladorVisuPort {
                 })
                 .create();
 
-        String jsoncr = gson.toJson(this.portaria);
-        System.out.println(jsoncr);
-        return jsoncr;
+        String portariaJson = gson.toJson(portaria);
+        return portariaJson;
 
     }
 
-}
-
-//public class  ControladorVisuPort() {
-//    
-//    Portaria portaria;
-//
-//    public String visuPort(Portaria portaria) throws Exception {
-//        
-//
-//        Gson gson = gsonBuilder.create();
-//        String portariaJson = gson.toJson(portaria);
-//
-//        return portariaJson;
-//   
-//}
-//        GsonBuilder gsonBuilder = new GsonBuilder();
-//        gsonBuilder.setExclusionStrategies(new ExclusionStrategy() {
-//            @Override
-//            public boolean shouldSkipField(FieldAttributes f) {
-//                return f.getName().toLowerCase().contains("permissao");
-//            }
-//
-//            @Override
-//            public boolean shouldSkipClass(Class<?> incomingClass) {
-//                return false;
-//            }
-//
-//    
-//}
-//    
-
+} 
