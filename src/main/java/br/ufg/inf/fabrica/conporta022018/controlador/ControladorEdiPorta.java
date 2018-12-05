@@ -1,11 +1,15 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
-import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
-import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
-import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
+import br.ufg.inf.fabrica.conporta022018.modelo.*;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Map;
+import java.util.HashMap;
 
 import java.util.Date;
 import java.util.List;
@@ -18,7 +22,9 @@ public class ControladorEdiPorta {
     private UndAdmDAO undAdmDAO;
 
     public ControladorEdiPorta(){
-        portariaDAO = new PortariaDAO();
+        this.undAdmDAO = new UndAdmDAO();
+        this.pessoaDAO = new PessoaDAO();
+        this.portariaDAO = new PortariaDAO();
     }
 
     public Portaria editarPortaria(Long idPortaria){
@@ -32,15 +38,36 @@ public class ControladorEdiPorta {
     }
 
     public List<Portaria> buscarPortarias() {
-        List<Portaria> portarias = portariaDAO.buscarTodos();
-        return portarias;
+        String query = "SELECT p FROM Portaria p WHERE p.status = :status";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("status", PortariaStatus.Ativa);
+
+        return this.portariaDAO.pesquisarJPQLCustomizada(query, params);
     }
 
-    public boolean salvar(Portaria portaria){
-        if(!validarCampos(portaria.getAssunto(), portaria.getDtIniVig(), portaria.getResumo()))
+    public boolean salvar(String assunto, Date dtIniVig, Date dtFimVig, Date dPublicDou, int horasDesig, String resumo, File arqPdf, List<Designado> designados, List<Referencia> referencias, List<Recebedora> recebedoras) throws IOException {
+        if(!this.validarCampos(assunto, dtIniVig, resumo)){
             return false;
+        }
 
-        this.portariaDAO.salvar(portaria);
+        Portaria portaria = new Portaria();
+        portaria.setAssunto(assunto);
+        portaria.setDtIniVig(dtIniVig);
+        portaria.setDtFimVig(dtFimVig);
+        portaria.setDtPublicDou(dPublicDou);
+        portaria.setHorasDesig(horasDesig);
+        portaria.setResumo(resumo);
+        portaria.setDesignados(designados);
+        portaria.setReferencias(referencias);
+        portaria.setUndRecebedora(recebedoras);
+
+        if(arqPdf.exists()) {
+            byte[] fileContent = Files.readAllBytes(arqPdf.toPath());
+            portaria.setArqPdf(fileContent);
+        }
+
+        portariaDAO.salvar(portaria);
+
         return true;
     }
 

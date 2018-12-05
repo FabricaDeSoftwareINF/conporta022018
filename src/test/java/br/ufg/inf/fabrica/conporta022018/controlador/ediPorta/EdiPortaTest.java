@@ -3,15 +3,22 @@ package br.ufg.inf.fabrica.conporta022018.controlador.ediPorta;
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorEdiPorta;
 import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
+import br.ufg.inf.fabrica.conporta022018.modelo.Recebedora;
+import br.ufg.inf.fabrica.conporta022018.modelo.Referencia;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -85,44 +92,56 @@ public class EdiPortaTest {
     }
 
     @Test
-    public  void salvarPortariaSemReferenciaSemDesignadoTest() {
+    public  void salvarPortariaSemReferenciaSemDesignadoTest() throws IOException {
         Portaria portaria = new Portaria();
-        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        boolean isSaved = controladorEdiPorta.salvar(portaria.getAssunto(), portaria.getDtIniVig(),
+                portaria.getDtFimVig(), portaria.getDtPublicDou(),portaria.getHorasDesig(), portaria.getResumo(),
+                null, portaria.getDesignados(), portaria.getReferencias(), portaria.getUndRecebedora());
         Assert.assertTrue(isSaved);
     }
 
     @Test
-    public void salvarPortariaComReferenciaSemDesignadoTest() {
+    public void salvarPortariaComReferenciaSemDesignadoTest() throws IOException {
         Portaria portaria = new Portaria();
-        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        boolean isSaved = controladorEdiPorta.salvar(portaria.getAssunto(), portaria.getDtIniVig(),
+                portaria.getDtFimVig(), portaria.getDtPublicDou(),portaria.getHorasDesig(), portaria.getResumo(),
+                null, portaria.getDesignados(), portaria.getReferencias(), portaria.getUndRecebedora());
         Assert.assertTrue(isSaved);
     }
 
     @Test
-    public  void salvarPortariaSemReferenciaComDesignadoTest() {
+    public  void salvarPortariaSemReferenciaComDesignadoTest() throws IOException {
         Portaria portaria = new Portaria();
-        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        boolean isSaved = controladorEdiPorta.salvar(portaria.getAssunto(), portaria.getDtIniVig(),
+                portaria.getDtFimVig(), portaria.getDtPublicDou(),portaria.getHorasDesig(), portaria.getResumo(),
+                null, portaria.getDesignados(), portaria.getReferencias(), portaria.getUndRecebedora());
         Assert.assertTrue(isSaved);
     }
 
     @Test
-    public void salvarPortariaComReferenciaComDesignadoTest() {
+    public void salvarPortariaComReferenciaComDesignadoTest() throws IOException {
         Portaria portaria = new Portaria();
-        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        boolean isSaved = controladorEdiPorta.salvar(portaria.getAssunto(), portaria.getDtIniVig(),
+                portaria.getDtFimVig(), portaria.getDtPublicDou(),portaria.getHorasDesig(), portaria.getResumo(),
+                null, portaria.getDesignados(), portaria.getReferencias(), portaria.getUndRecebedora());
         Assert.assertTrue(isSaved);
     }
 
     @Test
-    public void salvarPortariaDadosInvalidos() {
+    public void salvarPortariaDadosInvalidos() throws IOException {
         Portaria portaria = new Portaria();
-        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        boolean isSaved = controladorEdiPorta.salvar(portaria.getAssunto(), portaria.getDtIniVig(),
+                portaria.getDtFimVig(), portaria.getDtPublicDou(),portaria.getHorasDesig(), portaria.getResumo(),
+                null, portaria.getDesignados(), portaria.getReferencias(), portaria.getUndRecebedora());
         Assert.assertTrue(isSaved);
     }
 
     @Test
-    public void ediPortaDesignadosInvalidosTest() {
+    public void ediPortaDesignadosInvalidosTest() throws IOException {
         Portaria portaria = new Portaria();
-        boolean isSaved = controladorEdiPorta.salvar(portaria);
+        boolean isSaved = controladorEdiPorta.salvar(portaria.getAssunto(), portaria.getDtIniVig(),
+                portaria.getDtFimVig(), portaria.getDtPublicDou(),portaria.getHorasDesig(), portaria.getResumo(),
+                null, portaria.getDesignados(), portaria.getReferencias(), portaria.getUndRecebedora());
         Assert.assertTrue(isSaved);
     }
 
