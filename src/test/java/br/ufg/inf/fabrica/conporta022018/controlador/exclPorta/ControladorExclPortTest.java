@@ -73,19 +73,11 @@ public class ControladorExclPortTest {
                     break;
                 case "portaria" :
                     extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    
-                    portaria = trataDadosDaPortariaParaPersistencia(dados);
-                    portariaDAO.salvar(portaria);
-  
+                    dados = extrator.getResultado(REGRA);  
                     break;
                 case "portariaReferenciada" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    
-                    portariaReferenciada = trataDadosDaPortariaReferenciadaParaPersistencia(dados, portariaDAO);
-                    portariaReferenciadaDAO.salvar(portariaReferenciada);
-                    
                     break;
                 case "portariaDesignada" :
                     extrator.setTexto(linha);
@@ -100,10 +92,6 @@ public class ControladorExclPortTest {
                 case "designado" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    
-                    designado = trataDadosDoDesignadoParaPersistencia(dados);
-                    designadoDAO.salvar(designado);
-                    
                     break;
             }
         }
@@ -128,68 +116,29 @@ public class ControladorExclPortTest {
     @Test
     public void casoTestDadosValidos() throws IOException {
 
-        //ainda será complementado, o parâmetro de excluirPortaria será uma instância de Portaria e não uma string.
-        Portaria portaria = new Portaria();
+        //o parâmetro de excluirPortaria será uma instância de Portaria e não uma string.
 
-        try{
-            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados:
-            portaria = portariaDAO.buscar(Long.parseLong("INF201813"));
-            controladorExclPort.excluirPortaria(portaria);
-            
-        }catch(Exception ex){
-            System.out.println("Erro ao excluir portaria proposta, sem referencias e designados");
-        }
-        
-        try{
-            // Portaria sem data final de vigência, proposta, com portarias referenciadas e sem designados:
-            portaria = portariaDAO.buscar(Long.parseLong("INF201800"));
-            controladorExclPort.excluirPortaria(portaria);
-            
-        }catch(Exception ex){
-            System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
-        }
-        
-        try{
-            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados:
-            portaria = portariaDAO.buscar(Long.parseLong("INF201803"));
-            controladorExclPort.excluirPortaria(portaria);
+        // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados:
+        controladorExclPort.excluirPortaria(portaria);
 
-        }catch(Exception ex){
-            System.out.println("Erro ao excluir portaria proposta com designados");
-        }
+        // Portaria sem data final de vigência, proposta, com portarias referenciadas e sem designados:
+        controladorExclPort.excluirPortaria(portaria);
+
+        // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados:
+        controladorExclPort.excluirPortaria(portaria);
     }
 
     @Test
     public void casoTestDadosExcecoes() throws IOException {
 
-        try{
-            // Tentativa de exclusão de portaria ativa
-            portaria = portariaDAO.buscar(Long.parseLong("INF201810"));
-            controladorExclPort.excluirPortaria(portaria);
+        // Tentativa de exclusão de portaria ativa
+        controladorExclPort.excluirPortaria(portaria);
 
-        }catch(Exception ex){
-            System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
-        }
+        // Tentativa de exclusão de portaria cancelada
+        controladorExclPort.excluirPortaria(portaria);
 
-
-        try{
-            // Tentativa de exclusão de portaria cancelada
-            portaria = portariaDAO.buscar(Long.parseLong("INF201810"));
-            controladorExclPort.excluirPortaria(portaria);
-
-        }catch(Exception ex){
-            System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
-        }
-
-
-        try{
-            // Tentativa de exclusão de portaria expirada
-            portaria = portariaDAO.buscar(Long.parseLong("INF201815"));
-            controladorExclPort.excluirPortaria(portaria);
-        }catch(Exception ex){
-            System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
-        }
-
+        // Tentativa de exclusão de portaria expirada
+        controladorExclPort.excluirPortaria(portaria);
     }
 
     @AfterClass
@@ -208,46 +157,4 @@ public class ControladorExclPortTest {
         Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201810")));
         Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201815")));
     }
-    
-    public static Portaria trataDadosDaPortariaParaPersistencia(String dados[]){
-        Portaria portaria = new Portaria();
-        portaria.setSiglaUndId(dados[2]);
-        portaria.setAnoId(Integer.parseInt(dados[3]));
-        portaria.setSeqId(Integer.parseInt(dados[4]));
-        //portaria.setStatus((PortariaStatus)dados[5]);
-        portaria.setAssunto(dados[6]);
-        portaria.setDtExped(new Date(dados[7]));
-        portaria.setDtIniVig(new Date(dados[9]));
-        portaria.setDtFimVig(new Date(dados[10]));
-        portaria.setDtPublicDou(new Date(dados[11]));
-        portaria.setHorasDesig(Integer.parseInt(dados[12]));
-        portaria.setResumo(dados[13]);
-        portaria.setTextoCompleto(dados[14]);
-        
-        return portaria;
-    }
-    
-     public static Designado trataDadosDoDesignadoParaPersistencia(String dados[]){
-        Designado designado = new Designado();
-        designado.setDtCienciaDesig(new Date(dados[1]));
-        designado.setDescrFuncDesig(dados[3]);
-        designado.setHorasDefFuncDesig(Integer.parseInt(dados[4]));
-        designado.setHorasExecFuncDesig(Integer.parseInt(dados[5]));
-        
-        return designado;
-    }
-     
-    public static Referencia trataDadosDaPortariaReferenciadaParaPersistencia(String dados[], PortariaDAO portariaDAO){
-        
-        Portaria portaria = new Portaria();
-        Referencia referenciada = new Referencia();
-   
-        portaria = portariaDAO.buscar(Long.parseLong(dados[2]));
-
-        referenciada.setReferencia(portaria);
-        referenciada.setEhCancelamento(Boolean.parseBoolean(dados[3]));
-        
-        return referenciada;
-    } 
-
 }
