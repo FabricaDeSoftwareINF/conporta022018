@@ -1,11 +1,6 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
-import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
-import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
-import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
-import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
-import br.ufg.inf.fabrica.conporta022018.modelo.Referencia;
-import br.ufg.inf.fabrica.conporta022018.modelo.Recebedora;
+import br.ufg.inf.fabrica.conporta022018.modelo.*;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
@@ -35,20 +30,25 @@ public class ControladorProPorta{
     }
 
     public List<Pessoa> buscarPessoas(){
+        // Busca apenas as pessoas ativas
         String query = "SELECT p FROM Pessoa p WHERE p.ehUsuAtivo = :ativo";
-        //String query = "SELECT p FROM Pessoa p";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("ativo", true);
 
-        // Busca apenas as pessoas ativas
+
         return this.pessoaDAO.pesquisarJPQLCustomizada(query, params);
     }
 
     public List<Portaria> buscarPortarias(){
-        return this.portariaDAO.buscarTodos();
+        // Busca apenas as portaria ativas
+        String query = "SELECT p FROM Portaria p WHERE p.status = :status";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("status", PortariaStatus.Ativa);
+
+        return this.portariaDAO.pesquisarJPQLCustomizada(query, params);
     }
 
-    public boolean validarCampos(String assunto, Date dtIniVig, String resumo){
+    private boolean validarCampos(String assunto, Date dtIniVig, String resumo){
         if(assunto.isEmpty() || dtIniVig.toString().isEmpty() || resumo.isEmpty()){
             return false;
         }else{
@@ -57,6 +57,10 @@ public class ControladorProPorta{
     }
 
     public boolean salvar(String assunto, Date dtIniVig, Date dtFimVig, Date dPublicDou, int horasDesig, String resumo, File arqPdf, List<Designado> designados, List<Referencia> referencias, List<Recebedora> recebedoras) throws IOException {
+        if(!this.validarCampos(assunto, dtIniVig, resumo)){
+            return false;
+        }
+
         Portaria portaria = new Portaria();
         portaria.setAssunto(assunto);
         portaria.setDtIniVig(dtIniVig);
@@ -67,8 +71,11 @@ public class ControladorProPorta{
         portaria.setDesignados(designados);
         portaria.setReferencias(referencias);
         portaria.setUndRecebedora(recebedoras);
-        byte[] fileContent = Files.readAllBytes(arqPdf.toPath());
-        portaria.setArqPdf(fileContent);
+
+        if(arqPdf.exists()) {
+            byte[] fileContent = Files.readAllBytes(arqPdf.toPath());
+            portaria.setArqPdf(fileContent);
+        }
 
         portariaDAO.salvar(portaria);
 

@@ -81,4 +81,20 @@ public class Designado extends ModeloAbstrato {
         this.horasExecFuncDesig = horasExecFuncDesig;
     }
 
+    public void setPessoa(Pessoa pessoa){
+        this.pessoa = pessoa;
+    }
+
+    public Pessoa getPessoa(){
+        return this.pessoa;
+    }
+
+    public void setFuncaoDesig(FuncaoDesig funcaoDesig){
+        this.funcaoDesig = funcaoDesig;
+    }
+
+    public FuncaoDesig getFuncaoDesig(){
+        return this.funcaoDesig;
+    }
+
 }
