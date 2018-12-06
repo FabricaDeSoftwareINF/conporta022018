@@ -49,9 +49,10 @@ public class JavaMail {
                     Address[] toUser = (Address[]) emailUsr.toArray(); //Destinatário(s)
 
                     message.setRecipients(Message.RecipientType.TO, toUser);
-                    message.setSubject("Encaminhento ciência da portaria " +portaria.getSeqId() ); //Assunto
-                    message.setText("<!DOCTYPE html><html> Por favor clicar no" +
-                            " link para realizar ciência da portaria: https://conporta.com.br/ciencia/ "
+                    message.setSubject("Encaminhamento de ciência da portaria " +portaria.getSeqId() ); //Assunto
+                    message.setText("<!DOCTYPE html><html> Prezado (a), a portaria"  + portaria.getSeqId() +
+                            " stá aguardando sua ciência. Para realizar ciência desta portaria clicar no seguinte" +
+                            " link: https://conporta.com.br/ciencia/ "
                             + portaria.getSeqId() +" </html>", "utf-8", "html");
 
                     Transport.send(message);//Método para enviar a mensagem criada
