@@ -96,8 +96,6 @@ public class ControladorCancPortRefTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
 
-                    if (dados[0] == "nomePes") break;
-
                     //Aqui colocar os comandos para popular a tabela pessoa no Banco de Dados.
 
                     pessoa = new Pessoa();
@@ -120,8 +118,6 @@ public class ControladorCancPortRefTest {
                 case "undAdm" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-
-                    if (dados[0] == "nomeUnd") break;
 
                     //Aqui colocar os comandos para popular a tabela unidade administrativa no Banco de Dados.
 
@@ -149,8 +145,6 @@ public class ControladorCancPortRefTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
 
-                    if (dados[0] == "siglaUndId") break;
-
                     // Aqui colocar os comandos para popular a tabela portariaReferenciada no Banco de Dados.
 
                     Portaria portariaReferenciada = new Portaria();
@@ -177,8 +171,6 @@ public class ControladorCancPortRefTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
 
-                    if (dados[0] == "idPortaria") break;
-
                     ReferenciaCSV referenciaCSV = new ReferenciaCSV();
                     referenciaCSV.setIdPortaria(dados[0]);
                     referenciaCSV.setIdPortariaReferenciada(dados[1]);
@@ -190,8 +182,6 @@ public class ControladorCancPortRefTest {
                 case "portaria" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-
-                    if (dados[0] == "siglaUndId") break;
 
                     // Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
 
@@ -243,7 +233,7 @@ public class ControladorCancPortRefTest {
     public void casoTestPrepararExecucao() {
 
         // Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
-        
+
         controladorCancPortRef = new ControladorCancPortRef();
     }
 
@@ -264,12 +254,12 @@ public class ControladorCancPortRefTest {
         // O parâmetro para a função será a instância de um Portaria (contendo suas referâncias) ou uma
         // lista de referências... Isso será confirmado dia 29/12 com os responsáveis pela expedição de portaria.
         // Apesar disso, os testes abaixo ainda podem ser compreendidos.
-        
+
         boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(0).getId());
         // O cenário acima testa o cancelamento de uma portaria referenciada com indicativo de cancelamento
         // pela portaria em questão.
         Assert.assertEquals(true, op1);
-        
+
         boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(1).getId());
         // O cenário acima testa o cancelamento de uma portaria referenciada a partir de uma portaria que possui
         // duas portarias referenciadas, onde apenas uma possui indicativo de cancelamento.
@@ -281,13 +271,13 @@ public class ControladorCancPortRefTest {
     public void casoTestDadosExcecoes() throws Exception {
 
         // Grupo de teste DadosExceções.
-        
+
         boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada(2);
         // O cenario acima testa parâmetro inválido. A exceção esperada é IllegalArgumentException
-        
+
         // A exeção atribuida para as chamadas abaixo é UnsupportedOperationException, mas um tipo de Error
         // expecífico pode ser implemantado e utilizado posteriormente.
-        
+
         boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada((long) 32);
         // O cenario acima testa a primeira exceção da seção de caso de uso, onde a portaria não é localizada na base de dados.
 
@@ -298,7 +288,7 @@ public class ControladorCancPortRefTest {
         boolean op4 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(3).getId());
         // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
         // cancelamento possui o status "Proposta".
-        
+
         // As variáveis de retorno não seram utilizadas pois a execução dos métodos vão gerar exceções.
     }
 
@@ -308,11 +298,11 @@ public class ControladorCancPortRefTest {
 
         // Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
         // irá fica as suas pós-condições.
-        
+
         // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos,
         // onde a portaria referenciada teve o status alterado para cancelada.
         Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(portariasReferenciadas.get(0).getId()).getStatus());
-        
+
         // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos,
         // onde a primeira portaria referenciada teve o status alterado para cancelada e
         // a segunda, que não contia indicativo de cancelamento, permanece com o status inalterado.
