@@ -7,7 +7,6 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
-import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 
@@ -17,14 +16,15 @@ import java.util.List;
 
 public class ControladorEncPort {
 
-    private PortariaDAO portariaDAO = new PortariaDAO();
+    private Portaria portaria = new Portaria();
     private Pessoa pessoa = new Pessoa();
     private Designado designado = new Designado();
 
     public boolean encPortariaCiencia(Portaria portaria){
 
         if(portariaIsValida(portaria) == true){
-            getEmailDesignados(portaria);
+            List<Designado> designados = portaria.getDesignados();
+            getEmailDesignados(designados);
             getEmailResponsavelUnidRec(portaria);
         }
 
@@ -68,24 +68,26 @@ public class ControladorEncPort {
     /**
      * Esse método tem como objetivo pegar o e-mail dos designados de uma
      * determinada portaria.
-     * @param portaria, recebe como parametro uma portaria válida.
+     * @param designados
+     * @return
      */
      public List <String> getEmailDesignados ( List <Designado> designados){
-        Iterator<Designado> iterator = designados.iterator();
-        Pessoa pessoa;
-        String email;
-        while (iterator.hasNext()){
-            pessoa = iterator.next();
+         List <String> email = null;
+        if (temDesignados(portaria) == true){
+            Iterator<Designado> iterator = designados.iterator();
+            Designado designado;
 
-            if(pessoa == designado.getDesignado()){
-                email = pessoa.getEmailPes();
-                List <String> pessoas = Collections.singletonList(email);
+            while (iterator.hasNext()){
+                designado = iterator.next();
+
+                if(portaria.getDesignados() == designado.getDesignado()){
+                    email = Collections.singletonList(pessoa.getEmailPes());
+
+                }
 
             }
-
         }
-
-        return  designados;
+         return  email;
     }
 
     /**
