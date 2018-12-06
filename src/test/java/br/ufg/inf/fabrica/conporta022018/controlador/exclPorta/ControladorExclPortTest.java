@@ -59,7 +59,7 @@ public class ControladorExclPortTest {
             linha = dadosSoftware.get(index);
 
             //Definir as tabelas que serão populadas no Banco de Dados.
-            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("undAdm") || linha.equals("designado")) {
+            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("undAdm") || linha.equals("designado")|| linha.equals("portariaReferenciada")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
@@ -215,10 +215,12 @@ public class ControladorExclPortTest {
 
     public static Portaria trataDadosDaPortariaParaPersistencia(String dados[]){
         Portaria portaria = new Portaria();
+        PortariaStatus status = retornaStatusPortaria(dados[5]);
+        System.out.println(status);
         portaria.setSiglaUndId(dados[2]);
         portaria.setAnoId(Integer.parseInt(dados[3]));
         portaria.setSeqId(Integer.parseInt(dados[4]));
-        //portaria.setStatus((PortariaStatus)dados[5]);
+        portaria.setStatus(status);
         portaria.setAssunto(dados[6]);
         portaria.setDtExped(new Date(dados[7]));
         portaria.setDtIniVig(new Date(dados[9]));
@@ -226,14 +228,14 @@ public class ControladorExclPortTest {
         portaria.setDtPublicDou(new Date(dados[11]));
         portaria.setHorasDesig(Integer.parseInt(dados[12]));
         portaria.setResumo(dados[13]);
-        portaria.setTextoCompleto(dados[14]);
+        //portaria.setTextoCompleto(dados[14]);
 
         return portaria;
     }
 
     public static Designado trataDadosDoDesignadoParaPersistencia(String dados[]){
         Designado designado = new Designado();
-        Pessoa pessoa = new Pessoa();
+        Pessoa pessoa;
         pessoa = pessoaDAO.buscar(Long.parseLong(dados[6]));
 
         designado.setId(Long.parseLong(dados[0]));
@@ -241,7 +243,7 @@ public class ControladorExclPortTest {
         designado.setDescrFuncDesig(dados[2]);
         designado.setDescrFuncDesig(dados[3]);
         designado.setHorasDefFuncDesig(Integer.parseInt(dados[4]));
-        designado.setHorasExecFuncDesig(Integer.parseInt(dados[5]));
+       // designado.setHorasExecFuncDesig(Integer.parseInt(dados[5]));
         designado.setDesignado(pessoa);
 
         return designado;
@@ -257,5 +259,20 @@ public class ControladorExclPortTest {
         referenciada.setEhCancelamento(Boolean.parseBoolean(dados[3]));
 
         return referenciada;
+    }
+
+    public static PortariaStatus retornaStatusPortaria(String dado){
+        switch (dado){
+            case "Proposta":
+                return PortariaStatus.PROPOSTA;
+            case "Ativa":
+                return PortariaStatus.ATIVA;
+            case "Cancelada":
+                return PortariaStatus.CANCELADA;
+            case "Expirada":
+                return  PortariaStatus.EXPIRADA;
+            default:
+                return PortariaStatus.ATIVA;
+        }
     }
 }

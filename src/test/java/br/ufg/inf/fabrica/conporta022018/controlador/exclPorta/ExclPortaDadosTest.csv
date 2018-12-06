@@ -1,44 +1,26 @@
 pessoa
 PKpes;nomePes; cpfPes; emailPes; senhaUsu; ehUsuAtivo
 1;Natalia Marufuji Aoki; 123.456.789-12; jose@exemplo.com;123456; true
-PKpes;nomePes; cpfPes; emailPes; senhaUsu; ehUsuAtivo
 2;Rhenan Konrad; 123.456.818-12; gabriel@exemplo.com;123456; true
-PKpes;nomePes; cpfPes; emailPes; senhaUsu; ehUsuAtivo
 3;Rafael Paludo; 236.456.818-12; gjesus@exemplo.com;123456; true
-PKpes;nomePes; cpfPes; emailPes; senhaUsu; ehUsuAtivo
-
 undAdm
 PKundAdm;nomeUnd; siglaUnd; tipoUnd; minInat; ultPort; anoPort; ultNumExped; ultNumProp
 1;Instituto de Informática; INF; Unidade Acadêmica;15;201815;2018;0;-1
-
 designado
 PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKpes
-1;12/11/2018; Coordenador; Novo coordenador de curso;220; 0;1
-PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKpes
-2;12/11/2018; Coordenador; Novo coordenador de curso;220; 0 ;2
-PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKpes
-3;12/11/2018; Coordenador; Novo coordenador de curso;220; 0;3
-
+1;12/11/2018; Coordenador; Novo coordenador de curso;220; 210;1
+2;12/11/2018; Coordenador; Novo coordenador de curso;220; 210 ;2
+3;12/11/2018; Coordenador; Novo coordenador de curso;220; 210;3
 portaria
 PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
-1;INF201800; INF;2018;0; Proposta; Novo coordenador de curso; 12/11/2018; 01/01/201931/12/2021; 01/01/2019; 31/12/2021; 12/12/2018;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
-PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
-3;INF201802; INF;2018;2; Proposta; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
-PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
-4;INF201803; INF;2018;3; Proposta; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
-PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
-11;INF201810; INF;2018;10; Ativa; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
-PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
-12;INF201811; INF;2018;11; Ativa; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
-PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
-13;INF201813; INF;2018;11; Proposta; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
-PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
-14;INF201814; INF;2018;11; Cancelada; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
-PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
-15;INF201815; INF;2018;11; Expirada; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
-
-
-
+1;INF201800; INF;2018;0;Proposta; Novo coordenador de curso; 12/11/2018; 01/01/201931/12/2021; 01/01/2019; 31/12/2021; 12/12/2018;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
+3;INF201802; INF;2018;2;Proposta; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
+4;INF201803; INF;2018;3;Proposta; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
+11;INF201810; INF;2018;10;Ativa; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
+12;INF201811; INF;2018;11;Ativa; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
+13;INF201813; INF;2018;11;Proposta; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
+14;INF201814; INF;2018;11;Cancelada; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho;
+15;INF201815; INF;2018;11;Expirada; Novo coordenador de curso; 12/11/2019; 01/01/202031/12/2022; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;
 portariaReferenciada
 PKportariaReferenciada; idPortaria; idPortariaReferenciada; ehCancelamento
 1;INF201810;INF201800;true
