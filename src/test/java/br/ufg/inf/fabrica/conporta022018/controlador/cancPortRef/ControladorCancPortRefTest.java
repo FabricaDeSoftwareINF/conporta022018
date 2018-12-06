@@ -107,8 +107,9 @@ public class ControladorCancPortRefTest {
                     pessoa.setSenhaUsu(dados[3]);
                     pessoa.setEhUsuAtivo(Boolean.parseBoolean(dados[4]));
 
+                    pessoaDAO.abrirTransacao();
+
                     try {
-                        pessoaDAO.abrirTransacao();
                         pessoaDAO.salvar(pessoa);
                         pessoaDAO.commitarTransacao();
                     } catch (Exception ex) {
@@ -134,8 +135,9 @@ public class ControladorCancPortRefTest {
                     undAdm.setUltNumExped(Integer.parseInt(dados[6]));
                     undAdm.setUltNumProp(Integer.parseInt(dados[7]));
 
+                    undAdmDAO.abrirTransacao();
+
                     try {
-                        undAdmDAO.abrirTransacao();
                         undAdmDAO.salvar(undAdm);
                         undAdmDAO.commitarTransacao();
                     } catch (Exception ex) {
@@ -160,8 +162,9 @@ public class ControladorCancPortRefTest {
                     portariaReferenciada.setExpedidor(pessoa);
                     portariaReferenciada.setUnidadeExpedidora(undAdm);
 
+                    portariaDAO.abrirTransacao();
+
                     try {
-                        portariaDAO.abrirTransacao();
                         Portaria portariaReferenciadaDoBanco = portariaDAO.salvar(portariaReferenciada);
                         portariasReferenciadas.add(portariaReferenciadaDoBanco);
                         portariaDAO.commitarTransacao();
@@ -221,8 +224,9 @@ public class ControladorCancPortRefTest {
                         }
                     }
 
+                    portariaDAO.abrirTransacao();
+
                     try {
-                        portariaDAO.abrirTransacao();
                         Portaria portariaDoBanco = portariaDAO.salvar(portaria);
                         portarias.add(portariaDoBanco);
                         portariaDAO.commitarTransacao();
@@ -305,9 +309,10 @@ public class ControladorCancPortRefTest {
         // Pega no banco de dados os status das portarias referenciadas com indicativo de cancelamento e verifica
         // se são iguais à "Cancelada".
 
-        Assert.assertEquals(PortariaStatus.Cancelada, portariaDAO.buscar(portariasReferenciadas.get(0).getId()).getStatus());
-        Assert.assertEquals(PortariaStatus.Ativa, portariaDAO.buscar(portariasReferenciadas.get(3).getId()));
-        Assert.assertEquals(PortariaStatus.Cancelada, portariaDAO.buscar(portariasReferenciadas.get(4).getId()).getStatus());
+        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(portariasReferenciadas.get(0).getId()).getStatus());
+        
+        Assert.assertEquals(PortariaStatus.ATIVA, portariaDAO.buscar(portariasReferenciadas.get(3).getId()));
+        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(portariasReferenciadas.get(4).getId()).getStatus());
 
         // Como o caso de uso realiza alterações nos dados manipulados apenas caso exceções não sejam lançadas, verificar
         // a verificação do resultado das chamadas que geram exceção é basicamente averiguar a igualdade das portarias
