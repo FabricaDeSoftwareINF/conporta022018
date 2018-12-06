@@ -3,7 +3,7 @@
  * Fabrica de Software INF
  * Creative Commons Attribution 4.0 International License.
  */
-package br.ufg.inf.fabrica.conporta022018.util.seguranca;
+package br.ufg.inf.fabrica.conporta022018.util.segurancaTemp;
 
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorConAcess;
 import br.ufg.inf.fabrica.conporta022018.modelo.Perfil;
@@ -11,6 +11,8 @@ import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import br.ufg.inf.fabrica.conporta022018.util.seguranca.Autoridade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -43,7 +45,7 @@ public class DetalheDoUsuario implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.papeis;
-    }
+    }   /////////interrogação msm?
 
     @Override
     public String getPassword() {

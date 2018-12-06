@@ -3,7 +3,7 @@
  * Fabrica de Software INF
  * Creative Commons Attribution 4.0 International License.
  */
-package br.ufg.inf.fabrica.conporta022018.util.seguranca;
+package br.ufg.inf.fabrica.conporta022018.util.segurancaTemp;
 
 import java.util.Collection;
 import org.springframework.context.annotation.Bean;
@@ -34,8 +34,7 @@ public class SecurancaConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         //Colocar as urls liberadas para todos, ou seja, não necessita de autenticação.
-        http
-                .authorizeRequests().antMatchers("/javax.faces.resource/**",
+        http.authorizeRequests().antMatchers("/javax.faces.resource/**",
                         "/resources/**",
                         "/index.xhtml",
                         "/trocarSenha.xhtml",
@@ -45,16 +44,13 @@ public class SecurancaConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest().authenticated();
         //Colocar a url de login com sucesso e com erro.
-        http
-                .formLogin().loginPage("/login.xhtml")
+        http.formLogin().loginPage("/login.xhtml")
                 .successHandler(getGestorDeAutenticacoesComSucesso())
                 .permitAll()
                 .failureUrl("/login.xhtml?error=true");
         //Para deslocar.
-        http
-                .logout().logoutSuccessUrl("/login.xhtml");
-        http
-                .csrf().disable();
+        http.logout().logoutSuccessUrl("/login.xhtml");
+        http.csrf().disable();
     }
 
     @Bean
@@ -88,8 +84,8 @@ public class SecurancaConfig extends WebSecurityConfigurerAdapter {
             @Override
             public boolean supports(Class<?> clazz) {
                 return true;
-            }
-        };
+            }//////////////////////////zz erro
+        };//////////////////////////////////////////////////////////////////////////ponto ; erro?
         return adm;
     }
 

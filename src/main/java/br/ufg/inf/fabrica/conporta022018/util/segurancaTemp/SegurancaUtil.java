@@ -3,7 +3,7 @@
  * Fabrica de Software INF
  * Creative Commons Attribution 4.0 International License.
  */
-package br.ufg.inf.fabrica.conporta022018.util.seguranca;
+package br.ufg.inf.fabrica.conporta022018.util.segurancaTemp;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import org.springframework.security.core.context.SecurityContextHolder;
