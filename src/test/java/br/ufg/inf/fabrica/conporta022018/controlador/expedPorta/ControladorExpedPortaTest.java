@@ -161,11 +161,11 @@ public class ControladorExpedPortaTest {
     @Test
     public void casoTesteAssinaturaValidos(){
         // Todos os casos abaixo são de sucesso, eles precisam apenas apresentarem a assinatura esperada
-        Assert.assertEquals(controladorExpedPorta.assinar(new Integer[]{20376, 372469}),
+        Assert.assertEquals(controladorExpedPorta.assinar(new Long[]{20376l, 372469l}),
                 new char[]{'A', '7', '4', 'C', '8', '2', '5', '7', 'F', 'A'});
-        Assert.assertEquals(controladorExpedPorta.assinar(new Integer[]{15487, 156546}),
+        Assert.assertEquals(controladorExpedPorta.assinar(new Long[]{15487l, 156546l}),
                 new char[]{'1', 'E', 'B', 'F', '0', '1', 'B', '1', '4', '1'});
-        Assert.assertEquals(controladorExpedPorta.assinar(new Integer[]{2514, 21548}),
+        Assert.assertEquals(controladorExpedPorta.assinar(new Long[]{2514l, 21548l}),
                 new char[]{'0', 'A', '2', 'F', '0', '0', '2', 'A', '1', '6'});
     }
 

@@ -3,8 +3,10 @@ package br.ufg.inf.fabrica.conporta022018.controlador;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
+import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
+import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 
 import java.nio.ByteBuffer;
 import java.util.Date;
@@ -42,6 +44,8 @@ public class ControladorExpedPorta {
         PortariaDAO portaDAO = new PortariaDAO();
         Pessoa pessoa = new Pessoa();
         PessoaDAO pessoaDAO = new PessoaDAO();
+        UndAdm undAdm = new UndAdm();
+        UndAdmDAO undAdmDAO = new UndAdmDAO();
         ControladorCancPortRef controladorCancPortRef = new ControladorCancPortRef();
         ControladorEncPortaria controladorEncPortaria = new ControladorEncPortaria();
         boolean designadosExistem = true;
@@ -55,13 +59,16 @@ public class ControladorExpedPorta {
         }
 
         // Verificação de cenários inválidos
-        if (!portaria.getStatus().equals(PortariaStatus.Proposta)) {
+        if (!portaria.getStatus().equals(PortariaStatus.PROPOSTA)) {
+            // O status da portaria não é "proposta", a portaria já foi expedida, cancelada ou expirada
             return 3;
         }
         if (portaria.getDtFimVig() != null && portaria.getDtFimVig().before(new Date())) {
+            // A data final do período de vigência já expirou
             return 4;
         }
         if (pessoa.getServidor().getUndAdm().getSiglaUnAdm() == portaria.getUnidadeExpedidora().getSiglaUnAdm()) {
+            // O servidor não pertence à unidade administrativa que propôs a portaria
             return 7;
         }
         for(int i = 0; i < portaria.getDesignados().size(); i++){
@@ -70,24 +77,31 @@ public class ControladorExpedPorta {
             }
         }
         if (!designadosExistem) {
+            // Um ou mais designados não existem
             return 5;
         } else {
             // Caso de sucesso
 
             // Atualização de dados
             portaria.setSeqId(portaria.getUnidadeExpedidora().getUltNumExped());
-                /* DÚVIDA!!!!!!!
-                Este valor será atualizado na tabela de unidade administrativa automaticamente quando a portaria
-                for persistida?*/
+
+            // Incrementa o número de portarias expedidas pela unidade administrativa
             portaria.getUnidadeExpedidora().setUltNumExped(portaria.getUnidadeExpedidora().getUltNumExped() + 1);
-            portaria.setStatus(PortariaStatus.Ativa);
+            // Alterar o status da portaria para "ativa"
+            portaria.setStatus(PortariaStatus.ATIVA);
+            // Atribuir a data atual na data de expedição
             portaria.setDtExped(new Date());
 
             // Assinatura da expedição, persistência da portaria, encaminhamento para ciência e cancelamento de referenciadas
             portaria.setAssinatura(assinar(new Long[]{pessoa.getServidor().getId(), portaria.getId()}));
-            portaDAO.salvar(portaria);
             controladorEncPortaria.encPortariaCiencia(idPorta);
             controladorCancPortRef.cancelarPortarias(idPorta);
+            portaDAO.salvar(portaria);
+            // Persistência da unidade expedidora para
+            undAdmDAO.salvar(portaria.getUnidadeExpedidora());
+
+            portaDAO.commitarTransacao();
+            undAdmDAO.commitarTransacao();
             return 1;
         }
     }
