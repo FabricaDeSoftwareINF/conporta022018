@@ -9,10 +9,17 @@ import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
+import com.sun.jndi.cosnaming.IiopUrl;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+import org.h2.engine.Session;
+import sun.plugin2.message.Message;
+import sun.plugin2.message.transport.Transport;
 
+import java.net.PasswordAuthentication;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 public class ControladorEncPort {
 
@@ -100,6 +107,48 @@ public class ControladorEncPort {
         List undRecebedora = portaria.getUndRecebedora();
 
     }
+
+//    public  void enviaEmail (){
+//            Properties props = new Properties();
+//            /** Parâmetros de conexão com servidor Gmail */
+//            props.put("mail.smtp.host", "smtp.gmail.com");
+//            props.put("mail.smtp.socketFactory.port", "465");
+//            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+//            props.put("mail.smtp.auth", "true");
+//            props.put("mail.smtp.port", "465");
+//
+//            Session session = Session.getDefaultInstance(props,
+//                    new javax.mail.Authenticator() {
+//                        protected PasswordAuthentication getPasswordAuthentication()
+//                        {
+//                            return new PasswordAuthentication("seuemail@gmail.com", "suasenha123");
+//                        }
+//                    });
+//
+//            /** Ativa Debug para sessão */
+//            session.setDebug(true);
+//
+//            try {
+//
+//                Message message = new MimeMessage(session);
+//                message.setFrom(new InternetAddress("seuemail@gmail.com")); //Remetente
+//
+//                IiopUrl.Address[] toUser = InternetAddress //Destinatário(s)
+//                        .parse("seuamigo@gmail.com, seucolega@hotmail.com, seuparente@yahoo.com.br");
+//
+//                message.setRecipients(Message.RecipientType.TO, toUser);
+//                message.setSubject("Enviando email com JavaMail");//Assunto
+//                message.setText("Enviei este email utilizando JavaMail com minha conta GMail!");
+//                /**Método para enviar a mensagem criada*/
+//                Transport.send(message);
+//
+//                System.out.println("Feito!!!");
+//
+//            } catch (MessagingException e) {
+//                throw new RuntimeException(e);
+//            }
+//    }
+
 
 
 
