@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class UndAdm extends ModeloAbstrato {
+public class UndAdm extends ModeloAbstrato{
 
     private String siglaUnAdm;
     private Integer minInat;

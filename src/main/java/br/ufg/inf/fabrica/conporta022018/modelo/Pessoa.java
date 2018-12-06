@@ -16,8 +16,8 @@ public class Pessoa extends ModeloAbstrato {
     private Boolean ehUsuAtivo;
     @OneToMany
     private List<Gestao> gestao;
-    @OneToMany
-    private List<Lotacao> servidor;
+    @OneToOne
+    private Lotacao servidor;
     @OneToMany
     private List<Matricula> discente;
 
@@ -80,10 +80,10 @@ public class Pessoa extends ModeloAbstrato {
     }
 
     public void setServidor(Lotacao servidor) {
-        this.servidor.add(servidor);
+        this.servidor = servidor;
     }
 
-    public List<Lotacao> getServidor() {
+    public Lotacao getServidor() {
         return this.servidor;
     }
 
