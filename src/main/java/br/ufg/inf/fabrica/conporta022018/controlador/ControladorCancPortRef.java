@@ -24,7 +24,7 @@ public class ControladorCancPortRef {
             throw new UnsupportedOperationException("Portaria não existe na base de dados.");
         }
 
-        if (portaria.getStatus() != PortariaStatus.Ativa) {
+        if (portaria.getStatus() != PortariaStatus.ATIVA) {
             throw new UnsupportedOperationException("Operação não permitida para portaria não ativa.");
         }
 
@@ -54,11 +54,11 @@ public class ControladorCancPortRef {
                     throw new UnsupportedOperationException("Apenas portarias existentes na base de dados podem ser canceladas.");
                 }
 
-                if (portariaParaCancelamento.getStatus() != PortariaStatus.Ativa) {
+                if (portariaParaCancelamento.getStatus() != PortariaStatus.ATIVA) {
                     throw new UnsupportedOperationException("Apenas portarias ativas podem ser canceladas.");
                 }
 
-                portariaParaCancelamento.setStatus(PortariaStatus.Cancelada);
+                portariaParaCancelamento.setStatus(PortariaStatus.CANCELADA);
                 portariaDAO.salvar(portariaParaCancelamento);
             }
 
