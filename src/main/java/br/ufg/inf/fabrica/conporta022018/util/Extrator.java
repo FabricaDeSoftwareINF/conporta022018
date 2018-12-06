@@ -13,3 +13,4 @@ public interface Extrator {
     void setTexto(String texto);
 
 }
+
