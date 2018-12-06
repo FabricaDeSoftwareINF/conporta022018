@@ -3,6 +3,7 @@ package br.ufg.inf.fabrica.conporta022018.persistencia;
 import br.ufg.inf.fabrica.conporta022018.modelo.Lotacao;
 import com.sun.tools.javac.util.Assert;
 import java.util.Date;
+import java.util.List;
 import org.junit.Test;
 
 
@@ -24,7 +25,9 @@ public class LotacaoDAOTest {
 
     Lotacao lotacaoSalva = new LotacaoDAO().salvar(lotacao);
 
-    Assert.checkNonNull(lotacaoSalva);
+    List<Lotacao> lotacaos = new LotacaoDAO().buscarTodos();
+
+    Assert.checkNonNull(lotacaos);
   }
 
 }
