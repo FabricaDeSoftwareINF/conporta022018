@@ -14,7 +14,12 @@ import static org.junit.Assert.*;
 public class ControladorEncPortTest {
 
     private static ControladorEncPort controladorEncPort;
-
+     
+    /*
+     * Preparação do ambiente para teste.
+     * População do banco de Dados para atendam os pré-requisitos da seção de caso de uso.
+     */
+    
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException {
 
