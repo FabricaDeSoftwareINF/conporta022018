@@ -33,10 +33,6 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
     } catch (Exception e) {
       e.printStackTrace();
       return null;
-    } finally {
-      if (entityManager.isOpen()) {
-        entityManager.close();
-      }
     }
 
   }
@@ -53,10 +49,6 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
       entityManager.remove(modelo);
     } catch (Exception e) {
       e.printStackTrace();
-    } finally {
-      if (entityManager.isOpen()) {
-        entityManager.close();
-      }
     }
   }
 
@@ -74,10 +66,6 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
     } catch (Exception e) {
       e.printStackTrace();
       return null;
-    } finally {
-      if (entityManager.isOpen()) {
-        entityManager.close();
-      }
     }
   }
 
@@ -95,10 +83,6 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
     } catch (Exception e) {
       e.printStackTrace();
       return null;
-    } finally {
-      if (entityManager.isOpen()) {
-        entityManager.close();
-      }
     }
   }
 
@@ -185,10 +169,6 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
       for (Entry<String, Object> parametro : parametros.entrySet()) {
         query.setParameter(parametro.getKey(), parametro.getValue());
       }
-    }
-
-    if (entityManager.isOpen()) {
-      entityManager.close();
     }
 
     return query;

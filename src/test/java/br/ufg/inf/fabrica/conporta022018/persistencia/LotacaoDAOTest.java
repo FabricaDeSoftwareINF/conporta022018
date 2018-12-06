@@ -23,9 +23,13 @@ public class LotacaoDAOTest {
     lotacao.setDtFimLotServ(new Date());
     lotacao.setDescrCargoServ("Teste");
 
+    new LotacaoDAO().abrirTransacao();  
     Lotacao lotacaoSalva = new LotacaoDAO().salvar(lotacao);
+    new LotacaoDAO().commitarTransacao();
 
     List<Lotacao> lotacaos = new LotacaoDAO().buscarTodos();
+
+    System.out.println(lotacaos.size());
 
     Assert.checkNonNull(lotacaos);
   }
