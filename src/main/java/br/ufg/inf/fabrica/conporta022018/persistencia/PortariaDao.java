@@ -17,7 +17,6 @@ public class PortariaDao extends GenericoDAO<Portaria> {
    * Retorna uma lista de {@link Portaria} conforme o filtro informado.
    *
    * @param filtroDto filtros informados para a consulta.
-   * @return
    */
   public List<Portaria> pesquisarPortaria(FiltroDTO filtroDto) {
 
@@ -26,13 +25,14 @@ public class PortariaDao extends GenericoDAO<Portaria> {
       StringBuilder jpql = new StringBuilder();
       Map<String, Object> parametros = new HashMap<String, Object>();
 
-      jpql.append(" select p from Portaria where 1 = 1 ");
+      jpql.append(" select p from Portaria p inner join p.designados d where 1 = 1 ");
 
       setParametroAnoPortaria(filtroDto.getAnoPortaria(), jpql, parametros);
-      setParametroCodigoDesignado(filtroDto.getCodigoDesignado(), jpql, parametros);
-      setParametroCodigoUnidadeAdm(filtroDto.getCodigoUnidadeAdm(), jpql, parametros);
-      setParametroFimVigencia(filtroDto.getFimVigencia(), jpql, parametros);
-      setParametroFimVigencia(filtroDto.getInicioVigencia(), jpql, parametros);
+      setParametroCodigoDesignado(filtroDto.getCpfPes(), jpql, parametros);
+      setParametroCodigoUnidadeAdm(filtroDto.getSiglaUnAdm(), jpql, parametros);
+
+      setParametroFimVigencia(filtroDto.getInicioVigencia(), filtroDto.getFimVigencia(), jpql,
+          parametros);
 
       return this.pesquisarJPQLCustomizada(jpql.toString(), parametros);
 
@@ -43,24 +43,43 @@ public class PortariaDao extends GenericoDAO<Portaria> {
     return null;
   }
 
-  private void setParametroFimVigencia(Date fimVigencia, StringBuilder jpql,
+  private void setParametroFimVigencia(Date inicioVigencia, Date fimVigencia, StringBuilder jpql,
       Map<String, Object> parametros) {
+
+    if (inicioVigencia != null && fimVigencia != null) {
+      jpql.append(" and ((p.dtIniVig between :inicioVigencia and :fimVigencia) ");
+      jpql.append(" or (p.dtFimVig between :inicioVigencia and :fimVigencia)) ");
+
+      parametros.put("inicioVigencia", inicioVigencia);
+      parametros.put("fimVigencia", fimVigencia);
+    }
 
   }
 
-  private void setParametroCodigoUnidadeAdm(Long codigoUnidadeAdm, StringBuilder jpql,
+  private void setParametroCodigoUnidadeAdm(String siglaUnAdm, StringBuilder jpql,
       Map<String, Object> parametros) {
+
+    if (siglaUnAdm != null) {
+      jpql.append(" and (p.unidadeExpedidora.siglaUnAdm = :siglaUnAdm) ");
+      parametros.put("siglaUnAdm", siglaUnAdm);
+    }
 
   }
 
-  private void setParametroCodigoDesignado(Long codigoDesignado, StringBuilder jpql,
+  private void setParametroCodigoDesignado(String cpfPes, StringBuilder jpql,
       Map<String, Object> parametros) {
-
+    if (cpfPes != null) {
+      jpql.append(" and (d.pessoa.cpfPes = :cpfPes) ");
+      parametros.put("cpfPes", cpfPes);
+    }
   }
 
   private void setParametroAnoPortaria(Integer anoPortaria, StringBuilder jpql,
       Map<String, Object> parametros) {
-
+    if (anoPortaria != null) {
+      jpql.append(" and (p.anoId = :anoPortaria) ");
+      parametros.put("anoPortaria", anoPortaria);
+    }
   }
 
 }

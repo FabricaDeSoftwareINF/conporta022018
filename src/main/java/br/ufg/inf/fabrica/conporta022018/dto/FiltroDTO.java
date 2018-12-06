@@ -6,9 +6,9 @@ import java.util.Date;
 
 public class FiltroDTO {
 
-    private Long codigoDesignado;
+    private String cpfPes;
 
-    private Long codigoUnidadeAdm;
+    private String siglaUnAdm;
 
     private Integer anoPortaria;
 
@@ -20,29 +20,28 @@ public class FiltroDTO {
 
     }
 
-    public FiltroDTO(Long codigoDesignado, Long codigoUnidadeAdm, Integer anoPortaria, Date inicioVigencia, Date fimVigencia) {
-        this.codigoDesignado = codigoDesignado;
-        this.codigoUnidadeAdm = codigoUnidadeAdm;
+    public FiltroDTO(String cpfPes, String siglaUnAdm, Integer anoPortaria, Date inicioVigencia, Date fimVigencia) {
+        this.cpfPes = cpfPes;
+        this.siglaUnAdm = siglaUnAdm;
         this.anoPortaria = anoPortaria;
         this.inicioVigencia = inicioVigencia;
         this.fimVigencia = fimVigencia;
     }
 
-
-    public Long getCodigoDesignado() {
-        return codigoDesignado;
+    public String getCpfPes() {
+        return cpfPes;
     }
 
-    public void setCodigoDesignado(Long codigoDesignado) {
-        this.codigoDesignado = codigoDesignado;
+    public void setCpfPes(String cpfPes) {
+        this.cpfPes = cpfPes;
     }
 
-    public Long getCodigoUnidadeAdm() {
-        return codigoUnidadeAdm;
+    public String getSiglaUnAdm() {
+        return siglaUnAdm;
     }
 
-    public void setCodigoUnidadeAdm(Long codigoUnidadeAdm) {
-        this.codigoUnidadeAdm = codigoUnidadeAdm;
+    public void setSiglaUnAdm(String siglaUnAdm) {
+        this.siglaUnAdm = siglaUnAdm;
     }
 
     public Integer getAnoPortaria() {

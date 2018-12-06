@@ -15,11 +15,17 @@ import java.util.List;
 
 public class ControladorPesqPorta {
 
-    private PortariaDao portariaDao;
+  private PortariaDao portariaDao;
 
-    public List<Portaria> pesqPorta(FiltroDTO filtro) {
-        return null;
-    }
+  /**
+   * Lista uma coleção de {@link Portaria} conforme o filtro informado
+   *
+   * @param filtro filtro de pesquisa
+   * @return coleção de {@link Portaria} caso sejam encontrados resultados para o filtro informado.
+   */
+  public List<Portaria> pesqPorta(FiltroDTO filtro) {
+    return portariaDao.pesquisarPortaria(filtro);
+  }
 
 }
 
