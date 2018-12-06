@@ -6,7 +6,7 @@
 
 package br.ufg.inf.fabrica.conporta022018.controlador.notifPortSemCiencia;
 
-import br.ufg.inf.fabrica.conporta022018.controlador.ControladorNorifPortSemCiencia;
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorNotifPortSemCiencia;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ControladorNotifPortSemCienciaTest {
 
-    private static ControladorNorifPortSemCiencia controladorNorifPortSemCiencia;
+    private static ControladorNotifPortSemCiencia controladorNorifPortSemCiencia;
 
     /*
      * Preparação do ambiente para teste.
@@ -80,7 +80,7 @@ public class ControladorNotifPortSemCienciaTest {
     public void casoTestPrepararExecucao() {
 
         //Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
-        controladorNorifPortSemCiencia = new ControladorNorifPortSemCiencia();
+        controladorNorifPortSemCiencia = new ControladorNotifPortSemCiencia();
     }
 
     /*
@@ -96,7 +96,7 @@ public class ControladorNotifPortSemCienciaTest {
     public void casoTestDadosValidos() throws IOException {
 
         //Grupo de teste DadosValidos, exemplo:
-        controladorNorifPortSemCiencia.notifPortSemCiencia();
+        controladorNorifPortSemCiencia.verificarCiencia();
         //Testa o cenário típico do caso de uso, onde há designados sem ciência.
 
     }
