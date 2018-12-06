@@ -159,18 +159,26 @@ public class ControladorEdiTemTimTest {
         final String JPQL_BUSCAR_UNIDADE = "select u UndAdm u where u.siglaUnd = :sigla";
         Map<String, Object> map = new HashMap<String, Object>();
 
+        //Aqui verifica se o valor foi alterado.
+        //Retorna "True" se a alteração refletiu na base de dados e "False" se a alteração não refletiu.
         map.put("sigla","INF");
         undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
         Assert.assertEquals(Integer.valueOf(60), undAdm.getMinInat());
 
+        //Aqui verifica se o valor foi alterado.
+        //Retorna "True" se a alteração refletiu na base de dados e "False" se a alteração não refletiu.
         map.put("sigla","EMC");
         undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
         Assert.assertEquals(Integer.valueOf(59), undAdm.getMinInat());
 
+        //Aqui verifica se o valor foi alterado.
+        //Retorna "True" se a alteração refletiu na base de dados e "False" se a alteração não refletiu.
         map.put("sigla","FAV");
         undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
         Assert.assertEquals(Integer.valueOf(15), undAdm.getMinInat());
 
+        //Aqui verifica se o valor foi alterado.
+        //Retorna "True" se a alteração refletiu na base de dados e "False" se a alteração não refletiu.
         map.put("sigla","IME");
         undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
         Assert.assertEquals(Integer.valueOf(16), undAdm.getMinInat());
