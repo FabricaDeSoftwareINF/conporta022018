@@ -59,7 +59,7 @@ public class ControladorEdiTemTimTest {
                     extrator.setTexto(linha);
                     dadosUndAdm = extrator.getResultado(REGRA);  
 
-                    undAdm.setId(Long.parseLong(dadosUndAdm[0]));
+                    //undAdm.setId(Long.parseLong(dadosUndAdm[0]));
                     undAdm.setNomeUnd(dadosUndAdm[1]);
                     undAdm.setSiglaUnAdm(dadosUndAdm[2]);
                     String tipoUnd = dadosUndAdm[3];
