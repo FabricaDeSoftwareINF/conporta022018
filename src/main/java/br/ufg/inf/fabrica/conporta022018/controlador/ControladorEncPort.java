@@ -13,13 +13,20 @@ public class ControladorEncPort {
 
     private PessoaDAO pessoaDAO = new PessoaDAO();
 
+    /**
+     * O método abaixo é responsável por execução do caso de uso, ou seja,
+     * é responsável por chamar/invocar os demais métodos presente no
+     * controlador;
+     * @param portaria
+     * @return
+     */
     public boolean encPortariaCiencia(Portaria portaria){
 
         if(portariaIsValida(portaria) == true){
             List<Designado> designados = portaria.getDesignados();
-            JavaMail enviar = new JavaMail();
-            enviar.enviarEmail(getEmailDesignados(designados), portaria);
-            enviar.enviarEmail(getEmailResponsavelUndRec(portaria), portaria);
+            JavaMail javaMail = new JavaMail();
+            javaMail.enviarEmail(getEmailDesignados(designados), portaria);
+            javaMail.enviarEmail(getEmailResponsavelUndRec(portaria), portaria);
 
         }
 
@@ -33,7 +40,7 @@ public class ControladorEncPort {
      * @param portaria, recebe como parametro uma portaria
      * @return falso (false) caso portaria não seja válida, ou seja, caso não
      * atenda os critérios estabelecidos e retorna true (verdadeiro) caso seja
-     * uma portaria válida.
+     * uma portaria válida;
      */
     public boolean portariaIsValida (Portaria portaria){
         if ( portaria.getUnidadeExpedidora() != null &&
@@ -46,7 +53,7 @@ public class ControladorEncPort {
 
     /**
      * Esse método tem como objetivo pegar o e-mail dos designados de uma
-     * determinada unidade.
+     * determinada unidade;
      * @param designados
      * @return
      */

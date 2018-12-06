@@ -20,6 +20,13 @@ import br.ufg.inf.fabrica.conporta022018.modelo.Mensagem;
 
 public class JavaMail {
     Mensagem mensagem = new Mensagem();
+
+    /**
+     * Metódo responsável pelo serviço de envio de e-mail, que pega como
+     * parametro uma lista de e-mails e uma portaria;
+     * @param emailUsr
+     * @param portaria
+     */
     public void enviarEmail(final List<String> emailUsr,Portaria portaria) {
         new Thread(new Runnable() {
 
