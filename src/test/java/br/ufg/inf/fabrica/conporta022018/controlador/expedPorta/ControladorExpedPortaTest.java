@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 
 public class ControladorExpedPortaTest {
 
@@ -59,62 +58,62 @@ public class ControladorExpedPortaTest {
             }
 
             switch (tabelaAtual) {
-                case "portaComFinalVig" :
+                case "portaComFinalVig":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela pessoa no Banco de Dados.
                     break;
-                case "portaDesigExist" :
+                case "portaDesigExist":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
                     break;
-                case "portaSemFinalVig" :
+                case "portaSemFinalVig":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela Unidade Administrativa no Banco de Dados.
                     break;
-                case "portaDesigInexist" :
+                case "portaDesigInexist":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
                     break;
-                case "portaSemIniVig" :
+                case "portaSemIniVig":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
                     break;
-                case "portaVigExpir" :
+                case "portaVigExpir":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
                     break;
-                case "portaExpedida" :
+                case "portaExpedida":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
                     break;
-                case "portaCancelada" :
+                case "portaCancelada":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
                     break;
-                case "desigExist" :
+                case "desigExist":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
                     break;
-                case "desigInexist" :
+                case "desigInexist":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
                     break;
-                case "pessoa" :
+                case "pessoa":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
                     break;
-                case "undAdm" :
+                case "undAdm":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
@@ -145,13 +144,13 @@ public class ControladorExpedPortaTest {
         // O código retornado para um caso de sucesso é 1
 
         // Portaria com data final de vigência, sem designados:
-        Assert.assertEquals(controladorExpedPorta.expedPorta(1), 1);
+        Assert.assertEquals(controladorExpedPorta.expedPorta(1, 1), 1);
 
         // Portaria com data final de vigência, com designados existentes:
-        Assert.assertEquals(controladorExpedPorta.expedPorta(6), 1);
+        Assert.assertEquals(controladorExpedPorta.expedPorta(6, 1), 1);
 
         // Portaria sem data final de vigência, sem designados:
-        Assert.assertEquals(controladorExpedPorta.expedPorta(2), 1);
+        Assert.assertEquals(controladorExpedPorta.expedPorta(2, 1), 1);
 
         /* ---------- testes a serem feitos posteriormente ---------- */
         // Portaria com data final de vigência e com referências a portarias existentes e ativas:
@@ -159,7 +158,7 @@ public class ControladorExpedPortaTest {
     }
 
     @Test
-    public void casoTesteAssinaturaValidos(){
+    public void casoTesteAssinaturaValidos() {
         // Todos os casos abaixo são de sucesso, eles precisam apenas apresentarem a assinatura esperada
         Assert.assertEquals(controladorExpedPorta.assinar(new Long[]{20376l, 372469l}),
                 new char[]{'A', '7', '4', 'C', '8', '2', '5', '7', 'F', 'A'});
@@ -173,31 +172,31 @@ public class ControladorExpedPortaTest {
     public void casoTestDadosExcecoes() throws IOException {
 
         /* Os códigos de erro são os seguintes:
-        *
-        * 2 - Portaria inválida - Cancelada ou Expedida
-        * 3 - Portaria inválida - Período de vigência sem início ou expirado
-        * 4 - Designado inválido - Inexistente
-        * 5 - Portaria inexistente
-        * 6 - Portaria referenciada - Inexistentes, canceladas ou propostas
-        * */
+         *
+         * 2 - Portaria inválida - Cancelada ou Expedida
+         * 3 - Portaria inválida - Período de vigência sem início ou expirado
+         * 4 - Designado inválido - Inexistente
+         * 5 - Portaria inexistente
+         * 6 - Portaria referenciada - Inexistentes, canceladas ou propostas
+         * */
 
         // Portaria com designado inexistente:
-        Assert.assertEquals(controladorExpedPorta.expedPorta(8), 4);
+        Assert.assertEquals(controladorExpedPorta.expedPorta(8, 1), 4);
 
         // Portaria sem data inicial de vigência:
-        Assert.assertEquals(controladorExpedPorta.expedPorta(3), 3);
+        Assert.assertEquals(controladorExpedPorta.expedPorta(3, 1), 3);
 
         // Portaria com data final de vigência expirada:
-        Assert.assertEquals(controladorExpedPorta.expedPorta(4), 3);
+        Assert.assertEquals(controladorExpedPorta.expedPorta(4, 1), 3);
 
         // Portaria expedida
-        Assert.assertEquals(controladorExpedPorta.expedPorta(7), 2);
+        Assert.assertEquals(controladorExpedPorta.expedPorta(7, 1), 2);
 
         // Portaria cancelada
-        Assert.assertEquals(controladorExpedPorta.expedPorta(5), 2);
+        Assert.assertEquals(controladorExpedPorta.expedPorta(5, 1), 2);
 
         // Portaria inexistente
-        Assert.assertEquals(controladorExpedPorta.expedPorta(2469), 5);
+        Assert.assertEquals(controladorExpedPorta.expedPorta(2469, 1), 5);
 
         /* ---------- testes a serem feitos posteriormente ---------- */
 
