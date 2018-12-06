@@ -5,10 +5,9 @@
  */
 
 package br.ufg.inf.fabrica.conporta022018.controlador;
-import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
-import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
-import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
-import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
+import br.ufg.inf.fabrica.conporta022018.modelo.*;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +17,7 @@ public class ControladorEncPort {
     private Portaria portaria = new Portaria();
     private Pessoa pessoa = new Pessoa();
     private Designado designado = new Designado();
+    private PessoaDAO pessoaDAO = new PessoaDAO();
 
     public boolean encPortariaCiencia(Portaria portaria){
 
@@ -69,26 +69,15 @@ public class ControladorEncPort {
 
     /**
      * Esse método tem como objetivo pegar o e-mail dos designados de uma
-     * determinada portaria.
+     * determinada unidade.
      * @param designados
      * @return
      */
      public List <String> getEmailDesignados ( List <Designado> designados){
          List <String> email = null;
-        if (temDesignados(portaria) == true){
-            Iterator<Designado> iterator = designados.iterator();
-            Designado designado;
-
-            while (iterator.hasNext()){
-                designado = iterator.next();
-
-                if(portaria.getDesignados() == designado.getDesignado()){
-                    email = Collections.singletonList(pessoa.getEmailPes());
-
-                }
-
-            }
-        }
+         for (Designado designado: designados) {
+             
+         }
          return  email;
     }
 
@@ -98,10 +87,29 @@ public class ControladorEncPort {
      * PortValid definida no documento ConPorta022018-DesigFun-EncPorta
      * @param portaria, recebe como parametro uma portaria válida.
      */
-    public List <String>  getEmailResponsavelUnidRec(Portaria portaria){
-        List undRecebedora = portaria.getUndRecebedora();
+    public List<String>  getEmailResponsavelUnidRec(Portaria portaria){
+        List<Recebedora> undRecebedora = portaria.getUndRecebedora();
+        List<String> emailRespUndRec = null;
 
-        return  undRecebedora;
+        try{
+            String jpql = "SELECT p FROM Pessoa";
+            List<Pessoa> listaPessoas = pessoaDAO.pesquisarJPQLCustomizada(jpql, null);
+            for (Pessoa pessoa: listaPessoas) {
+                List<Gestao> listaGestao = pessoa.getGestao();
+                for (Gestao gestao: listaGestao) {
+                    for (Recebedora recebedora: undRecebedora) {
+                        if (recebedora.getUnidadeRecebedora() == gestao.getUnAdm()) {
+                            if (gestao.getdtFim() == null){
+                                emailRespUndRec.add(pessoa.getEmailPes());
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException("Não é possível pegar os e-mails");
+        }
+        return  emailRespUndRec;
     }
 
 }
