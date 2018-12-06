@@ -1,8 +1,10 @@
 package br.ufg.inf.fabrica.conporta022018.persistencia;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Lotacao;
-import org.junit.*;
+import com.sun.tools.javac.util.Assert;
 import java.util.Date;
+import org.junit.Test;
+
 
 /**
  * Classe de teste do {@link LotacaoDAO}
@@ -22,7 +24,7 @@ public class LotacaoDAOTest {
 
     Lotacao lotacaoSalva = new LotacaoDAO().salvar(lotacao);
 
-    Assert.assertNotNull(lotacaoSalva);
+    Assert.checkNonNull(lotacaoSalva);
   }
 
 }

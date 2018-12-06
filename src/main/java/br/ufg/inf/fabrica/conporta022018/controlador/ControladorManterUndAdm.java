@@ -12,11 +12,15 @@ import static javafx.scene.input.KeyCode.T;
 
 public class ControladorManterUndAdm {
 
+    private final String TEMPO_MAXIMO = 60;
+    private final String TEMPO_MINIMO = 15;
+
     public void editarTimeOut(int timeOut, String sigla) {
         //verificar se a unidade adm existe
         UndAdmDAO undAdmDao = new UndAdmDAO();
-        //if (undAdmDao.pesquisarUndAdm(sigla) != null) {            
-         //   undAdmDao.editarTimeOut(timeOut);
-        //}
+        if (undAdmDao.pesquisarUndAdm(sigla) != null && timeOut >= TEMPO_MINIMO && timeOut <= TEMPO_MAXIMO) {            
+            undAdmDao.editarTimeOut(timeOut);
+        }
     }
 }
+ 
