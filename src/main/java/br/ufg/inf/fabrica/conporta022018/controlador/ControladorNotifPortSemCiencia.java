@@ -10,7 +10,6 @@ import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 
 import java.util.*;
-import java.sql.Time;
 
 public class ControladorNotifPortSemCiencia {
 
@@ -18,22 +17,12 @@ public class ControladorNotifPortSemCiencia {
 
         DesignadoDAO designadoDao = new DesignadoDAO();
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -5);
-        Date dataLimite = calendar.getTime();
-
-        StringBuilder builder = new StringBuilder();
-        builder.append("select d from Designado d where d.dtCienciaDesig is null ");
-        builder.append(" and d.portaria.dtExped <= :dtExped ");
-
-        Map<String, Object> parametros = new HashMap<>();
-        parametros.put("dtExped", dataLimite );
-
-        List<Designado> designados = designadoDao.pesquisarJPQLCustomizada(builder.toString(),parametros);
+    
+        List<Designado> designados = designadoDao.pesquisaDesignadosSemCiencia();
 
         List<String> emails = getEmailDesignados(designados);
 
-        enviarEmail(emails);
+        this.enviarEmail(emails);
     }
 
 
