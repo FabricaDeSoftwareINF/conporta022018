@@ -1,6 +1,9 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
+import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
+import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
+import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
 import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
 import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
@@ -9,6 +12,8 @@ import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import org.junit.*;
 
 import java.io.IOException;
@@ -23,7 +28,7 @@ public class ControladorEncPortTest {
 
 
   @BeforeClass
-  public static void casoTestPepararCenario() throws IOException {
+  public static void casoTestPepararCenario() throws IOException, ParseException {
 
     String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/EncPortDadosTest.csv";
     String REGRA = ";";
@@ -40,6 +45,8 @@ public class ControladorEncPortTest {
     PortariaDao portariaDao = new PortariaDao();
     DesignadoDAO designadoDAO = new DesignadoDAO();
     UndAdmDAO undAdmDAO = new UndAdmDAO();
+
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
     for (int index = 0; index < dadosSoftware.size(); index++) {
       linha = dadosSoftware.get(index);
@@ -73,7 +80,18 @@ public class ControladorEncPortTest {
           extrator.setTexto(linha);
           dados = extrator.getResultado(REGRA);
 
+          Portaria portaria = new Portaria();
 
+          portaria.setId(Long.parseLong(dados[0]));
+          portaria.setAnoId(Integer.valueOf(dados[1]));
+          portaria.setSeqId(Integer.valueOf(dados[2]));
+          portaria.setStatus(PortariaStatus.valueOf(dados[3]));
+          portaria.setAssunto(dados[4]);
+          portaria.setDtExped(formato.parse(dados[5]));
+          portaria.setDtIniVig(formato.parse(dados[7]));
+          portaria.setDtFimVig(formato.parse(dados[8]));
+
+          portariaDao.salvar(portaria);
 
           break;
         case "undAdm":
@@ -92,10 +110,32 @@ public class ControladorEncPortTest {
           undAdm.setUltNumExped(Integer.valueOf(dados[7]));
           undAdm.setUltNumProp(Integer.valueOf(dados[8]));
 
+          undAdmDAO.salvar(undAdm);
+
           break;
         case "designado":
           extrator.setTexto(linha);
           dados = extrator.getResultado(REGRA);
+
+//          Portaria portariaSalva = portariaDao.buscar(Long.parseLong(dados[6]));
+//          Pessoa pessoaSalva = pessoaDAO.buscar(Long.parseLong(dados[7]));
+//
+//
+//
+//          Designado designado = new Designado();
+//
+//          designado.setDesignado(pessoaSalva);
+//
+//          portariaSalva.setDesignados(new ArrayList<Designado>());
+//
+//          portariaSalva.getDesignados().add(designado);
+//
+//
+//          portariaDao.salvar(portariaSalva);
+
+
+
+
           break;
       }
     }
