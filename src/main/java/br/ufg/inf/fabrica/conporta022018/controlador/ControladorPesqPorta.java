@@ -3,7 +3,6 @@
  * Fabrica de Software INF
  * Creative Commons Attribution 4.0 International License.
  */
-
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
 import br.ufg.inf.fabrica.conporta022018.dto.FiltroDTO;
@@ -12,21 +11,19 @@ import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDao;
 
 import java.util.List;
 
-
 public class ControladorPesqPorta {
 
-  private PortariaDao portariaDao;
+    private PortariaDao portariaDao;
 
-  /**
-   * Lista uma coleção de {@link Portaria} conforme o filtro informado
-   *
-   * @param filtro filtro de pesquisa
-   * @return coleção de {@link Portaria} caso sejam encontrados resultados para o filtro informado.
-   */
-  public List<Portaria> pesqPorta(FiltroDTO filtro) {
-    return portariaDao.pesquisarPortaria(filtro);
-  }
+    /**
+     * Lista uma coleção de {@link Portaria} conforme o filtro informado
+     *
+     * @param filtro filtro de pesquisa
+     * @return coleção de {@link Portaria} caso sejam encontrados resultados
+     * para o filtro informado.
+     */
+    public List<Portaria> pesqPorta(FiltroDTO filtro) {
+        return portariaDao.pesquisarPortaria(filtro);
+    }
 
 }
-
-

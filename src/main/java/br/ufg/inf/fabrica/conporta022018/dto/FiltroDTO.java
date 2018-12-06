@@ -1,8 +1,6 @@
-
 package br.ufg.inf.fabrica.conporta022018.dto;
 
 import java.util.Date;
-
 
 public class FiltroDTO {
 
