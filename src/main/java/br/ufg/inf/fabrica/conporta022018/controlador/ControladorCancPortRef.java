@@ -10,7 +10,6 @@ import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
 import br.ufg.inf.fabrica.conporta022018.modelo.Referencia;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
-import com.sun.xml.internal.bind.v2.TODO;
 
 import java.util.Iterator;
 import java.util.List;
