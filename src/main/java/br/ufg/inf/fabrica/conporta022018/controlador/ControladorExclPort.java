@@ -41,8 +41,8 @@ public class ControladorExclPort {
                 }
                 this.portaria.setReferencias(listaReferenciadas);
             }
-            
-            this.portariaDAO.salvar(this.portaria);
+           
+            this.portariaDAO.remover(this.portaria);
             portariaDAO.commitarTransacao();
         } catch (Exception e) {
             portariaDAO.rollBackTransacao();
