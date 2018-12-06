@@ -7,7 +7,6 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
-
 import java.util.List;
 import java.util.Properties;
 import javax.mail.Address;
@@ -17,8 +16,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import br.ufg.inf.fabrica.conporta022018.modelo.Mensagem;
 
 public class JavaMail {
+    Mensagem mensagem = new Mensagem();
     public void enviarEmail(final List<String> emailUsr,Portaria portaria) {
         new Thread(new Runnable() {
 
@@ -49,11 +50,10 @@ public class JavaMail {
                     Address[] toUser = (Address[]) emailUsr.toArray(); //Destinatário(s)
 
                     message.setRecipients(Message.RecipientType.TO, toUser);
-                    message.setSubject("Encaminhamento de ciência da portaria " +portaria.getSeqId() ); //Assunto
-                    message.setText("<!DOCTYPE html><html> Prezado (a), a portaria"  + portaria.getSeqId() +
-                            " stá aguardando sua ciência. Para realizar ciência desta portaria clicar no seguinte" +
-                            " link: https://conporta.com.br/ciencia/ "
-                            + portaria.getSeqId() +" </html>", "utf-8", "html");
+                    message.setSubject(mensagem.getTitulo());
+                    String url = "https://conporta.com.br/" + portaria.getSeqId();
+                    message.setText("<!DOCTYPE html><html>"  + mensagem.getDescricao() + url +
+                            " </html>", "utf-8", "html");
 
                     Transport.send(message);//Método para enviar a mensagem criada
 

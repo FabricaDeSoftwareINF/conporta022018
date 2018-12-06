@@ -11,9 +11,6 @@ import java.util.List;
 
 public class ControladorEncPort {
 
-    private Portaria portaria = new Portaria();
-    private Pessoa pessoa = new Pessoa();
-    private Designado designado = new Designado();
     private PessoaDAO pessoaDAO = new PessoaDAO();
 
     public boolean encPortariaCiencia(Portaria portaria){
@@ -22,7 +19,7 @@ public class ControladorEncPort {
             List<Designado> designados = portaria.getDesignados();
             JavaMail enviar = new JavaMail();
             enviar.enviarEmail(getEmailDesignados(designados), portaria);
-            enviar.enviarEmail(getEmailResponsavelUnidRec(portaria), portaria);
+            enviar.enviarEmail(getEmailResponsavelUndRec(portaria), portaria);
 
         }
 
@@ -43,22 +40,6 @@ public class ControladorEncPort {
                 (portaria.getStatus() == PortariaStatus.ATIVA ||
                         portaria.getStatus() == PortariaStatus.CANCELADA) ){
             return true;
-        }
-        return  false;
-    }
-
-    /**
-     * Esse método verifica se uma portaria tem designado, uma portoria pode
-     * não ter designado. Sendo assim, o objetivo desse método é otimizar
-     * ganho de performmace, ou seja, caso não tenha designado não será
-     * necessário executar o método responsável por pegar e-mail dos designados
-     * @param portaria, recebe uma portaria.
-     * @return true (verdadeiro) caso portaria tenha designado e false (falso)
-     * casco não tenha.
-     */
-    public boolean temDesignados(Portaria portaria){
-        if (portaria.getDesignados() != null){
-            return  true;
         }
         return  false;
     }
@@ -86,7 +67,7 @@ public class ControladorEncPort {
      * PortValid definida no documento ConPorta022018-DesigFun-EncPorta
      * @param portaria, recebe como parametro uma portaria válida.
      */
-    public List<String>  getEmailResponsavelUnidRec(Portaria portaria){
+    public List<String>  getEmailResponsavelUndRec(Portaria portaria){
         List<Recebedora> undRecebedora = portaria.getUndRecebedora();
         List<String> emailRespUndRec = null;
 
