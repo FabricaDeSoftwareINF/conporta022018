@@ -9,17 +9,9 @@ import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
-import com.sun.jndi.cosnaming.IiopUrl;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-import org.h2.engine.Session;
-import sun.plugin2.message.Message;
-import sun.plugin2.message.transport.Transport;
-
-import java.net.PasswordAuthentication;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
 
 public class ControladorEncPort {
 
@@ -31,8 +23,11 @@ public class ControladorEncPort {
 
         if(portariaIsValida(portaria) == true){
             List<Designado> designados = portaria.getDesignados();
-            getEmailDesignados(designados);
-            getEmailResponsavelUnidRec(portaria);
+            JavaMail enviar = new JavaMail();
+            enviar.enviarEmail(getEmailDesignados(designados), portaria);
+            enviar.enviarEmail(getEmailResponsavelUnidRec(portaria), portaria);
+
+
         }
 
         return true;
@@ -103,9 +98,10 @@ public class ControladorEncPort {
      * PortValid definida no documento ConPorta022018-DesigFun-EncPorta
      * @param portaria, recebe como parametro uma portaria válida.
      */
-    public void getEmailResponsavelUnidRec(Portaria portaria){
+    public List <String>  getEmailResponsavelUnidRec(Portaria portaria){
         List undRecebedora = portaria.getUndRecebedora();
 
+        return  undRecebedora;
     }
 
 }
