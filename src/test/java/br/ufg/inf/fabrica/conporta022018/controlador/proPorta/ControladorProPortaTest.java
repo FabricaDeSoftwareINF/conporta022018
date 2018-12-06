@@ -15,9 +15,7 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class ControladorProPortaTest{
     private static ControladorProPorta controladorProPorta;
@@ -87,24 +85,107 @@ public class ControladorProPortaTest{
     public void casoTestBuscarPessoas()throws ParseException {
         List<Pessoa> lista = controladorProPorta.buscarPessoas();
         Assert.assertEquals(7, lista.size());
+        Assert.assertEquals("José Carlos Santos", lista.get(0).getNomePes());
+        Assert.assertEquals("Maria José", lista.get(1).getNomePes());
+        Assert.assertEquals("João Tavares", lista.get(2).getNomePes());
+        Assert.assertEquals("Matheus Costa", lista.get(3).getNomePes());
+        Assert.assertEquals("Beatriz Silva", lista.get(4).getNomePes());
+        Assert.assertEquals("Lucas Teixeira", lista.get(5).getNomePes());
+        Assert.assertEquals("Vitor Almeida", lista.get(6).getNomePes());
     }
 
     @Test
     public void casoTestBuscarUndAdm()throws ParseException {
         List<UndAdm> lista = controladorProPorta.buscarUndAdm();
         Assert.assertEquals(3, lista.size());
+        Assert.assertEquals("Instituto de Informática", lista.get(0).getNomeUnd());
+        Assert.assertEquals("Instituto de Matemática", lista.get(1).getNomeUnd());
+        Assert.assertEquals("Faculdade de Educação Física", lista.get(2).getNomeUnd());
     }
 
     @Test
     public void casoTestBuscarPortarias()throws ParseException {
         List<Portaria> lista = controladorProPorta.buscarPortarias();
         Assert.assertEquals(3, lista.size());
+        Assert.assertEquals("Novo coordenador e vice-coordenador de curso", lista.get(0).getAssunto());
+        Assert.assertEquals("Novo presidente do NDE", lista.get(1).getAssunto());
+        Assert.assertEquals("Criação da Liga INF, IME e FEF", lista.get(2).getAssunto());
     }
 
     @Test
-    public void proPortaComDesignacaoComReferencia() {
+    public void proPortaComDesignacaoComReferencia() throws IOException {
         // Testa o cenário típico
         // Criação de portaria proposta com designação e referência com cancelamento de portaria
+
+        // Cria as variáveis necessárias
+        String assunto = "Portaria Com Designacao e Com referência";
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        Date dtFimVig = new Date();
+        Date dPublicDou = new Date();
+        int horasDesig = 220;
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        File arqPdf = new File("");
+
+        // Cria a lista vazia de designados
+        List<Designado> designados = new ArrayList<>();
+        // Busca as pessoas no banco
+        List<Pessoa> listaPessoas = controladorProPorta.buscarPessoas();
+        // Seleciona a primeira e a segunda (O usuário iria escolher) já criando o objeto designado
+        Designado designado = new Designado();
+        designado.setPessoa(listaPessoas.get(0));
+        designado.setFuncaoDesig(FuncaoDesig.MEMBRO);
+        designado.setDescrFuncDesig("Descrição teste 1");
+        designados.add(designado);
+
+        Designado designado2 = new Designado();
+
+        designado2.setPessoa(listaPessoas.get(1));
+        designado2.setFuncaoDesig(FuncaoDesig.COORDENADOR);
+        designado2.setDescrFuncDesig("Descrição do Coordenador Teste");
+        designado2.setHorasDefFuncDesig(200);
+        designados.add(designado2);
+
+        // Cria a lista vazia de Referências
+        List<Referencia> referencias = new ArrayList<>();
+        // Busca as portarias cadastradas no banco
+        List<Portaria> listaPortarias = controladorProPorta.buscarPortarias();
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto referencia
+        Referencia referencia = new Referencia();
+        referencia.setEhCancelamento(true);
+        referencia.setReferencia(listaPortarias.get(0));
+        referencias.add(referencia);
+
+        List<Recebedora> recebedoras = new ArrayList<>();
+        // Busca as unidades administrativas
+        List<UndAdm> listaUndAdm = controladorProPorta.buscarUndAdm();
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto recebedora
+        Recebedora recebedora = new Recebedora();
+        recebedora.setUnidadeRecebedora(listaUndAdm.get(0));
+        recebedoras.add(recebedora);
+
+        // Busca o expeditor (Usa também o primeiro da lista de unidades administrativas)
+        UndAdm undAdmExpedidora = listaUndAdm.get(0);
+
+        boolean salvar = controladorProPorta.salvar(assunto, dtIniVig, dtFimVig, dPublicDou, horasDesig, resumo, arqPdf, designados, referencias, recebedoras, undAdmExpedidora);
+
+        Assert.assertTrue(salvar);
+
+        // Busca os dados pra ver se a portaria foi salva corretamente
+        PortariaDAO portariaDAO = new PortariaDAO();
+        String query = "SELECT p FROM Portaria p WHERE p.assunto = :assunto";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("assunto", assunto);
+        Portaria portaria = portariaDAO.pesquisarUmJPQLCustomizada(query, params);
+
+        Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
+        Assert.assertEquals(dtFimVig, portaria.getDtFimVig());
+        Assert.assertEquals(dPublicDou, portaria.getDtPublicDou());
+        Assert.assertEquals(horasDesig, portaria.getHorasDesig());
+        Assert.assertEquals(resumo, portaria.getResumo());
+        Assert.assertEquals(designados, portaria.getDesignados());
+        Assert.assertEquals(referencias, portaria.getReferencias());
+        Assert.assertEquals(recebedoras, portaria.getUndRecebedora());
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
     }
 
     @Test
