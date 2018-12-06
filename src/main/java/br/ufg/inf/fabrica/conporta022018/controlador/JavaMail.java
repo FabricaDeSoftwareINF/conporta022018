@@ -7,7 +7,6 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 
 import java.util.List;
 import java.util.Properties;

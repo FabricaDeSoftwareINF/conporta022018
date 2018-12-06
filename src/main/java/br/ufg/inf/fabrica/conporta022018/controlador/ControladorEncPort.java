@@ -7,9 +7,6 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 import br.ufg.inf.fabrica.conporta022018.modelo.*;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
-
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public class ControladorEncPort {
@@ -26,7 +23,6 @@ public class ControladorEncPort {
             JavaMail enviar = new JavaMail();
             enviar.enviarEmail(getEmailDesignados(designados), portaria);
             enviar.enviarEmail(getEmailResponsavelUnidRec(portaria), portaria);
-
 
         }
 
@@ -74,11 +70,14 @@ public class ControladorEncPort {
      * @return
      */
      public List <String> getEmailDesignados ( List <Designado> designados){
-         List <String> email = null;
+         List <String> listaEmail = null;
          for (Designado designado: designados) {
-             
+             String email = designado.getDesignado().getEmailPes();
+             if (email != null) {
+                 listaEmail.add(email);
+             }
          }
-         return  email;
+         return  listaEmail;
     }
 
     /**
