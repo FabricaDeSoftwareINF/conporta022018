@@ -7,10 +7,8 @@
 package br.ufg.inf.fabrica.conporta022018.controlador.exclPorta;
 
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorExclPort;
-import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
-import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
-import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
-import br.ufg.inf.fabrica.conporta022018.modelo.Referencia;
+import br.ufg.inf.fabrica.conporta022018.modelo.*;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaReferenciadaDAO;
@@ -29,6 +27,8 @@ public class ControladorExclPortTest {
     private static ControladorExclPort controladorExclPort;
     private static PortariaDAO portariaDAO = new PortariaDAO();
     private static Portaria portaria = new Portaria();
+    private static Pessoa pessoa = new Pessoa();
+    private static PessoaDAO pessoaDAO = new PessoaDAO();
     private static DesignadoDAO designadoDAO = new DesignadoDAO();
     private static Designado designado = new Designado();
     private static Referencia portariaReferenciada = new Referencia();
@@ -69,7 +69,8 @@ public class ControladorExclPortTest {
                 case "pessoa" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela pessoa no Banco de Dados.
+                    pessoa = trataDadosDePessoaParaPersistencia(dados);
+                    pessoaDAO.salvar(pessoa);
                     break;
                 case "portaria" :
                     extrator.setTexto(linha);
@@ -182,22 +183,34 @@ public class ControladorExclPortTest {
             System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
         }
     }
+//
+//    @AfterClass
+//    public static void casoTestResultados() throws IOException {
+//
+//        //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
+//        // irá fica as suas pós-condições.
+//
+//        //resultados devem ser nulos visto que nestes casos as portarias devem ter sido excluídas
+//        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201813")));
+//        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201800")));
+//        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201803")));
+//
+//         //resultados devem retornar um objeto visto que nestes casos as portarias não devem ter sido excluídas
+//        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201810")));
+//        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201810")));
+//        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201815")));
+//    }
 
-    @AfterClass
-    public static void casoTestResultados() throws IOException {
+    public static Pessoa trataDadosDePessoaParaPersistencia(String dados[]){
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(Long.parseLong(dados[0]));
+        pessoa.setNomePes(dados[1]);
+        pessoa.setCpfPes(dados[2]);
+        pessoa.setEmailPes(dados[3]);
+        pessoa.setSenhaUsu(dados[4]);
+        pessoa.setEhUsuAtivo(Boolean.parseBoolean(dados[5]));
 
-        //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
-        // irá fica as suas pós-condições.
-        
-        //resultados devem ser nulos visto que nestes casos as portarias devem ter sido excluídas
-        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201813")));
-        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201800")));
-        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201803")));
-        
-         //resultados devem retornar um objeto visto que nestes casos as portarias não devem ter sido excluídas
-        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201810")));
-        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201810")));
-        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201815")));
+        return pessoa;
     }
 
     public static Portaria trataDadosDaPortariaParaPersistencia(String dados[]){
@@ -220,10 +233,16 @@ public class ControladorExclPortTest {
 
     public static Designado trataDadosDoDesignadoParaPersistencia(String dados[]){
         Designado designado = new Designado();
+        Pessoa pessoa = new Pessoa();
+        pessoa = pessoaDAO.buscar(Long.parseLong(dados[6]));
+
         designado.setId(Long.parseLong(dados[0]));
         designado.setDtCienciaDesig(new Date(dados[1]));
+        designado.setDescrFuncDesig(dados[2]);
         designado.setDescrFuncDesig(dados[3]);
         designado.setHorasDefFuncDesig(Integer.parseInt(dados[4]));
+        designado.setHorasExecFuncDesig(Integer.parseInt(dados[5]));
+        designado.setDesignado(pessoa);
 
         return designado;
     }
