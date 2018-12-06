@@ -43,10 +43,12 @@ public class ControladorManterUndAdm {
                 } catch (Exception exc) {
                     dao.rollBackTransacao();
                 }
-            } else {
+            }else {
                 throw new Exception("Tempo Inválido! Por favor, Digite um Tempo para inatividade entre 15 e 60 " +
                         "segundos, inclusive-os.");
             }
+        } else {
+            throw new Exception("A Unidade informada não foi localizada.");
         }
     }
 }
