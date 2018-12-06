@@ -1,5 +1,7 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;

@@ -13,14 +13,11 @@ import javax.persistence.Table;
 @Table
 public class UndAdm extends ModeloAbstrato {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     private String siglaUnAdm;
     private Integer minInat;
     private String nomeUnd;
-    private Integer tipoUnd;
+    private TipoUnd tipoUnd;
     private String ultPort;
     private Integer anoPort;
     private Integer ultNumExped;
@@ -74,14 +71,14 @@ public class UndAdm extends ModeloAbstrato {
     /**
      * @return Integer return the tipoUnd
      */
-    public Integer getTipoUnd() {
+    public TipoUnd getTipoUnd() {
         return tipoUnd;
     }
 
     /**
      * @param tipoUnd the tipoUnd to set
      */
-    public void setTipoUnd(Integer tipoUnd) {
+    public void setTipoUnd(TipoUnd tipoUnd) {
         this.tipoUnd = tipoUnd;
     }
 
