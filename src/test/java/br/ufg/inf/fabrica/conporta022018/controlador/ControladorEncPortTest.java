@@ -1,5 +1,6 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
+import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
@@ -60,79 +61,27 @@ public class ControladorEncPortTest {
       switch (tabelaAtual) {
         case "pessoa":
 
-          extrator.setTexto(linha);
-          dados = extrator.getResultado(REGRA);
-
-          Pessoa pessoa = new Pessoa();
-
-          pessoa.setId(Long.parseLong(dados[0]));
-          pessoa.setNomePes(dados[1]);
-          pessoa.setCpfPes(dados[2]);
-          pessoa.setEmailPes(dados[3]);
-          pessoa.setSenhaUsu(dados[4]);
-          pessoa.setEhUsuAtivo(Boolean.getBoolean(dados[5]));
-
-          pessoaDAO.salvar(pessoa);
 
           break;
         case "portaria":
           extrator.setTexto(linha);
           dados = extrator.getResultado(REGRA);
 
-          Portaria portaria = new Portaria();
 
-          portaria.setId(Long.parseLong(dados[0]));
-          portaria.setAnoId(Integer.valueOf(dados[1]));
-          portaria.setSeqId(Integer.valueOf(dados[2]));
-          portaria.setStatus(PortariaStatus.valueOf(dados[3]));
-          portaria.setAssunto(dados[4]);
-          portaria.setDtExped(formato.parse(dados[5]));
-          portaria.setDtIniVig(formato.parse(dados[7]));
-          portaria.setDtFimVig(formato.parse(dados[8]));
 
-          portariaDao.salvar(portaria);
 
           break;
         case "undAdm":
           extrator.setTexto(linha);
           dados = extrator.getResultado(REGRA);
 
-          UndAdm undAdm = new UndAdm();
 
-          undAdm.setId(Long.parseLong(dados[0]));
-          undAdm.setNomeUnd(dados[1]);
-          undAdm.setSiglaUnAdm(dados[2]);
-          undAdm.setTipoUnd(Integer.valueOf(dados[3]));
-          undAdm.setMinInat(Integer.valueOf(dados[4]));
-          undAdm.setUltPort(dados[5]);
-          undAdm.setAnoPort(Integer.valueOf(dados[6]));
-          undAdm.setUltNumExped(Integer.valueOf(dados[7]));
-          undAdm.setUltNumProp(Integer.valueOf(dados[8]));
-
-          undAdmDAO.salvar(undAdm);
 
           break;
         case "designado":
+
           extrator.setTexto(linha);
           dados = extrator.getResultado(REGRA);
-
-//          Portaria portariaSalva = portariaDao.buscar(Long.parseLong(dados[6]));
-//          Pessoa pessoaSalva = pessoaDAO.buscar(Long.parseLong(dados[7]));
-//
-//
-//
-//          Designado designado = new Designado();
-//
-//          designado.setDesignado(pessoaSalva);
-//
-//          portariaSalva.setDesignados(new ArrayList<Designado>());
-//
-//          portariaSalva.getDesignados().add(designado);
-//
-//
-//          portariaDao.salvar(portariaSalva);
-
-
 
 
           break;
