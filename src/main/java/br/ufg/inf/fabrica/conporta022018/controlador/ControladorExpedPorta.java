@@ -46,8 +46,8 @@ public class ControladorExpedPorta {
         PessoaDAO pessoaDAO = new PessoaDAO();
         UndAdm undAdm = new UndAdm();
         UndAdmDAO undAdmDAO = new UndAdmDAO();
-        ControladorCancPortRef controladorCancPortRef = new ControladorCancPortRef();
-        ControladorEncPortaria controladorEncPortaria = new ControladorEncPortaria();
+//        ControladorCancPortRef controladorCancPortRef = new ControladorCancPortRef();
+//        ControladorEncPortaria controladorEncPortaria = new ControladorEncPortaria();
         boolean designadosExistem = true;
 
         pessoa = pessoaDAO.buscar(idUsuario);
@@ -94,8 +94,8 @@ public class ControladorExpedPorta {
 
             // Assinatura da expedição, persistência da portaria, encaminhamento para ciência e cancelamento de referenciadas
             portaria.setAssinatura(assinar(new Long[]{pessoa.getServidor().getId(), portaria.getId()}));
-            controladorEncPortaria.encPortariaCiencia(idPorta);
-            controladorCancPortRef.cancelarPortarias(idPorta);
+//            controladorEncPortaria.encPortariaCiencia(idPorta);
+//            controladorCancPortRef.cancelarPortarias(idPorta);
             portaDAO.salvar(portaria);
             // Persistência da unidade expedidora para
             undAdmDAO.salvar(portaria.getUnidadeExpedidora());

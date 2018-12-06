@@ -7,13 +7,12 @@ package br.ufg.inf.fabrica.conporta022018.controlador;
 
 import br.ufg.inf.fabrica.conporta022018.dto.FiltroDTO;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
-import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDao;
-
+import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import java.util.List;
 
 public class ControladorPesqPorta {
 
-    private PortariaDao portariaDao;
+    private PortariaDAO portariaDao;
 
     /**
      * Lista uma coleção de {@link Portaria} conforme o filtro informado

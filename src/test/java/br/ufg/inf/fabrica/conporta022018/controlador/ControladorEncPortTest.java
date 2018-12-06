@@ -1,26 +1,25 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
-import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
 import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
 import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
-import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDao;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import org.junit.*;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ControladorEncPortTest {
 
@@ -42,7 +41,7 @@ public class ControladorEncPortTest {
     dadosSoftware = lerArquivo.lerArquivo(CAMINHO_CSV);
 
     PessoaDAO pessoaDAO = new PessoaDAO();
-    PortariaDao portariaDao = new PortariaDao();
+    PortariaDAO portariaDao = new PortariaDAO();
     DesignadoDAO designadoDAO = new DesignadoDAO();
     UndAdmDAO undAdmDAO = new UndAdmDAO();
 
