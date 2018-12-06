@@ -1,9 +1,6 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-<<<<<<< HEAD
-public class Designado {
-    
-=======
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -100,5 +97,4 @@ public class Designado extends ModeloAbstrato {
     public void setTipFuncDesig(FuncaoDesig tipFuncDesig) {
         this.tipFuncDesig = tipFuncDesig;
     }
->>>>>>> dev
 }
