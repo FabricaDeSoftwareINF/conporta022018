@@ -29,13 +29,7 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
     EntityManager entityManager = ConnectionFactory.obterManager();
 
     try {
-      this.abrirTransacao();
-
-      T retorno = entityManager.merge(modelo);
-
-      this.commitarTransacao();
-
-      return retorno;
+      return entityManager.merge(modelo);
     } catch (Exception e) {
       e.printStackTrace();
       return null;

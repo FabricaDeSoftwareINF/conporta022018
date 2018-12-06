@@ -117,28 +117,31 @@ public class ControladorProPortaTest{
         // Testa o cenário típico
         // Criação de portaria proposta com designação e referência com cancelamento de portaria
 
-        // Cria as variáveis necessárias
+        // Cria as variáveis necessárias para rodar o método salvar
         String assunto = "Portaria Com Designacao e Com referência";
         Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
         Date dtFimVig = new Date();
         Date dPublicDou = new Date();
         int horasDesig = 220;
         String resumo = "Um resumo da portaria criada com designação e com referência";
+
+        // Define um arquivo vazio
         File arqPdf = new File("");
 
         // Cria a lista vazia de designados
+
         List<Designado> designados = new ArrayList<>();
-        // Busca as pessoas no banco
+
+        // Busca as pessoas no banco (Simula o que o front ia fazer)
         List<Pessoa> listaPessoas = controladorProPorta.buscarPessoas();
+
         // Seleciona a primeira e a segunda (O usuário iria escolher) já criando o objeto designado
         Designado designado = new Designado();
         designado.setPessoa(listaPessoas.get(0));
         designado.setFuncaoDesig(FuncaoDesig.MEMBRO);
         designado.setDescrFuncDesig("Descrição teste 1");
         designados.add(designado);
-
         Designado designado2 = new Designado();
-
         designado2.setPessoa(listaPessoas.get(1));
         designado2.setFuncaoDesig(FuncaoDesig.COORDENADOR);
         designado2.setDescrFuncDesig("Descrição do Coordenador Teste");
@@ -147,17 +150,22 @@ public class ControladorProPortaTest{
 
         // Cria a lista vazia de Referências
         List<Referencia> referencias = new ArrayList<>();
+
         // Busca as portarias cadastradas no banco
         List<Portaria> listaPortarias = controladorProPorta.buscarPortarias();
+
         // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto referencia
         Referencia referencia = new Referencia();
         referencia.setEhCancelamento(true);
         referencia.setReferencia(listaPortarias.get(0));
         referencias.add(referencia);
 
+        // Cria a lista vazia de recebedoras
         List<Recebedora> recebedoras = new ArrayList<>();
+
         // Busca as unidades administrativas
         List<UndAdm> listaUndAdm = controladorProPorta.buscarUndAdm();
+
         // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto recebedora
         Recebedora recebedora = new Recebedora();
         recebedora.setUnidadeRecebedora(listaUndAdm.get(0));
@@ -166,17 +174,14 @@ public class ControladorProPortaTest{
         // Busca o expeditor (Usa também o primeiro da lista de unidades administrativas)
         UndAdm undAdmExpedidora = listaUndAdm.get(0);
 
-        boolean salvar = controladorProPorta.salvar(assunto, dtIniVig, dtFimVig, dPublicDou, horasDesig, resumo, arqPdf, designados, referencias, recebedoras, undAdmExpedidora);
-
-        Assert.assertTrue(salvar);
+        // Tenta salvar
+        Portaria portaria = controladorProPorta.salvar(assunto, dtIniVig, dtFimVig, dPublicDou, horasDesig, resumo, arqPdf, designados, referencias, recebedoras, undAdmExpedidora);
 
         // Busca os dados pra ver se a portaria foi salva corretamente
         PortariaDAO portariaDAO = new PortariaDAO();
-        String query = "SELECT p FROM Portaria p WHERE p.assunto = :assunto";
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("assunto", assunto);
-        Portaria portaria = portariaDAO.pesquisarUmJPQLCustomizada(query, params);
+        portaria = portariaDAO.buscar(portaria.getId());
 
+        Assert.assertEquals(assunto, portaria.getAssunto());
         Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
         Assert.assertEquals(dtFimVig, portaria.getDtFimVig());
         Assert.assertEquals(dPublicDou, portaria.getDtPublicDou());
@@ -242,7 +247,9 @@ public class ControladorProPortaTest{
         }
 
         // Salva o objeto no banco
+        pessoaDAO.abrirTransacao();
         pessoaDAO.salvar(pessoa);
+        pessoaDAO.commitarTransacao();
     }
 
     private static void trataDadosUndAdm(String dados[]){
@@ -262,7 +269,9 @@ public class ControladorProPortaTest{
         undAdm.setUltNumProp( Integer.parseInt(dados[8]) );
 
         // Salva o objeto no banco
+        undAdmDAO.abrirTransacao();
         undAdmDAO.salvar(undAdm);
+        undAdmDAO.commitarTransacao();
     }
 
     private static void trataDadosRecebedora(String dados[]) throws ParseException {
@@ -283,7 +292,9 @@ public class ControladorProPortaTest{
         recebedora.setUnidadeRecebedora(undRecebedora);
 
         // Salva o objeto no banco
+        recebedoraDAO.abrirTransacao();
         recebedoraDAO.salvar(recebedora);
+        recebedoraDAO.commitarTransacao();
     }
 
     private static void trataDadosDesignado(String dados[]) throws ParseException{
@@ -316,7 +327,9 @@ public class ControladorProPortaTest{
         designado.setFuncaoDesig(FuncaoDesig.valueOf(dados[6]));
 
         // Salva o objeto no banco
+        designadoDAO.abrirTransacao();
         designadoDAO.salvar(designado);
+        designadoDAO.commitarTransacao();
     }
 
     private static void trataDadosPortaria(String dados[]) throws ParseException {
@@ -419,7 +432,9 @@ public class ControladorProPortaTest{
         }
 
         // Salva o objeto no banco
+        portariaDAO.abrirTransacao();
         portariaDAO.salvar(portaria);
+        portariaDAO.commitarTransacao();
     }
 
 }

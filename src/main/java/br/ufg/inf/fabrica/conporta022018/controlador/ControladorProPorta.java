@@ -60,9 +60,9 @@ public class ControladorProPorta{
         }
     }
 
-    public boolean salvar(String assunto, Date dtIniVig, Date dtFimVig, Date dPublicDou, int horasDesig, String resumo, File arqPdf, List<Designado> designados, List<Referencia> referencias, List<Recebedora> recebedoras, UndAdm expedidora) throws IOException {
+    public Portaria salvar(String assunto, Date dtIniVig, Date dtFimVig, Date dPublicDou, int horasDesig, String resumo, File arqPdf, List<Designado> designados, List<Referencia> referencias, List<Recebedora> recebedoras, UndAdm expedidora) throws IOException {
         if(!this.validarCampos(assunto, dtIniVig, resumo)){
-            return false;
+            throw new IllegalArgumentException();
         }
 
         Portaria portaria = new Portaria();
@@ -75,7 +75,10 @@ public class ControladorProPorta{
 
         portaria.setUnidadeExpedidora(expedidora);
 
-        // Define o seqId
+        // Abre a transação
+        this.portariaDAO.abrirTransacao();
+
+        // Define o seqId com base na UndAdm expedidora
         int seqId = expedidora.getUltNumProp() + 1;
         portaria.setSeqId(seqId);
 
@@ -83,21 +86,18 @@ public class ControladorProPorta{
             // Salva os designados
             designados.set(i, this.designadoDAO.salvar(designados.get(i)));
         }
-
         portaria.setDesignados(designados);
 
         for(int i = 0; i < referencias.size(); i++){
             // Salva as referências
             referencias.set(i, this.portariaReferenciadaDAO.salvar(referencias.get(i)));
         }
-
         portaria.setReferencias(referencias);
 
         for(int i = 0; i < recebedoras.size(); i++){
             // Salva as recebedoras
             recebedoras.set(i, this.recebedoraDAO.salvar(recebedoras.get(i)));
         }
-
         portaria.setUndRecebedora(recebedoras);
 
         // Define o status de Proposta
@@ -108,12 +108,19 @@ public class ControladorProPorta{
             portaria.setArqPdf(fileContent);
         }
 
-        portariaDAO.salvar(portaria);
+        portaria = this.portariaDAO.salvar(portaria);
 
         // Altera o ultNumProp da UndAdm
         expedidora.setUltNumProp(seqId);
         this.undAdmDAO.salvar(expedidora);
 
-        return true;
+        // Comitta
+        try{
+            this.portariaDAO.commitarTransacao();
+            return portaria;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
