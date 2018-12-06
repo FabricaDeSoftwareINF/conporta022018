@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ControladorPesqPorta {
 
-    private PortariaDAO portariaDao;
+    private PortariaDAO portariaDao = new PortariaDAO();
 
     /**
      * Lista uma coleção de {@link Portaria} conforme o filtro informado

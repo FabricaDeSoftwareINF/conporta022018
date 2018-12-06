@@ -141,23 +141,23 @@ public class ControladorPesqPortaTest {
           extrator.setTexto(linha);
           dados = extrator.getResultado(REGRA);
 
-          List<Portaria> portarias = portariaDao.buscarTodos();
-
-          Portaria portariaSalva = portariaDao.buscar(Long.parseLong(dados[6]));
-          Pessoa pessoaSalva = pessoaDAO.buscar(Long.parseLong(dados[7]));
-
-          Designado designado = new Designado();
-
-          designado.setDesignado(pessoaSalva);
-
-          portariaSalva.setDesignados(new ArrayList<Designado>());
-
-          portariaSalva.getDesignados().add(designado);
-
-
-          portariaDao.abrirTransacao();
-          portariaDao.salvar(portariaSalva);
-          portariaDao.commitarTransacao();
+//          List<Portaria> portarias = portariaDao.buscarTodos();
+//
+//          Portaria portariaSalva = portariaDao.buscar(Long.parseLong(dados[6]));
+//          Pessoa pessoaSalva = pessoaDAO.buscar(Long.parseLong(dados[7]));
+//
+//          Designado designado = new Designado();
+//
+//          designado.setDesignado(pessoaSalva);
+//
+//          portariaSalva.setDesignados(new ArrayList<Designado>());
+//
+//          portariaSalva.getDesignados().add(designado);
+//
+//
+//          portariaDao.abrirTransacao();
+//          portariaDao.salvar(portariaSalva);
+//          portariaDao.commitarTransacao();
 
 
 

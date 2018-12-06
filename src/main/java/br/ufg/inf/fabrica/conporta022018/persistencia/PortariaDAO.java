@@ -24,7 +24,12 @@ public class PortariaDAO extends GenericoDAO<Portaria> {
       StringBuilder jpql = new StringBuilder();
       Map<String, Object> parametros = new HashMap<String, Object>();
 
-      jpql.append(" select p from Portaria p inner join p.designados d where 1 = 1 ");
+      if (filtroDto.getCpfPes() != null) {
+        jpql.append(" select p from Portaria p inner join p.designados d where 1 = 1 ");
+      } else{
+        jpql.append(" select p from Portaria p where 1 = 1 ");
+      }
+
 
       setParametroAnoPortaria(filtroDto.getAnoPortaria(), jpql, parametros);
       setParametroCodigoDesignado(filtroDto.getCpfPes(), jpql, parametros);
