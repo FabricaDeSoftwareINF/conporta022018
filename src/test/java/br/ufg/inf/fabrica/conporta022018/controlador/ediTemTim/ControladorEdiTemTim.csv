@@ -1,4 +1,6 @@
 undAdm,,,,,,,,
 PKundAdm,nomeUnd, siglaUnd, tipoUnd, minInat, ultPort, anoPort, ultNumExped, ultNumProp
-1,Instituto de Informática, INF, Unidade Acadêmica,15,2018001,2018,1,-1
-2,Instituto de Matemática,IME, Unidade Acadêmica,15,2018002,2018,1,-1
+1,Instituto de Informï¿½tica, INF, Unidade Acadï¿½mica,15,2018001,2018,1,-1
+2,Instituto de Matemï¿½tica,IME, Unidade Acadï¿½mica,15,2018002,2018,1,-1
+3,Faculdade de Ã¡rtes visuais,FAV, Unidade Acadï¿½mica,30,2018003,2018,1,-1
+4,Instituto de quÃ­mica,IQ, Unidade Acadï¿½mica,40,2018004,2018,1,-1
