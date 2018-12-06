@@ -309,10 +309,13 @@ public class ControladorCancPortRefTest {
         // Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
         // irá fica as suas pós-condições.
         
-        // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos. 
+        // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos,
+        // onde a portaria referenciada teve o status alterado para cancelada.
         Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(portariasReferenciadas.get(0).getId()).getStatus());
         
-        // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos. 
+        // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos,
+        // onde a primeira portaria referenciada teve o status alterado para cancelada e
+        // a segunda, que não contia indicativo de cancelamento, permanece com o status inalterado.
         Assert.assertEquals(PortariaStatus.ATIVA, portariaDAO.buscar(portariasReferenciadas.get(3).getId()));
         Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(portariasReferenciadas.get(4).getId()).getStatus());
 
