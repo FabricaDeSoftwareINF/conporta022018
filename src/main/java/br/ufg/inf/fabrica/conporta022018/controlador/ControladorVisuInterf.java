@@ -1,24 +1,28 @@
-
-
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
+
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorVisuInterf {
     
-    List<String> URLsPermitidas = Permissoes.getURLs();
-    Gson gson = new Gson();
-    String URLsPermitidasJson = gson.toJson(URLsPermitidas);
-    
-    System.out.println(URLsPermitidasJson); //trocar por return. 
-
-//    ISso vai me ajudar ao fazer os testes;
-//    Type type = new TypeToken<List<String>>() {}.getType();
-//    List<String> youtube_List = gson.fromJson(youtubeListStr, type);
-//    for(String url : youtube_List){
-//        System.out.println(url);
-//    }
+    public static void main(String[] args) {
+        
     }
     
+    public static String visuInterf() {
+        
+        
+        
+        Gson gson = new Gson();
+        String permissoesJson = gson.toJson(buscarPermissao(usuario));
+        return permissoesJson;
+
+}
+
     
 }
