@@ -1,5 +1,6 @@
-package br.ufg.inf.fabrica.conporta022018.controlador;
+package br.ufg.inf.fabrica.conporta022018.controlador.EncPort;
 
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorEncPort;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
