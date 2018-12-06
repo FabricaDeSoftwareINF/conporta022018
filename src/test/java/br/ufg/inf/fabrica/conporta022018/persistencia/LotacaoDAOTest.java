@@ -3,7 +3,6 @@ package br.ufg.inf.fabrica.conporta022018.persistencia;
 import br.ufg.inf.fabrica.conporta022018.modelo.Lotacao;
 import org.junit.*;
 import java.util.Date;
-import org.junit.jupiter.api.Test;
 
 /**
  * Classe de teste do {@link LotacaoDAO}
