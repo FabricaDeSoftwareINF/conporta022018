@@ -59,7 +59,7 @@ public class ControladorExclPortTest {
             linha = dadosSoftware.get(index);
 
             //Definir as tabelas que serão populadas no Banco de Dados.
-            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("undAdm") || linha.equals("designado")|| linha.equals("portariaReferenciada")) {
+            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("undAdm") || linha.equals("designado")|| linha.equals("referencia")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
@@ -128,8 +128,8 @@ public class ControladorExclPortTest {
         Portaria portaria = new Portaria();
         //o parâmetro de excluirPortaria será uma instância de Portaria e não uma string.
         try{
-            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados:
-            portaria = portariaDAO.buscar(Long.parseLong("INF201813"));
+            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados (INF201813):
+            portaria = portariaDAO.buscar((long) 13);
             controladorExclPort.excluirPortaria(portaria);
 
         }catch(Exception ex){
@@ -137,8 +137,8 @@ public class ControladorExclPortTest {
         }
 
         try{
-            // Portaria sem data final de vigência, proposta, com portarias referenciadas e sem designados:
-            portaria = portariaDAO.buscar(Long.parseLong("INF201800"));
+            // Portaria sem data final de vigência, proposta, com portarias referenciadas e sem designados (INF201800):
+            portaria = portariaDAO.buscar((long) 1);
             controladorExclPort.excluirPortaria(portaria);
 
         }catch(Exception ex){
@@ -146,8 +146,8 @@ public class ControladorExclPortTest {
         }
 
         try{
-            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados:
-            portaria = portariaDAO.buscar(Long.parseLong("INF201803"));
+            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados (INF201803):
+            portaria = portariaDAO.buscar((long) 4);
             controladorExclPort.excluirPortaria(portaria);
         }catch(Exception ex){
             System.out.println("Erro ao excluir portaria proposta com designados");
@@ -158,16 +158,16 @@ public class ControladorExclPortTest {
     public void casoTestDadosExcecoes() throws IOException {
 
         try{
-            // Tentativa de exclusão de portaria ativa
-            portaria = portariaDAO.buscar(Long.parseLong("INF201810"));
+            // Tentativa de exclusão de portaria ativa(INF201810)
+            portaria = portariaDAO.buscar((long) 11);
             controladorExclPort.excluirPortaria(portaria);
         }catch(Exception ex){
             System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
         }
 
         try{
-            // Tentativa de exclusão de portaria cancelada
-            portaria = portariaDAO.buscar(Long.parseLong("INF201810"));
+            // Tentativa de exclusão de portaria cancelada (INF201814)
+            portaria = portariaDAO.buscar((long)14);
             controladorExclPort.excluirPortaria(portaria);
             // Tentativa de exclusão de portaria ativa
             controladorExclPort.excluirPortaria(portaria);
@@ -176,30 +176,30 @@ public class ControladorExclPortTest {
         }
 
         try{
-            // Tentativa de exclusão de portaria expirada
-            portaria = portariaDAO.buscar(Long.parseLong("INF201815"));
+            // Tentativa de exclusão de portaria expirada (INF201815)
+            portaria = portariaDAO.buscar((long)15);
             controladorExclPort.excluirPortaria(portaria);
         }catch(Exception ex){
             System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
         }
     }
-//
-//    @AfterClass
-//    public static void casoTestResultados() throws IOException {
-//
-//        //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
-//        // irá fica as suas pós-condições.
-//
-//        //resultados devem ser nulos visto que nestes casos as portarias devem ter sido excluídas
-//        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201813")));
-//        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201800")));
-//        Assert.assertNull(portariaDAO.buscar(Long.parseLong("INF201803")));
-//
-//         //resultados devem retornar um objeto visto que nestes casos as portarias não devem ter sido excluídas
-//        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201810")));
-//        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201810")));
-//        Assert.assertNotNull(portariaDAO.buscar(Long.parseLong("INF201815")));
-//    }
+
+    @AfterClass
+    public static void casoTestResultados() throws IOException {
+
+        //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
+        // irá fica as suas pós-condições.
+
+        //resultados devem ser nulos visto que nestes casos as portarias devem ter sido excluídas
+        Assert.assertNull(portariaDAO.buscar((long) 13));
+        Assert.assertNull(portariaDAO.buscar((long) 1));
+        Assert.assertNull(portariaDAO.buscar((long) 4));
+
+         //resultados devem retornar um objeto visto que nestes casos as portarias não devem ter sido excluídas
+        Assert.assertNotNull(portariaDAO.buscar((long) 11));
+        Assert.assertNotNull(portariaDAO.buscar((long)14));
+        Assert.assertNotNull(portariaDAO.buscar((long) 15));
+    }
 
     public static Pessoa trataDadosDePessoaParaPersistencia(String dados[]){
         Pessoa pessoa = new Pessoa();
@@ -216,7 +216,7 @@ public class ControladorExclPortTest {
     public static Portaria trataDadosDaPortariaParaPersistencia(String dados[]){
         Portaria portaria = new Portaria();
         PortariaStatus status = retornaStatusPortaria(dados[5]);
-        System.out.println(status);
+
         portaria.setSiglaUndId(dados[2]);
         portaria.setAnoId(Integer.parseInt(dados[3]));
         portaria.setSeqId(Integer.parseInt(dados[4]));
