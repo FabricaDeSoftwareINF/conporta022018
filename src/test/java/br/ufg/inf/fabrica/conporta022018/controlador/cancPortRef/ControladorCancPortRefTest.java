@@ -265,13 +265,15 @@ public class ControladorCancPortRefTest {
         // lista de referências... Isso será confirmado dia 29/12 com os responsáveis pela expedição de portaria.
         // Apesar disso, os testes abaixo ainda podem ser compreendidos.
         
-        controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(0).getId());
+        boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(0).getId());
         // O cenário acima testa o cancelamento de uma portaria referenciada com indicativo de cancelamento
-        // pela portaria em questão. 
+        // pela portaria em questão.
+        Assert.assertEquals(true, op1);
         
-        controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(1).getId());
+        boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(1).getId());
         // O cenário acima testa o cancelamento de uma portaria referenciada a partir de uma portaria que possui
         // duas portarias referenciadas, onde apenas uma possui indicativo de cancelamento.
+        Assert.assertEquals(true, op2);
 
     }
 
@@ -280,22 +282,24 @@ public class ControladorCancPortRefTest {
 
         // Grupo de teste DadosExceções.
         
-        controladorCancPortRef.cancelarPortariaReferenciada(2);
+        boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada(2);
         // O cenario acima testa parâmetro inválido. A exceção esperada é IllegalArgumentException
         
         // A exeção atribuida para as chamadas abaixo é UnsupportedOperationException, mas um tipo de Error
         // expecífico pode ser implemantado e utilizado posteriormente.
         
-        controladorCancPortRef.cancelarPortariaReferenciada((long) 32);
+        boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada((long) 32);
         // O cenario acima testa a primeira exceção da seção de caso de uso, onde a portaria não é localizada na base de dados.
 
-        controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(2).getId());
+        boolean op3 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(2).getId());
         // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
         // cancelamento possui o status "Cancelada".
 
-        controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(3).getId());
+        boolean op4 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(3).getId());
         // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
         // cancelamento possui o status "Proposta".
+        
+        // As variáveis de retorno não seram utilizadas pois a execução dos métodos vão gerar exceções.
     }
 
     @AfterClass
@@ -304,21 +308,21 @@ public class ControladorCancPortRefTest {
 
         // Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
         // irá fica as suas pós-condições.
-
-        String status = "Cancelada";
-        // Pega no banco de dados os status das portarias referenciadas com indicativo de cancelamento e verifica
-        // se são iguais à "Cancelada".
-
+        
+        // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos. 
         Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(portariasReferenciadas.get(0).getId()).getStatus());
         
+        // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos. 
         Assert.assertEquals(PortariaStatus.ATIVA, portariaDAO.buscar(portariasReferenciadas.get(3).getId()));
         Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(portariasReferenciadas.get(4).getId()).getStatus());
 
         // Como o caso de uso realiza alterações nos dados manipulados apenas caso exceções não sejam lançadas, verificar
-        // a verificação do resultado das chamadas que geram exceção é basicamente averiguar a igualdade das portarias
+        // o resultado das chamadas que geram exceção é basicamente averiguar a igualdade das portarias
         // manipuladas antes e depois da chamada do método.
     }
 
+    // Classe auxiliar utilizada para mapear o relacionamento
+    // de referência entre as portarias.
     private static class ReferenciaCSV {
         private String idPortaria;
         private String idPortariaReferenciada;
