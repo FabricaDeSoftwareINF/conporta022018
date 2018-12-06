@@ -137,15 +137,16 @@ public class ControladorEdiTemTimTest {
         //O cenario abaixo testa que a mudança do tempo de sessão para um período inferior em um ao permitido.             
         controladorEdiTemTim.editarTimeOut(14, "INF");
 
-        //O cenario abaixo testa que a mudança do tempo válido de sessão para uma unidade academica que não existe na base de dados.             
-        controladorEdiTemTim.editarTimeOut(30, "FAV");
+        //O cenario abaixo testa que a mudança do tempo válido de sessão para uma unidade academica que não existe na 
+        //base de dados.             
+        controladorEdiTemTim.editarTimeOut(30, "FACE");
 
-        //O cenario abaixo testa que a mudança do tempo de sessão para um período inferior em um ao permitido de sessão para uma unidade
-        // academica que não existe na base de dados.             
-        controladorEdiTemTim.editarTimeOut(14, "FAV");
+        //O cenario abaixo testa que a mudança do tempo de sessão para um período inferior em um ao permitido de sessão 
+        //para uma unidade academica que não existe na base de dados.             
+        controladorEdiTemTim.editarTimeOut(14, "FD");
 
-        //O cenario abaixo testa que a mudança do tempo de sessão para um período superior em um ao permitido de sessão para uma unidade
-        // academica que não existe na base de dados.             
+        //O cenario abaixo testa que a mudança do tempo de sessão para um período superior em um ao permitido de sessão 
+        para uma unidade academica que não existe na base de dados.             
         controladorEdiTemTim.editarTimeOut(61, "FAV");  
     }
 
