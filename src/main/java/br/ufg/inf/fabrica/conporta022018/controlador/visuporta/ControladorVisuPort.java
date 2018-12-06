@@ -3,6 +3,7 @@ package br.ufg.inf.fabrica.conporta022018.controlador.visuporta;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.Recebedora;
 import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -11,7 +12,9 @@ import com.google.gson.GsonBuilder;
 public class ControladorVisuPort {
     
 
-    public static String conversorPortariaJson(Portaria portaria) {
+    public static String conversorPortariaJson(Long id) {
+        
+        Portaria portaria = new PortariaDAO().buscar(id);
       
         
         Gson gson = new GsonBuilder()
