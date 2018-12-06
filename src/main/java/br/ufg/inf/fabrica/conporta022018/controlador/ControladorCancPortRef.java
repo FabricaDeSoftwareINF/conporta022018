@@ -18,7 +18,13 @@ import java.util.List;
 public class ControladorCancPortRef {
     private PortariaDAO portariaDAO = new PortariaDAO();
 
-    public boolean cancelarPortariaReferenciada(Portaria portaria) {
+    public boolean cancelarPortariaReferenciada(Long id) {
+        Portaria portaria = portariaDAO.buscar(id);
+
+        if (portaria == null) {
+            throw new UnsupportedOperationException("Portaria não existe na base de dados.");
+        }
+
         if (portaria.getStatus() != PortariaStatus.Ativa) {
             throw new UnsupportedOperationException("Operação não permitida para portaria não ativa.");
         }
