@@ -18,7 +18,7 @@ public class ControladorExclPort {
     public ControladorExclPort() {}
 
     public boolean validaStatusPortaria(PortariaStatus status) {
-            return status == PortariaStatus.Proposta;
+            return status == PortariaStatus.PROPOSTA;
     }
 	
     public boolean excluirPortaria(Portaria portaria) throws Exception{
