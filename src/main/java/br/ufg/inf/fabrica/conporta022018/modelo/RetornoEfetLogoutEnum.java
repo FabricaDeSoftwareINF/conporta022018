@@ -8,23 +8,44 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 public enum RetornoEfetLogoutEnum {
 
-    OK("Sessão encerrada com sucesso!"),
-    ERRO_EXECUCAO("Houve um erro de execução e a sessão não pode ser terminada."),
-    ERRO_JA_ENCERRADA("Não há uma sessão ativa para o usuário solicitado."),
-    ERRO_CONEXAO_BD("Não foi possível terminar a sessão devido a um erro de conexão com a base de dados."),
-    ERRO_INESPERADO("Houve um erro inesperado e não foi possível encerrar a sessão.");
+    OK("Sessão encerrada com sucesso!", "OK"),
+    ERRO_EXECUCAO("Houve um erro de execução e a sessão não pode ser terminada.", "ERRO"),
+    ERRO_INESPERADO("Houve um erro inesperado e não foi possível encerrar a sessão.", "ERRO");
 
     private final String retorno;
+    private final String status;
 
-    RetornoEfetLogoutEnum(final String retorno) {
+    RetornoEfetLogoutEnum(final String retorno, final String status) {
         this.retorno = retorno;
+        this.status = status;
     }
 
     /**
-     * @return a mensagem de erro a ser usada pelo sistema.
+     * @return a mensagem de retorno ou erro a ser usada pelo sistema.
      */
     public String getRetorno() {
         return retorno;
     }
 
+    /**
+     * @return o status atual da resposta, que identifica seu tipo (ERRO ou OK).
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @return retorno formatado para JSON, com espaço para adição de mais campos.
+     */
+    @Override
+    public String toString() {
+        /*
+         A parte da string que contem $$$ é usada no método replace() para adicionar campos extras ao JSON.
+         */
+        return String.format(
+            "{ \"status\": \"%s\", \"mensagem\": \"%s\", $$$ }",
+            this.getStatus(),
+            this.getRetorno()
+        );
+    }
 }

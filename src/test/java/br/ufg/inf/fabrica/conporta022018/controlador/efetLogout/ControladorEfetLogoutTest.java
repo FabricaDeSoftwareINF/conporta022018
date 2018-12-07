@@ -24,6 +24,9 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+
+import static br.ufg.inf.fabrica.conporta022018.modelo.RetornoEfetLogoutEnum.*;
 
 public class ControladorEfetLogoutTest extends Mockito {
 
@@ -31,27 +34,21 @@ public class ControladorEfetLogoutTest extends Mockito {
 
     @Before
     public void casoTestPrepararExecucao() {
-        //Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
-        controladorEfetLogout = new ControladorEfetLogout();
+        controladorEfetLogout = mock(ControladorEfetLogout.class);
     }
 
     @Test
-    public void testServlet() throws Exception {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
+    public void casoTestDadosValidos() {
+        String resposta = controladorEfetLogout.efetuarLogout();
+        Assert.assertNull(resposta);
+        if (resposta != null) Assert.assertTrue(resposta.contains(OK.getStatus()));
+    }
 
-        when(request.getParameter("username")).thenReturn("me");
-        when(request.getParameter("password")).thenReturn("secret");
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
-
-        controladorEfetLogout.efetuarLogout();
-
-        verify(request, atLeast(1)).getParameter("username");
-        writer.flush();
-        Assert.assertTrue(stringWriter.toString().contains("My expected string"));
+    @Test(expected = ServletException.class)
+    public void casoTestDadosExcecoes() {
+        String resposta = controladorEfetLogout.efetuarLogout();
+        Assert.assertNull(resposta);
+        if (resposta != null) Assert.assertTrue(resposta.contains(ERRO_EXECUCAO.getStatus()));
     }
 
 }
