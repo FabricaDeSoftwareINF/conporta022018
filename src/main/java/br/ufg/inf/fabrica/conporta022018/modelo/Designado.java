@@ -22,8 +22,8 @@ public class Designado extends ModeloAbstrato {
     private int horasExecFuncDesig;
 
     @ManyToOne
-    private Pessoa designado;
-    private FuncaoDesig tipFuncDesig;
+    private Pessoa pessoa;
+    private FuncaoDesig funcaoDesig;
 
     /**
      * @return Date return the dtCienciaDesig
@@ -81,19 +81,20 @@ public class Designado extends ModeloAbstrato {
         this.horasExecFuncDesig = horasExecFuncDesig;
     }
 
-    public Pessoa getDesignado() {
-        return designado;
+    public void setPessoa(Pessoa pessoa){
+        this.pessoa = pessoa;
     }
 
-    public void setDesignado(Pessoa designado) {
-        this.designado = designado;
+    public Pessoa getPessoa(){
+        return this.pessoa;
     }
 
-    public FuncaoDesig getTipFuncDesig() {
-        return tipFuncDesig;
+    public void setFuncaoDesig(FuncaoDesig funcaoDesig){
+        this.funcaoDesig = funcaoDesig;
     }
 
-    public void setTipFuncDesig(FuncaoDesig tipFuncDesig) {
-        this.tipFuncDesig = tipFuncDesig;
+    public FuncaoDesig getFuncaoDesig(){
+        return this.funcaoDesig;
     }
+
 }
