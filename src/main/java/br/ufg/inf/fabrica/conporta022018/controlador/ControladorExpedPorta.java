@@ -3,12 +3,12 @@ package br.ufg.inf.fabrica.conporta022018.controlador;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
-import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 
 import java.nio.ByteBuffer;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -19,7 +19,18 @@ import java.util.Date;
  */
 public class ControladorExpedPorta {
 
+    PortariaDAO portaDAO;
+    PessoaDAO pessoaDAO;
+    UndAdmDAO undAdmDAO;
+
     private final short[] chaveAssinatura = new short[]{1, 1, 1, 1, 1};
+    private final String caracteresHexadecimais = "0123456789ABCDEF";
+
+    public ControladorExpedPorta() {
+        portaDAO = new PortariaDAO();
+        pessoaDAO = new PessoaDAO();
+        undAdmDAO = new UndAdmDAO();
+    }
 
     /**
      * Expede uma portaria com status "Proposta", registrando o expedidor que fez a operação, por meio de uma assinatura
@@ -40,17 +51,16 @@ public class ControladorExpedPorta {
      */
     public int expedPorta(long idPorta, long idUsuario){
 
-        Portaria portaria = new Portaria();
-        PortariaDAO portaDAO = new PortariaDAO();
-        Pessoa pessoa = new Pessoa();
-        PessoaDAO pessoaDAO = new PessoaDAO();
-        UndAdm undAdm = new UndAdm();
-        UndAdmDAO undAdmDAO = new UndAdmDAO();
-        ControladorCancPortRef controladorCancPortRef = new ControladorCancPortRef();
-        ControladorEncPortaria controladorEncPortaria = new ControladorEncPortaria();
-        boolean designadosExistem = true;
+        Portaria portaria, referenciada;
+        Pessoa expedidor, designado;
 
-        pessoa = pessoaDAO.buscar(idUsuario);
+        ControladorCancPortRef controladorCancPortRef = new ControladorCancPortRef();
+        ControladorEncPort controladorEncPortaria = new ControladorEncPort();
+
+        pessoaDAO.abrirTransacao();
+        portaDAO.abrirTransacao();
+
+        expedidor = pessoaDAO.buscar(idUsuario);
         portaria = portaDAO.buscar(idPorta);
 
         // Portaria inexistente, a interface deve perguntar ao usuário se ele deseja criar uma portaria
@@ -67,44 +77,49 @@ public class ControladorExpedPorta {
             // A data final do período de vigência já expirou
             return 4;
         }
-        if (pessoa.getServidor().getUndAdm().getSiglaUnAdm() == portaria.getUnidadeExpedidora().getSiglaUnAdm()) {
+        if (expedidor.getServidor().getUndAdm().getSiglaUnAdm() == portaria.getUnidadeExpedidora().getSiglaUnAdm()) {
             // O servidor não pertence à unidade administrativa que propôs a portaria
             return 7;
         }
-        for(int i = 0; i < portaria.getDesignados().size(); i++){
-            if(pessoaDAO.buscar(portaria.getDesignados().get(i).getDesignado().getId()).equals(new Pessoa())){
-                designadosExistem = false;
+        for(int i = 0; i < portaria.getReferencias().size(); i++){
+            referenciada = portaDAO.buscar(portaria.getReferencias().get(i).getPortariaReferenciada().getId());
+            if(referenciada.equals(new Portaria()) ||
+                    referenciada == null ||
+                    portaria.getStatus().equals(PortariaStatus.CANCELADA)){
+                return 6;
             }
         }
-        if (!designadosExistem) {
-            // Um ou mais designados não existem
-            return 5;
-        } else {
-            // Caso de sucesso
-
-            // Atualização de dados
-            portaria.setSeqId(portaria.getUnidadeExpedidora().getUltNumExped());
-
-            // Incrementa o número de portarias expedidas pela unidade administrativa
-            portaria.getUnidadeExpedidora().setUltNumExped(portaria.getUnidadeExpedidora().getUltNumExped() + 1);
-            // Alterar o status da portaria para "ativa"
-            portaria.setStatus(PortariaStatus.ATIVA);
-            // Atribuir a data atual na data de expedição
-            portaria.setDtExped(new Date());
-
-            // Assinatura da expedição, persistência da portaria, encaminhamento para ciência e cancelamento de referenciadas
-            portaria.setAssinatura(assinar(new Long[]{pessoa.getServidor().getId(), portaria.getId()}));
-            controladorEncPortaria.encPortariaCiencia(idPorta);
-            controladorCancPortRef.cancelarPortarias(idPorta);
-            portaDAO.salvar(portaria);
-            // Persistência da unidade expedidora para
-            undAdmDAO.salvar(portaria.getUnidadeExpedidora());
-
-            portaDAO.commitarTransacao();
-            undAdmDAO.commitarTransacao();
-            return 1;
+        for(int i = 0; i < portaria.getDesignados().size(); i++){
+            designado = pessoaDAO.buscar(portaria.getDesignados().get(i).getDesignado().getId());
+            if(designado.equals(new Pessoa()) || designado == null){
+                return 5;
+            }
         }
+
+        // Caso de sucesso
+
+        // Atualização de dados
+        portaria.setSeqId(portaria.getUnidadeExpedidora().getUltNumExped());
+
+        // Incrementa o número de portarias expedidas pela unidade administrativa
+        portaria.getUnidadeExpedidora().setUltNumExped(portaria.getUnidadeExpedidora().getUltNumExped() + 1);
+        // Alterar o status da portaria para "ativa"
+        portaria.setStatus(PortariaStatus.ATIVA);
+        // Atribuir a data atual na data de expedição
+        portaria.setDtExped(new Date());
+
+        // Assinatura da expedição, persistência da portaria, encaminhamento para ciência e cancelamento de referenciadas
+        portaria.setAssinatura(assinar(new Long[]{expedidor.getServidor().getId(), portaria.getId()}));
+        controladorEncPortaria.encPortariaCiencia(idPorta);
+        controladorCancPortRef.cancelarPortarias(idPorta);
+
+        portaDAO.salvar(portaria);
+        undAdmDAO.salvar(portaria.getUnidadeExpedidora());
+        portaDAO.commitarTransacao();
+        undAdmDAO.commitarTransacao();
+        return 1;
     }
+
 
     /**
      * Faz a assinatura de uma portaria expedida, concatenando os identificadores recebidos e fazendo operações de
@@ -118,7 +133,7 @@ public class ControladorExpedPorta {
      */
     public String assinar(Long[] identificadores){
 
-        ByteBuffer identificadoresEmBytes = ByteBuffer.allocate(8);
+        ByteBuffer identificadoresEmBytes = ByteBuffer.allocate(16);
         ByteBuffer assinaturaEmBytes = ByteBuffer.allocate(5);
 
         /* Retira os dois primeiros bytes do identificador do expedidor e o
@@ -142,10 +157,86 @@ public class ControladorExpedPorta {
         for (byte b : assinaturaEmBytes.array()) {
             sb.append(String.format("%02X ", b));
         }
+
         /* A cadeia de caracteres gerada possui espaços entre cada par de caracteres hexadecimais, portanto é necessário
         retirar todos os espaços em branco da assinatura.
         String.trim() não funcionou, por algum motivo desconhecido, portanto foi usado String.replace()*/
         return sb.toString().replace(" ", "");
+    }
+
+    /**
+     * Faz a autenticação de uma portaria expedida, descriptografando o código de assinatura informado e recuperando as
+     * informações da portaria e do expedidor (usuário), verificando se o expedidor da portaria expedida confere com o
+     * expedidor recuperado.
+     *
+     * @param assinatura Código de assinatura eletrônica gerada para a portaria no momento de expedição.
+     * @return Mensagem de resultado da autenticação, sendo que os possíveis valores são:
+     * <ul>
+     *     <li>"O código é inválido." (O código não é hexadecimal)</li>
+     *     <li>"O código está incorreto." (Os identificadores não correspondem com nenhum registro de portaria ou
+     *          usuário, a portaria não foi expedida ou o expedidor da portaria encontrada não corresponde com o
+     *          expedidor encontrado)</li>
+     *     <li>"Esta portaria foi expedida no dia [Dia] de [Mes] de [Ano] por [Expedidor]" (Caso de sucesso)</li>
+     * </ul>
+     */
+    public String autenticar(String assinatura){
+
+        for(char caractereAssinatura : assinatura.toCharArray()){
+            if(!caracteresHexadecimais.contains("" + caractereAssinatura)){
+                return "O código é inválido.";
+            }
+        }
+
+        String resultado;
+        char[] assinaturaEmChar = assinatura.toCharArray();
+        ByteBuffer identificadoresEmBytes = ByteBuffer.allocate(16);
+        ByteBuffer assinaturaEmBytes = ByteBuffer.allocate(5);
+
+        //  conversao de texto hexadecimal para byte
+        for (int i = 0; i < assinaturaEmChar.length; i += 2){
+            assinaturaEmBytes.put(hexToByte(assinatura.substring(i, i + 1)));
+        }
+
+        // rotaciona os bytes para a posição original para adquirir os bytes com os identificadores
+        for(int i = 0; i < assinaturaEmBytes.capacity(); i++){
+            assinaturaEmBytes.put(i, rotacionaByte(assinaturaEmBytes.get(i), (short) (8 - chaveAssinatura[i])));
+        }
+
+        identificadoresEmBytes.putLong(0);
+        identificadoresEmBytes.put(6, assinaturaEmBytes.get(0));
+        identificadoresEmBytes.put(7, assinaturaEmBytes.get(1));
+        identificadoresEmBytes.put(13, assinaturaEmBytes.get(2));
+        identificadoresEmBytes.put(14, assinaturaEmBytes.get(3));
+        identificadoresEmBytes.put(15, assinaturaEmBytes.get(4));
+
+        portaDAO.abrirTransacao();
+        pessoaDAO.abrirTransacao();
+
+        Portaria portariaAuth = portaDAO.buscar(identificadoresEmBytes.getLong());
+        Pessoa expedidorAuth = pessoaDAO.buscar(identificadoresEmBytes.getLong());
+
+        portaDAO.commitarTransacao();
+        pessoaDAO.commitarTransacao();
+        
+        if (portariaAuth.equals(new Portaria()) || portariaAuth == null ||
+                expedidorAuth.equals(new Pessoa()) || expedidorAuth == null) {
+            resultado = "O código está incorreto.";
+        } else if(portariaAuth.getStatus().equals(PortariaStatus.PROPOSTA)){
+            resultado = "O código está incorreto.";
+        } else if(portariaAuth.getExpedidor().equals(expedidorAuth)){
+            Calendar diaEmCalendar = Calendar.getInstance();
+            diaEmCalendar.setTime(portariaAuth.getDtExped());
+
+            resultado = "Esta portaria foi expedida no dia " +
+                    diaEmCalendar.get(Calendar.DAY_OF_MONTH) + " de " +
+                    diaEmCalendar.get(Calendar.MONTH) + " de " +
+                    diaEmCalendar.get(Calendar.YEAR) + " por " +
+                    portariaAuth.getExpedidor().getNomePes() + ".";
+        } else {
+            resultado = "O código está incorreto.";
+        }
+
+        return resultado;
     }
 
     /**
@@ -177,5 +268,11 @@ public class ControladorExpedPorta {
         }
 
         return byteARotacionar;
+    }
+
+    private byte hexToByte(String byteEmString){
+        int hexEmByte = (Character.digit(byteEmString.charAt(0), 16) << 4) +
+                Character.digit(byteEmString.charAt(1), 16);
+        return (byte) hexEmByte;
     }
 }
