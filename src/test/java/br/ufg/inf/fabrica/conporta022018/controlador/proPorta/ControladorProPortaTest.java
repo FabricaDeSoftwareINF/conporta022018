@@ -683,6 +683,109 @@ public class ControladorProPortaTest{
         Assert.assertEquals(undAdmExpedidora.getUltNumProp(), ultnum);
     }
 
+    @Test
+    public void proPortaTodosCamposPreenchidos() throws IOException {
+        // Testa a persistência com todos os campo possíveis preenchidos
+        // Cria o mapa de variáveis
+        Map<String, Object> parametros = new HashMap<String, Object>();
+
+        // Preenche o mapa
+        String assunto = "Portaria Com Designacao e Com referência";
+        parametros.put("assunto", assunto);
+
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        parametros.put("dtIniVig", dtIniVig);
+
+        Date dtFimVig = new GregorianCalendar(2020, Calendar.FEBRUARY, 1).getTime();
+        parametros.put("dtFimVig", dtFimVig);
+
+        Date dPublicDou = new GregorianCalendar(2019, Calendar.MARCH, 15).getTime();
+        parametros.put("dPublicDou", dPublicDou);
+
+        int horasDesig = 220;
+        parametros.put("horasDesig", horasDesig);
+
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        parametros.put("resumo", resumo);
+
+        // Coloca o arquivo pdf
+        String dir = System.getProperty("user.dir");
+        // Cria o arquivo
+        File arqPdf = new File(dir+"/src/test/resources/arq_1.pdf");
+        parametros.put("arqPdf", arqPdf);
+        // Transforma o arquivo para byte[] para comparar
+        byte[] arqPdfBytes = Files.readAllBytes(arqPdf.toPath());
+
+        // Cria a lista vazia de designados
+
+        List<Designado> designados = new ArrayList<>();
+
+        // Busca as pessoas no banco (Simula o que o front ia fazer)
+        List<Pessoa> listaPessoas = controladorProPorta.buscarPessoas();
+
+        // Seleciona a primeira e a segunda (O usuário iria escolher) já criando o objeto designado
+        Designado designado = new Designado();
+        designado.setPessoa(listaPessoas.get(0));
+        designado.setFuncaoDesig(FuncaoDesig.MEMBRO);
+        designado.setDescrFuncDesig("Descrição teste 1");
+        designados.add(designado);
+        Designado designado2 = new Designado();
+        designado2.setPessoa(listaPessoas.get(1));
+        designado2.setFuncaoDesig(FuncaoDesig.COORDENADOR);
+        designado2.setDescrFuncDesig("Descrição do Coordenador Teste");
+        designado2.setHorasDefFuncDesig(200);
+        designados.add(designado2);
+        parametros.put("designados", designados);
+
+        // Cria a lista vazia de Referências
+        List<Referencia> referencias = new ArrayList<>();
+
+        // Busca as portarias cadastradas no banco
+        List<Portaria> listaPortarias = controladorProPorta.buscarPortarias();
+
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto referencia
+        Referencia referencia = new Referencia();
+        referencia.setEhCancelamento(true);
+        referencia.setReferencia(listaPortarias.get(0));
+        referencias.add(referencia);
+        parametros.put("referencias", referencias);
+
+        // Cria a lista vazia de recebedoras
+        List<Recebedora> recebedoras = new ArrayList<>();
+
+        // Busca as unidades administrativas
+        List<UndAdm> listaUndAdm = controladorProPorta.buscarUndAdm();
+
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto recebedora
+        Recebedora recebedora = new Recebedora();
+        recebedora.setUnidadeRecebedora(listaUndAdm.get(0));
+        recebedoras.add(recebedora);
+        parametros.put("recebedoras", recebedoras);
+
+        // Busca o expeditor (Usa também o primeiro da lista de unidades administrativas)
+        UndAdm undAdmExpedidora = listaUndAdm.get(0);
+        parametros.put("expedidora", undAdmExpedidora);
+
+        // Tenta salvar
+        Portaria portaria = controladorProPorta.salvar(parametros);
+
+        // Busca os dados pra ver se a portaria foi salva corretamente
+        PortariaDAO portariaDAO = new PortariaDAO();
+        portaria = portariaDAO.buscar(portaria.getId());
+
+        Assert.assertEquals(assunto, portaria.getAssunto());
+        Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
+        Assert.assertEquals(dtFimVig, portaria.getDtFimVig());
+        Assert.assertEquals(dPublicDou, portaria.getDtPublicDou());
+        Assert.assertEquals(horasDesig, portaria.getHorasDesig());
+        Assert.assertEquals(resumo, portaria.getResumo());
+        Assert.assertEquals(designados, portaria.getDesignados());
+        Assert.assertEquals(referencias, portaria.getReferencias());
+        Assert.assertEquals(recebedoras, portaria.getUndRecebedora());
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
+        Assert.assertArrayEquals(arqPdfBytes, portaria.getArqPdf());
+    }
+
     private static void trataDadosPessoa(String dados[]){
         // Instancia os objetos
         PessoaDAO pessoaDAO = new PessoaDAO();
