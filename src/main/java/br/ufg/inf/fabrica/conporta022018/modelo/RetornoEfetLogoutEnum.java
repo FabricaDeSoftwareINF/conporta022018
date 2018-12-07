@@ -6,6 +6,14 @@
 
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorEfetLogout;
+
+/**
+ * @author erick
+ * @see ControladorEfetLogout#efetuarLogout()
+ *
+ * Padronizador de Mensagens de Erro especificamente para o ControladorEfetLogout.
+ */
 public enum RetornoEfetLogoutEnum {
 
     OK("Sessão encerrada com sucesso!", "OK"),
