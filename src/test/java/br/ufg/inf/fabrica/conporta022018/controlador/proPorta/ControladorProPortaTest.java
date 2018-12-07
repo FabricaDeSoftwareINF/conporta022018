@@ -17,6 +17,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.fail;
+
 public class ControladorProPortaTest{
     private static ControladorProPorta controladorProPorta;
 
@@ -117,16 +120,22 @@ public class ControladorProPortaTest{
         // Testa o cenário típico
         // Criação de portaria proposta com designação e referência com cancelamento de portaria
 
-        // Cria as variáveis necessárias para rodar o método salvar
-        String assunto = "Portaria Com Designacao e Com referência";
-        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
-        Date dtFimVig = new Date();
-        Date dPublicDou = new Date();
-        int horasDesig = 220;
-        String resumo = "Um resumo da portaria criada com designação e com referência";
+        // Cria o mapa de variáveis
+        Map<String, Object> parametros = new HashMap<String, Object>();
 
-        // Define um arquivo vazio
-        File arqPdf = new File("");
+        // Preenche o mapa
+        String assunto = "Portaria Com Designacao e Com referência";
+        parametros.put("assunto", assunto);
+
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        parametros.put("dtIniVig", dtIniVig);
+
+        int horasDesig = 220;
+        parametros.put("horasDesig", horasDesig);
+
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        parametros.put("resumo", resumo);
+
 
         // Cria a lista vazia de designados
 
@@ -147,6 +156,7 @@ public class ControladorProPortaTest{
         designado2.setDescrFuncDesig("Descrição do Coordenador Teste");
         designado2.setHorasDefFuncDesig(200);
         designados.add(designado2);
+        parametros.put("designados", designados);
 
         // Cria a lista vazia de Referências
         List<Referencia> referencias = new ArrayList<>();
@@ -159,6 +169,7 @@ public class ControladorProPortaTest{
         referencia.setEhCancelamento(true);
         referencia.setReferencia(listaPortarias.get(0));
         referencias.add(referencia);
+        parametros.put("referencias", referencias);
 
         // Cria a lista vazia de recebedoras
         List<Recebedora> recebedoras = new ArrayList<>();
@@ -170,12 +181,14 @@ public class ControladorProPortaTest{
         Recebedora recebedora = new Recebedora();
         recebedora.setUnidadeRecebedora(listaUndAdm.get(0));
         recebedoras.add(recebedora);
+        parametros.put("recebedoras", recebedoras);
 
         // Busca o expeditor (Usa também o primeiro da lista de unidades administrativas)
         UndAdm undAdmExpedidora = listaUndAdm.get(0);
+        parametros.put("expedidora", undAdmExpedidora);
 
         // Tenta salvar
-        Portaria portaria = controladorProPorta.salvar(assunto, dtIniVig, dtFimVig, dPublicDou, horasDesig, resumo, arqPdf, designados, referencias, recebedoras, undAdmExpedidora);
+        Portaria portaria = controladorProPorta.salvar(parametros);
 
         // Busca os dados pra ver se a portaria foi salva corretamente
         PortariaDAO portariaDAO = new PortariaDAO();
@@ -183,8 +196,6 @@ public class ControladorProPortaTest{
 
         Assert.assertEquals(assunto, portaria.getAssunto());
         Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
-        Assert.assertEquals(dtFimVig, portaria.getDtFimVig());
-        Assert.assertEquals(dPublicDou, portaria.getDtPublicDou());
         Assert.assertEquals(horasDesig, portaria.getHorasDesig());
         Assert.assertEquals(resumo, portaria.getResumo());
         Assert.assertEquals(designados, portaria.getDesignados());
@@ -194,39 +205,482 @@ public class ControladorProPortaTest{
     }
 
     @Test
-    public void proPortaComDesignacaoSemReferecia() {
+    public void proPortaComDesignacaoSemReferecia() throws IOException {
         // Testa o cenário alternativo 1
         // Criação de portaria proposta com designação e sem referência
+        // Cria o mapa de variáveis
+        Map<String, Object> parametros = new HashMap<String, Object>();
+
+        // Preenche o mapa
+        String assunto = "Portaria Com Designacao e Com referência";
+        parametros.put("assunto", assunto);
+
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        parametros.put("dtIniVig", dtIniVig);
+
+        int horasDesig = 220;
+        parametros.put("horasDesig", horasDesig);
+
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        parametros.put("resumo", resumo);
+
+
+        // Cria a lista vazia de designados
+
+        List<Designado> designados = new ArrayList<>();
+
+        // Busca as pessoas no banco (Simula o que o front ia fazer)
+        List<Pessoa> listaPessoas = controladorProPorta.buscarPessoas();
+
+        // Seleciona a primeira e a segunda (O usuário iria escolher) já criando o objeto designado
+        Designado designado = new Designado();
+        designado.setPessoa(listaPessoas.get(0));
+        designado.setFuncaoDesig(FuncaoDesig.MEMBRO);
+        designado.setDescrFuncDesig("Descrição teste 1");
+        designados.add(designado);
+        Designado designado2 = new Designado();
+        designado2.setPessoa(listaPessoas.get(1));
+        designado2.setFuncaoDesig(FuncaoDesig.COORDENADOR);
+        designado2.setDescrFuncDesig("Descrição do Coordenador Teste");
+        designado2.setHorasDefFuncDesig(200);
+        designados.add(designado2);
+        parametros.put("designados", designados);
+
+        // Cria a lista vazia de recebedoras
+        List<Recebedora> recebedoras = new ArrayList<>();
+
+        // Busca as unidades administrativas
+        List<UndAdm> listaUndAdm = controladorProPorta.buscarUndAdm();
+
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto recebedora
+        Recebedora recebedora = new Recebedora();
+        recebedora.setUnidadeRecebedora(listaUndAdm.get(0));
+        recebedoras.add(recebedora);
+        parametros.put("recebedoras", recebedoras);
+
+        // Busca o expeditor (Usa também o primeiro da lista de unidades administrativas)
+        UndAdm undAdmExpedidora = listaUndAdm.get(0);
+        parametros.put("expedidora", undAdmExpedidora);
+
+        // Tenta salvar
+        Portaria portaria = controladorProPorta.salvar(parametros);
+
+        // Busca os dados pra ver se a portaria foi salva corretamente
+        PortariaDAO portariaDAO = new PortariaDAO();
+        portaria = portariaDAO.buscar(portaria.getId());
+
+        Assert.assertEquals(assunto, portaria.getAssunto());
+        Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
+        Assert.assertEquals(horasDesig, portaria.getHorasDesig());
+        Assert.assertEquals(resumo, portaria.getResumo());
+        Assert.assertEquals(designados, portaria.getDesignados());
+        Assert.assertEquals(recebedoras, portaria.getUndRecebedora());
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
     }
 
     @Test
-    public void proPortaSemDesignacaoComReferecia() {
+    public void proPortaSemDesignacaoComReferecia() throws IOException {
         // Testa o cenário alternativo 2
         // Criação de portaria proposta com referência com cancelamento de portaria e sem designação
+
+        // Cria o mapa de variáveis
+        Map<String, Object> parametros = new HashMap<String, Object>();
+
+        // Preenche o mapa
+        String assunto = "Portaria Com Designacao e Com referência";
+        parametros.put("assunto", assunto);
+
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        parametros.put("dtIniVig", dtIniVig);
+
+        int horasDesig = 220;
+        parametros.put("horasDesig", horasDesig);
+
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        parametros.put("resumo", resumo);
+
+        // Cria a lista vazia de Referências
+        List<Referencia> referencias = new ArrayList<>();
+
+        // Busca as portarias cadastradas no banco
+        List<Portaria> listaPortarias = controladorProPorta.buscarPortarias();
+
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto referencia
+        Referencia referencia = new Referencia();
+        referencia.setEhCancelamento(true);
+        referencia.setReferencia(listaPortarias.get(0));
+        referencias.add(referencia);
+        parametros.put("referencias", referencias);
+
+        // Cria a lista vazia de recebedoras
+        List<Recebedora> recebedoras = new ArrayList<>();
+
+        // Busca as unidades administrativas
+        List<UndAdm> listaUndAdm = controladorProPorta.buscarUndAdm();
+
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto recebedora
+        Recebedora recebedora = new Recebedora();
+        recebedora.setUnidadeRecebedora(listaUndAdm.get(0));
+        recebedoras.add(recebedora);
+        parametros.put("recebedoras", recebedoras);
+
+        // Busca o expeditor (Usa também o primeiro da lista de unidades administrativas)
+        UndAdm undAdmExpedidora = listaUndAdm.get(0);
+        parametros.put("expedidora", undAdmExpedidora);
+
+        // Tenta salvar
+        Portaria portaria = controladorProPorta.salvar(parametros);
+
+        // Busca os dados pra ver se a portaria foi salva corretamente
+        PortariaDAO portariaDAO = new PortariaDAO();
+        portaria = portariaDAO.buscar(portaria.getId());
+
+        Assert.assertEquals(assunto, portaria.getAssunto());
+        Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
+        Assert.assertEquals(horasDesig, portaria.getHorasDesig());
+        Assert.assertEquals(resumo, portaria.getResumo());
+        Assert.assertEquals(referencias, portaria.getReferencias());
+        Assert.assertEquals(recebedoras, portaria.getUndRecebedora());
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
     }
 
     @Test
-    public void proPortaSemDesignacaoSemReferecia() {
+    public void proPortaSemDesignacaoSemReferecia() throws IOException {
         // Testa o cenário alternativo 3
         // Criação de portaria proposta sem referência nem designação
+
+        // Cria o mapa de variáveis
+        Map<String, Object> parametros = new HashMap<String, Object>();
+
+        // Preenche o mapa
+        String assunto = "Portaria Com Designacao e Com referência";
+        parametros.put("assunto", assunto);
+
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        parametros.put("dtIniVig", dtIniVig);
+
+        int horasDesig = 220;
+        parametros.put("horasDesig", horasDesig);
+
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        parametros.put("resumo", resumo);
+
+        // Cria a lista vazia de recebedoras
+        List<Recebedora> recebedoras = new ArrayList<>();
+
+        // Busca as unidades administrativas
+        List<UndAdm> listaUndAdm = controladorProPorta.buscarUndAdm();
+
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto recebedora
+        Recebedora recebedora = new Recebedora();
+        recebedora.setUnidadeRecebedora(listaUndAdm.get(0));
+        recebedoras.add(recebedora);
+        parametros.put("recebedoras", recebedoras);
+
+        // Busca o expeditor (Usa também o primeiro da lista de unidades administrativas)
+        UndAdm undAdmExpedidora = listaUndAdm.get(0);
+        parametros.put("expedidora", undAdmExpedidora);
+
+        // Tenta salvar
+        Portaria portaria = controladorProPorta.salvar(parametros);
+
+        // Busca os dados pra ver se a portaria foi salva corretamente
+        PortariaDAO portariaDAO = new PortariaDAO();
+        portaria = portariaDAO.buscar(portaria.getId());
+
+        Assert.assertEquals(assunto, portaria.getAssunto());
+        Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
+        Assert.assertEquals(horasDesig, portaria.getHorasDesig());
+        Assert.assertEquals(resumo, portaria.getResumo());
+        Assert.assertEquals(recebedoras, portaria.getUndRecebedora());
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
     }
 
     @Test
-    public void proPortaRegraNegocioCamObri() {
+    public void proPortaRegraNegocioCamObri() throws IOException {
         // Testa a regra de negócio CamObri
-        // O assunto deve ter no mínimo um item, a dtIniVig e o resumo são campos obrigatórios.
+        // O assunto, a dtIniVig, o resumo e o expedidor são campos obrigatórios.
+
+        // Cria o mapa de variáveis
+        Map<String, Object> parametros = new HashMap<String, Object>();
+        String assunto = "Portaria Com Designacao e Com referência";
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        List<UndAdm> listaUndAdm = controladorProPorta.buscarUndAdm();
+        UndAdm undAdmExpedidora = listaUndAdm.get(0);
+
+        // Testa cada variável separadamente
+
+        // Sem assunto
+        try {
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "assunto, dtIniVig, resumo e expedidora são obrigatórios");
+        }
+
+        // assunto de tipo incorreto
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", 1);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O assunto deve ser do tipo String");
+        }
+
+        // Sem resumo
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "assunto, dtIniVig, resumo e expedidora são obrigatórios");
+        }
+
+        // resumo de tipo incorreto
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", 1);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O resumo deve ser do tipo String");
+        }
+
+        // Sem dtIniVig
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("expedidora", undAdmExpedidora);
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "assunto, dtIniVig, resumo e expedidora são obrigatórios");
+        }
+
+        // dtIniVig de tipo incorreto
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", 1);
+            parametros.put("expedidora", undAdmExpedidora);
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O dtIniVig deve ser do tipo Date");
+        }
+
+        // Sem expedidora
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "assunto, dtIniVig, resumo e expedidora são obrigatórios");
+        }
+
+        // expedidora de tipo incorreto
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", 1);
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O expedidora deve ser do tipo UndAdm");
+        }
+
     }
 
     @Test
-    public void proPortaRegraNegocioAtribGerados() {
-        // Testa a regra de negócio AtribGerados
-        // O siglaUndId é preenchido de acordo com o atributo
+    public void proPortaTestTipoParametrosIncorretos() throws IOException {
+        // Testa se algum parâmetro pode ser passado com o tipo incorreto
+        // Trata a excecão de todos os cenários "Ocorreu um erro na validação" e a regra de negócio CamTipoDados
+        // Testa apenas os campos opcionais, pois os obrigatórios foram testados no método anterior
+
+        // Cria o mapa de variáveis com os parametros obrigatórios
+        Map<String, Object> parametros = new HashMap<String, Object>();
+        String assunto = "Portaria Com Designacao e Com referência";
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        List<UndAdm> listaUndAdm = controladorProPorta.buscarUndAdm();
+        UndAdm undAdmExpedidora = listaUndAdm.get(0);
+
+        // Testa cada variável separadamente
+
+        // dtFimVig
+        try {
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            parametros.put("dtFimVig", 1);
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O dtFimVig deve ser do tipo Date");
+        }
+
+        // dPublicDou
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            parametros.put("dPublicDou", 1);
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O dPublicDou deve ser do tipo Date");
+        }
+
+        // horasDesig
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            parametros.put("horasDesig", "Teste");
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O horasDesig deve ser do tipo int");
+        }
+
+        // arqPdf
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            parametros.put("arqPdf", "Teste");
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O arqPdf deve ser do tipo File");
+        }
+
+        // designados
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            parametros.put("designados", "Teste");
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O designados deve ser do tipo List<Designado>");
+        }
+
+        // referencias
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            parametros.put("referencias", "Teste");
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O referencias deve ser do tipo List<Referencia>");
+        }
+
+        // recebedoras
+        try {
+            parametros = new HashMap<String, Object>();
+            parametros.put("assunto", assunto);
+            parametros.put("resumo", resumo);
+            parametros.put("dtIniVig", dtIniVig);
+            parametros.put("expedidora", undAdmExpedidora);
+            parametros.put("recebedoras", "Teste");
+            Portaria portaria = controladorProPorta.salvar(parametros);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            assertEquals(exception.getMessage(), "O recebedoras deve ser do tipo List<Recebedora>");
+        }
     }
 
-    @AfterClass
-    public static void casoTestResultados() throws IOException {
+    @Test
+    public void proPortaRegraNegocioAtribGerados() throws IOException {
+        // Testa a regra de negócio AtribGerados
+        // o seqId é preenchido com o próximo número do atributo ultNumProp da unidade administrativa expedidora,
+        // o ultNumProp da unidade administrativa expedidora também é atualizado, o status é preenchido com o valor “Proposta”.
 
-        //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
+        // Cadastra a portaria
+
+        // Cria o mapa de variáveis
+        Map<String, Object> parametros = new HashMap<String, Object>();
+
+        // Preenche o mapa
+        String assunto = "Portaria Com Designacao e Com referência";
+        parametros.put("assunto", assunto);
+
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        parametros.put("dtIniVig", dtIniVig);
+
+        int horasDesig = 220;
+        parametros.put("horasDesig", horasDesig);
+
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        parametros.put("resumo", resumo);
+
+        // Cria a lista vazia de recebedoras
+        List<Recebedora> recebedoras = new ArrayList<>();
+
+        // Busca as unidades administrativas
+        List<UndAdm> listaUndAdm = controladorProPorta.buscarUndAdm();
+
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto recebedora
+        Recebedora recebedora = new Recebedora();
+        recebedora.setUnidadeRecebedora(listaUndAdm.get(0));
+        recebedoras.add(recebedora);
+        parametros.put("recebedoras", recebedoras);
+
+        // Busca o expeditor (Usa também o primeiro da lista de unidades administrativas)
+        UndAdm undAdmExpedidora = listaUndAdm.get(0);
+        int ultnum = undAdmExpedidora.getUltNumProp() + 1;
+        parametros.put("expedidora", undAdmExpedidora);
+
+        // Tenta salvar
+        Portaria portaria = controladorProPorta.salvar(parametros);
+
+        // Verifica se salvou o seqId com o próximo numero prop
+        PortariaDAO portariaDAO = new PortariaDAO();
+        portaria = portariaDAO.buscar(portaria.getId());
+        Assert.assertEquals(ultnum, portaria.getSeqId());
+        // Verifica o status
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
+
+        // Verifica se o ultNumPro foi persistido
+        UndAdmDAO undAdmDAO = new UndAdmDAO();
+        undAdmExpedidora = undAdmDAO.buscar(undAdmExpedidora.getId());
+        Assert.assertEquals(undAdmExpedidora.getUltNumProp(), ultnum);
     }
 
     private static void trataDadosPessoa(String dados[]){

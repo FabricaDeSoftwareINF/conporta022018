@@ -52,28 +52,107 @@ public class ControladorProPorta{
         return this.portariaDAO.pesquisarJPQLCustomizada(query, params);
     }
 
-    private boolean validarCampos(String assunto, Date dtIniVig, String resumo){
-        if(assunto.isEmpty() || dtIniVig.toString().isEmpty() || resumo.isEmpty()){
-            return false;
-        }else{
-            return true;
+    private void validarCampos(Map<String, Object> parametros){
+
+        // Verifica se possui as keys obrigatórias
+        if(!parametros.containsKey("assunto") || !parametros.containsKey("dtIniVig") || !parametros.containsKey("resumo") || !parametros.containsKey("expedidora")){
+            throw new IllegalArgumentException("assunto, dtIniVig, resumo e expedidora são obrigatórios");
+        }
+
+        // Testa primeiro os campos obrigatórios
+        if(!(parametros.get("assunto") instanceof String)){
+            throw new IllegalArgumentException("O assunto deve ser do tipo String");
+        }
+        if(((String) parametros.get("assunto")).isEmpty()){
+            throw new IllegalArgumentException("O assunto é obrigatório");
+        }
+
+        if(!(parametros.get("dtIniVig") instanceof Date)){
+            throw new IllegalArgumentException("O dtIniVig deve ser do tipo Date");
+        }
+
+        if(!(parametros.get("resumo") instanceof String)){
+            throw new IllegalArgumentException("O resumo deve ser do tipo String");
+        }
+        if(((String) parametros.get("resumo")).isEmpty()){
+            throw new IllegalArgumentException("O resumo é obrigatório");
+        }
+        if(!(parametros.get("expedidora") instanceof UndAdm)){
+            throw new IllegalArgumentException("O expedidora deve ser do tipo UndAdm");
+        }
+
+        // Verifica se os campos opcionais são do tipo correto
+        if(parametros.containsKey("dtFimVig") && !(parametros.get("dtFimVig") instanceof Date)){
+            throw new IllegalArgumentException("O dtFimVig deve ser do tipo Date");
+        }
+        if(parametros.containsKey("dPublicDou") && !(parametros.get("dPublicDou") instanceof Date)){
+            throw new IllegalArgumentException("O dPublicDou deve ser do tipo Date");
+        }
+        if(parametros.containsKey("horasDesig") && !(parametros.get("horasDesig") instanceof Integer)){
+            throw new IllegalArgumentException("O horasDesig deve ser do tipo int");
+        }
+        if(parametros.containsKey("arqPdf") && !(parametros.get("arqPdf") instanceof File)){
+            throw new IllegalArgumentException("O arqPdf deve ser do tipo File");
+        }
+        if(parametros.containsKey("designados")){
+            if(!(parametros.get("designados") instanceof List<?>)){
+                throw new IllegalArgumentException("O designados deve ser do tipo List<Designado>");
+            } else {
+                for (Object obj : (List) parametros.get("designados")) {
+                    if (!(obj instanceof Designado)) {
+                        throw new IllegalArgumentException("O designados deve ser do tipo List<Designado>");
+                    }
+                }
+            }
+        }
+        if(parametros.containsKey("referencias")){
+            if(!(parametros.get("referencias") instanceof List<?>)){
+                throw new IllegalArgumentException("O referencias deve ser do tipo List<Referencia>");
+            } else {
+                for (Object obj : (List) parametros.get("referencias")) {
+                    if (!(obj instanceof Referencia)) {
+                        throw new IllegalArgumentException("O referencias deve ser do tipo List<referencias>");
+                    }
+                }
+            }
+        }
+        if(parametros.containsKey("recebedoras")){
+            if(!(parametros.get("recebedoras") instanceof List<?>)){
+                throw new IllegalArgumentException("O recebedoras deve ser do tipo List<Recebedora>");
+            } else {
+                for (Object obj : (List) parametros.get("recebedoras")) {
+                    if (!(obj instanceof Recebedora)) {
+                        throw new IllegalArgumentException("O recebedoras deve ser do tipo List<Recebedora>");
+                    }
+                }
+            }
         }
     }
 
-    public Portaria salvar(String assunto, Date dtIniVig, Date dtFimVig, Date dPublicDou, int horasDesig, String resumo, File arqPdf, List<Designado> designados, List<Referencia> referencias, List<Recebedora> recebedoras, UndAdm expedidora) throws IOException {
-        if(!this.validarCampos(assunto, dtIniVig, resumo)){
-            throw new IllegalArgumentException();
-        }
+    public Portaria salvar(Map<String, Object> parametros) throws IOException {
+
+        // Valida os parametros
+        validarCampos(parametros);
 
         Portaria portaria = new Portaria();
-        portaria.setAssunto(assunto);
-        portaria.setDtIniVig(dtIniVig);
-        portaria.setDtFimVig(dtFimVig);
-        portaria.setDtPublicDou(dPublicDou);
-        portaria.setHorasDesig(horasDesig);
-        portaria.setResumo(resumo);
+        portaria.setAssunto((String) parametros.get("assunto"));
+        portaria.setDtIniVig((Date) parametros.get("dtIniVig"));
 
-        portaria.setUnidadeExpedidora(expedidora);
+        if(parametros.containsKey("dtFimVig")){
+            portaria.setDtFimVig((Date) parametros.get("dtFimVig"));
+        }
+
+        if(parametros.containsKey("dPublicDou")){
+            portaria.setDtPublicDou((Date) parametros.get("dPublicDou"));
+        }
+
+        if(parametros.containsKey("horasDesig")){
+            portaria.setHorasDesig((int) parametros.get("horasDesig"));
+        }
+
+        portaria.setResumo((String) parametros.get("resumo"));
+
+        UndAdm expedidora = (UndAdm) parametros.get("expedidora");
 
         // Abre a transação
         this.portariaDAO.abrirTransacao();
@@ -82,37 +161,52 @@ public class ControladorProPorta{
         int seqId = expedidora.getUltNumProp() + 1;
         portaria.setSeqId(seqId);
 
-        for(int i = 0; i < designados.size(); i++){
-            // Salva os designados
-            designados.set(i, this.designadoDAO.salvar(designados.get(i)));
-        }
-        portaria.setDesignados(designados);
+        // Altera o ultNumProp da UndAdm
+        expedidora.setUltNumProp(seqId);
+        portaria.setUnidadeExpedidora(expedidora);
 
-        for(int i = 0; i < referencias.size(); i++){
-            // Salva as referências
-            referencias.set(i, this.portariaReferenciadaDAO.salvar(referencias.get(i)));
+        if(parametros.containsKey("designados")) {
+            List<Designado> designados = (List<Designado>) parametros.get("designados");
+            for (int i = 0; i < designados.size(); i++) {
+                // Salva os designados
+                designados.set(i, this.designadoDAO.salvar(designados.get(i)));
+            }
+            portaria.setDesignados(designados);
         }
-        portaria.setReferencias(referencias);
 
-        for(int i = 0; i < recebedoras.size(); i++){
-            // Salva as recebedoras
-            recebedoras.set(i, this.recebedoraDAO.salvar(recebedoras.get(i)));
+        if(parametros.containsKey("referencias")) {
+            List<Referencia> referencias = (List<Referencia>) parametros.get("referencias");
+            for (int i = 0; i < referencias.size(); i++) {
+                // Salva as referências
+                referencias.set(i, this.portariaReferenciadaDAO.salvar(referencias.get(i)));
+            }
+            portaria.setReferencias(referencias);
         }
-        portaria.setUndRecebedora(recebedoras);
+
+        if(parametros.containsKey("recebedoras")) {
+            List<Recebedora> recebedoras = (List<Recebedora>) parametros.get("recebedoras");
+            for (int i = 0; i < recebedoras.size(); i++) {
+                // Salva as recebedoras
+                recebedoras.set(i, this.recebedoraDAO.salvar(recebedoras.get(i)));
+            }
+            portaria.setUndRecebedora(recebedoras);
+        }
+
+        if(parametros.containsKey("arqPdf")) {
+            File arqPdf = (File) parametros.get("arqPdf");
+            if(arqPdf.exists()) {
+                byte[] fileContent = Files.readAllBytes(arqPdf.toPath());
+                portaria.setArqPdf(fileContent);
+            }
+        }
 
         // Define o status de Proposta
         portaria.setStatus(PortariaStatus.Proposta);
 
-        if(arqPdf.exists()) {
-            byte[] fileContent = Files.readAllBytes(arqPdf.toPath());
-            portaria.setArqPdf(fileContent);
-        }
-
         portaria = this.portariaDAO.salvar(portaria);
 
-        // Altera o ultNumProp da UndAdm
-        expedidora.setUltNumProp(seqId);
-        this.undAdmDAO.salvar(expedidora);
+
+        //this.undAdmDAO.salvar(expedidora);
 
         // Comitta
         try{
