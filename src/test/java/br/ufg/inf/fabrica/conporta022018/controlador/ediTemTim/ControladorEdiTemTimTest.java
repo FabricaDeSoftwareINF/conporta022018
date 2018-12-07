@@ -12,6 +12,8 @@ import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
+
+import java.io.IOException;
 import java.util.*;
 import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
 import org.junit.*;
@@ -22,7 +24,8 @@ import org.junit.*;
  *  1 - Testando os valores limites inferior;
  *  2 - Testando os valores limites superiores;
  *  3 - Testando os valores limites;
- *  4 - Tentando com valores extrategicos dentro do limite definido.
+ *  4 - Tentando com valores extrategicos dentro e fora do limite definido.
+ *  5 - Para os cenários de excerção serão tratadas no try/catch e validada as excerções.
  *
  *  Limites:  15 <= minInat <=60 minutos, para isso definido valores inteiros sendo:
  *  1 = 1 minuto, 1 = 2 minutos, ..., 60 = 60 minutos.
@@ -31,6 +34,9 @@ import org.junit.*;
 public class ControladorEdiTemTimTest {
 
     private static ControladorManterUndAdm controladorEdiTemTim;
+    private static final String UNIDADE_INVALIDA = "A Unidade informada não foi localizada.";
+    private static final String TEMPO_INVALIDO = "Tempo Inválido! Por favor, Digite um Tempo para " +
+            "inatividade entre 15 e 60 segundos, inclusive-os.";
 
 
     @Test
@@ -112,6 +118,7 @@ public class ControladorEdiTemTimTest {
         /*                -------->>> SEÇÃO 1 - CENÁRIOS DE SUCESSO  <<<---------                    */
 
         controladorEdiTemTim = new ControladorManterUndAdm();
+
         /*
          * Cenário que testa os limites.
          */
@@ -136,21 +143,103 @@ public class ControladorEdiTemTimTest {
         /*                -------->>> SEÇÃO 2 - CENÁRIOS DE EXCERÇÕES   <<<---------                  */
 
         /*
-         * Cenário que testa os valores limites superiores e inferiores próximo
+         * Cenário que testa os valores limites superiores e inferiores próximo.
+         *
+         * Espera se "True" no lançamento da exceção.
          */
-        controladorEdiTemTim.editarTimeOut(61,"FF");
-        controladorEdiTemTim.editarTimeOut(14, "FM");
+        try {
+            controladorEdiTemTim.editarTimeOut(61,"FF");
+        } catch (Exception e) {
+            Assert.assertEquals(TEMPO_INVALIDO, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(14, "FM");
+        } catch (Exception e) {
+            Assert.assertEquals(TEMPO_INVALIDO, e);
+        }
 
         /*
          * Cenário  que testa valores estratégicos inválidos.
+         *
+         * Espera se "True" no lançamento da exceção.
          */
-        controladorEdiTemTim.editarTimeOut(68, "EMC");
-        controladorEdiTemTim.editarTimeOut(100, "EECA");
-        controladorEdiTemTim.editarTimeOut(75, "EA");
-        controladorEdiTemTim.editarTimeOut(10, "EVZ");
-        controladorEdiTemTim.editarTimeOut(7, "FED");
-        controladorEdiTemTim.editarTimeOut(-1, "FACE");
-        controladorEdiTemTim.editarTimeOut(0, "FAFIL");
+        try {
+            controladorEdiTemTim.editarTimeOut(68, "EMC");
+        } catch (Exception e) {
+            Assert.assertEquals(TEMPO_INVALIDO, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(100, "EECA");
+        } catch (Exception e) {
+            Assert.assertEquals(TEMPO_INVALIDO, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(75, "EA");
+        } catch (Exception e) {
+            Assert.assertEquals(TEMPO_INVALIDO, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(10, "EVZ");
+        } catch (Exception e) {
+            Assert.assertEquals(TEMPO_INVALIDO, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(7, "FED");
+        } catch (Exception e) {
+            Assert.assertEquals(TEMPO_INVALIDO, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(-1, "FACE");
+        } catch (Exception e) {
+            Assert.assertEquals(TEMPO_INVALIDO, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(0, "FAFIL");
+        } catch (Exception e) {
+            Assert.assertEquals(TEMPO_INVALIDO, e);
+        }
+
+        /*
+         * Cenário que testa unidade inválida.
+         *
+         * Espera se "True" no lançamento da exceção.
+         */
+        try {
+            controladorEdiTemTim.editarTimeOut(60, "EFR");
+        } catch (Exception e) {
+            Assert.assertEquals(UNIDADE_INVALIDA, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(30, "YRT");
+        } catch (Exception e) {
+            Assert.assertEquals(UNIDADE_INVALIDA, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(45, "URF");
+        } catch (Exception e) {
+            Assert.assertEquals(UNIDADE_INVALIDA, e);
+        }
+
+        /*
+         * Cenário que testa os dois valores de entrada inválido.
+         *
+         * Espera se "True" no lançamento da exceção.
+         */
+        try {
+            controladorEdiTemTim.editarTimeOut(75, "EWQ");
+        } catch (Exception e) {
+            Assert.assertEquals(UNIDADE_INVALIDA, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(-12, "TFR");
+        } catch (Exception e) {
+            Assert.assertEquals(UNIDADE_INVALIDA, e);
+        }
+        try {
+            controladorEdiTemTim.editarTimeOut(7, "ASD");
+        } catch (Exception e) {
+            Assert.assertEquals(UNIDADE_INVALIDA, e);
+        }
 
 
         /*                -------->>> SEÇÃO 3 - VÁLIDA OPERAÇÕES   <<<---------                      */
