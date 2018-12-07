@@ -7,24 +7,8 @@
 package br.ufg.inf.fabrica.conporta022018.controlador.efetLogout;
 
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorEfetLogout;
-import br.ufg.inf.fabrica.conporta022018.modelo.RetornoEfetLogoutEnum;
-import br.ufg.inf.fabrica.conporta022018.util.Extrator;
-import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
-import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
-import br.ufg.inf.fabrica.conporta022018.util.exception.EfetLogoutException;
 import org.junit.*;
 import org.mockito.Mockito;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
 import static br.ufg.inf.fabrica.conporta022018.modelo.RetornoEfetLogoutEnum.*;
 
@@ -38,17 +22,30 @@ public class ControladorEfetLogoutTest extends Mockito {
     }
 
     @Test
-    public void casoTestDadosValidos() {
+    public void casoTestRespostaServidorOK() {
+        when(controladorEfetLogout.efetuarLogout()).thenReturn(OK.toString());
+
         String resposta = controladorEfetLogout.efetuarLogout();
-        Assert.assertNull(resposta);
-        if (resposta != null) Assert.assertTrue(resposta.contains(OK.getStatus()));
+        Assert.assertNotNull(resposta);
+        Assert.assertTrue(resposta.contains(OK.getStatus()));
     }
 
-    @Test(expected = ServletException.class)
-    public void casoTestDadosExcecoes() {
+    @Test
+    public void casoTestRespostaServidorErroExecucao() {
+        when(controladorEfetLogout.efetuarLogout()).thenReturn(ERRO_EXECUCAO.toString());
+
         String resposta = controladorEfetLogout.efetuarLogout();
-        Assert.assertNull(resposta);
-        if (resposta != null) Assert.assertTrue(resposta.contains(ERRO_EXECUCAO.getStatus()));
+        Assert.assertNotNull(resposta);
+        Assert.assertTrue(resposta.contains(ERRO_EXECUCAO.getStatus()));
+    }
+
+    @Test
+    public void casoTestRespostaServidorErroInesperado() {
+        when(controladorEfetLogout.efetuarLogout()).thenReturn(ERRO_INESPERADO.toString());
+
+        String resposta = controladorEfetLogout.efetuarLogout();
+        Assert.assertNotNull(resposta);
+        Assert.assertTrue(resposta.contains(ERRO_INESPERADO.getStatus()));
     }
 
 }
