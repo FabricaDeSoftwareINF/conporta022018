@@ -9,22 +9,22 @@ public class Referencia extends ModeloAbstrato {
     private static final long serialVersionUID = 1L;
     
     @ManyToOne
-    private Portaria Referencia;
+    private Portaria portariaReferenciada;
     private boolean ehCancelamento;
       
 
     /**
      * @return Portaria return the Referencia
      */
-    public Portaria getReferencia() {
-        return Referencia;
+    public Portaria getPortariaReferenciada() {
+        return portariaReferenciada;
     }
 
     /**
      * @param Referencia the Referencia to set
      */
-    public void setReferencia(Portaria Referencia) {
-        this.Referencia = Referencia;
+    public void setReferencia(Portaria portariaReferenciada) {
+        this.portariaReferenciada = portariaReferenciada;
     }
 
     /**
