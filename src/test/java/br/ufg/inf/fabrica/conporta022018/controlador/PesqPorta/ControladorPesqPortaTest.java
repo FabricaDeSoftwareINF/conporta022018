@@ -6,14 +6,13 @@
 
 package br.ufg.inf.fabrica.conporta022018.controlador.PesqPorta;
 
-import br.ufg.inf.fabrica.conporta022018.controlador.ControladorPesqPorta;
+import br.ufg.inf.fabrica.conporta022018.controlador.PortariaControlador;
 import br.ufg.inf.fabrica.conporta022018.dto.FiltroDTO;
 import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
 import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
-import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
@@ -25,16 +24,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class ControladorPesqPortaTest {
 
-  private static ControladorPesqPorta controladorPesqPorta;
+  private static PortariaControlador controladorPesqPorta;
 
   /*
    * Preparação do ambiente para teste.
@@ -62,7 +66,9 @@ public class ControladorPesqPortaTest {
 
     dadosSoftware = lerArquivo.lerArquivo(CAMINHO_CSV);
 
+    Map<Long, List<Designado>> mapDesignados = new HashMap<Long, List<Designado>>();
 
+    UndAdm unidadeExp = null;
 
     for (int index = 0; index < dadosSoftware.size(); index++) {
       linha = dadosSoftware.get(index);
@@ -108,11 +114,12 @@ public class ControladorPesqPortaTest {
           portaria.setDtExped(formato.parse(dados[5]));
           portaria.setDtIniVig(formato.parse(dados[7]));
           portaria.setDtFimVig(formato.parse(dados[8]));
+          portaria.setDesignados(mapDesignados.get(Long.parseLong(dados[0])));
+          portaria.setUnidadeExpedidora(unidadeExp);
 
           portariaDao.abrirTransacao();
           portariaDao.salvar(portaria);
           portariaDao.commitarTransacao();
-
 
           break;
         case "undAdm":
@@ -132,7 +139,7 @@ public class ControladorPesqPortaTest {
           undAdm.setUltNumProp(Integer.valueOf(dados[8]));
 
           undAdmDAO.abrirTransacao();
-          undAdmDAO.salvar(undAdm);
+          unidadeExp = undAdmDAO.salvar(undAdm);
           undAdmDAO.commitarTransacao();
 
           break;
@@ -141,26 +148,22 @@ public class ControladorPesqPortaTest {
           extrator.setTexto(linha);
           dados = extrator.getResultado(REGRA);
 
-//          List<Portaria> portarias = portariaDao.buscarTodos();
-//
-//          Portaria portariaSalva = portariaDao.buscar(Long.parseLong(dados[6]));
-//          Pessoa pessoaSalva = pessoaDAO.buscar(Long.parseLong(dados[7]));
-//
-//          Designado designado = new Designado();
-//
-//          designado.setDesignado(pessoaSalva);
-//
-//          portariaSalva.setDesignados(new ArrayList<Designado>());
-//
-//          portariaSalva.getDesignados().add(designado);
-//
-//
-//          portariaDao.abrirTransacao();
-//          portariaDao.salvar(portariaSalva);
-//          portariaDao.commitarTransacao();
+          Designado designado = new Designado();
 
+          Map<String, Object> parametro = new HashMap<String, Object>();
 
+          parametro.put("CpfPes", dados[7]);
 
+          Pessoa pessoaSalva = pessoaDAO.pesquisarUmJPQLCustomizada(
+              "select p from Pessoa p where p.cpfPes = :CpfPes", parametro);
+
+          designado.setDesignado(pessoaSalva);
+
+          if (!mapDesignados.containsKey(Long.parseLong(dados[6]))) {
+            mapDesignados.put(Long.parseLong(dados[6]), new ArrayList<Designado>());
+          }
+
+          mapDesignados.get(Long.parseLong(dados[6])).add(designado);
 
           break;
       }
@@ -171,7 +174,7 @@ public class ControladorPesqPortaTest {
   public void casoTestPrepararExecucao() {
 
     //Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
-    controladorPesqPorta = new ControladorPesqPorta();
+    controladorPesqPorta = new PortariaControlador();
   }
 
   /*
@@ -186,18 +189,41 @@ public class ControladorPesqPortaTest {
   public void casoTestDadosValidos() throws IOException {
 
     //Grupo de teste DadosValidos, exemplo:
-    FiltroDTO filtro = new FiltroDTO(null, null, 2018, null, null);
-    List<Portaria> portarias = controladorPesqPorta.pesqPorta(filtro);
+    FiltroDTO filtroAno = new FiltroDTO(null, null, 2018, null, null);
+    List<Portaria> portarias = controladorPesqPorta.pesquisa(filtroAno);
+
+    //Teste para consuta por ano
+    Assert.assertNotEquals(portarias.size(), 0);
+
+
+    FiltroDTO filtroCPF = new FiltroDTO("784.456.818-12", null, null, null, null);
+
+    portarias = controladorPesqPorta.pesquisa(filtroCPF);
+
+    //Teste para consuta por CPF
+    Assert.assertNotEquals(portarias.size(), 0);
+
+
+    FiltroDTO filtroSigla = new FiltroDTO(null, "INF", null, null, null);
+
+    portarias = controladorPesqPorta.pesquisa(filtroSigla);
+
+    //Teste para consuta por Sigla Unidade
     Assert.assertNotEquals(portarias.size(), 0);
 
   }
 
-  @Test
-  public void casoTestDadosExcecoes() throws IOException {
+  @Test(expected = IllegalArgumentException.class)
+  public void casoTestDadosExcecoes() throws  ParseException {
 
-    //Grupo de teste DadosExcecoes, exemplo:
-    // controladorPesqPorta.pesqPorta("123.456.789-12", "FACE", 2018, 0001);
-    //O cenario acima testa a primeira exceção do caso de uso a unidade acadêmica não é localizada.
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+    FiltroDTO filtro = new FiltroDTO(null, null, null, formato.parse("02/01/2018"),
+        formato.parse("01/01/2018"));
+
+    controladorPesqPorta.pesquisa(filtro);
+
+
   }
 
   @AfterClass

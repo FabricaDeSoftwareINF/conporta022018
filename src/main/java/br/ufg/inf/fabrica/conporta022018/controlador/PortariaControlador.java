@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class PortariaControlador {
 
-  private PortariaDAO portariaDao;
+  private PortariaDAO portariaDao = new PortariaDAO();
 
   /**
    * Retorna uma lista de {@link Portaria} conforme o filtro informado.
@@ -25,7 +25,16 @@ public class PortariaControlador {
 
     try {
 
-      return portariaDao.pesquisarPortaria(filtro);
+      if (filtro.getInicioVigencia() != null && filtro.getFimVigencia() != null){
+        if (filtro.getFimVigencia().before(filtro.getInicioVigencia())){
+          throw new IllegalArgumentException("A data fim não deve ser menor que a de início");
+        } else {
+          return portariaDao.pesquisarPortaria(filtro);
+        }
+      } else {
+        return portariaDao.pesquisarPortaria(filtro);
+      }
+
 
     } catch (Exception e) {
       e.printStackTrace();

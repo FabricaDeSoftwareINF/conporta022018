@@ -73,7 +73,7 @@ public class PortariaDAO extends GenericoDAO<Portaria> {
   private void setParametroCodigoDesignado(String cpfPes, StringBuilder jpql,
       Map<String, Object> parametros) {
     if (cpfPes != null) {
-      jpql.append(" and (d.pessoa.cpfPes = :cpfPes) ");
+      jpql.append(" and (d.designado.cpfPes = :cpfPes) ");
       parametros.put("cpfPes", cpfPes);
     }
   }
