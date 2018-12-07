@@ -150,12 +150,12 @@ public class ControladorEdiTemTimTest {
         try {
             controladorEdiTemTim.editarTimeOut(61,"FF");
         } catch (Exception e) {
-            Assert.assertEquals(TEMPO_INVALIDO, e);
+            Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(14, "FM");
         } catch (Exception e) {
-            Assert.assertEquals(TEMPO_INVALIDO, e);
+            Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
 
         /*
@@ -166,37 +166,37 @@ public class ControladorEdiTemTimTest {
         try {
             controladorEdiTemTim.editarTimeOut(68, "EMC");
         } catch (Exception e) {
-            Assert.assertEquals(TEMPO_INVALIDO, e);
+            Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(100, "EECA");
         } catch (Exception e) {
-            Assert.assertEquals(TEMPO_INVALIDO, e);
+            Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(75, "EA");
         } catch (Exception e) {
-            Assert.assertEquals(TEMPO_INVALIDO, e);
+            Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(10, "EVZ");
         } catch (Exception e) {
-            Assert.assertEquals(TEMPO_INVALIDO, e);
+            Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(7, "FED");
         } catch (Exception e) {
-            Assert.assertEquals(TEMPO_INVALIDO, e);
+            Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(-1, "FACE");
         } catch (Exception e) {
-            Assert.assertEquals(TEMPO_INVALIDO, e);
+            Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(0, "FAFIL");
         } catch (Exception e) {
-            Assert.assertEquals(TEMPO_INVALIDO, e);
+            Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
 
         /*
@@ -207,17 +207,17 @@ public class ControladorEdiTemTimTest {
         try {
             controladorEdiTemTim.editarTimeOut(60, "EFR");
         } catch (Exception e) {
-            Assert.assertEquals(UNIDADE_INVALIDA, e);
+            Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(30, "YRT");
         } catch (Exception e) {
-            Assert.assertEquals(UNIDADE_INVALIDA, e);
+            Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(45, "URF");
         } catch (Exception e) {
-            Assert.assertEquals(UNIDADE_INVALIDA, e);
+            Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
 
         /*
@@ -228,17 +228,17 @@ public class ControladorEdiTemTimTest {
         try {
             controladorEdiTemTim.editarTimeOut(75, "EWQ");
         } catch (Exception e) {
-            Assert.assertEquals(UNIDADE_INVALIDA, e);
+            Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(-12, "TFR");
         } catch (Exception e) {
-            Assert.assertEquals(UNIDADE_INVALIDA, e);
+            Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(7, "ASD");
         } catch (Exception e) {
-            Assert.assertEquals(UNIDADE_INVALIDA, e);
+            Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
 
 
