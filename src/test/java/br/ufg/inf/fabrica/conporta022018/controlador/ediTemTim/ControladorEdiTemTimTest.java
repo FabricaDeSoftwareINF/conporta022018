@@ -12,67 +12,72 @@ import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
-import java.io.IOException;
 import java.util.*;
-
 import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
 import org.junit.*;
+
+/*
+ * Classe tem o intuito de exercitar o controlador referente ao caso de uso EdiTemTim.
+ * Para este cenário foi utilizado a estrategia de pontos críticos.
+ *  1 - Testando os valores limites inferior;
+ *  2 - Testando os valores limites superiores;
+ *  3 - Testando os valores limites;
+ *  4 - Tentando com valores extrategicos dentro do limite definido.
+ *
+ *  Limites:  15 <= minInat <=60 minutos, para isso definido valores inteiros sendo:
+ *  1 = 1 minuto, 1 = 2 minutos, ..., 60 = 60 minutos.
+ */
 
 public class ControladorEdiTemTimTest {
 
     private static ControladorManterUndAdm controladorEdiTemTim;
 
-    /*
-     * Preparação do ambiente para teste.
-     * População do banco de Dados para atendam os pré-requisitos do caso de uso.
-     */
 
-    @BeforeClass
-    public static void casoTestPepararCenario() throws IOException {
+    @Test
+    public void casoTestControladorEdiTemTim() throws Exception {
 
-        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/editTemTim/ControladorEdiTemTim.csv";
+        /*
+         * Os comandos abaixo prepara o ambiente para a execução dos testes, ou seja,
+         * ele popula a base da dados realiza configuração de variáveis globais.
+         */
+        String CAMINHO_CSV = "ControladorEdiTemTim.csv";
         String REGRA = ",";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
         LerArquivo lerArquivo = new LerArquivo();
         String tabelaAtual = " ";
         String dadosUndAdm[];
-        String linha;  
+        String linha;
         UndAdm undAdm;
         UndAdmDAO dao = new UndAdmDAO();
-
         dadosSoftware = lerArquivo.lerArquivo(CAMINHO_CSV);
 
         for (int index = 0; index < dadosSoftware.size(); index++) {
             linha = dadosSoftware.get(index);
 
-            //Definir as tabelas que serão populadas no Banco de Dados.
+            /*
+             * Definir as tabelas que serão populadas.
+             */
             if (linha.equals("undAdm")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
             }
 
-            switch (tabelaAtual) {               
-                case "undAdm" :
+            /*
+             * Inserir os dados na base de dados.
+             */
+            switch (tabelaAtual) {
+                case "undAdm":
                     undAdm = new UndAdm();
                     extrator.setTexto(linha);
-                    dadosUndAdm = extrator.getResultado(REGRA);  
+                    dadosUndAdm = extrator.getResultado(REGRA);
 
                     //undAdm.setId(Long.parseLong(dadosUndAdm[0]));
                     undAdm.setNomeUnd(dadosUndAdm[1]);
                     undAdm.setSiglaUnAdm(dadosUndAdm[2]);
-                    String tipoUnd = dadosUndAdm[3];
-                    if (tipoUnd.equals("Curso"))
-                        undAdm.setTipoUnd(TipoUnd.CURSO);
-                    else if (tipoUnd.equals("Unidade Acadêmica"))
-                        undAdm.setTipoUnd(TipoUnd.UNIDADE_ACADEMICA);
-                    else if (tipoUnd.equals("Unidade Gestora"))
-                        undAdm.setTipoUnd(TipoUnd.UNIDADE_GESTORA);
-                    else if (tipoUnd.equals("Conselho"))
-                        undAdm.setTipoUnd(TipoUnd.CONSELHO);
-                    else if (tipoUnd.equals("Unidade Externa"))
-                        undAdm.setTipoUnd(TipoUnd.UNIDADE_EXTERNA);
+                    TipoUnd tipo = TipoUnd.valueOf(dadosUndAdm[3]);
+                    undAdm.setTipoUnd(tipo);
                     undAdm.setMinInat(Integer.parseInt(dadosUndAdm[4]));
                     undAdm.setUltPort(dadosUndAdm[5]);
                     undAdm.setAnoPort(Integer.parseInt(dadosUndAdm[6]));
@@ -88,100 +93,148 @@ public class ControladorEdiTemTimTest {
                 break;
             }
         }
-    }
 
-    @Before
-    public void casoTestPrepararExecucao() {
+        /*            -------->>> FINALIZAÇÂO DA PREPARAÇÃO DO AMBIENTE <<<---------                 */
 
-        //Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
+
+
+        /*
+         * Como as alterações são realizadas na base de dados os testes estão organizados de
+         * acordo com a estrutura abaixo:
+         *
+         * Seção 1 - Exercita os cenários de sucesso do caso de uso.
+         * Seção 2 - Exercita os cenários de excerções do caso de uso.
+         * Seção 3 - Válida as operações realizadas nas seções anteriores.
+         */
+
+
+
+        /*                -------->>> SEÇÃO 1 - CENÁRIOS DE SUCESSO  <<<---------                    */
+
         controladorEdiTemTim = new ControladorManterUndAdm();
-    }
-
-    /*
-     * Criar os cenários de testes para a aplicação:
-     * Os cenarios de testes devem obrigatóriamente ser divididos em dois grupos.
-     * DadosValidos : Grupo destinado ao cenatio típico e aos cenarios alternativos do caso de uso.
-     * DadosExcecoes : Grupo destinado as exceções do cenario típico e dos cenarios alternativos.
-     * Cada cenário e cada exceção deve necessáriamente ser testado no minimo uma vez, cada entrada e/ou combinação
-     * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
-     */
-
-    @Test
-    public void casoTestDadosValidos() throws Exception {
-
-        //Grupo de teste DadosValidos, exemplo:   
-        //Limite máximo do tempo válido uma sessão.
-        UndAdm undAdm = new UndAdm();            
+        /*
+         * Cenário que testa os limites.
+         */
         controladorEdiTemTim.editarTimeOut(60, "INF");
+        controladorEdiTemTim.editarTimeOut(15, "IME");
 
-        //Limite máximo do tempo válido uma sessão menos um.
-        UndAdm undAdm2 = new UndAdm();              
-        controladorEdiTemTim.editarTimeOut(59, "EMC");
+        /*
+         * Cenário que testa os valores proxímo ao limite válidos.
+         */
+        controladorEdiTemTim.editarTimeOut(59, "IESA");
+        controladorEdiTemTim.editarTimeOut(16,"FD");
 
-        //Limite mínimo do tempo válido uma sessão.
-        UndAdm undAdm3 = new UndAdm();              
-        controladorEdiTemTim.editarTimeOut(15, "FAV");
+        /*
+         * Cenário  que testa valores estratégicos válidos.
+         */
+        controladorEdiTemTim.editarTimeOut(20, "IF");
+        controladorEdiTemTim.editarTimeOut(35, "IQ");
+        controladorEdiTemTim.editarTimeOut(47, "ICB");
+        controladorEdiTemTim.editarTimeOut(53, "FL");
 
-        //Limite mínimo do tempo válido uma sessão mais um .
-        UndAdm undAdm4 = new UndAdm();              
-        controladorEdiTemTim.editarTimeOut(16, "IME");
 
-    }
+        /*                -------->>> SEÇÃO 2 - CENÁRIOS DE EXCERÇÕES   <<<---------                  */
 
-    @Test
-    public void casoTestDadosExcecoes() throws Exception {
+        /*
+         * Cenário que testa os valores limites superiores e inferiores próximo
+         */
+        controladorEdiTemTim.editarTimeOut(61,"FF");
+        controladorEdiTemTim.editarTimeOut(14, "FM");
 
-        //O cenario abaixo testa que a mudança do tempo de sessão para mais de uma período superior em um ao permitido.       
-        controladorEdiTemTim.editarTimeOut(61, "INF");
+        /*
+         * Cenário  que testa valores estratégicos inválidos.
+         */
+        controladorEdiTemTim.editarTimeOut(68, "EMC");
+        controladorEdiTemTim.editarTimeOut(100, "EECA");
+        controladorEdiTemTim.editarTimeOut(75, "EA");
+        controladorEdiTemTim.editarTimeOut(10, "EVZ");
+        controladorEdiTemTim.editarTimeOut(7, "FED");
+        controladorEdiTemTim.editarTimeOut(-1, "FACE");
+        controladorEdiTemTim.editarTimeOut(0, "FAFIL");
 
-        //O cenario abaixo testa que a mudança do tempo de sessão para um período inferior em um ao permitido.             
-        controladorEdiTemTim.editarTimeOut(14, "INF");
 
-        //O cenario abaixo testa que a mudança do tempo válido de sessão para uma unidade academica que não existe na 
-        //base de dados.             
-        controladorEdiTemTim.editarTimeOut(30, "FACE");
+        /*                -------->>> SEÇÃO 3 - VÁLIDA OPERAÇÕES   <<<---------                      */
 
-        //O cenario abaixo testa que a mudança do tempo de sessão para um período inferior em um ao permitido de sessão 
-        //para uma unidade academica que não existe na base de dados.             
-        controladorEdiTemTim.editarTimeOut(14, "FD");
-
-        //O cenario abaixo testa que a mudança do tempo de sessão para um período superior em um ao permitido de sessão 
-        para uma unidade academica que não existe na base de dados.             
-        controladorEdiTemTim.editarTimeOut(61, "FAV");  
-    }
-
-    @AfterClass
-    public static void casoTestResultados() throws IOException {
-
-        UndAdm undAdm;
-        UndAdmDAO dao = new UndAdmDAO();
-
-        final String JPQL_BUSCAR_UNIDADE = "select u UndAdm u where u.siglaUnd = :sigla";
         Map<String, Object> map = new HashMap<String, Object>();
+        final String JPQL_BUSCAR_UNIDADE = "SELECT u FROM UndAdm u WHERE u.siglaUnAdm = :sigla";
 
-        //Aqui verifica se o valor foi alterado.
-        //Retorna "True" se a alteração refletiu na base de dados e "False" se a alteração não refletiu.
+        /*
+         * Válida as operações realizadas na base de dados.
+         * Espera se "True" confirmando o novo tempo na base de dados.
+         */
         map.put("sigla","INF");
         undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
         Assert.assertEquals(Integer.valueOf(60), undAdm.getMinInat());
 
-        //Aqui verifica se o valor foi alterado.
-        //Retorna "True" se a alteração refletiu na base de dados e "False" se a alteração não refletiu.
-        map.put("sigla","EMC");
-        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
-        Assert.assertEquals(Integer.valueOf(59), undAdm.getMinInat());
-
-        //Aqui verifica se o valor foi alterado.
-        //Retorna "True" se a alteração refletiu na base de dados e "False" se a alteração não refletiu.
-        map.put("sigla","FAV");
+        map.put("sigla","IME");
         undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
         Assert.assertEquals(Integer.valueOf(15), undAdm.getMinInat());
 
-        //Aqui verifica se o valor foi alterado.
-        //Retorna "True" se a alteração refletiu na base de dados e "False" se a alteração não refletiu.
-        map.put("sigla","IME");
+        map.put("sigla","IESA");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertEquals(Integer.valueOf(59), undAdm.getMinInat());
+
+        map.put("sigla","FD");
         undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
         Assert.assertEquals(Integer.valueOf(16), undAdm.getMinInat());
+
+        map.put("sigla","IF");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertEquals(Integer.valueOf(20), undAdm.getMinInat());
+
+        map.put("sigla","IQ");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertEquals(Integer.valueOf(35), undAdm.getMinInat());
+
+        map.put("sigla","ICB");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertEquals(Integer.valueOf(47), undAdm.getMinInat());
+
+        map.put("sigla","FL");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertEquals(Integer.valueOf(53), undAdm.getMinInat());
+
+
+        /*
+         * Válida as operações realizadas na base de dados.
+         * Espera se "False" confirmando o novo tempo não foi armazenado na base de dados.
+         */
+        map.put("sigla","FF");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertNotEquals(Integer.valueOf(61), undAdm.getMinInat());
+
+        map.put("sigla","FM");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertNotEquals(Integer.valueOf(14), undAdm.getMinInat());
+
+        map.put("sigla","EMC");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertNotEquals(Integer.valueOf(68), undAdm.getMinInat());
+
+        map.put("sigla","EECA");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertNotEquals(Integer.valueOf(100), undAdm.getMinInat());
+
+        map.put("sigla","EA");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertNotEquals(Integer.valueOf(75), undAdm.getMinInat());
+
+        map.put("sigla","EVZ");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertNotEquals(Integer.valueOf(10), undAdm.getMinInat());
+
+        map.put("sigla","FED");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertNotEquals(Integer.valueOf(7), undAdm.getMinInat());
+
+        map.put("sigla","FACE");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertNotEquals(Integer.valueOf(-1), undAdm.getMinInat());
+
+        map.put("sigla","FAFIL");
+        undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
+        Assert.assertNotEquals(Integer.valueOf(0), undAdm.getMinInat());
+
     }
 
 }

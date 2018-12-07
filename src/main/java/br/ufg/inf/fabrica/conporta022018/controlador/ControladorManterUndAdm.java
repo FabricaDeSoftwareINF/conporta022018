@@ -6,7 +6,6 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;
-import br.ufg.inf.fabrica.conporta022018.persistencia.GenericoDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 
 import java.util.HashMap;
@@ -16,7 +15,7 @@ public class ControladorManterUndAdm {
 
     private final int TEMPO_MAXIMO = 60;
     private final int TEMPO_MINIMO = 15;
-    private final String JPQL_BUSCAR_UNIDADE = "select u UndAdm u where u.siglaUnd = :sigla";
+    private final String JPQL_BUSCAR_UNIDADE = "SELECT u FROM UndAdm u WHERE u.siglaUnAdm = :sigla";
     private UndAdm undAdm;
     private UndAdmDAO dao;
     private Map<String, Object> map;
@@ -28,11 +27,10 @@ public class ControladorManterUndAdm {
     }
 
     public void editarTimeOut(int minInat, String sigla) throws Exception {
-
         this.map.put("sigla", sigla);
         this.undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
 
-        if (this.undAdm.equals(null)) {
+        if (!this.undAdm.equals(null)) {
 
             if (minInat <= this.TEMPO_MAXIMO && minInat >= this.TEMPO_MINIMO) {
                 undAdm.setMinInat(minInat);
@@ -52,6 +50,3 @@ public class ControladorManterUndAdm {
         }
     }
 }
-
-
- 
