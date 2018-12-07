@@ -26,5 +26,5 @@ public class ExtratorCSV implements Extrator {
 
         this.texto = texto;
     }
+ }
 
-}
