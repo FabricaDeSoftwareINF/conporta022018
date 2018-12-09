@@ -227,7 +227,7 @@ public class ControladorConAcessTest extends Mockito {
          *
          * Espera-se "True" como retorno da válidação dos dados tragos da base de dados.
          */
-        usuario = controlador.buscarPorCPF("785.123.543-78");
+        usuario = controlador.buscarPorCPF("785.123.543-78"); 
         Assert.assertEquals("785.123.543-78", usuario.getCpfPes());
         Assert.assertEquals("José Carlos de Souza", usuario.getNomePes());
         Assert.assertEquals("jose@exemplo.com", usuario.getEmailPes());
@@ -235,7 +235,7 @@ public class ControladorConAcessTest extends Mockito {
         usuario = controlador.buscarPorCPF("342.897.456-34");
         Assert.assertEquals("342.897.456-34", usuario.getCpfPes());
         Assert.assertEquals("Fermanda Maria da Silva", usuario.getNomePes());
-        Assert.assertEquals("fernanda@exemple.com", usuario.getEmailPes());
+        Assert.assertEquals("fernanda@exemplo.com", usuario.getEmailPes());
 
         usuario = controlador.buscarPorCPF("764.098.612-09");
         Assert.assertEquals("764.098.612-09", usuario.getCpfPes());
