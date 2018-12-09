@@ -184,7 +184,7 @@ public class ControladorEdiTemTimTest {
             Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
         try {
-            controladorEdiTemTim.editarTimeOut(7, "FED");
+            controladorEdiTemTim.editarTimeOut(7, "FEN");
         } catch (Exception e) {
             Assert.assertEquals(TEMPO_INVALIDO, e.getMessage());
         }
