@@ -70,19 +70,40 @@ public class ControladorExclPortTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     pessoa = trataDadosDePessoaParaPersistencia(dados);
-                    pessoaDAO.salvar(pessoa);
+                    pessoaDAO.abrirTransacao();
+                    
+                    try{
+                        pessoaDAO.salvar(pessoa);
+                        pessoaDAO.commitarTransacao();
+                    }catch(Exception ex){
+                        pessoaDAO.rollBackTransacao();
+                    }
                     break;
                 case "portaria" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     portaria = trataDadosDaPortariaParaPersistencia(dados);
-                    portariaDAO.salvar(portaria);
+                    
+                    portariaDAO.abrirTransacao();
+                    try{
+                        portariaDAO.salvar(portaria);
+                        portariaDAO.commitarTransacao();
+                    }catch(Exception ex){
+                        portariaDAO.rollBackTransacao();
+                    }
                     break;
                 case "referencia" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     portariaReferenciada = trataDadosDaPortariaReferenciadaParaPersistencia(dados);
-                    portariaReferenciadaDAO.salvar(portariaReferenciada);
+                    
+                    portariaReferenciadaDAO.abrirTransacao();
+                    try{
+                        portariaReferenciadaDAO.salvar(portariaReferenciada);
+                        portariaReferenciadaDAO.commitarTransacao();
+                    }catch(Exception ex){
+                        portariaReferenciadaDAO.rollBackTransacao();
+                    }
                     break;
                 case "portariaDesignada" :
                     extrator.setTexto(linha);
@@ -98,7 +119,14 @@ public class ControladorExclPortTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     designado = trataDadosDoDesignadoParaPersistencia(dados);
-                    designadoDAO.salvar(designado);
+                    
+                    designadoDAO.abrirTransacao();
+                    try{
+                        designadoDAO.salvar(designado);
+                        designadoDAO.commitarTransacao();
+                    }catch(Exception ex){
+                        designadoDAO.rollBackTransacao();
+                    }
                     break;
             }
         }
@@ -223,11 +251,11 @@ public class ControladorExclPortTest {
         portaria.setStatus(status);
         portaria.setAssunto(dados[6]);
         portaria.setDtExped(new Date(dados[7]));
-        portaria.setDtIniVig(new Date(dados[9]));
-        portaria.setDtFimVig(new Date(dados[10]));
-        portaria.setDtPublicDou(new Date(dados[11]));
-        portaria.setHorasDesig(Integer.parseInt(dados[12]));
-        portaria.setResumo(dados[13]);
+        portaria.setDtIniVig(new Date(dados[8]));
+        portaria.setDtFimVig(new Date(dados[9]));
+        portaria.setDtPublicDou(new Date(dados[10]));
+        portaria.setHorasDesig(Integer.parseInt(dados[11]));
+        portaria.setResumo(dados[12]);
         //portaria.setTextoCompleto(dados[14]);
 
         return portaria;
