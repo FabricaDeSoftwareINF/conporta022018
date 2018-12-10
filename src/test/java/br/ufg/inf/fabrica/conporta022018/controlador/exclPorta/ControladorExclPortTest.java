@@ -25,12 +25,12 @@ import java.util.List;
 public class ControladorExclPortTest {
 
     private static ControladorExclPort controladorExclPort;
-    private static PortariaDAO portariaDAO = new PortariaDAO();
     private static Portaria portaria = new Portaria();
+    private static PortariaDAO portariaDAO = new PortariaDAO();
     private static Pessoa pessoa = new Pessoa();
     private static PessoaDAO pessoaDAO = new PessoaDAO();
-    private static DesignadoDAO designadoDAO = new DesignadoDAO();
     private static Designado designado = new Designado();
+    private static DesignadoDAO designadoDAO = new DesignadoDAO();
     private static Referencia portariaReferenciada = new Referencia();
     private static PortariaReferenciadaDAO portariaReferenciadaDAO = new PortariaReferenciadaDAO();
 
@@ -76,13 +76,14 @@ public class ControladorExclPortTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     portaria = trataDadosDaPortariaParaPersistencia(dados);
+                    
+                    System.out.println(portaria);
                     portariaDAO.salvar(portaria);
-
                     break;
-                case "portariaReferenciada" :
+                case "referencia" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    portariaReferenciada = trataDadosDaPortariaReferenciadaParaPersistencia(dados, portariaDAO);
+                    portariaReferenciada = trataDadosDaPortariaReferenciadaParaPersistencia(dados);
                     portariaReferenciadaDAO.salvar(portariaReferenciada);
                     break;
                 case "portariaDesignada" :
@@ -217,6 +218,7 @@ public class ControladorExclPortTest {
         Portaria portaria = new Portaria();
         PortariaStatus status = retornaStatusPortaria(dados[5]);
 
+        portaria.setId(Long.parseLong(dados[0]));
         portaria.setSiglaUndId(dados[2]);
         portaria.setAnoId(Integer.parseInt(dados[3]));
         portaria.setSeqId(Integer.parseInt(dados[4]));
@@ -235,7 +237,12 @@ public class ControladorExclPortTest {
 
     public static Designado trataDadosDoDesignadoParaPersistencia(String dados[]){
         Designado designado = new Designado();
+        List<Designado> listaDesignados = new ArrayList<Designado>();
+        
         Pessoa pessoa;
+        Portaria portaria;
+        
+        portaria = portariaDAO.buscar(Long.parseLong(dados[7]));
         pessoa = pessoaDAO.buscar(Long.parseLong(dados[6]));
 
         designado.setId(Long.parseLong(dados[0]));
@@ -245,18 +252,27 @@ public class ControladorExclPortTest {
         designado.setHorasDefFuncDesig(Integer.parseInt(dados[4]));
        // designado.setHorasExecFuncDesig(Integer.parseInt(dados[5]));
         designado.setDesignado(pessoa);
+        
+        listaDesignados.add(designado);
+        portaria.setDesignados(listaDesignados);
+        portariaDAO.salvar(portaria);
 
         return designado;
     }
 
-    public static Referencia trataDadosDaPortariaReferenciadaParaPersistencia(String dados[], PortariaDAO portariaDAO){
+    public static Referencia trataDadosDaPortariaReferenciadaParaPersistencia(String dados[]){
 
         Portaria portaria = new Portaria();
         Referencia referenciada = new Referencia();
+        List<Referencia> listaReferencias = new ArrayList<Referencia>();
 
         portaria = portariaDAO.buscar(Long.parseLong(dados[2]));
         referenciada.setReferencia(portaria);
         referenciada.setEhCancelamento(Boolean.parseBoolean(dados[3]));
+        
+        listaReferencias.add(referenciada);
+        portaria.setReferencias(listaReferencias);
+        portariaDAO.salvar(portaria);
 
         return referenciada;
     }
