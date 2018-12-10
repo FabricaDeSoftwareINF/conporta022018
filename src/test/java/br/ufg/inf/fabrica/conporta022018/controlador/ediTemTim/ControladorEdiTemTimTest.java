@@ -82,8 +82,8 @@ public class ControladorEdiTemTimTest {
                     //undAdm.setId(Long.parseLong(dadosUndAdm[0]));
                     undAdm.setNomeUnd(dadosUndAdm[1]);
                     undAdm.setSiglaUnAdm(dadosUndAdm[2]);
-                    TipoUnd tipo = TipoUnd.valueOf(dadosUndAdm[3]);
-                    undAdm.setTipoUnd(tipo);
+                    //TipoUnd tipo = TipoUnd.valueOf(dadosUndAdm[3]);
+                    undAdm.setTipoUnd(TipoUnd.UNIDADE_ACADEMICA);
                     undAdm.setMinInat(Integer.parseInt(dadosUndAdm[4]));
                     undAdm.setUltPort(dadosUndAdm[5]);
                     undAdm.setAnoPort(Integer.parseInt(dadosUndAdm[6]));
@@ -312,7 +312,7 @@ public class ControladorEdiTemTimTest {
         undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
         Assert.assertNotEquals(Integer.valueOf(10), undAdm.getMinInat());
 
-        map.put("sigla","FED");
+        map.put("sigla","FEN");
         undAdm = dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_UNIDADE, map);
         Assert.assertNotEquals(Integer.valueOf(7), undAdm.getMinInat());
 
