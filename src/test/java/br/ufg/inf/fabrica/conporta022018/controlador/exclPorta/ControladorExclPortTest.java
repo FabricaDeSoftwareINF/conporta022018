@@ -76,8 +76,6 @@ public class ControladorExclPortTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     portaria = trataDadosDaPortariaParaPersistencia(dados);
-                    
-                    System.out.println(portaria);
                     portariaDAO.salvar(portaria);
                     break;
                 case "referencia" :
@@ -242,8 +240,8 @@ public class ControladorExclPortTest {
         Pessoa pessoa;
         Portaria portaria;
         
-        portaria = portariaDAO.buscar(Long.parseLong(dados[7]));
         pessoa = pessoaDAO.buscar(Long.parseLong(dados[6]));
+        portaria = portariaDAO.buscar(Long.parseLong(dados[7]));
 
         designado.setId(Long.parseLong(dados[0]));
         designado.setDtCienciaDesig(new Date(dados[1]));
