@@ -7,7 +7,6 @@ portaria
 PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
 1;INF201800;INF;2018;1;Proposta;Novo coordenador de curso; 12/11/2018; 01/01/2019; 31/12/2021; 12/12/2018;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
 3;INF201802;INF;2018;3;Proposta;Novo coordenador de curso; 12/11/2019; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
-4;INF201803;INF;2018;4;Proposta;Novo coordenador de curso; 12/11/2019; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
 11;INF201810;INF;2018;11;Ativa;Novo coordenador de curso; 12/11/2019; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
 12;INF201811;INF;2018;12;Ativa;Novo coordenador de curso; 12/11/2019; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
 13;INF201813;INF;2018;13;Proposta;Novo coordenador de curso; 12/11/2019; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
@@ -15,10 +14,10 @@ PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; dtIni
 15;INF201815;INF;2018;15;Expirada;Novo coordenador de curso; 12/11/2019;01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
 designado
 PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
-1;12/11/2018; Coordenador; Novo coordenador de curso;220;13;1
-2;12/11/2018; Coordenador; Novo coordenador de curso;220;13;1
-3;12/11/2018; Coordenador; Novo coordenador de curso;220;13;2
+1;12/11/2018; Coordenador; Novo coordenador de curso;220;8;1
+2;12/11/2018; Coordenador; Novo coordenador de curso;220;8;1
+3;12/11/2018; Coordenador; Novo coordenador de curso;220;8;2
 referencia
 PKportariaReferenciada; idPortaria; idPortariaReferenciada; ehCancelamento
 1;INF201810;4;true
-2;INF201811;3;true
+2;INF201811;4;true

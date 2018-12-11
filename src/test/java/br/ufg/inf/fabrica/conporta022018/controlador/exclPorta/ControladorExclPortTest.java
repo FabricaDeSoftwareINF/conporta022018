@@ -35,7 +35,8 @@ public class ControladorExclPortTest {
     private static DesignadoDAO designadoDAO = new DesignadoDAO();
     private static Referencia portariaReferenciada = new Referencia();
     private static PortariaReferenciadaDAO portariaReferenciadaDAO = new PortariaReferenciadaDAO();
-    private static Map<Long, List<Designado>> mapDesignados = new HashMap<Long, List<Designado>>();
+    private static List<Designado> designados = new ArrayList<Designado>();
+    private static List<Portaria> listaPortarias = new ArrayList<Portaria>();
 
     /*
      * Preparação do ambiente para teste.
@@ -87,6 +88,8 @@ public class ControladorExclPortTest {
                     portariaDAO.abrirTransacao();
                     portariaDAO.salvar(portaria);
                     portariaDAO.commitarTransacao();
+                    
+                    listaPortarias.add(portaria);
 
                     break;
                 case "referencia" :
@@ -117,7 +120,7 @@ public class ControladorExclPortTest {
                     designadoDAO.abrirTransacao();
                     designadoDAO.salvar(designado);
                     designadoDAO.commitarTransacao();
-
+                    
                     break;
             }
         }
@@ -144,11 +147,11 @@ public class ControladorExclPortTest {
 
         //ainda será complementado, o parâmetro de excluirPortaria será uma instância de Portaria e não uma string.
         Portaria portaria = new Portaria();
-        List<Portaria> portarias = portariaDAO.buscarTodos();
         //o parâmetro de excluirPortaria será uma instância de Portaria e não uma string.
         try{
-            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados (INF201813):
-            controladorExclPort.excluirPortaria(portarias.get(4));
+            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados (INF201802):
+            portaria = portariaDAO.buscar((long) 5);
+            controladorExclPort.excluirPortaria(portaria);
 
         }catch(Exception ex){
             System.out.println("Erro ao excluir portaria proposta, sem referencias e designados");
@@ -156,7 +159,7 @@ public class ControladorExclPortTest {
 
         try{
             // Portaria sem data final de vigência, proposta, com portarias referenciadas e sem designados (INF201800):
-            portaria = portariaDAO.buscar((long) 1);
+            portaria = portariaDAO.buscar((long) 4);
             controladorExclPort.excluirPortaria(portaria);
 
         }catch(Exception ex){
@@ -164,8 +167,8 @@ public class ControladorExclPortTest {
         }
 
         try{
-            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados (INF201803):
-            portaria = portariaDAO.buscar((long) 4);
+            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados (INF201813):
+            portaria = portariaDAO.buscar((long) 8);
             controladorExclPort.excluirPortaria(portaria);
         }catch(Exception ex){
             System.out.println("Erro ao excluir portaria proposta com designados");
@@ -177,7 +180,7 @@ public class ControladorExclPortTest {
 
         try{
             // Tentativa de exclusão de portaria ativa(INF201810)
-            portaria = portariaDAO.buscar((long) 11);
+            portaria = portariaDAO.buscar((long) 6);
             controladorExclPort.excluirPortaria(portaria);
         }catch(Exception ex){
             System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
@@ -185,7 +188,7 @@ public class ControladorExclPortTest {
 
         try{
             // Tentativa de exclusão de portaria cancelada (INF201814)
-            portaria = portariaDAO.buscar((long)14);
+            portaria = portariaDAO.buscar((long)9);
             controladorExclPort.excluirPortaria(portaria);
             // Tentativa de exclusão de portaria ativa
             controladorExclPort.excluirPortaria(portaria);
@@ -195,7 +198,7 @@ public class ControladorExclPortTest {
 
         try{
             // Tentativa de exclusão de portaria expirada (INF201815)
-            portaria = portariaDAO.buscar((long)15);
+            portaria = portariaDAO.buscar((long)10);
             controladorExclPort.excluirPortaria(portaria);
         }catch(Exception ex){
             System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
@@ -209,14 +212,15 @@ public class ControladorExclPortTest {
         // irá fica as suas pós-condições.
 
         //resultados devem ser nulos visto que nestes casos as portarias devem ter sido excluídas
-        Assert.assertNull(portariaDAO.buscar((long) 13));
-        Assert.assertNull(portariaDAO.buscar((long) 1));
+        Portaria portaria = portariaDAO.buscar((long) 5);
+        Assert.assertNull(portariaDAO.buscar((long) 5));
         Assert.assertNull(portariaDAO.buscar((long) 4));
+        Assert.assertNull(portariaDAO.buscar((long) 8));
 
          //resultados devem retornar um objeto visto que nestes casos as portarias não devem ter sido excluídas
-        Assert.assertNotNull(portariaDAO.buscar((long) 11));
-        Assert.assertNotNull(portariaDAO.buscar((long)14));
-        Assert.assertNotNull(portariaDAO.buscar((long) 15));
+        Assert.assertNotNull(portariaDAO.buscar((long) 6));
+        Assert.assertNotNull(portariaDAO.buscar((long)9));
+        Assert.assertNotNull(portariaDAO.buscar((long) 10));
     }
 
     public static Pessoa trataDadosDePessoaParaPersistencia(String dados[]){
@@ -254,16 +258,8 @@ public class ControladorExclPortTest {
 
     public static Designado trataDadosDoDesignadoParaPersistencia(String dados[]){
         Designado designado = new Designado();
-        List<Designado> designados = new ArrayList<Designado>();
         Pessoa pessoa = pessoaDAO.buscar(Long.parseLong(dados[6]));
-        Portaria portaria = new Portaria();
-        
-        List<Portaria> portarias = portariaDAO.buscarTodos();
-        for(Portaria portariaAtual: portarias){
-           if(portariaAtual.getSeqId() == Integer.parseInt(dados[5])){
-               portaria = portariaAtual;
-           }
-        }
+        Portaria portaria = portariaDAO.buscar(Long.parseLong(dados[5]));
         
         designado.setId(Long.parseLong(dados[0]));
         designado.setDtCienciaDesig(new Date(dados[1]));
@@ -284,17 +280,11 @@ public class ControladorExclPortTest {
 
     public static Referencia trataDadosDaPortariaReferenciadaParaPersistencia(String dados[]){
 
-        Portaria portaria = new Portaria();
+        
         Referencia referenciada = new Referencia();
         List<Referencia> listaReferencias = new ArrayList<Referencia>();
-        
-         List<Portaria> portarias = portariaDAO.buscarTodos();
-        for(Portaria portariaAtual: portarias){
-           if(portariaAtual.getSeqId() == Integer.parseInt(dados[2])){
-               portaria = portariaAtual;
-           }
-        }
 
+        Portaria portaria = portariaDAO.buscar(Long.parseLong(dados[2]));
         referenciada.setReferencia(portaria);
         referenciada.setEhCancelamento(Boolean.parseBoolean(dados[3]));
         
