@@ -7,11 +7,16 @@
 package br.ufg.inf.fabrica.conporta022018.controlador.notifPortSemCiencia;
 
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorNotifPortSemCiencia;
+import br.ufg.inf.fabrica.conporta022018.modelo.*;
+import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
 import org.junit.*;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,15 +24,11 @@ import java.util.List;
 
 public class ControladorNotifPortSemCienciaTest {
 
-    private static ControladorNotifPortSemCiencia controladorNorifPortSemCiencia;
+    private static ControladorNotifPortSemCiencia controladorNotifPortSemCiencia;
 
-    /*
-     * Preparação do ambiente para teste.
-     * População do banco de Dados para atendam os pré-requisitos do caso de uso.
-     */
 
     @BeforeClass
-    public static void casoTestPepararCenario() throws IOException {
+    public static void casoTestPepararCenario() throws IOException, ParseException {
 
         String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest.csv";
         String REGRA = ";";
@@ -37,7 +38,17 @@ public class ControladorNotifPortSemCienciaTest {
         String tabelaAtual = " ";
         String dados[];
         String linha;
-        //Criar as instâncias de todos os objetos DAO's necessários para preparar o cenario.
+
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        DesignadoDAO designadoDAO = new DesignadoDAO();
+        PortariaDAO portariaDAO =new PortariaDAO();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        /*
+         * Preparação do ambiente para teste.
+         * População do banco de Dados para atendam os pré-requisitos do caso de uso.
+         */
 
         dadosSoftware = lerArquivo.lerArquivo(CAMINHO_CSV);
 
@@ -55,22 +66,69 @@ public class ControladorNotifPortSemCienciaTest {
                 case "pessoa" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela pessoa no Banco de Dados.
+
+                    Pessoa pessoa = new Pessoa();
+
+                    pessoa.setId(Long.parseLong(dados[0]));
+                    pessoa.setNomePes(dados[1]);
+                    pessoa.setCpfPes(dados[2]);
+                    pessoa.setEmailPes(dados[3]);
+                    pessoa.setSenhaUsu(dados[4]);
+                    pessoa.setEhUsuAtivo(Boolean.getBoolean(dados[5]));
+                    pessoaDAO.abrirTransacao();
+                    pessoaDAO.salvar(pessoa);
+                    pessoaDAO.commitarTransacao();
+
                     break;
-                case "portaria" :
+                case "portaria":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
-                    break;
-                case "undAdm" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela Unidade Administrativa no Banco de Dados.
+                    Portaria portaria = new Portaria();
+                    portaria.setId(Long.parseLong(dados[0]));
+                    portaria.setAnoId(Integer.valueOf(dados[1]));
+                    portaria.setSeqId(Integer.valueOf(dados[2]));
+                    portaria.setStatus(PortariaStatus.valueOf(dados[3]));
+                    portaria.setAssunto(dados[4]);
+                    portaria.setDtExped(formato.parse(dados[5]));
+                    portaria.setDtIniVig(formato.parse(dados[7]));
+                    portaria.setDtFimVig(formato.parse(dados[8]));
+                    portariaDAO.abrirTransacao();
+                    portariaDAO.salvar(portaria);
+                    portariaDAO.commitarTransacao();
                     break;
                 case "designado" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
+
+                    Designado designado = new Designado();
+                    designado.setId( Long.parseLong(dados[0]) );
+
+                    if(!dados[1].isEmpty()){
+                        Date dtCienciaDesig = formato.parse(dados[1]);
+                        designado.setDtCienciaDesig(dtCienciaDesig);
+                    }
+
+                    designado.setTipFuncDesig(FuncaoDesig.valueOf(dados[2]));
+
+                    designado.setDescrFuncDesig(dados[3]);
+
+                    if(!dados[4].isEmpty()){
+                        designado.setHorasDefFuncDesig( Integer.parseInt(dados[4]) );
+                    }
+
+                    if(!dados[5].isEmpty()){
+                        designado.setHorasExecFuncDesig( Integer.parseInt(dados[5]) );
+                    }
+
+                    pessoa = pessoaDAO.buscar( Long.parseLong(dados[6]) );
+                    designado.setDesignado(pessoa);
+
+                    designado.setTipFuncDesig(FuncaoDesig.valueOf(dados[7]));
+
+                    // Salva o objeto no banco
+                    designadoDAO.abrirTransacao();
+                    designadoDAO.salvar(designado);
+                    designadoDAO.commitarTransacao();
                     break;
             }
         }
@@ -80,43 +138,46 @@ public class ControladorNotifPortSemCienciaTest {
     public void casoTestPrepararExecucao() {
 
         //Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
-        controladorNorifPortSemCiencia = new ControladorNotifPortSemCiencia();
+        controladorNotifPortSemCiencia = new ControladorNotifPortSemCiencia();
     }
 
-    /*
-     * Criar os cenários de testes para a aplicação:
-     * Os cenarios de testes devem obrigatóriamente ser divididos em dois grupos.
-     * DadosValidos : Grupo destinado ao cenatio típico e aos cenarios alternativos do caso de uso.
-     * DadosExcecoes : Grupo destinado as exceções do cenario típico e dos cenarios alternativos.
-     * Cada cenário e cada exceção deve necessáriamente ser testado no minimo uma vez, cada entrada e/ou combinação
-     * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
+
+
+    /**
+     *  Devido a natureza do caso de uso, foi-se escolhido que a melhor forma de realizar os testes seria por
+     *  teste de valores limites.
+     *  No contexto desse caso de uso, foi-se criado duas funções com o mesmo objetivo no controlador, sendo que uma
+     *  recebe um parâmetro, sendo assim possível modificar a data que servirá como base da busca e evita que os
+     *  resultados dos testes variem dependendo do momento que forem realizados.
+     *
+     *  Serão realizados 3 testes no total:
+     *  1- Nenhum designado estpa com a ciência atrasada;
+     *  2- Apenas um designado está com a ciência atrasada;
+     *  3- Mais de um designado estão com a ciência atrasada
+     *
+     *  Com esses três teste, acredita-se que são satisfeitas a necessidade do caso de uso ser testado.
+     *
      */
 
     @Test
-    public void casoTestDadosValidos() throws IOException {
+    public void casoTestVerifcarCiencia() throws ParseException {
 
-        //Grupo de teste DadosValidos, exemplo:
-        controladorNorifPortSemCiencia.verificarCiencia();
-        //Testa o cenário típico do caso de uso, onde há designados sem ciência.
+        /**
+         * Testa o cenário onde não há designados com ciência atrasada.
+         */
+        controladorNotifPortSemCiencia.verificarCiencia("10/12/2018");
+
+        /**
+         * Testa o cenário onde há um designados com ciência atrasada.
+         */
+        controladorNotifPortSemCiencia.verificarCiencia("16/12/2018");
+
+        /**
+         * Testa o cenário onde há vários designados com ciência atrasada.
+         */
+        controladorNotifPortSemCiencia.verificarCiencia("25/12/2018");
 
     }
 
-    @AfterClass
-    public static void casoTestResultados() throws IOException {
-
-        //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
-        // irá fica as suas pós-condições. Exemplo:
-
-        //Busca a data atual.
-        Date hoje = new Date();
-        SimpleDateFormat df;
-        df = new SimpleDateFormat("dd/MM/yyyy");
-        String dataHoje = df.format(hoje);
-
-        //pega a data que foi armazenada no banco de dados e verifica com a data de execução do teste, ou seja,
-        // a data de hoje.
-
-        //Assert.assertEquals(dataHoje, rodaSQLparaPegarADataGravadaNoBancoDeDados);
-    }
 
 }

@@ -1,24 +1,53 @@
-pessoa
-PKpes;nomePes; cpfPes; emailPes; senhaUsu; ehUsuAtivo
-1;José Carlos Santos; 123.456.789-12; jose@exemplo.com; 123456; true
-2;Amanda Souza Silva; 987.654.321-00; amanda@email.com; 321654; true
-3;João Lucas Pacheco; 012.045.078-08; joao@email.com; 231546; true
-4;Carlos Campos; 147.258.369.03; carlos@email.com; 234543; true
-
 portaria
-PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; periodVig; dtIniVig; dtFimVig. dPublicDou; horasDesig; resumo; textoCompleto; arqPdf
-1;001; inf; 2018; 0001; Ativa; Novo coordenador de curso; 12/11/2018; 01/01/201931/12/2021; 01/01/2019; 31/12/2021; 12/12/2018; 220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.; Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;;
-2;002; inf; 2018; 0001; Ativa; Novo administrador; 11/10/2018; 01/01/201931/12/2021; 01/01/2019; 31/12/2021; 12/12/2018; 220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.; Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;;
-3;003; inf; 2018; 0001; Ativa; Novo professor de curso; 13/12/2018; 01/01/201931/12/2021; 01/01/2019; 31/12/2021; 12/12/2018; 220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.; Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;;
-
-undAdm
-PKundAdm;nomeUnd; siglaUnd; tipoUnd; minInat; ultPort; anoPort; ultNumExped; ultNumProp
-1;Instituto de Informática; INF; Unidade Acadêmica; 15; 2018001; 2018; 1; -1
-
+PKportaria;anoId;seqId;status;assunto;dtExped;periodVig;dtIniVig;dtFimVig;;
+1;2018;00;ATIVA;Novo coordenador de curso;10/12/2018;01/01/201931/12/2021;01/01/2019;31/12/2021
+3;2018;02;ATIVA;Novo coordenador de curso;13/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+4;2018;03;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+5;2018;10;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+6;2018;11;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+7;2018;12;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+8;2018;13;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+9;2018;14;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
 designado
-PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
-1;; Coordenador; Novo coordenador de curso; 220; ;1;1
-2;; Administrador; Novo administrador; 220; ;2;2
-3;; Professor; Novo professor de curso; 220; ;3;2
-4;14/12/2018; Administrador; Novo administrador; 220; ;2;3
-5;15/12/2018; Professor; Novo professor de curso; 220; ;3;3
+PKdesg;dtCienciaDesig;tipFuncDesig;descrFuncDesig;horasDefFuncDesig;horasExecFuncDesig;PKportaria;PKpes
+1;;Coordenador;Novo coordenador de curso;220;;1;1
+2;;Coordenador;Novo coordenador de curso;220;;3;2
+3;;Coordenador;Novo coordenador de curso;220;;4;3
+4;;Coordenador;Novo coordenador de curso;220;;4;4
+5;;Coordenador;Novo coordenador de curso;220;;5;5
+6;;Coordenador;Novo coordenador de curso;220;;6;6
+7;;Coordenador;Novo coordenador de curso;220;;7;7
+8;;Coordenador;Novo coordenador de curso;220;;8;8
+9;;Coordenador;Novo coordenador de curso;220;;9;9
+11;12/11/2018;Coordenador;Novo coordenador de curso;220;;1;11
+12;12/11/2018;Coordenador;Novo coordenador de curso;220;;2;12
+13;12/11/2018;Coordenador;Novo coordenador de curso;220;;3;13
+14;12/11/2018;Coordenador;Novo coordenador de curso;220;;4;14
+15;12/11/2018;Coordenador;Novo coordenador de curso;220;;5;15
+16;12/11/2018;Coordenador;Novo coordenador de curso;220;;6;16
+17;12/11/2018;Coordenador;Novo coordenador de curso;220;;7;17
+18;12/11/2018;Coordenador;Novo coordenador de curso;220;;8;18
+19;12/11/2018;Coordenador;Novo coordenador de curso;220;;9;19
+pessoa
+PKpes;nomePes;cpfPes;emailPes;senhaUsu;ehUsuAtivo
+1;José Carlos Santos;123.456.789-12;jose@exemplo.com;123456;true
+2;Gabriel Carlos Santos;123.456.818-12;gabriel@exemplo.com;123456;true
+3;Gabriel Jesus;236.456.818-12;gjesus@exemplo.com;123456;true
+4;Edson Júnior;784.456.818-12;edsonj@exemplo.com;123456;true
+5;Helena Rosa;586.456.818-12;helenar@exemplo.com;123456;true
+6;Matheus Ribeiro;734.463.818-12;matheus.ribeiro@exemplo.com;123456;true
+7;José Junior;234.547.818-12;jose.junior@exemplo.com;123456;true
+8;Victor Lemos;245.965.452-12;victorlemos@exemplo.com;123456;true
+9;Keslley Lima;456.567.452-12;keslleyls@exemplo.com;123456;true
+10;Luis Antonio;786.567.852-17;luis@exemplo.com;123456;true
+11;fabio;126.874.555-17;fabio@exemplo.com;123456;true
+12;Rogerio Ceni;874.874.874-17;ceni@exemplo.com;123456;true
+13;Luis Inacio;114.134.855-13;lula@exemplo.com;123456;true
+14;Sandro;874.598.474-55;sandro@exemplo.com;123456;true
+15;Bruno silveira;777.587.545-11;bruno@exemplo.com;123456;true
+16;Alana silveira;874.123.654-98;alana@exemplo.com;123456;true
+17;Alana silveira;874.123.654-98;alana@exemplo.com;123456;true
+18;João silveira;111.111.111-98;joao@exemplo.com;123456;true
+19;JOnelson Lan;111.183.854-98;jonelson@exemplo.com;123456;true
+20;Alana luna;874.744.848-55;alana_lu@exemplo.com;123456;true
+21;Bruninho luis silveira;884.888.154-98;bruninho_luis@exemplo.com;123456;true
