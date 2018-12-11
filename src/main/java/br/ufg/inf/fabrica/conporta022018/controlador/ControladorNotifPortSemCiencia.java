@@ -8,26 +8,63 @@ package br.ufg.inf.fabrica.conporta022018.controlador;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
-import java.util.*;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ControladorNotifPortSemCiencia {
 
-    public void verificarCiencia() {
+    public void verificarCiencia() throws ParseException {
 
         DesignadoDAO designadoDao = new DesignadoDAO();
 
-    
-        List<Designado> designados = designadoDao.pesquisaDesignadosSemCiencia();
+        //Define o atraso limite apra a ciência
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -5);
+        Date data = cal.getTime();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        String dataLimite = formatter.format(data);
+
+        List<Designado> designados = designadoDao.pesquisaDesignadosSemCiencia(formatter.parse(dataLimite));
 
         List<String> emails = getEmailDesignados(designados);
 
         this.enviarEmail(emails);
     }
 
+    /**
+     * Método criado somente para mock de testes.
+     * Recebe a dataLimite como parâmetro apra que os teste funcionem independente da data atual
+     * @param dataLimite
+     */
+    public void verificarCiencia(String dataLimite) throws ParseException {
 
+        DesignadoDAO designadoDao = new DesignadoDAO();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        List<Designado> designados = designadoDao.pesquisaDesignadosSemCiencia(formato.parse(dataLimite));
+
+        List<String> emails = getEmailDesignados(designados);
+
+        this.enviarEmail(emails);
+
+    }
+
+
+    /**
+     * Método Criado para a modularização do controlador,
+     * com o objetivo de facilitar a legibilidade do código
+     *
+     * @param designados
+     * @return
+     */
     public List<String> getEmailDesignados(List<Designado> designados){
         List<String> emails = null;
         Iterator<Designado> iterator = designados.iterator();
@@ -39,10 +76,13 @@ public class ControladorNotifPortSemCiencia {
         return emails;
     }
 
-
+    /**
+     * Método Criado para a modularização do controlador,
+     * com o objetivo de facilitar a legibilidade do código
+     * @param emails
+     */
     public void enviarEmail(List<String> emails)
     {
-        System.out.println("TODO enviar email");
         Properties props = new Properties();
         /** Parâmetros de conexão com servidor Gmail */
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -62,28 +102,30 @@ public class ControladorNotifPortSemCiencia {
         /** Ativa Debug para sessão */
         session.setDebug(true);
 
+        String destinatarios = String.join(", ",emails);
+
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("seuemail@gmail.com")); //Remetente
+            message.setFrom(new InternetAddress("conporta2018@gmail.com")); //Remetente
 
             Address[] toUser = InternetAddress //Destinatário(s)
-                    .parse("edionay@gmail.com, joaolucaspachecoab@gmail.com");
+                    .parse(destinatarios);
 
             message.setRecipients(Message.RecipientType.TO, toUser);
             message.setSubject("Enviando email com JavaMail");//Assunto
-            message.setText("Enviei este email utilizando JavaMail com minha conta GMail!");
+            message.setText("Você possui pendências na plataforma Conporta");
+
+
             /**Método para enviar a mensagem criada*/
             Transport.send(message);
 
-            System.out.println("Feito!!!");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
 
-
-    }
+}
 
 

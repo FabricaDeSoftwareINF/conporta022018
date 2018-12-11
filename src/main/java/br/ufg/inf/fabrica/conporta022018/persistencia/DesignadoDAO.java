@@ -6,11 +6,8 @@ import java.util.*;
 
 public class DesignadoDAO extends GenericoDAO<Designado>{
 
-    public List<Designado> pesquisaDesignadosSemCiencia(){
-       
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -5);
-        Date dataLimite = calendar.getTime();
+    public List<Designado> pesquisaDesignadosSemCiencia(Date dataLimite){
+
 
         StringBuilder builder = new StringBuilder();
         builder.append("select d from Designado d where d.dtCienciaDesig is null ");
@@ -20,6 +17,7 @@ public class DesignadoDAO extends GenericoDAO<Designado>{
         parametros.put("dtExped", dataLimite );
 
        return this.pesquisarJPQLCustomizada(builder.toString(),parametros);
+
     }
 
 }
