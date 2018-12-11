@@ -27,30 +27,30 @@ public class ControladorExclPort {
         List<Referencia> listaReferenciadas = this.portaria.getReferencias();
         List<Designado> listaDesignados = this.portaria.getDesignados();
     	
-    	try {
-            portariaDAO.abrirTransacao();
-            
-            if(listaDesignados.size() > 0){
-                this.portaria.setDesignados(null);
-            }
+        if(validaStatusPortaria(this.portaria.getStatus())){
+            try {
+                portariaDAO.abrirTransacao();
 
-            if(listaReferenciadas.size() > 0){
-                for (Referencia referencia : listaReferenciadas) {
-                    referencia.setReferencia(null);
-                    referenciaDAO.remover(referencia);
+                if(listaDesignados.size() > 0){
+                    this.portaria.setDesignados(null);
                 }
-                this.portaria.setReferencias(listaReferenciadas);
-            }
-           
-            this.portariaDAO.remover(this.portaria);
-            portariaDAO.commitarTransacao();
-        } catch (Exception e) {
-            portariaDAO.rollBackTransacao();
-            return false;
-        }
 
-        return true;
-    }
-        	
+                if(listaReferenciadas.size() > 0){
+                    for (Referencia referencia : listaReferenciadas) {
+                        referencia.setReferencia(null);
+                        referenciaDAO.remover(referencia);
+                    }
+                    this.portaria.setReferencias(listaReferenciadas);
+                }
+
+                this.portariaDAO.remover(this.portaria);
+                portariaDAO.commitarTransacao();
+            } catch (Exception e) {
+                portariaDAO.rollBackTransacao();
+                return false;
+            }
+        }
+        return false;    
+    }  	
   }
 

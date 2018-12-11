@@ -190,8 +190,6 @@ public class ControladorExclPortTest {
             // Tentativa de exclusão de portaria cancelada (INF201814)
             portaria = portariaDAO.buscar((long)9);
             controladorExclPort.excluirPortaria(portaria);
-            // Tentativa de exclusão de portaria ativa
-            controladorExclPort.excluirPortaria(portaria);
         }catch(Exception ex){
             System.out.println("Erro ao excluir portaria proposta com portarias referenciadas");
         }
@@ -212,7 +210,6 @@ public class ControladorExclPortTest {
         // irá fica as suas pós-condições.
 
         //resultados devem ser nulos visto que nestes casos as portarias devem ter sido excluídas
-        Portaria portaria = portariaDAO.buscar((long) 5);
         Assert.assertNull(portariaDAO.buscar((long) 5));
         Assert.assertNull(portariaDAO.buscar((long) 4));
         Assert.assertNull(portariaDAO.buscar((long) 8));
