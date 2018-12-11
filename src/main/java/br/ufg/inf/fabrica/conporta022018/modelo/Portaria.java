@@ -74,7 +74,7 @@ public class Portaria extends ModeloAbstrato {
     private List<Recebedora> undRecebedora;
 
     @JoinColumn
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Designado> designados;
 
     @JoinColumn

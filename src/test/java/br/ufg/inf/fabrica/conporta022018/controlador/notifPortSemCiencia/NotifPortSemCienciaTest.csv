@@ -30,24 +30,24 @@ PKdesg;dtCienciaDesig;tipFuncDesig;descrFuncDesig;horasDefFuncDesig;horasExecFun
 19;12/11/2018;Coordenador;Novo coordenador de curso;220;;9;19
 pessoa
 PKpes;nomePes;cpfPes;emailPes;senhaUsu;ehUsuAtivo
-1;José Carlos Santos;123.456.789-12;jose@exemplo.com;123456;true
-2;Gabriel Carlos Santos;123.456.818-12;gabriel@exemplo.com;123456;true
-3;Gabriel Jesus;236.456.818-12;gjesus@exemplo.com;123456;true
-4;Edson Júnior;784.456.818-12;edsonj@exemplo.com;123456;true
-5;Helena Rosa;586.456.818-12;helenar@exemplo.com;123456;true
-6;Matheus Ribeiro;734.463.818-12;matheus.ribeiro@exemplo.com;123456;true
-7;José Junior;234.547.818-12;jose.junior@exemplo.com;123456;true
-8;Victor Lemos;245.965.452-12;victorlemos@exemplo.com;123456;true
-9;Keslley Lima;456.567.452-12;keslleyls@exemplo.com;123456;true
-10;Luis Antonio;786.567.852-17;luis@exemplo.com;123456;true
-11;fabio;126.874.555-17;fabio@exemplo.com;123456;true
-12;Rogerio Ceni;874.874.874-17;ceni@exemplo.com;123456;true
-13;Luis Inacio;114.134.855-13;lula@exemplo.com;123456;true
-14;Sandro;874.598.474-55;sandro@exemplo.com;123456;true
-15;Bruno silveira;777.587.545-11;bruno@exemplo.com;123456;true
-16;Alana silveira;874.123.654-98;alana@exemplo.com;123456;true
-17;Alana silveira;874.123.654-98;alana@exemplo.com;123456;true
-18;João silveira;111.111.111-98;joao@exemplo.com;123456;true
-19;JOnelson Lan;111.183.854-98;jonelson@exemplo.com;123456;true
-20;Alana luna;874.744.848-55;alana_lu@exemplo.com;123456;true
-21;Bruninho luis silveira;884.888.154-98;bruninho_luis@exemplo.com;123456;true
+1;Josï¿½ Carlos Santos;123.456.789-12;joaolucaspachecoab@gmail.com;123456;true
+2;Gabriel Carlos Santos;123.456.818-12;edionay@gmail.com;123456;true
+3;Gabriel Jesus;236.456.818-12;joaolucaspachecoab@gmail.com;123456;true
+4;Edson Jï¿½nior;784.456.818-12;edionay@gmail.com;123456;true
+5;Helena Rosa;586.456.818-12;joaolucaspachecoab@gmail.com;123456;true
+6;Matheus Ribeiro;734.463.818-12;edionay@gmail.com;123456;true
+7;Josï¿½ Junior;234.547.818-12;joaolucaspachecoab@gmail.com;123456;true
+8;Victor Lemos;245.965.452-12;edionay@gmail.com;123456;true
+9;Keslley Lima;456.567.452-12;joaolucaspachecoab@gmail.com;123456;true
+10;Luis Antonio;786.567.852-17;edionay@gmail.com;123456;true
+11;fabio;126.874.555-17;joaolucaspachecoab@gmail.com;123456;true
+12;Rogerio Ceni;874.874.874-17;edionay@gmail.com;123456;true
+13;Luis Inacio;114.134.855-13;joaolucaspachecoab@gmail.com;123456;true
+14;Sandro;874.598.474-55;edionay@gmail.com;123456;true
+15;Bruno silveira;777.587.545-11;joaolucaspachecoab@gmail.com;123456;true
+16;Alana silveira;874.123.654-98;edionay@gmail.com;123456;true
+17;Alana silveira;874.123.654-98;joaolucaspachecoab@gmail.com;123456;true
+18;Joï¿½o silveira;111.111.111-98;edionay@gmail.com;123456;true
+19;JOnelson Lan;111.183.854-98;joaolucaspachecoab@gmail.com;123456;true
+20;Alana luna;874.744.848-55;edionay@gmail.com;123456;true
+21;Bruninho luis silveira;884.888.154-98;joaolucaspachecoab@gmail.com;123456;true

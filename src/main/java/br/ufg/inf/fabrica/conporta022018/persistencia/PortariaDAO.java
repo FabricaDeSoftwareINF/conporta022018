@@ -3,27 +3,60 @@ package br.ufg.inf.fabrica.conporta022018.persistencia;
 import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.lang.reflect.ParameterizedType;
+import java.util.*;
 
 public class PortariaDAO extends GenericoDAO<Portaria> {
 
-    public List<Portaria> pesquisaExpedidorSemCiencia(Date dataLimite){
-
-        StringBuilder builder = new StringBuilder();
-        /*
-        * Ainda para fazer a query de pesquisa do banco de dados
-         */
-        builder.append("select p from Portaria d where p.dtCienciaDesig is null ");
-        builder.append(" and d.portaria.dtExped < :dtExped ");
-
-        Map<String, Object> parametros = new HashMap<>();
-        parametros.put("dtExped", dataLimite );
-
-        return this.pesquisarJPQLCustomizada(builder.toString(),parametros);
-
-    }
+//    public List<Portaria> pesquisaExpedidorSemCiencia(List<Long> idDesignado){
+//
+//        String buscarIdPortaria = "SELECT i FROM Portaria_Designados i WHERE i.Designado_id =:identificado";
+//        Map<String, Object> parametros = new HashMap<>();
+//        List<Portaria> portarias;
+//        List<Long> idPortarias = new ArrayList<>();
+//
+//        for (Long id : idDesignado) {
+//            parametros.put("identificado", id);
+//            idPortarias = 12;
+//
+//            for (Long idPort : idPortarias) {
+//                parametros.put("identificado", idPort);
+//
+//
+//            }
+//
+//        }
+//        return this.pesquisarJPQLCustomizada(builder.toString(),parametros);
+//
+//    }
+//
+//    private Class<Portaria> classType = ((Class<Portaria>) ((ParameterizedType) getClass()
+//            .getGenericSuperclass()).getActualTypeArguments()[0]);
+//
+//
+//    @Override
+//    public List<Portaria> pesquisarJPQLCustomizada(String jpql, Map<String, Object> parametros) {
+//        try {
+//            return criarQuery(jpql, parametros).getResultList();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+//
+//    private TypedQuery<Portaria> criarQuery(String jpql, Map<String, Object> parametros) {
+//        EntityManager entityManager = ConnectionFactory.obterManager();
+//
+//        TypedQuery<Portaria> query = entityManager.createQuery(jpql, classType);
+//
+//        if (parametros != null) {
+//            for (Map.Entry<String, Object> parametro : parametros.entrySet()) {
+//                query.setParameter(parametro.getKey(), parametro.getValue());
+//            }
+//        }
+//        return query;
+//    }
 
 }

@@ -108,7 +108,7 @@ public class ControladorNotifPortSemCienciaTest {
                         designado.setDtCienciaDesig(dtCienciaDesig);
                     }
 
-                    designado.setTipFuncDesig(FuncaoDesig.valueOf(dados[2]));
+                    designado.setTipFuncDesig(FuncaoDesig.COORDENADOR);
 
                     designado.setDescrFuncDesig(dados[3]);
 
@@ -123,7 +123,7 @@ public class ControladorNotifPortSemCienciaTest {
                     pessoa = pessoaDAO.buscar( Long.parseLong(dados[6]) );
                     designado.setDesignado(pessoa);
 
-                    designado.setTipFuncDesig(FuncaoDesig.valueOf(dados[7]));
+                    designado.setTipFuncDesig(FuncaoDesig.COORDENADOR);
 
                     // Salva o objeto no banco
                     designadoDAO.abrirTransacao();
