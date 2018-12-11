@@ -29,14 +29,11 @@ public class ControladorExclPortTest {
     private static ControladorExclPort controladorExclPort;
     private static Portaria portaria = new Portaria();
     private static PortariaDAO portariaDAO = new PortariaDAO();
-    private static Pessoa pessoa = new Pessoa();
     private static PessoaDAO pessoaDAO = new PessoaDAO();
-    private static Designado designado = new Designado();
     private static DesignadoDAO designadoDAO = new DesignadoDAO();
-    private static Referencia portariaReferenciada = new Referencia();
     private static PortariaReferenciadaDAO portariaReferenciadaDAO = new PortariaReferenciadaDAO();
     private static List<Designado> designados = new ArrayList<Designado>();
-    private static List<Portaria> listaPortarias = new ArrayList<Portaria>();
+    private static List<Referencia> listaReferencias = new ArrayList<Referencia>();
 
     /*
      * Preparação do ambiente para teste.
@@ -73,34 +70,17 @@ public class ControladorExclPortTest {
                 case "pessoa" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    pessoa = trataDadosDePessoaParaPersistencia(dados);
-
-                    pessoaDAO.abrirTransacao();
-                    pessoaDAO.salvar(pessoa);
-                    pessoaDAO.commitarTransacao();
-
+                    trataDadosDePessoaParaPersistencia(dados);
                     break;
                 case "portaria" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    portaria = trataDadosDaPortariaParaPersistencia(dados);
-
-                    portariaDAO.abrirTransacao();
-                    portariaDAO.salvar(portaria);
-                    portariaDAO.commitarTransacao();
-                    
-                    listaPortarias.add(portaria);
-
+                    trataDadosDaPortariaParaPersistencia(dados);
                     break;
                 case "referencia" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    portariaReferenciada = trataDadosDaPortariaReferenciadaParaPersistencia(dados);
-                
-                    portariaReferenciadaDAO.abrirTransacao();
-                    portariaReferenciadaDAO.salvar(portariaReferenciada);
-                    portariaReferenciadaDAO.commitarTransacao();
-                    
+                    trataDadosDaPortariaReferenciadaParaPersistencia(dados);                    
                     break;
                 case "portariaDesignada" :
                     extrator.setTexto(linha);
@@ -115,12 +95,7 @@ public class ControladorExclPortTest {
                 case "designado" :
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    designado = trataDadosDoDesignadoParaPersistencia(dados);
-                    
-                    designadoDAO.abrirTransacao();
-                    designadoDAO.salvar(designado);
-                    designadoDAO.commitarTransacao();
-                    
+                    trataDadosDoDesignadoParaPersistencia(dados);
                     break;
             }
         }
@@ -209,7 +184,7 @@ public class ControladorExclPortTest {
         //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
         // irá fica as suas pós-condições.
 
-        //resultados devem ser nulos visto que nestes casos as portarias devem ter sido excluídas
+        //resultados devem ser nulos visto que nestes casos as portarias devem ter sido excluídas       
         Assert.assertNull(portariaDAO.buscar((long) 5));
         Assert.assertNull(portariaDAO.buscar((long) 4));
         Assert.assertNull(portariaDAO.buscar((long) 8));
@@ -220,7 +195,7 @@ public class ControladorExclPortTest {
         Assert.assertNotNull(portariaDAO.buscar((long) 10));
     }
 
-    public static Pessoa trataDadosDePessoaParaPersistencia(String dados[]){
+    public static void trataDadosDePessoaParaPersistencia(String dados[]){
         Pessoa pessoa = new Pessoa();
         pessoa.setId(Long.parseLong(dados[0]));
         pessoa.setNomePes(dados[1]);
@@ -229,10 +204,12 @@ public class ControladorExclPortTest {
         pessoa.setSenhaUsu(dados[4]);
         pessoa.setEhUsuAtivo(Boolean.parseBoolean(dados[5]));
 
-        return pessoa;
+        pessoaDAO.abrirTransacao();
+        pessoaDAO.salvar(pessoa);
+        pessoaDAO.commitarTransacao();
     }
 
-    public static Portaria trataDadosDaPortariaParaPersistencia(String dados[]){
+    public static void trataDadosDaPortariaParaPersistencia(String dados[]){
         Portaria portaria = new Portaria();
         PortariaStatus status = retornaStatusPortaria(dados[5]);
 
@@ -248,12 +225,13 @@ public class ControladorExclPortTest {
         portaria.setDtPublicDou(new Date(dados[10]));
         portaria.setHorasDesig(Integer.parseInt(dados[11]));
         portaria.setResumo(dados[12]);
-        //portaria.setTextoCompleto(dados[14]);
 
-        return portaria;
+        portariaDAO.abrirTransacao();
+        portariaDAO.salvar(portaria);
+        portariaDAO.commitarTransacao();
     }
 
-    public static Designado trataDadosDoDesignadoParaPersistencia(String dados[]){
+    public static void trataDadosDoDesignadoParaPersistencia(String dados[]){
         Designado designado = new Designado();
         Pessoa pessoa = pessoaDAO.buscar(Long.parseLong(dados[6]));
         Portaria portaria = portariaDAO.buscar(Long.parseLong(dados[5]));
@@ -264,35 +242,37 @@ public class ControladorExclPortTest {
         designado.setDescrFuncDesig(dados[3]);
         designado.setHorasDefFuncDesig(Integer.parseInt(dados[4]));
         designado.setDesignado(pessoa);
+        
+        designadoDAO.abrirTransacao();
+        designadoDAO.salvar(designado);
+        designadoDAO.commitarTransacao();
+        
         designados.add(designado);
-       // designado.setHorasExecFuncDesig(Integer.parseInt(dados[5]));
+        portaria.setDesignados(designados);
        
-       portariaDAO.abrirTransacao();
-       portaria.setDesignados(designados);
-       portariaDAO.salvar(portaria);
-       portariaDAO.commitarTransacao();
-
-        return designado;
+        portariaDAO.abrirTransacao();
+        portariaDAO.salvar(portaria);
+        portariaDAO.commitarTransacao();
     }
 
-    public static Referencia trataDadosDaPortariaReferenciadaParaPersistencia(String dados[]){
-
-        
+    public static void trataDadosDaPortariaReferenciadaParaPersistencia(String dados[]){
         Referencia referenciada = new Referencia();
-        List<Referencia> listaReferencias = new ArrayList<Referencia>();
-
         Portaria portaria = portariaDAO.buscar(Long.parseLong(dados[2]));
+        
+        referenciada.setId(Long.parseLong(dados[0]));
         referenciada.setReferencia(portaria);
         referenciada.setEhCancelamento(Boolean.parseBoolean(dados[3]));
         
+        portariaReferenciadaDAO.abrirTransacao();
+        portariaReferenciadaDAO.salvar(referenciada);
+        portariaReferenciadaDAO.commitarTransacao();
+       
         listaReferencias.add(referenciada);
         portaria.setReferencias(listaReferencias);
         
         portariaDAO.abrirTransacao();
         portariaDAO.salvar(portaria);
         portariaDAO.commitarTransacao();
-
-        return referenciada;
     }
 
     public static PortariaStatus retornaStatusPortaria(String dado){

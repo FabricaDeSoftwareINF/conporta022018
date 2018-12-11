@@ -31,20 +31,20 @@ public class ControladorExclPort {
             try {
                 portariaDAO.abrirTransacao();
 
-                if(listaDesignados.size() > 0){
+                if(listaDesignados != null && listaDesignados.size() > 0){
                     this.portaria.setDesignados(null);
                 }
 
-                if(listaReferenciadas.size() > 0){
+                if(listaReferenciadas != null && listaReferenciadas.size() > 0){
                     for (Referencia referencia : listaReferenciadas) {
                         referencia.setReferencia(null);
                         referenciaDAO.remover(referencia);
                     }
-                    this.portaria.setReferencias(listaReferenciadas);
+                    this.portaria.setReferencias(null);
                 }
-
                 this.portariaDAO.remover(this.portaria);
                 portariaDAO.commitarTransacao();
+                return true;
             } catch (Exception e) {
                 portariaDAO.rollBackTransacao();
                 return false;
