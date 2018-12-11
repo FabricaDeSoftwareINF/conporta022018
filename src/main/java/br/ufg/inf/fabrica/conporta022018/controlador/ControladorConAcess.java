@@ -9,6 +9,7 @@ import br.ufg.inf.fabrica.conporta022018.modelo.*;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PerfilDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ControladorConAcess {
@@ -16,6 +17,8 @@ public class ControladorConAcess {
     private final String JPQL_BUSCAR_USUARIO_POR_CPF = "SELECT u FROM Pessoa u WHERE u.cpfPes = :CPF";
     private final String JPQL_BUSCAR_PERFIL = "SELECT u FROM Perfil u WHERE u.nome = :nome";
     private Map<String, Object> map;
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    private Date defaultDate = new Date(01/01/2100);
 
     public ControladorConAcess() {
         this.map = new HashMap<String, Object>();
@@ -41,7 +44,7 @@ public class ControladorConAcess {
             for (Matricula matricula : usuario.getDiscente()) {
                 Date data = matricula.getDtFimMatrCur();
 
-                if (data == null) {
+                if (data == null || data == defaultDate) {
                     map.put("nome", "ROLE_MODERADO");
                     perfilList.add(dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map));
                 }
@@ -51,7 +54,7 @@ public class ControladorConAcess {
         if (!usuario.getServidor().equals(null)) {
             for (Lotacao lotacao : usuario.getServidor()) {
                 Date data = lotacao.getDtFimLotServ();
-                if (data == null) {
+                if (data == null || data == defaultDate) {
                     map.put("nome", "ROLE_MODERADO");
                     perfilList.add(dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map));
                 }
@@ -60,7 +63,7 @@ public class ControladorConAcess {
 
         if (!usuario.getGestao().equals(null)) {
             for (Gestao gestao : usuario.getGestao()) {
-                if (gestao.getDtFimSubChefe() == null) {
+                if (gestao.getDtFimSubChefe() == null || gestao.getDtFimSubChefe() == defaultDate) {
                     if (gestao.getTipo() == Tipo.COORDENADOR_ADM) {
                         map.put("nome", "ROLE_RESTRITO");
                         perfilList.add(dao.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_PERFIL, map));

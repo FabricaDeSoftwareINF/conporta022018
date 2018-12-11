@@ -18,8 +18,8 @@ public class Perfil extends ModeloAbstrato {
     @NotNull
     @Column
     private String descricao;
-    @JoinColumn
-    @ManyToMany
+    @ManyToMany(cascade= {CascadeType.ALL})
+    @JoinColumn(name ="permissoes_id")
     private List<Permissao> permissoes;
     
     public void setNome(String nome) {

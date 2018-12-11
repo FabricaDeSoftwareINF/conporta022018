@@ -2,6 +2,7 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,12 +15,21 @@ public class Pessoa extends ModeloAbstrato {
     private String emailPes;
     private String senhaUsu;
     private Boolean ehUsuAtivo;
-    @OneToMany
+    @ManyToMany(cascade= {CascadeType.ALL})
+    @JoinColumn(name ="gestao_id")
     private List<Gestao> gestao;
-    @OneToMany
+    @ManyToMany(cascade= {CascadeType.ALL})
+    @JoinColumn(name ="servidor_id")
     private List<Lotacao> servidor;
-    @OneToMany
+    @ManyToMany(cascade= {CascadeType.ALL})
+    @JoinColumn(name ="discente_id")
     private List<Matricula> discente;
+
+    public Pessoa(){
+        this.gestao = new ArrayList<>();
+        this.servidor = new ArrayList<>();
+        this.discente = new ArrayList<>();
+    }
 
     public String getNomePes() {
         return nomePes;

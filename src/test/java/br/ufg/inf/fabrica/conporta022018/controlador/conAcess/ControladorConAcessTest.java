@@ -32,7 +32,7 @@ import java.util.List;
  *   2. RefLogin;
  *   3. IdSoft.
  * Devido a uma particularidade dos casos de uso acima essa classe de teste será
- * dividaida em duas partes, sendo elas:
+ * dividida em duas partes, sendo elas:
  *   1ª parte testa o controlador;
  *   2ª parte testa chamadas ao Framework.
  * Para os testes a seguinte estrategia foi definida:
@@ -78,7 +78,7 @@ public class ControladorConAcessTest extends Mockito {
             linha = dadosSoftware.get(index);
 
             //Definir as tabelas que serão populadas no Banco de Dados.
-            if (linha.equals("pessoa")) {
+            if (linha.equals("pessoa")||linha.equals("perfil")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
@@ -149,13 +149,15 @@ public class ControladorConAcessTest extends Mockito {
 
                         undAdm.setNomeUnd(dados[22]);
                         undAdm.setSiglaUnAdm(dados[23]);
-                        TipoUnd tipo = TipoUnd.valueOf(dados[24]);
-                        undAdm.setTipoUnd(tipo);
+                        undAdm.setTipoUnd(TipoUnd.UNIDADE_ACADEMICA);
                         undAdm.setMinInat(Integer.parseInt(dados[25]));
                         undAdm.setUltPort(dados[26]);
                         undAdm.setAnoPort(Integer.parseInt(dados[27]));
                         undAdm.setUltNumExped(Integer.parseInt(dados[28]));
                         undAdm.setUltNumProp(Integer.parseInt(dados[29]));
+                        List<UndAdm> undAdms = new ArrayList<>();
+                        //undAdms.add(undAdm);
+                        //undAdm.setSubordinadas(undAdms);
 
                         lotacao.setUndAdm(undAdm);
                         usuario.setServidor(lotacao);
@@ -178,6 +180,7 @@ public class ControladorConAcessTest extends Mockito {
                     List<Permissao> permissaoList = new ArrayList<>();
                     Permissao permissao = new Permissao();
                     PerfilDAO perfilDAO = new PerfilDAO();
+                    extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
 
                     permissao.setUrlFuncionalidade(dados[0]);
