@@ -9,8 +9,10 @@ package br.ufg.inf.fabrica.conporta022018.controlador;
 import br.ufg.inf.fabrica.conporta022018.modelo.*;
 import br.ufg.inf.fabrica.conporta022018.persistencia.*;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Calendar
+import java.util.Calendar;
+import java.util.Map;
 
 public class ControladorExpiraPorta {
 
@@ -23,7 +25,7 @@ public class ControladorExpiraPorta {
     public List<Portaria> buscarPortariasAExpirar(){
         //busca as portarias cuja a data de expiração seja igual a data atual
 
-        String query = "SELECT p FROM Portaria WHERE Portaria.Status = status AND p.dtFimVig = data";
+        String query = "SELECT p FROM Portaria WHERE Portaria.Status =:status AND p.dtFimVig <: data";
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("status", PortariaStatus.Ativa);
