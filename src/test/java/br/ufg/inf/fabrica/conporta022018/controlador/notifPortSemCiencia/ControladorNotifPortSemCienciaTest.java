@@ -31,7 +31,7 @@ public class ControladorNotifPortSemCienciaTest {
     public static void casoTestPepararCenario() throws IOException, ParseException {
 
         String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest.csv";
-        String REGRA = ";";
+        String REGRA = ",";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
         LerArquivo lerArquivo = new LerArquivo();
