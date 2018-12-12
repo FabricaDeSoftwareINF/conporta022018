@@ -165,17 +165,17 @@ public class ControladorProxExpPortaTest {
         /**
          * Testa o cenário onde não há designados com ciência atrasada.
          */
-        controladorProxExpPorta.verificarPortariasExpirando("10/12/2018");
+        controladorProxExpPorta.verificarPortariasExpirando();
 
         /**
          * Testa o cenário onde há um designados com ciência atrasada.
          */
-        controladorProxExpPorta.verificarPortariasExpirando("16/12/2018");
+        controladorProxExpPorta.verificarPortariasExpirando();
 
         /**
          * Testa o cenário onde há vários designados com ciência atrasada.
          */
-        controladorProxExpPorta.verificarPortariasExpirando("25/12/2018");
+        controladorProxExpPorta.verificarPortariasExpirando();
 
     }
 
