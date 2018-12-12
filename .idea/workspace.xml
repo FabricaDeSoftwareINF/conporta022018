@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="baab05f9-9623-4222-b5fb-614796f74371" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Designado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Designado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/UndAdm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/UndAdm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/DesignadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/DesignadoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/UndAdmDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/UndAdmDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaDadosTest.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaDadosTest.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/ufg/inf/fabrica/conporta022018/controlador/EdiPorta.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -18,45 +27,55 @@
     <session id="692766418">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="2" />
-          <entry key="csv" value="3" />
-          <entry key="iml" value="2" />
-          <entry key="java" value="30" />
-          <entry key="xml" value="9" />
+          <entry key="0-SNAPSHOT" value="1" />
+          <entry key="class" value="4" />
+          <entry key="csv" value="4" />
+          <entry key="iml" value="3" />
+          <entry key="java" value="41" />
+          <entry key="xml" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="2" />
-          <entry key="CSV" value="3" />
-          <entry key="IDEA_MODULE" value="2" />
-          <entry key="JAVA" value="30" />
-          <entry key="XML" value="9" />
+          <entry key="CLASS" value="4" />
+          <entry key="CSV" value="4" />
+          <entry key="IDEA_MODULE" value="3" />
+          <entry key="JAVA" value="41" />
+          <entry key="UML" value="1" />
+          <entry key="XML" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
-          <entry key="project.open.time.17" value="1" />
+          <entry key="project.closed" value="12" />
+          <entry key="project.open.time.17" value="2" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.20" value="1" />
+          <entry key="project.open.time.20" value="2" />
+          <entry key="project.open.time.22" value="1" />
+          <entry key="project.open.time.23" value="1" />
+          <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.31" value="1" />
+          <entry key="project.open.time.37" value="1" />
           <entry key="project.open.time.43" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.open.time.51" value="1" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="8" />
-          <entry key="java" value="1220" />
+          <entry key="java" value="1298" />
+          <entry key="txt" value="9" />
+          <entry key="xml" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1220" />
-          <entry key="PLAIN_TEXT" value="8" />
+          <entry key="JAVA" value="1298" />
+          <entry key="PLAIN_TEXT" value="17" />
+          <entry key="XML" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -70,50 +89,66 @@
     <favorites_list name="conporta022018" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="53" column="37" lean-forward="true" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
+            <state relative-caret-position="840">
+              <caret line="68" column="26" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1177#1193#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="57" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/ConnectionFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+            <state relative-caret-position="60">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Portaria.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/GenericoDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="54" column="12" lean-forward="true" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="18" />
-              <folding>
-                <element signature="e#3029#3030#0" expanded="true" />
-                <element signature="e#3058#3059#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorManterUndAdm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="330">
+              <caret line="28" selection-start-line="28" selection-end-line="28" />
             </state>
           </provider>
         </entry>
@@ -123,6 +158,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>COMPORTA</find>
+      <find>formatter</find>
+      <find>javax.persistence.JoinColumn.foreignKey()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -136,13 +173,21 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/persistencia/LotacaoDAOTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorManterUndAdm.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/util/Extrator.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Portaria.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/UndAdmDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Designado.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/DesignadoDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaDadosTest.csv" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/ConnectionFactory.java" />
         <option value="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$USER_HOME$/.m2/settings.xml" />
       </list>
     </option>
   </component>
@@ -171,9 +216,17 @@
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="conporta022018" type="9519ce18:MavenProjectsStructure$ProjectNode" />
         </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="conporta022018" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
       </expand>
       <select />
     </treeState>
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="67" />
@@ -193,114 +246,6 @@
             <path>
               <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="controlador" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="conporta022018" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="conporta022018" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="test" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="br" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ufg" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="inf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="fabrica" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conporta022018" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="controlador" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ediPorta" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -326,14 +271,23 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="mave&#9;ACTION&#9;ActivateMavenProjectsToolWindow&#10;plugin&#9;PSI&#9;JAVA://net.bytebuddy.build.Plugin" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544052357293" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544137579935" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/javax.persistence.jar!/META-INF" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -347,7 +301,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.EdiPortaTest">
+  <component name="RunManager" selected="JUnit.EdiPortaTest.buscarPortariaDesejadaTest">
     <configuration name="EdiPortaTest.ediPortaParametrosValidosTest" type="ArquillianJUnit" factoryName="" temporary="true" nameIsGenerated="true">
       <module name="conporta022018" />
       <extension name="coverage">
@@ -377,10 +331,63 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-8-oracle/jre" />
       <option name="PACKAGE_NAME" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta" />
       <option name="MAIN_CLASS_NAME" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta.EdiPortaTest" />
       <option name="METHOD_NAME" value="" />
       <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EdiPortaTest.buscarPortariaDesejadaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="conporta022018" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-8-oracle/jre" />
+      <option name="PACKAGE_NAME" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta" />
+      <option name="MAIN_CLASS_NAME" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta.EdiPortaTest" />
+      <option name="METHOD_NAME" value="buscarPortariaDesejadaTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EdiPortaTest.ediPortaDesignadosInvalidosTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="conporta022018" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta" />
+      <option name="MAIN_CLASS_NAME" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta.EdiPortaTest" />
+      <option name="METHOD_NAME" value="ediPortaDesignadosInvalidosTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EdiPortaTest.salvarPortariaComReferenciaComDesignadoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="conporta022018" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta" />
+      <option name="MAIN_CLASS_NAME" value="br.ufg.inf.fabrica.conporta022018.controlador.ediPorta.EdiPortaTest" />
+      <option name="METHOD_NAME" value="salvarPortariaComReferenciaComDesignadoTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -403,13 +410,18 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.EdiPortaTest" />
-      <item itemvalue="JUnit.LotacaoDAOTest.salvar" />
       <item itemvalue="Arquillian JUnit.EdiPortaTest.ediPortaParametrosValidosTest" />
+      <item itemvalue="JUnit.LotacaoDAOTest.salvar" />
+      <item itemvalue="JUnit.EdiPortaTest.ediPortaDesignadosInvalidosTest" />
+      <item itemvalue="JUnit.EdiPortaTest.salvarPortariaComReferenciaComDesignadoTest" />
+      <item itemvalue="JUnit.EdiPortaTest.buscarPortariaDesejadaTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EdiPortaTest.buscarPortariaDesejadaTest" />
+        <item itemvalue="JUnit.EdiPortaTest.salvarPortariaComReferenciaComDesignadoTest" />
+        <item itemvalue="JUnit.EdiPortaTest.ediPortaDesignadosInvalidosTest" />
         <item itemvalue="Arquillian JUnit.EdiPortaTest.ediPortaParametrosValidosTest" />
-        <item itemvalue="JUnit.LotacaoDAOTest.salvar" />
         <item itemvalue="JUnit.LotacaoDAOTest.salvar" />
       </list>
     </recent_temporary>
@@ -443,44 +455,51 @@
       <workItem from="1543616434664" duration="2361000" />
       <workItem from="1543678578034" duration="4404000" />
       <workItem from="1543958254000" duration="614000" />
-      <workItem from="1544046955329" duration="3150000" />
+      <workItem from="1544046955329" duration="4331000" />
+      <workItem from="1544092855472" duration="4419000" />
+      <workItem from="1544097311217" duration="1619000" />
+      <workItem from="1544100186131" duration="274000" />
+      <workItem from="1544130356992" duration="3693000" />
+      <workItem from="1544134128571" duration="1126000" />
+      <workItem from="1544137425316" duration="230000" />
+      <workItem from="1544653592884" duration="286000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="EdiPortaTest - 2018.11.30 at 20h 36m 46s.xml">
+    <history-entry file="EdiPortaTest_ediPortaDesignadosInvalidosTest - 2018.12.06 at 19h 34m 14s.xml">
+      <configuration name="EdiPortaTest.ediPortaDesignadosInvalidosTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EdiPortaTest_ediPortaDesignadosInvalidosTest - 2018.12.06 at 19h 47m 15s.xml">
+      <configuration name="EdiPortaTest.ediPortaDesignadosInvalidosTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EdiPortaTest_salvarPortariaComReferenciaComDesignadoTest - 2018.12.06 at 19h 50m 46s.xml">
+      <configuration name="EdiPortaTest.salvarPortariaComReferenciaComDesignadoTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EdiPortaTest - 2018.12.06 at 20h 00m 08s.xml">
       <configuration name="EdiPortaTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EdiPortaTest - 2018.11.30 at 20h 37m 05s.xml">
+    <history-entry file="EdiPortaTest - 2018.12.06 at 20h 01m 58s.xml">
       <configuration name="EdiPortaTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EdiPortaTest - 2018.11.30 at 20h 37m 08s.xml">
+    <history-entry file="EdiPortaTest - 2018.12.06 at 20h 06m 47s.xml">
       <configuration name="EdiPortaTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EdiPortaTest - 2018.12.01 at 14h 02m 39s.xml">
+    <history-entry file="EdiPortaTest - 2018.12.06 at 20h 09m 45s.xml">
       <configuration name="EdiPortaTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EdiPortaTest - 2018.12.01 at 14h 04m 16s.xml">
-      <configuration name="EdiPortaTest" configurationId="JUnit" />
+    <history-entry file="EdiPortaTest_buscarPortariaDesejadaTest - 2018.12.06 at 20h 11m 02s.xml">
+      <configuration name="EdiPortaTest.buscarPortariaDesejadaTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EdiPortaTest - 2018.12.05 at 21h 23m 13s.xml">
-      <configuration name="EdiPortaTest" configurationId="JUnit" />
+    <history-entry file="EdiPortaTest_buscarPortariaDesejadaTest - 2018.12.06 at 20h 15m 23s.xml">
+      <configuration name="EdiPortaTest.buscarPortariaDesejadaTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EdiPortaTest - 2018.12.05 at 21h 24m 00s.xml">
-      <configuration name="EdiPortaTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="EdiPortaTest - 2018.12.05 at 21h 24m 42s.xml">
-      <configuration name="EdiPortaTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="EdiPortaTest - 2018.12.05 at 21h 24m 50s.xml">
-      <configuration name="EdiPortaTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="EdiPortaTest - 2018.12.05 at 21h 25m 37s.xml">
-      <configuration name="EdiPortaTest" configurationId="JUnit" />
+    <history-entry file="EdiPortaTest_buscarPortariaDesejadaTest - 2018.12.06 at 21h 06m 27s.xml">
+      <configuration name="EdiPortaTest.buscarPortariaDesejadaTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16325000" />
+    <option name="totallyTimeSpent" value="29153000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
@@ -497,16 +516,16 @@
       <window_info anchor="bottom" id="Java Enterprise" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32861635" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.8560431" visible="true" weight="0.2720126" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.8529638" weight="0.5015723" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4996151" weight="0.39937106" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.14395688" side_tool="true" visible="true" weight="0.2720126" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.147806" side_tool="true" visible="true" weight="0.5015723" />
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49037722" weight="0.32861635" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.4896074" weight="0.32861635" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24980047" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -515,8 +534,9 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="right" id="Maven Projects" order="8" visible="true" weight="0.21016166" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.21016166" />
       <window_info anchor="right" id="Bean Validation" order="9" />
+      <window_info anchor="right" id="Remote Host" order="10" weight="0.32948422" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -581,34 +601,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/ConnectionFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="20" column="20" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jrt:///usr/lib/jvm/java-1.11.0-openjdk-amd64!/java.base/jdk/internal/reflect/DelegatingMethodAccessorImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/UndAdmDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jrt:///usr/lib/jvm/java-1.11.0-openjdk-amd64!/java.base/jdk/internal/reflect/DelegatingMethodAccessorImpl.class" />
     <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/regCiencDesig/RegCienDesigDadosTest.csv">
       <provider editor-type-id="csv-text-editor">
         <state relative-caret-position="165">
@@ -630,13 +623,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jrt:///usr/lib/jvm/java-1.11.0-openjdk-amd64!/java.base/jdk/internal/reflect/NativeMethodAccessorImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-62">
-          <caret line="12" column="32" lean-forward="true" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jrt:///usr/lib/jvm/java-1.11.0-openjdk-amd64!/java.base/jdk/internal/reflect/NativeMethodAccessorImpl.class" />
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3060" />
@@ -661,9 +648,6 @@
     <entry file="file://$PROJECT_DIR$/.idea/conporta022018.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/conporta022018.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediTemTim/ControladorEdiTemTimTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-764">
@@ -671,59 +655,348 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Portaria.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaDadosTest.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Designado.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-210">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        <state relative-caret-position="765">
+          <caret line="54" column="12" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorManterUndAdm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="60">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Portaria.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/UndAdmDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="54" column="12" lean-forward="true" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="18" />
-          <folding>
-            <element signature="e#3029#3030#0" expanded="true" />
-            <element signature="e#3058#3059#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="14">
+          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jboss/arquillian/junit/arquillian-junit-core/1.4.1.Final/arquillian-junit-core-1.4.1.Final.jar!/org/jboss/arquillian/junit/MethodInvoker.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaDadosTest.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="299">
+          <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Designado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/DesignadoDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://MAVEN/br.ufg.inf.fabrica:conporta022018:1.0-SNAPSHOT">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MAVEN</ID>
+          <OriginalElement>br.ufg.inf.fabrica:conporta022018:1.0-SNAPSHOT</OriginalElement>
+          <nodes>
+            <node x="1449.79623015873" y="384.0">br.ufg.inf.fabrica:conporta022018:1.0-SNAPSHOT</node>
+            <node x="979.3833333333332" y="202.0">org.hibernate:hibernate-core:jar:5.3.7.Final</node>
+            <node x="1439.0" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/org.jboss.logging:jboss-logging:jar:3.3.2.Final</node>
+            <node x="261.0" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/javax.persistence:javax.persistence-api:jar:2.2</node>
+            <node x="1142.0" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/org.javassist:javassist:jar:3.23.1-GA</node>
+            <node x="830.0" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/net.bytebuddy:byte-buddy:jar:1.8.17</node>
+            <node x="1057.0" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/antlr:antlr:jar:2.7.7</node>
+            <node x="0.0" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:jar:1.1.1.Final</node>
+            <node x="959.0" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/org.jboss:jandex:jar:2.0.5.Final</node>
+            <node x="1832.2829184704185" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/com.fasterxml:classmate:jar:1.3.4</node>
+            <node x="1253.0" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/javax.activation:javax.activation-api:jar:1.2.0</node>
+            <node x="735.0" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/org.dom4j:dom4j:jar:2.1.1</node>
+            <node x="457.0" y="81.0">org.hibernate:hibernate-core:jar:5.3.7.Final/org.hibernate.common:hibernate-commons-annotations:jar:5.0.4.Final</node>
+            <node x="523.5" y="0.0">org.hibernate:hibernate-core:jar:5.3.7.Final/org.hibernate.common:hibernate-commons-annotations:jar:5.0.4.Final/org.jboss.logging:jboss-logging:jar:3.3.1.Final</node>
+            <node x="670.7128968253968" y="293.0">org.hibernate:hibernate-entitymanager:jar:5.3.7.Final</node>
+            <node x="1760.5329184704185" y="293.0">org.hibernate.validator:hibernate-validator:jar:6.0.13.Final</node>
+            <node x="1770.7829184704185" y="202.0">org.hibernate.validator:hibernate-validator:jar:6.0.13.Final/javax.validation:validation-api:jar:2.0.1.Final</node>
+            <node x="1945.5329184704185" y="293.0">com.h2database:h2:jar:1.4.196</node>
+            <node x="1483.5329184704185" y="293.0">junit:junit:jar:4.12</node>
+            <node x="1450.5329184704185" y="202.0">junit:junit:jar:4.12/org.hamcrest:hamcrest-core:jar:1.3</node>
+            <node x="1567.5329184704185" y="293.0">org.hibernate.javax.persistence:hibernate-jpa-2.0-api:jar:1.0.1.Final</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="org.hibernate:hibernate-entitymanager:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final">
+              <point x="58.28571428571422" y="-15.5" />
+              <point x="830.998611111111" y="263.0" />
+              <point x="1012.6333333333332" y="263.0" />
+              <point x="-33.25" y="15.5" />
+            </edge>
+            <edge source="br.ufg.inf.fabrica:conporta022018:1.0-SNAPSHOT" target="org.hibernate:hibernate-entitymanager:jar:5.3.7.Final">
+              <point x="-59.58333333333326" y="-15.5" />
+              <point x="1461.712896825397" y="364.0" />
+              <point x="772.7128968253968" y="364.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="br.ufg.inf.fabrica:conporta022018:1.0-SNAPSHOT" target="com.h2database:h2:jar:1.4.196">
+              <point x="59.58333333333337" y="-15.5" />
+              <point x="1580.8795634920634" y="364.0" />
+              <point x="1970.0329184704185" y="364.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="junit:junit:jar:4.12" target="junit:junit:jar:4.12/org.hamcrest:hamcrest-core:jar:1.3">
+              <point x="0.0" y="-15.5" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.hibernate.common:hibernate-commons-annotations:jar:5.0.4.Final">
+              <point x="-36.27272727272725" y="-15.5" />
+              <point x="1009.610606060606" y="162.0" />
+              <point x="650.5" y="162.0" />
+              <point x="64.5" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/antlr:antlr:jar:2.7.7">
+              <point x="12.090909090909122" y="-15.5" />
+              <point x="1057.9742424242424" y="132.0" />
+              <point x="1089.5" y="132.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.javassist:javassist:jar:3.23.1-GA">
+              <point x="24.18181818181813" y="-15.5" />
+              <point x="1070.0651515151515" y="142.0" />
+              <point x="1187.5" y="142.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-entitymanager:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.dom4j:dom4j:jar:2.1.1">
+              <point x="0.0" y="-15.5" />
+              <point x="772.7128968253968" y="273.0" />
+              <point x="753.75" y="273.0" />
+              <point x="-18.75" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.jboss.logging:jboss-logging:jar:3.3.2.Final">
+              <point x="48.363636363636374" y="-15.5" />
+              <point x="1094.2469696969697" y="162.0" />
+              <point x="1459.8333333333333" y="162.0" />
+              <point x="-41.666666666666686" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-entitymanager:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.hibernate.common:hibernate-commons-annotations:jar:5.0.4.Final">
+              <point x="-29.14285714285711" y="-15.5" />
+              <point x="743.5700396825397" y="253.0" />
+              <point x="521.5" y="253.0" />
+              <point x="-64.5" y="15.5" />
+            </edge>
+            <edge source="br.ufg.inf.fabrica:conporta022018:1.0-SNAPSHOT" target="org.hibernate.javax.persistence:hibernate-jpa-2.0-api:jar:1.0.1.Final">
+              <point x="11.916666666666629" y="-15.5" />
+              <point x="1533.2128968253967" y="344.0" />
+              <point x="1654.0329184704185" y="344.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-entitymanager:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/javax.persistence:javax.persistence-api:jar:2.2">
+              <point x="-58.28571428571422" y="-15.5" />
+              <point x="714.4271825396826" y="263.0" />
+              <point x="305.0" y="263.0" />
+              <point x="-44.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-entitymanager:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:jar:1.1.1.Final">
+              <point x="-87.42857142857156" y="-15.5" />
+              <point x="685.2843253968252" y="273.0" />
+              <point x="60.25" y="273.0" />
+              <point x="-60.25" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.dom4j:dom4j:jar:2.1.1">
+              <point x="-24.181818181818244" y="-15.5" />
+              <point x="1021.701515151515" y="152.0" />
+              <point x="791.25" y="152.0" />
+              <point x="18.75" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-entitymanager:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.jboss.logging:jboss-logging:jar:3.3.2.Final">
+              <point x="87.42857142857133" y="-15.5" />
+              <point x="860.1414682539681" y="273.0" />
+              <point x="1440.0329184704185" y="273.0" />
+              <point x="1440.0329184704185" y="172.0" />
+              <point x="1501.5" y="172.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="br.ufg.inf.fabrica:conporta022018:1.0-SNAPSHOT" target="org.hibernate:hibernate-core:jar:5.3.7.Final">
+              <point x="-35.75" y="-15.5" />
+              <point x="1485.54623015873" y="354.0" />
+              <point x="1079.1333333333332" y="354.0" />
+              <point x="33.25" y="15.5" />
+            </edge>
+            <edge source="org.hibernate.validator:hibernate-validator:jar:6.0.13.Final" target="org.hibernate.validator:hibernate-validator:jar:6.0.13.Final/javax.validation:validation-api:jar:2.0.1.Final">
+              <point x="0.0" y="-15.5" />
+              <point x="1843.0329184704185" y="273.0" />
+              <point x="1833.7829184704185" y="273.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/javax.persistence:javax.persistence-api:jar:2.2">
+              <point x="-48.363636363636374" y="-15.5" />
+              <point x="997.519696969697" y="172.0" />
+              <point x="393.0" y="172.0" />
+              <point x="44.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate.validator:hibernate-validator:jar:6.0.13.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.jboss.logging:jboss-logging:jar:3.3.2.Final">
+              <point x="-55.0" y="-15.5" />
+              <point x="1788.0329184704185" y="273.0" />
+              <point x="1671.0329184704185" y="273.0" />
+              <point x="1671.0329184704185" y="172.0" />
+              <point x="1543.1666666666665" y="172.0" />
+              <point x="41.66666666666663" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final/org.hibernate.common:hibernate-commons-annotations:jar:5.0.4.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.hibernate.common:hibernate-commons-annotations:jar:5.0.4.Final/org.jboss.logging:jboss-logging:jar:3.3.1.Final">
+              <point x="0.0" y="-15.5" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="br.ufg.inf.fabrica:conporta022018:1.0-SNAPSHOT" target="org.hibernate.validator:hibernate-validator:jar:6.0.13.Final">
+              <point x="35.75" y="-15.5" />
+              <point x="1557.04623015873" y="354.0" />
+              <point x="1843.0329184704185" y="354.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:jar:1.1.1.Final">
+              <point x="-60.454545454545496" y="-15.5" />
+              <point x="985.4287878787877" y="182.0" />
+              <point x="180.75" y="182.0" />
+              <point x="60.25" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-entitymanager:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/net.bytebuddy:byte-buddy:jar:1.8.17">
+              <point x="29.14285714285711" y="-15.5" />
+              <point x="801.8557539682539" y="253.0" />
+              <point x="857.25" y="253.0" />
+              <point x="-27.25" y="15.5" />
+            </edge>
+            <edge source="br.ufg.inf.fabrica:conporta022018:1.0-SNAPSHOT" target="junit:junit:jar:4.12">
+              <point x="-11.916666666666629" y="-15.5" />
+              <point x="1509.3795634920634" y="364.0" />
+              <point x="1515.5329184704185" y="364.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/com.fasterxml:classmate:jar:1.3.4">
+              <point x="60.454545454545496" y="-15.5" />
+              <point x="1106.3378787878787" y="182.0" />
+              <point x="1857.2829184704185" y="182.0" />
+              <point x="-25.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate.validator:hibernate-validator:jar:6.0.13.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/com.fasterxml:classmate:jar:1.3.4">
+              <point x="55.0" y="-15.5" />
+              <point x="1898.0329184704185" y="273.0" />
+              <point x="1907.2829184704185" y="273.0" />
+              <point x="25.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/javax.activation:javax.activation-api:jar:1.2.0">
+              <point x="36.27272727272725" y="-15.5" />
+              <point x="1082.1560606060605" y="152.0" />
+              <point x="1336.0" y="152.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/org.jboss:jandex:jar:2.0.5.Final">
+              <point x="0.0" y="-15.5" />
+              <point x="1045.8833333333332" y="132.0" />
+              <point x="998.0" y="132.0" />
+              <point x="0.0" y="15.5" />
+            </edge>
+            <edge source="org.hibernate:hibernate-core:jar:5.3.7.Final" target="org.hibernate:hibernate-core:jar:5.3.7.Final/net.bytebuddy:byte-buddy:jar:1.8.17">
+              <point x="-12.090909090909122" y="-15.5" />
+              <point x="1033.7924242424242" y="142.0" />
+              <point x="911.75" y="142.0" />
+              <point x="27.25" y="15.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.3982823403113258" x="593.0" y="467.0" />
+          <SelectedNodes>
+            <node>br.ufg.inf.fabrica:conporta022018:1.0-SNAPSHOT</node>
+            <node>org.hibernate.javax.persistence:hibernate-jpa-2.0-api:jar:1.0.1.Final</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>All</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/net/bytebuddy/byte-buddy/1.8.17/byte-buddy-1.8.17-sources.jar!/net/bytebuddy/build/Plugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/javax.persistence.jar!/javax/persistence/Persistence.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="21" column="22" lean-forward="true" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conporta022018.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15">
+          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="53" column="10" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.m2/settings.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="53" column="37" lean-forward="true" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
+        <state relative-caret-position="840">
+          <caret line="68" column="26" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1177#1193#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="57" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="78" column="5" selection-start-line="78" selection-start-column="5" selection-end-line="78" selection-end-column="5" />
+        <state relative-caret-position="180">
+          <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/ConnectionFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/GenericoDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/PessoaDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -756,7 +1029,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>No facets are configured</last-edited>
+          <last-edited>JPA</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -779,7 +1052,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>10</last-edited>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

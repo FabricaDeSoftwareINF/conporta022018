@@ -25,6 +25,22 @@ public class Designado extends ModeloAbstrato {
     private Pessoa pessoa;
     private FuncaoDesig funcaoDesig;
 
+    public FuncaoDesig getFuncaoDesig() {
+        return funcaoDesig;
+    }
+
+    public void setFuncaoDesig(FuncaoDesig funcaoDesig) {
+        this.funcaoDesig = funcaoDesig;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
     /**
      * @return Date return the dtCienciaDesig
      */
