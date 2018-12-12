@@ -60,7 +60,7 @@ public class ControladorExclPortTest {
             linha = dadosSoftware.get(index);
 
             //Definir as tabelas que serão populadas no Banco de Dados.
-            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("undAdm") || linha.equals("designado")|| linha.equals("referencia")) {
+            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("designado")|| linha.equals("referencia")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
@@ -81,16 +81,6 @@ public class ControladorExclPortTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     trataDadosDaPortariaReferenciadaParaPersistencia(dados);                    
-                    break;
-                case "portariaDesignada" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela portaria designadas no Banco de dados.
-                    break;
-                case "undAdm" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela unidade administrativa no Banco de Dados.
                     break;
                 case "designado" :
                     extrator.setTexto(linha);
