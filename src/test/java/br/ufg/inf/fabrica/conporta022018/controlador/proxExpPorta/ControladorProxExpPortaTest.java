@@ -4,9 +4,9 @@
  * Creative Commons Attribution 4.0 International License.
  */
 
-package br.ufg.inf.fabrica.conporta022018.controlador.notifPortSemCiencia;
+package br.ufg.inf.fabrica.conporta022018.controlador.proxExpPorta;
 
-import br.ufg.inf.fabrica.conporta022018.controlador.ControladorNotifPortSemCiencia;
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorProxExpPorta;
 import br.ufg.inf.fabrica.conporta022018.modelo.*;
 import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
@@ -22,15 +22,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ControladorNotifPortSemCienciaTest {
+public class ControladorProxExpPortaTest {
 
-    private static ControladorNotifPortSemCiencia controladorNotifPortSemCiencia;
+    private static ControladorProxExpPorta controladorProxExpPorta;
 
 
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException, ParseException {
 
-        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest.csv";
+        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/proxExpPorta/ProxExpPortaTest.csv";
         String REGRA = ";";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
@@ -138,7 +138,7 @@ public class ControladorNotifPortSemCienciaTest {
     public void casoTestPrepararExecucao() {
 
         //Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
-        controladorNotifPortSemCiencia = new ControladorNotifPortSemCiencia();
+        controladorProxExpPorta = new ControladorProxExpPorta();
     }
 
 
@@ -160,22 +160,22 @@ public class ControladorNotifPortSemCienciaTest {
      */
 
     @Test
-    public void casoTestVerifcarCiencia() throws ParseException {
+    public void casoTesteVerificarPortariasExpirando() throws ParseException {
 
         /**
          * Testa o cenário onde não há designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia("10/12/2018");
+        controladorProxExpPorta.verificarPortariasExpirando("10/12/2018");
 
         /**
          * Testa o cenário onde há um designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia("16/12/2018");
+        controladorProxExpPorta.verificarPortariasExpirando("16/12/2018");
 
         /**
          * Testa o cenário onde há vários designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia("25/12/2018");
+        controladorProxExpPorta.verificarPortariasExpirando("25/12/2018");
 
     }
 
