@@ -29,7 +29,6 @@ public class ControladorNotifPortSemCiencia {
         PortariaDAO portariaDAO = new PortariaDAO();
         Map<String, Object> busca = new HashMap<>();
 
-        //List<Designado> listaTemp = designadoDao.pesquisarJPQLCustomizada(BUSCAR_DESIGNADO, busca);
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, -5);
