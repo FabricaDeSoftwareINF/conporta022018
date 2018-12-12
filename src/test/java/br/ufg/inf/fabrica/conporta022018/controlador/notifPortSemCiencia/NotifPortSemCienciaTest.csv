@@ -1,12 +1,53 @@
+portaria
+PKportaria;anoId;seqId;status;assunto;dtExped;periodVig;dtIniVig;dtFimVig;;
+1;2018;00;ATIVA;Novo coordenador de curso;10/12/2018;01/01/201931/12/2021;01/01/2019;31/12/2021
+3;2018;02;ATIVA;Novo coordenador de curso;13/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+4;2018;03;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+5;2018;10;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+6;2018;11;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+7;2018;12;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+8;2018;13;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+9;2018;14;ATIVA;Novo coordenador de curso;15/12/2018;01/01/202031/12/2022;01/01/2020;31/12/2022
+designado
+PKdesg;dtCienciaDesig;tipFuncDesig;descrFuncDesig;horasDefFuncDesig;horasExecFuncDesig;PKportaria;PKpes
+1;;Coordenador;Novo coordenador de curso;220;;1;1
+2;;Coordenador;Novo coordenador de curso;220;;3;2
+3;;Coordenador;Novo coordenador de curso;220;;4;3
+4;;Coordenador;Novo coordenador de curso;220;;4;4
+5;;Coordenador;Novo coordenador de curso;220;;5;5
+6;;Coordenador;Novo coordenador de curso;220;;6;6
+7;;Coordenador;Novo coordenador de curso;220;;7;7
+8;;Coordenador;Novo coordenador de curso;220;;8;8
+9;;Coordenador;Novo coordenador de curso;220;;9;9
+11;12/11/2018;Coordenador;Novo coordenador de curso;220;;1;11
+12;12/11/2018;Coordenador;Novo coordenador de curso;220;;2;12
+13;12/11/2018;Coordenador;Novo coordenador de curso;220;;3;13
+14;12/11/2018;Coordenador;Novo coordenador de curso;220;;4;14
+15;12/11/2018;Coordenador;Novo coordenador de curso;220;;5;15
+16;12/11/2018;Coordenador;Novo coordenador de curso;220;;6;16
+17;12/11/2018;Coordenador;Novo coordenador de curso;220;;7;17
+18;12/11/2018;Coordenador;Novo coordenador de curso;220;;8;18
+19;12/11/2018;Coordenador;Novo coordenador de curso;220;;9;19
 pessoa
-NomePes,CpfPes,EmailPes,SenhaUsu,EhUsuAtivo,setdtInicio,setdtFim,setDtIniSubChefe,setDtFimSubChefe,NomeUnd,setSiglaUnAdm,TipoUnd,MinInat,UltPort,AnoPort,NumExped,NumProp,Funcao,DtIniLotServ,DtFimLotServ,setDescrCargoServ,setCargoServ,NomeUnd,SiglaUnAdm,TipoUnd,MinInat,UltPort,AnoPort,UltNumExped,UltNumProp,matricula
-José Paulo Souza,123.123.123-12,jose@example.com,1234,true,12/12/2011,null,null,null,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,null,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
-Fernanda Paula de Souza,789.789.789-89,fernanda@example.com,1234,true,12/12/2011,null,null,null,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,null,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
-Paula de Souza,789.000.789-89,nanda@example.com,1234,true,12/12/2011,null,null,null,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,null,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
-Paula Fernanda de Souza,222.789.333-89,fer@example.com,1234,true,12/12/2011,null,null,null,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,null,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
-Ana Paula de Souza,333.222.111-89,ana@example.com,1234,true,12/12/2011,null,null,null,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,null,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
-José de Souza,789.789.789-89,jose@example.com,1234,true,12/12/2011,null,null,null,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,null,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
-José Carlos de Souza,785.123.543-78,jose@exemplo.com,1234,true,12/12/2011,null,null,null,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,null,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
-Fermanda Maria da Silva,342.897.456-34,fernanda@exemplo.com,1234,true,12/12/2011,null,null,null,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,null,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
-Pedro da Silva,764.098.612-09,pedro@exemple.com,1234,true,12/12/2011,null,null,null,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,null,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
-Maria José de Oliveira,456.095.124-98,maria@exemple.com,1234,true,12/12/2011,null,null,null,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,null,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
+PKpes;nomePes;cpfPes;emailPes;senhaUsu;ehUsuAtivo
+1;Jos� Carlos Santos;123.456.789-12;joaolucaspachecoab@gmail.com;123456;true
+2;Gabriel Carlos Santos;123.456.818-12;edionay@gmail.com;123456;true
+3;Gabriel Jesus;236.456.818-12;joaolucaspachecoab@gmail.com;123456;true
+4;Edson J�nior;784.456.818-12;edionay@gmail.com;123456;true
+5;Helena Rosa;586.456.818-12;joaolucaspachecoab@gmail.com;123456;true
+6;Matheus Ribeiro;734.463.818-12;edionay@gmail.com;123456;true
+7;Jos� Junior;234.547.818-12;joaolucaspachecoab@gmail.com;123456;true
+8;Victor Lemos;245.965.452-12;edionay@gmail.com;123456;true
+9;Keslley Lima;456.567.452-12;joaolucaspachecoab@gmail.com;123456;true
+10;Luis Antonio;786.567.852-17;edionay@gmail.com;123456;true
+11;fabio;126.874.555-17;joaolucaspachecoab@gmail.com;123456;true
+12;Rogerio Ceni;874.874.874-17;edionay@gmail.com;123456;true
+13;Luis Inacio;114.134.855-13;joaolucaspachecoab@gmail.com;123456;true
+14;Sandro;874.598.474-55;edionay@gmail.com;123456;true
+15;Bruno silveira;777.587.545-11;joaolucaspachecoab@gmail.com;123456;true
+16;Alana silveira;874.123.654-98;edionay@gmail.com;123456;true
+17;Alana silveira;874.123.654-98;joaolucaspachecoab@gmail.com;123456;true
+18;Jo�o silveira;111.111.111-98;edionay@gmail.com;123456;true
+19;JOnelson Lan;111.183.854-98;joaolucaspachecoab@gmail.com;123456;true
+20;Alana luna;874.744.848-55;edionay@gmail.com;123456;true
+21;Bruninho luis silveira;884.888.154-98;joaolucaspachecoab@gmail.com;123456;true

@@ -31,7 +31,7 @@ public class ControladorNotifPortSemCienciaTest {
     public static void casoTestPepararCenario() throws IOException, ParseException {
 
         String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest.csv";
-        String REGRA = ",";
+        String REGRA = ";";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
         LerArquivo lerArquivo = new LerArquivo();
@@ -141,8 +141,6 @@ public class ControladorNotifPortSemCienciaTest {
         controladorNotifPortSemCiencia = new ControladorNotifPortSemCiencia();
     }
 
-
-
     /**
      *  Devido a natureza do caso de uso, foi-se escolhido que a melhor forma de realizar os testes seria por
      *  teste de valores limites.
@@ -155,28 +153,35 @@ public class ControladorNotifPortSemCienciaTest {
      *  2- Apenas um designado está com a ciência atrasada;
      *  3- Mais de um designado estão com a ciência atrasada
      *
-     *  Com esses três teste, acredita-se que são satisfeitas a necessidade do caso de uso ser testado.
+     *  Com esses três casos de teste, acredita-se que são satisfeitas a necessidade do caso de uso ser testado.
      *
      */
 
     @Test
-    public void casoTestVerifcarCiencia() throws ParseException {
+    public void casoSemNenhumaPendenciaDeCiencia() throws ParseException {
 
         /**
          * Testa o cenário onde não há designados com ciência atrasada.
          */
         controladorNotifPortSemCiencia.verificarCiencia("10/12/2018");
+    }
+
+    @Test
+    public void casoComUmaPendenciaDeCiencia() throws ParseException {
 
         /**
          * Testa o cenário onde há um designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia("16/12/2018");
+        controladorNotifPortSemCiencia.verificarCiencia("13/12/2018");
+    }
+
+    @Test
+    public void casoComVariasPendenciaDeCiencia() throws ParseException {
 
         /**
-         * Testa o cenário onde há vários designados com ciência atrasada.
+         * Testa o cenário onde há varios designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia("25/12/2018");
-
+        controladorNotifPortSemCiencia.verificarCiencia("20/12/2018");
     }
 
 
