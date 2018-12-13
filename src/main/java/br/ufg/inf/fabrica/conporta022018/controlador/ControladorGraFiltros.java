@@ -12,8 +12,7 @@ public class ControladorGraFiltros {
 
     private PortariaDao portariaDao;
 
-    public List<Portaria> graFiltros(Filtro filtro) {
+    public List<EsforcoIndividual> graFiltros(Filtro filtro) {
         return null;
     }
-
 }
