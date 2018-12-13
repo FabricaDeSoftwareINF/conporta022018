@@ -11,6 +11,7 @@ import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
 import br.ufg.inf.fabrica.conporta022018.modelo.Referencia;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ControladorCancPortRef {
         List<Referencia> referencias = portaria.getReferencias();
         List<Referencia> portRefCancelamento = getPortRefCancelamento(referencias);
 
-        if (portRefCancelamento.size() == 0) {
+        if (portRefCancelamento == null || portRefCancelamento.size() == 0) {
 //            throw new UnsupportedOperationException("Não existem portarias para cancelamento.");
             return true;
         }
@@ -47,7 +48,7 @@ public class ControladorCancPortRef {
 
             while (iterator.hasNext()) {
                 referencia = iterator.next();
-                portariaReferenciada = referencia.getReferencia();
+                portariaReferenciada = referencia.getPortariaReferenciada();
                 portariaParaCancelamento = portariaDAO.buscar(portariaReferenciada.getId());
 
                 if (portariaParaCancelamento == null) {
@@ -72,18 +73,22 @@ public class ControladorCancPortRef {
     }
 
     public List<Referencia> getPortRefCancelamento(List<Referencia> referencias) {
-        Iterator<Referencia> iterator = referencias.iterator();
-        Referencia referencia;
+        List<Referencia> referenciasParaCancelamento = new ArrayList<>();
 
-        while (iterator.hasNext()) {
-            referencia = iterator.next();
+        if (referencias != null && referencias.size() > 0) {
+            Iterator<Referencia> iterator = referencias.iterator();
+            Referencia referencia;
 
-            if (referencia.isEhCancelamento() != true) {
-                referencias.remove(referencia);
+            while (iterator.hasNext()) {
+                referencia = iterator.next();
+
+                if (referencia.isEhCancelamento() == true) {
+                    referenciasParaCancelamento.add(referencia);
+                }
             }
         }
 
-        return referencias;
+        return referenciasParaCancelamento;
     }
 
 }

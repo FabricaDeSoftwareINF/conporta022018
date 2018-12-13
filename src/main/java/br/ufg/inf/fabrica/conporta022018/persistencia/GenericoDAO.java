@@ -16,7 +16,7 @@ import javax.persistence.TypedQuery;
 public abstract class GenericoDAO<T extends ModeloAbstrato> {
 
   private Class<T> classType = ((Class<T>) ((ParameterizedType) getClass()
-      .getGenericSuperclass()).getActualTypeArguments()[0]);
+          .getGenericSuperclass()).getActualTypeArguments()[0]);
 
   /**
    * Salva ou altera um modelo no banco de dados.
@@ -79,7 +79,7 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
 
     try {
       return entityManager.createQuery("select c from " + classType.getName() + " c ",
-          classType).getResultList();
+              classType).getResultList();
     } catch (Exception e) {
       e.printStackTrace();
       return null;
@@ -87,15 +87,13 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
   }
 
   /**
-   * Consulta através de um script de pesquisa e de seus parâmetros informados, retorna apenas uma
-   * instância de  T.
+   * Consulta através de um script de pesquisa e de seus parâmetros informados, retorna apenas uma instância de  T.
    *
    * @param jpql String de consulta no formato JPQL, ver <a href="https://docs.oracle.com/html/E13946_01/ejb3_langref.html"></a>.
    * @param parametros {@link Map} de parâmetros da consulta.
    * @return instância de T caso pesquisa traga resultados, caso contrário, null.
    */
   public T pesquisarUmJPQLCustomizada(String jpql, Map<String, Object> parametros) {
-
     try {
       return criarQuery(jpql, parametros).getSingleResult();
     } catch (Exception e) {
@@ -105,8 +103,7 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
   }
 
   /**
-   * Consulta através de um script de pesquisa e de seus parâmetros informados, retorna apenas uma
-   * lista de T.
+   * Consulta através de um script de pesquisa e de seus parâmetros informados, retorna apenas uma lista de T.
    *
    * @param jpql String de consulta no formato JPQL, ver <a href="https://docs.oracle.com/html/E13946_01/ejb3_langref.html"></a>.
    * @param parametros {@link Map} de parâmetros da consulta.
@@ -158,7 +155,8 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
    * Métoo privado que instância um objeto {@link TypedQuery} com seus parâmetros
    *
    * @param jpql String de consulta no formato JPQL, ver <a href="https://docs.oracle.com/html/E13946_01/ejb3_langref.html"></a>.
-   * @param parametros {@link Map} de parâmetros da consulta.
+   * @param parametros  {@link Map} de parâmetros da consulta.
+   * @return
    */
   private TypedQuery<T> criarQuery(String jpql, Map<String, Object> parametros) {
     EntityManager entityManager = ConnectionFactory.obterManager();
@@ -170,7 +168,6 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
         query.setParameter(parametro.getKey(), parametro.getValue());
       }
     }
-
     return query;
   }
 
