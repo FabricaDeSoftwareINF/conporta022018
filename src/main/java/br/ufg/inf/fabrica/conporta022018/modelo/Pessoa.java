@@ -2,6 +2,7 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,11 +16,11 @@ public class Pessoa extends ModeloAbstrato {
     private String senhaUsu;
     private Boolean ehUsuAtivo;
     @OneToMany
-    private List<Gestao> gestao;
+    private List<Gestao> gestao = new ArrayList<>();
     @OneToMany
-    private List<Lotacao> servidor;
+    private List<Lotacao> servidor = new ArrayList<>();
     @OneToMany
-    private List<Matricula> discente;
+    private List<Matricula> discente = new ArrayList<>();
 
     public String getNomePes() {
         return nomePes;
