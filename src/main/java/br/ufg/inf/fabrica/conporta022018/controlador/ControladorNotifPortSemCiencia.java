@@ -23,7 +23,7 @@ public class ControladorNotifPortSemCiencia {
 
     private final static String BUSCAR_PORTARIA = "SELECT p FROM Portaria p WHERE p.dtExped <:dataProcurada";
 
-    public void verificarCiencia(){
+    public void verificarCiencia() throws ParseException {
 
         List<String> emails = encontraEmailDesig();
 
@@ -34,7 +34,7 @@ public class ControladorNotifPortSemCiencia {
         }
     }
 
-    public List<String> encontraEmailDesig(){
+    public List<String> encontraEmailDesig() throws ParseException {
 
         PortariaDAO portariaDAO = new PortariaDAO();
         Map<String, Object> busca = new HashMap<>();
@@ -43,7 +43,8 @@ public class ControladorNotifPortSemCiencia {
         cal.add(Calendar.DAY_OF_MONTH, -5);
         Date data = cal.getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        busca.put("dataProcurada", formatter.format(data));
+        String s = formatter.format(data);
+        busca.put("dataProcurada", formatter.parse(s));
 
         List<Portaria> portarias = portariaDAO.pesquisarJPQLCustomizada(BUSCAR_PORTARIA, busca);
         List<String> emails = new ArrayList<>();

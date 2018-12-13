@@ -28,10 +28,10 @@ public class ControladorNotifPortSemCienciaTest {
 
 
     @BeforeClass
-    public static void casoTestPepararCenario(String caminho) throws IOException, ParseException {
+    public static void casoTestPepararCenario() throws IOException, ParseException {
 
-        //String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest1.csv";
-        String CAMINHO_CSV = caminho;   
+        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest2.csv";
+        //String CAMINHO_CSV = caminho;
         String REGRA = ";";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
@@ -47,6 +47,7 @@ public class ControladorNotifPortSemCienciaTest {
         Portaria portaria = new Portaria();
         Pessoa pessoa = new Pessoa();
         UndAdm undAdm = new UndAdm();
+        Matricula matricula = new Matricula();
         Designado designado = new Designado();
         List<Designado> designados = new ArrayList<>();
         List<Referencia> referencias = new ArrayList<>();
@@ -97,7 +98,7 @@ public class ControladorNotifPortSemCienciaTest {
 
                     //Primeiro discente da lista
                     pessoa.setCpfPes("");
-                    pessoa.setDiscente(null);
+                    pessoa.setDiscente(matricula);
                     pessoa.setEhUsuAtivo(true);
                     pessoa.setEmailPes(dados[5]);
                     pessoa.setGestao(null);
@@ -149,28 +150,36 @@ public class ControladorNotifPortSemCienciaTest {
 
                     designados.add(designado);
 
-                    //Quarto discente da lista
-                    pessoa.setCpfPes("");
-                    pessoa.setDiscente(null);
-                    pessoa.setEhUsuAtivo(true);
-                    pessoa.setEmailPes(dados[11]);
-                    pessoa.setGestao(null);
-                    pessoa.setNomePes("");
-                    pessoa.setSenhaUsu("");
-                    pessoa.setServidor(null);
-
-                    designado.setDesignado(pessoa);
-                    designado.setDescrFuncDesig("");
-                    designado.setDtCienciaDesig(formato.parse(dados[12]));
-                    designado.setHorasDefFuncDesig(10);
-                    designado.setTipFuncDesig(FuncaoDesig.COORDENADOR);
-
-                    designados.add(designado);
+//                    //Quarto discente da lista
+//                    pessoa.setCpfPes("");
+//                    pessoa.setDiscente(null);
+//                    pessoa.setEhUsuAtivo(true);
+//                    pessoa.setEmailPes(dados[11]);
+//                    pessoa.setGestao(null);
+//                    pessoa.setNomePes("");
+//                    pessoa.setSenhaUsu("");
+//                    pessoa.setServidor(null);
+//
+//                    designado.setDesignado(pessoa);
+//                    designado.setDescrFuncDesig("");
+//                    designado.setDtCienciaDesig(formato.parse(dados[12]));
+//                    designado.setHorasDefFuncDesig(10);
+//                    designado.setTipFuncDesig(FuncaoDesig.COORDENADOR);
+//
+//                    designados.add(designado);
 
                     portaria.setDesignados(designados);
                     pessoa.setEmailPes(dados[13]);
                     portaria.setExpedidor(pessoa);
                     portaria.setUnidadeExpedidora(undAdm);
+
+                    try{
+                        portariaDAO.salvar(portaria);
+                        portariaDAO.commitarTransacao();
+                    }catch (Exception e){
+                        pessoaDAO.rollBackTransacao();
+                    }
+                    break;
 
             }
         }
@@ -200,7 +209,7 @@ public class ControladorNotifPortSemCienciaTest {
      */
 
     @Test
-    public void casoSemNenhumaPendenciaDeCiencia() {
+    public void casoSemNenhumaPendenciaDeCiencia() throws ParseException {
 
         /**
          * Testa o cenário onde não há designados com ciência atrasada.
@@ -209,7 +218,7 @@ public class ControladorNotifPortSemCienciaTest {
     }
 
     @Test
-    public void casoComUmaPendenciaDeCiencia() {
+    public void casoComUmaPendenciaDeCiencia() throws ParseException {
 
         /**
          * Testa o cenário onde há um designados com ciência atrasada.
@@ -218,7 +227,7 @@ public class ControladorNotifPortSemCienciaTest {
     }
 
     @Test
-    public void casoComVariasPendenciaDeCiencia() {
+    public void casoComVariasPendenciaDeCiencia() throws ParseException {
 
         /**
          * Testa o cenário onde há varios designados com ciência atrasada.
