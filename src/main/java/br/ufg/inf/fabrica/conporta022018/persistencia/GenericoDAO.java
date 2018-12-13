@@ -186,11 +186,9 @@ public abstract class GenericoDAO<T extends ModeloAbstrato> {
         query.setParameter(parametro.getKey(), parametro.getValue());
       }
     }
-
     if (entityManager.isOpen()) {
       entityManager.close();
     }
-
     return query;
   }
 

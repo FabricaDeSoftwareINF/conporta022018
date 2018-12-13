@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table
@@ -11,11 +12,10 @@ public class Portaria extends ModeloAbstrato {
     private static final long serialVersionUID = 1L;
 
     @Column
-//    @NotBlank
+    @NotBlank
     private int anoId;
 
     @Column
-//    @NotBlank
     private int seqId;
 
     @Column
@@ -23,22 +23,18 @@ public class Portaria extends ModeloAbstrato {
 
     @Column
     @Temporal(TemporalType.DATE)
-//    @PastOrPresent
     private Date dtExped;
 
     @Column
     @Temporal(TemporalType.DATE)
-//    @FutureOrPresent
     private Date dtIniVig;
 
     @Column
     @Temporal(TemporalType.DATE)
-//    @FutureOrPresent
     private Date dtFimVig;
 
     @Column
     @Temporal(TemporalType.DATE)
-//    @FutureOrPresent
     private Date dtPublicDou;
 
     @Column
@@ -55,14 +51,12 @@ public class Portaria extends ModeloAbstrato {
     private byte[] arqPdf;
 
     @Column
-//    @NotBlank
     private String siglaUndId;
 
     @Column
     private String assinatura;
 
     @Column
-//    @NotBlank
     private PortariaStatus status;
 
     @JoinColumn
@@ -77,9 +71,9 @@ public class Portaria extends ModeloAbstrato {
     @OneToMany
     private List<Designado> designados;
 
-//    @JoinColumn
-//    @ManyToOne
-//    private Pessoa expedidor;
+    @JoinColumn
+    @ManyToOne
+    private Pessoa expedidor;
 
     @JoinColumn
     @ManyToOne
@@ -221,13 +215,13 @@ public class Portaria extends ModeloAbstrato {
         this.designados = designados;
     }
 
-//    public Pessoa getExpedidor() {
-//        return expedidor;
-//    }
-//
-//    public void setExpedidor(Pessoa expedidor) {
-//        this.expedidor = expedidor;
-//    }
+    public Pessoa getExpedidor() {
+        return expedidor;
+    }
+
+    public void setExpedidor(Pessoa expedidor) {
+        this.expedidor = expedidor;
+    }
 
     public UndAdm getUnidadeExpedidora() {
         return unidadeExpedidora;

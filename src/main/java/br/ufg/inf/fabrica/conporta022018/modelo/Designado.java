@@ -12,7 +12,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Designado extends ModeloAbstrato {
+public class Designado extends ModeloAbstrato{
 
     private static final long serialVersionUID = 1L;
 
@@ -24,6 +24,8 @@ public class Designado extends ModeloAbstrato {
     @ManyToOne
 //    private Pessoa pessoa;
     private FuncaoDesig funcaoDesig;
+    private Pessoa designado;
+    private FuncaoDesig tipFuncDesig;
 
     /**
      * @return Date return the dtCienciaDesig
@@ -81,4 +83,19 @@ public class Designado extends ModeloAbstrato {
         this.horasExecFuncDesig = horasExecFuncDesig;
     }
 
+    public Pessoa getDesignado() {
+        return designado;
+    }
+
+    public void setDesignado(Pessoa designado) {
+        this.designado = designado;
+    }
+
+    public FuncaoDesig getTipFuncDesig() {
+        return tipFuncDesig;
+    }
+
+    public void setTipFuncDesig(FuncaoDesig tipFuncDesig) {
+        this.tipFuncDesig = tipFuncDesig;
+    }
 }

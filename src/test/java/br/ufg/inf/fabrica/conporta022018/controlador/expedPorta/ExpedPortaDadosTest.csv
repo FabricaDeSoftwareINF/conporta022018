@@ -1,0 +1,47 @@
+pessoa
+PKpes;nomePes;cpfPes;emailPes;senhaUsu;ehUsuAtivo;PKlotacao
+1;José Carlos Santos;123.456.789-12;rbpaludo@gmail.com;123456;True;
+2;Gerovildes Carmelindes;987.654.321-98;rbpaludo@gmail.com;123456;True;1
+3;Epaminondas Alves;234.456.678-89;rbpaludo@gmail.com;123456;True;2
+4;Valdisnei Preslei;876.654.432-21;rbpaludo@gmail.com;123456;True;3
+undAdm
+PKundAdm;nomeUnd;siglaUnd;tipoUnd;minInat;ultPort;anoPort;ultNumExped;ultNumProp
+1;Instituto de Informática;INF;Unidade Acadêmica;15;2018001;2018;1;-1
+lotacao
+PKlotacao;dtIniLotServ;dtFimLotServ;descrCargoServ;cargoServ;PKundAdm
+1;12/12/2012;12/12/2021;Coordenador de ES;Coordenador;1
+2;12/12/2012;12/12/2021;Coordenador de CC;Coordenador;1
+3;12/12/2012/12/12/2021;Coordenador de SI;Coordenador;1
+portariasExpedidasOuReferenciadas
+PKportaria;siglaUndId;anoId;seqId;status;assunto;dtExped;dtIniVig;dtFimVig;dPublicDou;horasDesig;resumo;textoCompleto;arqPdf;PKpes
+7;inf;2018;1;Ativa;Novo coordenador de curso;12/11/2018;01/01/2019;31/12/2021;12/12/2018;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;2
+5;inf;2018;2;Cancelada;Novo coordenador de curso;12/11/2018;01/01/2019;31/12/2021;12/12/2018;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;2
+11;inf;2018;3;Ativa;Novo coordenador de curso;12/11/2018;01/01/2019;31/12/2021;;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;2
+14;inf;2018;4;Ativa;Novo coordenador de curso;12/11/2018;01/01/2019;;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;2
+16;inf;2018;5;Ativa;Novo coordenador de curso;12/11/2018;01/01/2019;;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;2
+referencia
+PKreferencia;PKreferenciadora;PKreferenciada;ehCancelamento
+1;9;7;True
+2;10;11;True
+3;13;14;True
+4;15;16;True
+designado
+PKdesg;dtCienciaDesig;tipFuncDesig;descrFuncDesig;horasDefFuncDesig;horasExecFuncDesig;PKportaria;PKpes
+1;;Coordenador;Novo coordenador de curso;220;;6;1
+99;;Coordenador;Novo coordenador de curso;220;;8;98
+2;;Coordenador;Novo coordenador de curso;220;;12;2
+3;;Coordenador;Novo coordenador de curso;220;;13;3
+4;;Coordenador;Novo coordenador de curso;220;;15;4
+portariasPropostas
+PKportaria;siglaUndId;anoId;seqId;status;assunto;dtExped;dtIniVig;dtFimVig;dPublicDou;horasDesig;resumo;textoCompleto;arqPdf;PKpes
+1;inf;2018;-1;Proposta;Novo coordenador de curso;;01/01/2019;31/12/2021;12/12/2018;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;
+6;inf;2018;-6;Proposta;Novo coordenador de curso;;01/01/2019;31/12/2021;12/12/2018;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;
+2;inf;2018;-2;Proposta;Novo coordenador de curso;;01/01/2019;;12/12/2018;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;
+8;inf;2018;-8;Proposta;Novo coordenador de curso;;01/01/2019;;12/12/2018;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;
+3;inf;2016;-3;Proposta;Novo coordenador de curso;;;31/12/2016;12/12/2016;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;
+4;inf;2016;-4;Proposta;Novo coordenador de curso;;01/01/2016;31/12/2016;12/12/2016;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;
+9;inf;2016;-5;Proposta;Novo coordenador de curso;;01/01/2019;;;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;
+10;inf;2016;-7;Proposta;Novo coordenador de curso;;01/01/2019;01/01/2020;;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;
+12;inf;2016;-9;Proposta;Novo coordenador de curso;;01/01/2019;;;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;
+13;inf;2016;-10;Proposta;Novo coordenador de curso;;01/01/2019;;;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;
+15;inf;2016;-11;Proposta;Novo coordenador de curso;;01/01/2019;01/01/2020;;220;Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.;Representa uma unidade que compõe a estrutura acadêmica e administrativa da universidade. Conforme o Art. 7º do Estatuto da UFG;

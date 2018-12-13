@@ -26,7 +26,6 @@ public class Referencia extends ModeloAbstrato {
     public void setReferencia(Portaria Referencia) {
         this.Referencia = Referencia;
     }
-
     /**
      * @return boolean return the ehCancelamento
      */
