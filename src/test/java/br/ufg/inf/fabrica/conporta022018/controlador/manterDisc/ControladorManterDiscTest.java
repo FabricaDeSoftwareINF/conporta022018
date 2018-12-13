@@ -6,6 +6,9 @@
 
 package br.ufg.inf.fabrica.conporta022018.controlador.manterDisc;
 
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorDisc;
+import br.ufg.inf.fabrica.conporta022018.modelo.Matricula;
+import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
@@ -40,11 +43,14 @@ public class ControladorManterDiscTest {
 
         dadosSoftware = lerArquivo.lerArquivo(CAMINHO_CSV);
 
+        Pessoa pessoa = new Pessoa();
+        Matricula discente = new Matricula();
+
         for (int index = 0; index < dadosSoftware.size(); index++) {
             linha = dadosSoftware.get(index);
 
             //Definir as tabelas que serão populadas no Banco de Dados.
-            if (linha.equals("pessoa") || linha.equals("matricula") ||  linha.equals("curso")) {
+            if (linha.equals("pessoa")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
@@ -55,16 +61,15 @@ public class ControladorManterDiscTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     //Aqui colocar os comandos para popular a tabela discente no Banco de Dados.
-                    break;
-                case "matricula" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela discente no Banco de Dados.
-                    break;
-                case "curso" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela discente no Banco de Dados.
+                    pessoa.setNomePes(dados[0]);
+                    pessoa.setCpfPes(dados[1]);
+                    pessoa.setEmailPes(dados[2]);
+                    pessoa.setEhUsuAtivo(Boolean.parseBoolean(dados[3]));
+
+
+
+
+
                     break;
             }
         }
@@ -106,8 +111,6 @@ public class ControladorManterDiscTest {
     @AfterClass
     public static void casoTestResultados() throws IOException {
 
-        controladorDisc.criarDiscente("");
-        
         //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
         // irá fica as suas pós-condições. Exemplo:
 
