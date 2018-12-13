@@ -43,6 +43,14 @@ public class ControladorNotifPortSemCienciaTest {
         DesignadoDAO designadoDAO = new DesignadoDAO();
         PortariaDAO portariaDAO =new PortariaDAO();
 
+        Portaria portaria = new Portaria();
+        Pessoa pessoa = new Pessoa();
+        UndAdm undAdm = new UndAdm();
+        Designado designado = new Designado();
+        List<Designado> designados = new ArrayList<>();
+        List<Referencia> referencias = new ArrayList<>();
+        List<Recebedora> recebedoras = new ArrayList<>();
+
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         /*
@@ -62,74 +70,107 @@ public class ControladorNotifPortSemCienciaTest {
                 continue;
             }
 
+
             switch (tabelaAtual) {
-                case "pessoa" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-
-                    Pessoa pessoa = new Pessoa();
-
-                    pessoa.setId(Long.parseLong(dados[0]));
-                    pessoa.setNomePes(dados[1]);
-                    pessoa.setCpfPes(dados[2]);
-                    pessoa.setEmailPes(dados[3]);
-                    pessoa.setSenhaUsu(dados[4]);
-                    pessoa.setEhUsuAtivo(Boolean.getBoolean(dados[5]));
-                    pessoaDAO.abrirTransacao();
-                    pessoaDAO.salvar(pessoa);
-                    pessoaDAO.commitarTransacao();
-
-                    break;
                 case "portaria":
+
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-                    Portaria portaria = new Portaria();
-                    portaria.setId(Long.parseLong(dados[0]));
-                    portaria.setAnoId(Integer.valueOf(dados[1]));
-                    portaria.setSeqId(Integer.valueOf(dados[2]));
-                    portaria.setStatus(PortariaStatus.valueOf(dados[3]));
-                    portaria.setAssunto(dados[4]);
-                    portaria.setDtExped(formato.parse(dados[5]));
-                    portaria.setDtIniVig(formato.parse(dados[7]));
-                    portaria.setDtFimVig(formato.parse(dados[8]));
-                    portariaDAO.abrirTransacao();
-                    portariaDAO.salvar(portaria);
-                    portariaDAO.commitarTransacao();
-                    break;
-                case "designado" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-
-                    Designado designado = new Designado();
-                    designado.setId( Long.parseLong(dados[0]) );
-
-                    if(!dados[1].isEmpty()){
-                        Date dtCienciaDesig = formato.parse(dados[1]);
-                        designado.setDtCienciaDesig(dtCienciaDesig);
+                    portaria.setAnoId(0);
+                    portaria.setSeqId(0);
+                    portaria.setAssunto("Lorem Ipsum");
+                    portaria.setDtExped(formato.parse(dados[0]));
+                    portaria.setDtIniVig(formato.parse(dados[1]));
+                    portaria.setDtFimVig(formato.parse(dados[2]));
+                    portaria.setDtPublicDou(formato.parse(dados[3]));
+                    portaria.setArqPdf(null);
+                    portaria.setSiglaUndId("UndId");
+                    portaria.setAssinatura("Assinatura");
+                    if (dados[4] == "Ativo"){
+                        portaria.setStatus(PortariaStatus.ATIVA);
+                    }else{
+                        portaria.setStatus(PortariaStatus.EXPIRADA);
                     }
+                    portaria.setReferencias(referencias);
+                    portaria.setUndRecebedora(recebedoras);
 
-                    designado.setTipFuncDesig(FuncaoDesig.COORDENADOR);
+                    //Primeiro discente da lista
+                    pessoa.setCpfPes("");
+                    pessoa.setDiscente(null);
+                    pessoa.setEhUsuAtivo(true);
+                    pessoa.setEmailPes(dados[5]);
+                    pessoa.setGestao(null);
+                    pessoa.setNomePes("");
+                    pessoa.setSenhaUsu("");
+                    pessoa.setServidor(null);
 
-                    designado.setDescrFuncDesig(dados[3]);
-
-                    if(!dados[4].isEmpty()){
-                        designado.setHorasDefFuncDesig( Integer.parseInt(dados[4]) );
-                    }
-
-                    if(!dados[5].isEmpty()){
-                        designado.setHorasExecFuncDesig( Integer.parseInt(dados[5]) );
-                    }
-
-                    pessoa = pessoaDAO.buscar( Long.parseLong(dados[6]) );
                     designado.setDesignado(pessoa);
-
+                    designado.setDescrFuncDesig("");
+                    designado.setDtCienciaDesig(formato.parse(dados[6]));
+                    designado.setHorasDefFuncDesig(10);
                     designado.setTipFuncDesig(FuncaoDesig.COORDENADOR);
 
-                    // Salva o objeto no banco
-                    designadoDAO.abrirTransacao();
-                    designadoDAO.salvar(designado);
-                    designadoDAO.commitarTransacao();
-                    break;
+                    designados.add(designado);
+
+                    //Segundo discente da lista
+                    pessoa.setCpfPes("");
+                    pessoa.setDiscente(null);
+                    pessoa.setEhUsuAtivo(true);
+                    pessoa.setEmailPes(dados[7]);
+                    pessoa.setGestao(null);
+                    pessoa.setNomePes("");
+                    pessoa.setSenhaUsu("");
+                    pessoa.setServidor(null);
+
+                    designado.setDesignado(pessoa);
+                    designado.setDescrFuncDesig("");
+                    designado.setDtCienciaDesig(formato.parse(dados[8]));
+                    designado.setHorasDefFuncDesig(10);
+                    designado.setTipFuncDesig(FuncaoDesig.COORDENADOR);
+
+                    designados.add(designado);
+
+                    //Terceiro discente da lista
+                    pessoa.setCpfPes("");
+                    pessoa.setDiscente(null);
+                    pessoa.setEhUsuAtivo(true);
+                    pessoa.setEmailPes(dados[9]);
+                    pessoa.setGestao(null);
+                    pessoa.setNomePes("");
+                    pessoa.setSenhaUsu("");
+                    pessoa.setServidor(null);
+
+                    designado.setDesignado(pessoa);
+                    designado.setDescrFuncDesig("");
+                    designado.setDtCienciaDesig(formato.parse(dados[10]));
+                    designado.setHorasDefFuncDesig(10);
+                    designado.setTipFuncDesig(FuncaoDesig.COORDENADOR);
+
+                    designados.add(designado);
+
+                    //Quarto discente da lista
+                    pessoa.setCpfPes("");
+                    pessoa.setDiscente(null);
+                    pessoa.setEhUsuAtivo(true);
+                    pessoa.setEmailPes(dados[11]);
+                    pessoa.setGestao(null);
+                    pessoa.setNomePes("");
+                    pessoa.setSenhaUsu("");
+                    pessoa.setServidor(null);
+
+                    designado.setDesignado(pessoa);
+                    designado.setDescrFuncDesig("");
+                    designado.setDtCienciaDesig(formato.parse(dados[12]));
+                    designado.setHorasDefFuncDesig(10);
+                    designado.setTipFuncDesig(FuncaoDesig.COORDENADOR);
+
+                    designados.add(designado);
+
+                    portaria.setDesignados(designados);
+                    pessoa.setEmailPes(dados[13]);
+                    portaria.setExpedidor(pessoa);
+                    portaria.setUnidadeExpedidora(undAdm);
+
             }
         }
     }

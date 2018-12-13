@@ -23,13 +23,26 @@ public class ControladorNotifPortSemCiencia {
 
     private final static String BUSCAR_PORTARIA = "SELECT p FROM Portaria p WHERE p.dtExped <:dataProcurada";
 
+    private List<String> ciencia = new ArrayList<>();
+    private List<String> expedidor = new ArrayList<>();
+
+
+
     public void verificarCiencia() throws ParseException {
 
-        DesignadoDAO designadoDao = new DesignadoDAO();
+        encontraEmailDesig();
+
+        enviarEmail(ciencia, "Você possui uma portaria sem ciência");
+        enviarEmail(expedidor,"Você possui designados sem ciência");
+
+    }
+
+    public void encontraEmailDesig(){
+
+        ciencia.clear();
+        expedidor.clear();
         PortariaDAO portariaDAO = new PortariaDAO();
         Map<String, Object> busca = new HashMap<>();
-
-        //List<Designado> listaTemp = designadoDao.pesquisarJPQLCustomizada(BUSCAR_DESIGNADO, busca);
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, -5);
@@ -54,12 +67,7 @@ public class ControladorNotifPortSemCiencia {
                 flag = false;
             }
         }
-
-        enviarEmail(ciencia, "Vocẽ possui uma portaria sem ciência");
-        enviarEmail(expedidor,"Você possui designados sem ciência");
-
     }
-
     /**
      * Método Overload criado somente para mock de testes.
      * Recebe a dataLimite como parâmetro para que os teste sejam consistentes independente da data em que são realizados
@@ -71,8 +79,6 @@ public class ControladorNotifPortSemCiencia {
         DesignadoDAO designadoDao = new DesignadoDAO();
         PortariaDAO portariaDAO = new PortariaDAO();
         Map<String, Object> busca = new HashMap<>();
-
-        //List<Designado> listaTemp = designadoDao.pesquisarJPQLCustomizada(BUSCAR_DESIGNADO, busca);
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, -5);
