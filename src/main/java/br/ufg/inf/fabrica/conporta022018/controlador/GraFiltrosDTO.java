@@ -11,12 +11,12 @@ class GraFiltrosDTO {
    private Date dtFimVig;
    private String cargoServ;
    private boolean isDiscente;
-   private boolean siglaUndRec;
+   private String siglaUndRec;
    private boolean incluirSubord;
 
 
-    public Filtro(siglaUndExp, dtInExped, dtFimExped, dtInVig, dtFimVig, 
-                    cargoServ, isDiscente, siglaUndRec, incluirSubord) {
+    public Filtro(String siglaUndExp, Date dtInExped, Date dtFimExped, Date dtInVig, 
+    Date dtFimVig, String cargoServ, boolean isDiscente, String siglaUndRec, boolean incluirSubord) {
         this.siglaUndExp = siglaUndExp;
         this.dtInExped = dtInExped;
         this.dtFimExped = dtFimExped;
@@ -25,6 +25,6 @@ class GraFiltrosDTO {
         this.cargoServ = cargoServ;
         this.isDiscente = isDiscente;
         this.siglaUndRec = siglaUndRec;
-        this.incluirSubord  = incluirSubord
+        this.incluirSubord  = incluirSubord;
     }
 }

@@ -1,24 +1,21 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import java.util.Date;
-
-
 class EsforcoIndividual {
 
-    private String name;
-    private int qtdHoras;
-    private int qtdPortarias;
+    private String nome;
+    private int qtdHoras = 0;
+    private int qtdPortarias = 0;
 
-    public setName(String name){
-        this.name = name;
+    public setnome(String nome){
+        this.nome = nome;
     }
 
-    public String getName(){
-        return name;
+    public String getnome(){
+        return nome;
     }
 
     public setQtdHoras(int qtdHoras){
-        this.qtdHoras = qtdHoras;
+        this.qtdHoras = this.qtdHoras + qtdHoras;
     }
 
     public int getQtdHoras(){
@@ -26,7 +23,7 @@ class EsforcoIndividual {
     }
 
     public setQtdPortarias(int qtdPortarias){
-        this.qtdPortarias = qtdPortarias;
+        this.qtdPortarias = this.qtdPortarias + qtdPortarias;
     }
 
     public int getQtdPortarias(){
