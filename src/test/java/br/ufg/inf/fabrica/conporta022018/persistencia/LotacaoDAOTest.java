@@ -18,14 +18,15 @@ public class LotacaoDAOTest {
   @Test
   public void salvar() {
     Lotacao lotacao = new Lotacao();
+    LotacaoDAO lotacaoDAO = new LotacaoDAO();
 
     lotacao.setDtIniLotServ(new Date());
     lotacao.setDtFimLotServ(new Date());
     lotacao.setDescrCargoServ("Teste");
 
-    new LotacaoDAO().abrirTransacao();  
+    lotacaoDAO.abrirTransacao();
     Lotacao lotacaoSalva = new LotacaoDAO().salvar(lotacao);
-    new LotacaoDAO().commitarTransacao();
+    lotacaoDAO.commitarTransacao();
 
     List<Lotacao> lotacaos = new LotacaoDAO().buscarTodos();
 

@@ -3,13 +3,6 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 import java.util.Date;
 import javax.persistence.*;
 
-/**
- * Modelo da Entidade de DESIGNADO.
- *
- * @author Edionay Aguiar
- * @since 1.0
- */
-
 @Entity
 @Table
 public class Designado extends ModeloAbstrato{
@@ -22,9 +15,8 @@ public class Designado extends ModeloAbstrato{
     private int horasExecFuncDesig;
 
     @ManyToOne
-//    private Pessoa pessoa;
-    private FuncaoDesig funcaoDesig;
     private Pessoa designado;
+
     private FuncaoDesig tipFuncDesig;
 
     /**
