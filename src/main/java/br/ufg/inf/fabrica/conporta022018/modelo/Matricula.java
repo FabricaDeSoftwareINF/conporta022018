@@ -12,7 +12,7 @@ public class Matricula extends ModeloAbstrato{
     private static final long serialVersionUID = 1343L;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Curso curso;
 
     @Column

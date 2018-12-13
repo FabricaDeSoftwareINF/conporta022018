@@ -15,11 +15,11 @@ public class Pessoa extends ModeloAbstrato {
     private String emailPes;
     private String senhaUsu;
     private Boolean ehUsuAtivo;
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Gestao> gestao = new ArrayList<>();
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Lotacao> servidor = new ArrayList<>();
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Matricula> discente = new ArrayList<>();
 
     public String getNomePes() {

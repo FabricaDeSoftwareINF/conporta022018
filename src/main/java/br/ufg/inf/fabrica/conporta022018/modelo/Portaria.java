@@ -66,11 +66,11 @@ public class Portaria extends ModeloAbstrato {
     private PortariaStatus status;
 
     @JoinColumn
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Referencia> referencias;
 
     @JoinColumn
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Recebedora> undRecebedora;
 
     @JoinColumn
@@ -78,11 +78,11 @@ public class Portaria extends ModeloAbstrato {
     private List<Designado> designados;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Pessoa expedidor;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private UndAdm unidadeExpedidora;
 
     public int getAnoId() {
