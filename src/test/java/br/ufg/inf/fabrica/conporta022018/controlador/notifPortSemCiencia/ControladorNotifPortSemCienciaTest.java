@@ -28,9 +28,10 @@ public class ControladorNotifPortSemCienciaTest {
 
 
     @BeforeClass
-    public static void casoTestPepararCenario() throws IOException, ParseException {
+    public static void casoTestPepararCenario(String caminho) throws IOException, ParseException {
 
-        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest.csv";
+        //String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest1.csv";
+        String CAMINHO_CSV = caminho;   
         String REGRA = ";";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
@@ -199,30 +200,30 @@ public class ControladorNotifPortSemCienciaTest {
      */
 
     @Test
-    public void casoSemNenhumaPendenciaDeCiencia() throws ParseException {
+    public void casoSemNenhumaPendenciaDeCiencia() {
 
         /**
          * Testa o cenário onde não há designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia("10/12/2018");
+        controladorNotifPortSemCiencia.verificarCiencia();
     }
 
     @Test
-    public void casoComUmaPendenciaDeCiencia() throws ParseException {
+    public void casoComUmaPendenciaDeCiencia() {
 
         /**
          * Testa o cenário onde há um designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia("13/12/2018");
+        controladorNotifPortSemCiencia.verificarCiencia();
     }
 
     @Test
-    public void casoComVariasPendenciaDeCiencia() throws ParseException {
+    public void casoComVariasPendenciaDeCiencia() {
 
         /**
          * Testa o cenário onde há varios designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia("20/12/2018");
+        controladorNotifPortSemCiencia.verificarCiencia();
     }
 
 

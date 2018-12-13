@@ -23,24 +23,19 @@ public class ControladorNotifPortSemCiencia {
 
     private final static String BUSCAR_PORTARIA = "SELECT p FROM Portaria p WHERE p.dtExped <:dataProcurada";
 
-    private List<String> ciencia = new ArrayList<>();
-    private List<String> expedidor = new ArrayList<>();
+    public void verificarCiencia(){
 
+        List<String> emails = encontraEmailDesig();
 
+        if (emails.size()>0) {
 
-    public void verificarCiencia() throws ParseException {
+            enviarEmail(emails, "Você possui pendências de ciência da plataforma Conporta:\n");
 
-        encontraEmailDesig();
-
-        enviarEmail(ciencia, "Você possui uma portaria sem ciência");
-        enviarEmail(expedidor,"Você possui designados sem ciência");
-
+        }
     }
 
-    public void encontraEmailDesig(){
+    public List<String> encontraEmailDesig(){
 
-        ciencia.clear();
-        expedidor.clear();
         PortariaDAO portariaDAO = new PortariaDAO();
         Map<String, Object> busca = new HashMap<>();
 
@@ -51,94 +46,95 @@ public class ControladorNotifPortSemCiencia {
         busca.put("dataProcurada", formatter.format(data));
 
         List<Portaria> portarias = portariaDAO.pesquisarJPQLCustomizada(BUSCAR_PORTARIA, busca);
-        List<String> ciencia = new ArrayList<>();
-        List<String> expedidor = new ArrayList<>();
+        List<String> emails = new ArrayList<>();
         Boolean flag = false;
 
         for (Portaria portaria : portarias){
             for (Designado  designado: portaria.getDesignados()){
                 if (designado.getDtCienciaDesig() == null || designado.getDtCienciaDesig().equals("")){
-                    ciencia.add(designado.getDesignado().getEmailPes());
+                    emails.add(designado.getDesignado().getEmailPes());
                     flag = true;
                 }
             }
             if (flag){
-                expedidor.add(portaria.getExpedidor().getEmailPes());
-                flag = false;
-            }
-        }
-    }
-    /**
-     * Método Overload criado somente para mock de testes.
-     * Recebe a dataLimite como parâmetro para que os teste sejam consistentes independente da data em que são realizados
-     * @param dataLimite
-     */
-    public void verificarCiencia(String dataLimite) throws ParseException {
-
-
-        DesignadoDAO designadoDao = new DesignadoDAO();
-        PortariaDAO portariaDAO = new PortariaDAO();
-        Map<String, Object> busca = new HashMap<>();
-
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH, -5);
-        Date data = cal.getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        busca.put("dataProcurada", dataLimite);
-
-        List<Portaria> portarias = portariaDAO.pesquisarJPQLCustomizada(BUSCAR_PORTARIA, busca);
-        List<String> ciencia = new ArrayList<>();
-        List<String> expedidor = new ArrayList<>();
-        Boolean flag = false;
-
-        for (Portaria portaria : portarias){
-            for (Designado  designado: portaria.getDesignados()){
-                if (designado.getDtCienciaDesig() == null || designado.getDtCienciaDesig().equals("")){
-                    ciencia.add(designado.getDesignado().getEmailPes());
-                    flag = true;
-                }
-            }
-            if (flag){
-                expedidor.add(portaria.getExpedidor().getEmailPes());
+                emails.add(portaria.getExpedidor().getEmailPes());
                 flag = false;
             }
         }
 
-        enviarEmail(ciencia, "Vocẽ possui uma portaria sem ciência");
-        enviarEmail(expedidor,"Você possui designados sem ciência");
-
-    }
-
-
-    private List<String> getEmailExpedidor(List<Portaria> expedidores) {
-        List<String> emails = null;
-        Iterator<Portaria> iterator = expedidores.iterator();
-
-        while (iterator.hasNext()){
-            emails.add(iterator.next().getExpedidor().getEmailPes());
-        }
-
-        return emails;
-
-    }
-
-    /**
-     * Método Criado para a modularização do controlador,
-     * com o objetivo de facilitar a legibilidade do código
-     *
-     * @param designados
-     * @return
-     */
-    public List<String> getEmailDesignados(List<Designado> designados){
-        List<String> emails = null;
-        Iterator<Designado> iterator = designados.iterator();
-
-        while (iterator.hasNext()){
-            emails.add(iterator.next().getDesignado().getEmailPes());
-        }
-
         return emails;
     }
+//    /**
+//     * Método Overload criado somente para mock de testes.
+//     * Recebe a dataLimite como parâmetro para que os teste sejam consistentes independente da data em que são realizados
+//     * @param dataLimite
+//     */
+//    public void verificarCiencia(String dataLimite) throws ParseException {
+//
+//
+//        DesignadoDAO designadoDao = new DesignadoDAO();
+//        PortariaDAO portariaDAO = new PortariaDAO();
+//        Map<String, Object> busca = new HashMap<>();
+//
+//        Calendar cal = Calendar.getInstance();
+//        cal.add(Calendar.DAY_OF_MONTH, -5);
+//        Date data = cal.getTime();
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+//        busca.put("dataProcurada", dataLimite);
+//
+//        List<Portaria> portarias = portariaDAO.pesquisarJPQLCustomizada(BUSCAR_PORTARIA, busca);
+//        List<String> ciencia = new ArrayList<>();
+//        List<String> expedidor = new ArrayList<>();
+//        Boolean flag = false;
+//
+//        for (Portaria portaria : portarias){
+//            for (Designado  designado: portaria.getDesignados()){
+//                if (designado.getDtCienciaDesig() == null || designado.getDtCienciaDesig().equals("")){
+//                    ciencia.add(designado.getDesignado().getEmailPes());
+//                    flag = true;
+//                }
+//            }
+//            if (flag){
+//                expedidor.add(portaria.getExpedidor().getEmailPes());
+//                flag = false;
+//            }
+//        }
+//
+//        enviarEmail(ciencia, "Vocẽ possui uma portaria sem ciência");
+//        enviarEmail(expedidor,"Você possui designados sem ciência");
+//
+//    }
+//
+//
+//    private List<String> getEmailExpedidor(List<Portaria> expedidores) {
+//        List<String> emails = null;
+//        Iterator<Portaria> iterator = expedidores.iterator();
+//
+//        while (iterator.hasNext()){
+//            emails.add(iterator.next().getExpedidor().getEmailPes());
+//        }
+//
+//        return emails;
+//
+//    }
+//
+//    /**
+//     * Método Criado para a modularização do controlador,
+//     * com o objetivo de facilitar a legibilidade do código
+//     *
+//     * @param designados
+//     * @return
+//     */
+//    public List<String> getEmailDesignados(List<Designado> designados){
+//        List<String> emails = null;
+//        Iterator<Designado> iterator = designados.iterator();
+//
+//        while (iterator.hasNext()){
+//            emails.add(iterator.next().getDesignado().getEmailPes());
+//        }
+//
+//        return emails;
+//    }
 
     /**
      * Método Criado para a modularização do controlador,
