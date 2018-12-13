@@ -12,7 +12,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Designado extends ModeloAbstrato {
+public class Designado extends ModeloAbstrato{
 
     private static final long serialVersionUID = 1L;
 
