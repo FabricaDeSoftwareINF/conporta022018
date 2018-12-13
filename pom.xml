@@ -34,11 +34,6 @@
             <artifactId>h2</artifactId>
             <version>1.4.196</version>
         </dependency>
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/dev
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>junit</groupId>
@@ -46,16 +41,10 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/dev
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.0-api</artifactId>
             <version>1.0.1.Final</version>
-<<<<<<< HEAD
         </dependency>       
     <dependency>
   <groupId>com.google.code.gson</groupId>
@@ -78,15 +67,3 @@
     </dependencies>
 </project>
 
-
-=======
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
-            <version>1.6.0</version>
-        </dependency>
-    </dependencies>
-</project>
->>>>>>> origin/dev

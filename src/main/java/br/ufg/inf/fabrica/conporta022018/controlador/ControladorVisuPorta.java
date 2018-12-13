@@ -1,4 +1,4 @@
-package br.ufg.inf.fabrica.conporta022018.controlador.visuporta;
+package br.ufg.inf.fabrica.conporta022018.controlador;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
 import br.ufg.inf.fabrica.conporta022018.modelo.Recebedora;
