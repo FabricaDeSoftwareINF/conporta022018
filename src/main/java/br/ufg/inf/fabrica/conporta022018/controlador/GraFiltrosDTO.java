@@ -3,25 +3,28 @@ package br.ufg.inf.fabrica.conporta022018.controlador;
 import java.util.Date;
 
 
-class Filtro {
-   private String nomeUnd;
+class GraFiltrosDTO {
+   private String siglaUndExp;
    private Date dtInExped;
    private Date dtFimExped;
    private Date dtInVig;
    private Date dtFimVig;
-   private boolean isServidor;
    private String cargoServ;
    private boolean isDiscente;
+   private boolean siglaUndRec;
+   private boolean incluirSubord;
 
 
-    public Filtro(nomeUnd, dtInExped, dtFimExped, dtInVig, dtFimVig, isServidor, cargoServ, isDiscente) {
-        this.nomeUnd = nomeUnd;
+    public Filtro(siglaUndExp, dtInExped, dtFimExped, dtInVig, dtFimVig, 
+                    cargoServ, isDiscente, siglaUndRec, incluirSubord) {
+        this.siglaUndExp = siglaUndExp;
         this.dtInExped = dtInExped;
         this.dtFimExped = dtFimExped;
         this.dtInVig = dtInVig;
         this.dtFimVig = dtFimVig;
-        this.isServidor = isServidor;
         this.cargoServ = cargoServ;
         this.isDiscente = isDiscente;
+        this.siglaUndRec = siglaUndRec;
+        this.incluirSubord  = incluirSubord
     }
 }
