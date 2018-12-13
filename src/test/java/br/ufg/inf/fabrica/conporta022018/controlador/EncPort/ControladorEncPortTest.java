@@ -1,5 +1,6 @@
-package br.ufg.inf.fabrica.conporta022018.controlador;
+package br.ufg.inf.fabrica.conporta022018.controlador.EncPort;
 
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorEncPort;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
@@ -14,7 +15,12 @@ import static org.junit.Assert.*;
 public class ControladorEncPortTest {
 
     private static ControladorEncPort controladorEncPort;
-
+     
+    /*
+     * Preparação do ambiente para teste.
+     * População do banco de Dados para atendam os pré-requisitos da seção de caso de uso.
+     */
+    
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException {
 
