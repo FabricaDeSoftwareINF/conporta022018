@@ -7,7 +7,7 @@ class EsforcoDTO {
     private List designados = new List<EsforcoIndividual>();
     private int qtdHoras = 0;
     private int qtdPortarias = 0;
-    private int index = 0;
+    private int index;
 
     public addDesignados(String nome){
         EsforcoIndividual pessoa = new EsforcoIndividual();
@@ -15,6 +15,15 @@ class EsforcoDTO {
         pessoa.setQtdHoras(0);
         pessoa.setQtdPortarias(0);
         designados.add(pessoa);
+    }
+
+    public int buscaDesignado(String nome){
+        this.index = 0;
+        while(!(designados(index).getNome()).equals(nome)){
+            index++;
+        }
+
+        return index;
     }
 
     public modifyQtdHoras(int horas, int index){
