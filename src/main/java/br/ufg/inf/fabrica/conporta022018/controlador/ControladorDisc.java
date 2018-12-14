@@ -12,9 +12,7 @@ import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ControladorDisc {
 
@@ -24,12 +22,11 @@ public class ControladorDisc {
     private Date defaultDate = new Date(01/01/2100);
 
 
-    public Boolean criarDiscente(String cpfPessoa, int matrDiscCur, Date dtFimMatrCur, Date cdIniMatrCur, Curso curso) {
+    public Boolean criarDiscente(String cpfPessoa, int matrDiscCur, Date cdIniMatrCur, Curso curso) {
 
         Matricula discente = new Matricula();
         discente.setMatrDiscCur(matrDiscCur);
         discente.setCdIniMatrCur(cdIniMatrCur);
-        discente.setDtFimMatrCur(dtFimMatrCur);
         discente.setCurso(curso);
 
         map.put("CPF", cpfPessoa);
@@ -44,10 +41,26 @@ public class ControladorDisc {
         pessoaDAO.salvar(pessoa);
         pessoaDAO.commitarTransacao();
 
+        System.out.println(discente.getMatrDiscCur());
+
         return true;
     }
 
-    public Boolean excluirDiscente() {
+    public Boolean excluirDiscente(String cpfPessoa, Date dtFinalMatrCur) {
+
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        map.put("CPF", cpfPessoa);
+
+        List<Matricula> discente = new ArrayList<>();
+
+        Pessoa pessoa = pessoaDAO.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_USUARIO_POR_CPF,map);
+        discente = pessoa.getDiscente();
+
+        Matricula matricula = discente.get(discente.size() - 1);
+        matricula.setDtFimMatrCur(dtFinalMatrCur);
+
+        pessoaDAO.salvar(pessoa);
+
         return true;
     };
 

@@ -17,13 +17,13 @@ public class Pessoa extends ModeloAbstrato {
     private Boolean ehUsuAtivo;
     @ManyToMany(cascade= {CascadeType.ALL})
     @JoinColumn(name ="gestao_id")
-    private List<Gestao> gestao;
+    private List<Gestao> gestao = new ArrayList<>();
     @ManyToMany(cascade= {CascadeType.ALL})
     @JoinColumn(name ="servidor_id")
-    private List<Lotacao> servidor;
+    private List<Lotacao> servidor = new ArrayList<>();
     @ManyToMany(cascade= {CascadeType.ALL})
     @JoinColumn(name ="discente_id")
-    private List<Matricula> discente;
+    private List<Matricula> discente = new ArrayList<>();
 
     public Pessoa(){
         this.gestao = new ArrayList<>();
