@@ -15,6 +15,7 @@ import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
 import org.junit.*;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,8 +30,17 @@ public class ControladorExpedPortaTest {
     private static LotacaoDAO lotacaoDAO = new LotacaoDAO();
     private static ReferenciaDAO referenciaDAO = new ReferenciaDAO();
     private static UndAdmDAO undAdmDAO = new UndAdmDAO();
-    private static List<int[]> designados = new ArrayList<>();
-    private static List<int[]> referencias = new ArrayList<>();
+    private static List<Long[]> designadoList = new ArrayList<>();
+    private static List<Long[]> referenciasList = new ArrayList<>();
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+    private static List<Pessoa> pessoas = new ArrayList<>();
+    private static List<Portaria> portarias = new ArrayList<>();
+    private static List<UndAdm> undAdms = new ArrayList<>();
+    private static List<Designado> designados = new ArrayList<>();
+    private static List<Referencia> referencias = new ArrayList<>();
+    private static List<Lotacao> lotacoes = new ArrayList<>();
+
     /*
      * Preparação do ambiente para teste.
      * População do banco de Dados para atendam os pré-requisitos do caso de uso.
@@ -56,7 +66,9 @@ public class ControladorExpedPortaTest {
             linha = dadosSoftware.get(index);
 
             //Definir as tabelas que serão populadas no Banco de Dados.
-            if (linha.equals("portaria") || linha.equals("designado") || linha.equals("pessoa") || linha.equals("undAdm")) {
+            if (linha.equals("portaria") || linha.equals("designado") || linha.equals("pessoa") ||
+                    linha.equals("undAdm") || linha.equals("lotacao") || linha.equals("referencia") ||
+                    linha.equals("portariasExpedidasOuReferenciadas") || linha.equals("portariasPropostas")) {
 
                 tabelaAtual = linha;
                 index++;
@@ -104,6 +116,45 @@ public class ControladorExpedPortaTest {
                     break;
             }
         }
+
+
+        undAdmDAO.abrirTransacao();
+        for (UndAdm undAdm : undAdms) {
+            undAdmDAO.salvar(undAdm);
+        }
+        undAdmDAO.commitarTransacao();
+        lotacaoDAO.abrirTransacao();
+        for (Lotacao lotacao : lotacoes) {
+            lotacaoDAO.salvar(lotacao);
+        }
+        lotacaoDAO.commitarTransacao();
+        pessoaDAO.abrirTransacao();
+        for (Pessoa pessoa : pessoas) {
+            pessoaDAO.salvar(pessoa);
+        }
+        pessoaDAO.commitarTransacao();
+        portariaDAO.abrirTransacao();
+        for (int i = 0; i < 5; i++) {
+            portariaDAO.salvar(portarias.get(i));
+        }
+        portariaDAO.commitarTransacao();
+        referenciaDAO.abrirTransacao();
+        for (Referencia referencia : referencias) {
+            referenciaDAO.salvar(referencia);
+        }
+        referenciaDAO.commitarTransacao();
+        designadoDAO.abrirTransacao();
+        for (Designado designado : designados) {
+            designadoDAO.salvar(designado);
+        }
+        designadoDAO.commitarTransacao();
+        portariaDAO.abrirTransacao();
+        for (int i = 5; i < portarias.size(); i++) {
+            portariaDAO.salvar(portarias.get(i));
+        }
+        portariaDAO.commitarTransacao();
+
+        // aqui
     }
 
     @Before
@@ -229,7 +280,6 @@ public class ControladorExpedPortaTest {
      */
     public static void trataDadosDaPessoaParaPersistencia(String[] dados){
         Pessoa pessoa = new Pessoa();
-        Lotacao servidor = lotacaoDAO.buscar(Long.parseLong(dados[6]));
 
         pessoa.setId(Long.parseLong(dados[0]));
         pessoa.setNomePes(dados[1]);
@@ -237,11 +287,20 @@ public class ControladorExpedPortaTest {
         pessoa.setEmailPes(dados[3]);
         pessoa.setSenhaUsu(dados[4]);
         pessoa.setEhUsuAtivo(Boolean.parseBoolean(dados[5]));
-        pessoa.setServidor(servidor);
 
+        for(Lotacao lotacao : lotacoes){
+            if(lotacao.getId().equals(Long.parseLong(dados[6]))){
+                pessoa.setServidor(lotacao);
+                break;
+            }
+        }
+        //pessoa.setServidor(lotacaoDAO.buscar(Long.parseLong(dados[6])));
+
+        pessoas.add(pessoa);
+        /*
         pessoaDAO.abrirTransacao();
         pessoaDAO.salvar(pessoa);
-        pessoaDAO.commitarTransacao();
+        pessoaDAO.commitarTransacao();*/
     }
 
     /**
@@ -252,21 +311,32 @@ public class ControladorExpedPortaTest {
      */
     public static void trataDadosDoDesignadoParaPersistencia(String[] dados){
         Designado designado = new Designado();
-        Pessoa pessoa = pessoaDAO.buscar(Long.parseLong(dados[7]));
 
-        designado.setId(Long.parseLong(dados[0]));
-        designado.setDtCienciaDesig(new Date(dados[1]));
-        designado.setTipFuncDesig(retornaFuncaoDesig(dados[2]));
-        designado.setDescrFuncDesig(dados[3]);
-        designado.setHorasDefFuncDesig(Integer.parseInt(dados[4]));
-        designado.setHorasExecFuncDesig(Integer.parseInt(dados[5]));
-        designado.setDesignado(pessoa);
+        try {
+            designado.setId(Long.parseLong(dados[0]));
+            if(!dados[1].isEmpty()) designado.setDtCienciaDesig(sdf.parse(dados[1]));
+            designado.setTipFuncDesig(retornaFuncaoDesig(dados[2]));
+            designado.setDescrFuncDesig(dados[3]);
+            designado.setHorasDefFuncDesig(Integer.parseInt(dados[4]));
+            if(!dados[5].isEmpty()) designado.setHorasExecFuncDesig(Integer.parseInt(dados[5]));
 
-        designados.add(new int[]{Integer.parseInt(dados[0]), Integer.parseInt(dados[6])});
+            for(Pessoa pessoa : pessoas){
+                if(pessoa.getId().equals(Long.parseLong(dados[7]))){
+                    designado.setDesignado(pessoa);
+                    break;
+                }
+            }
+            //designado.setDesignado(pessoaDAO.buscar(Long.parseLong(dados[7])));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        designados.add(designado);
+        designadoList.add(new Long[]{Long.parseLong(dados[0]), Long.parseLong(dados[6])});
+/*
         designadoDAO.abrirTransacao();
         designadoDAO.salvar(designado);
-        designadoDAO.commitarTransacao();
+        designadoDAO.commitarTransacao();*/
     }
 
     /**
@@ -289,9 +359,11 @@ public class ControladorExpedPortaTest {
         undAdm.setUltNumExped(Integer.parseInt(dados[7]));
         undAdm.setUltNumProp(Integer.parseInt(dados[8]));
 
+        undAdms.add(undAdm);
+        /*
         undAdmDAO.abrirTransacao();
         undAdmDAO.salvar(undAdm);
-        undAdmDAO.commitarTransacao();
+        undAdmDAO.commitarTransacao();*/
     }
 
     /**
@@ -304,16 +376,28 @@ public class ControladorExpedPortaTest {
         Lotacao lotacao = new Lotacao();
         Cargo cargo = retornaCargoServid(dados[4]);
 
-        lotacao.setId(Long.parseLong(dados[0]));
-        lotacao.setDtIniLotServ(new Date(dados[1]));
-        lotacao.setDtFimLotServ(new Date(dados[2]));
-        lotacao.setDescrCargoServ(dados[3]);
-        lotacao.setCargoServ(cargo);
-        lotacao.setUndAdm(undAdmDAO.buscar(Long.parseLong(dados[5])));
+        try {
+            lotacao.setId(Long.parseLong(dados[0]));
+            if(!dados[1].isEmpty()) lotacao.setDtIniLotServ(sdf.parse(dados[1]));
+            if(!dados[2].isEmpty()) lotacao.setDtFimLotServ(sdf.parse(dados[2]));
+            lotacao.setDescrCargoServ(dados[3]);
+            lotacao.setCargoServ(cargo);
+            for(UndAdm unidade : undAdms){
+                if(unidade.getId().equals(Long.parseLong(dados[5]))){
+                    lotacao.setUndAdm(unidade);
+                    break;
+                }
+            }
+            //lotacao.setUndAdm(undAdmDAO.buscar(Long.parseLong(dados[5])));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        lotacoes.add(lotacao);
+        /*
         lotacaoDAO.abrirTransacao();
         lotacaoDAO.salvar(lotacao);
-        lotacaoDAO.commitarTransacao();
+        lotacaoDAO.commitarTransacao();*/
     }
 
     /**
@@ -324,16 +408,23 @@ public class ControladorExpedPortaTest {
      */
     private static void trataDadosDaReferenciaParaPersistencia(String[] dados) {
         Referencia referencia = new Referencia();
-        Portaria referenciada = portariaDAO.buscar(Long.parseLong(dados[2]));
 
-        referencias.add(new int[]{Integer.parseInt(dados[0]), Integer.parseInt(dados[1])});
+        referenciasList.add(new Long[]{Long.parseLong(dados[0]), Long.parseLong(dados[1])});
         referencia.setId(Long.parseLong(dados[0]));
-        referencia.setReferencia(referenciada);
+        for(Portaria portaria : portarias){
+            if(portaria.getId().equals(Long.parseLong(dados[2]))){
+                referencia.setReferencia(portaria);
+                break;
+            }
+        }
+        //referencia.setReferencia(portariaDAO.buscar(Long.parseLong(dados[2])));
         referencia.setEhCancelamento(Boolean.parseBoolean(dados[3]));
+        referencias.add(referencia);
 
+        /*
         referenciaDAO.abrirTransacao();
         referenciaDAO.salvar(referencia);
-        referenciaDAO.commitarTransacao();
+        referenciaDAO.commitarTransacao();*/
     }
 
     /**
@@ -344,39 +435,63 @@ public class ControladorExpedPortaTest {
      */
     public static void trataDadosDaPortariaParaPersistencia(String[] dados){
         Portaria portaria = new Portaria();
-        PortariaStatus status = retornaStatusPortaria(dados[5]);
-        Pessoa expedidor = pessoaDAO.buscar(Long.parseLong(dados[13]));
+        PortariaStatus status = retornaStatusPortaria(dados[4]);
 
-        portaria.setId(Long.parseLong(dados[0]));
-        portaria.setSiglaUndId(dados[2]);
-        portaria.setAnoId(Integer.parseInt(dados[3]));
-        portaria.setSeqId(Integer.parseInt(dados[4]));
-        portaria.setStatus(status);
-        portaria.setAssunto(dados[6]);
-        portaria.setDtExped(new Date(dados[7]));
-        portaria.setDtIniVig(new Date(dados[8]));
-        portaria.setDtFimVig(new Date(dados[9]));
-        portaria.setDtPublicDou(new Date(dados[10]));
-        portaria.setHorasDesig(Integer.parseInt(dados[11]));
-        portaria.setResumo(dados[12]);
-        portaria.setExpedidor(expedidor);
+        try {
+            portaria.setId(Long.parseLong(dados[0]));
+            portaria.setSiglaUndId(dados[1]);
+            portaria.setAnoId(Integer.parseInt(dados[2]));
+            portaria.setSeqId(Integer.parseInt(dados[3]));
+            portaria.setStatus(status);
+            portaria.setAssunto(dados[5]);
+            if(!dados[6].isEmpty()) portaria.setDtExped(sdf.parse(dados[6]));
+            if(!dados[7].isEmpty()) portaria.setDtIniVig(sdf.parse(dados[7]));
+            if(!dados[8].isEmpty()) portaria.setDtFimVig(sdf.parse(dados[8]));
+            if(!dados[9].isEmpty()) portaria.setDtPublicDou(sdf.parse(dados[9]));
+            if(!dados[10].isEmpty()) portaria.setHorasDesig(Integer.parseInt(dados[10]));
+            portaria.setResumo(dados[11]);
+            portaria.setTextoCompleto(dados[12]);
+
+            for(Pessoa pessoa : pessoas){
+                if(pessoa.getId().equals(Long.parseLong(dados[13]))){
+                    portaria.setExpedidor(pessoa);
+                    break;
+                }
+            }
+            //portaria.setExpedidor(pessoaDAO.buscar(Long.parseLong(dados[13])));
+        } catch (ParseException e) {
+
+            e.printStackTrace();
+        }
 
         portaria.setDesignados(new ArrayList<>());
-        for(int i = 0; i < designados.size(); i++){
-            if((long)designados.get(i)[1] == portaria.getId()){
+        if(!designados.isEmpty()) {
+            for (int i = 0; i < designados.size(); i++) {
+                if (designadoList.get(i)[1].equals(portaria.getId())) {
+                    portaria.getDesignados().add(designados.get(i));
+                }
+            /*if(designados.get(i)[1].equals(portaria.getId())){
                 portaria.getDesignados().add(designadoDAO.buscar((long)designados.get(i)[0]));
+            }*/
             }
         }
         portaria.setReferencias(new ArrayList<>());
-        for(int i = 0; i < referencias.size(); i++){
-            if((long)referencias.get(i)[1] == portaria.getId()){
+        if(!referencias.isEmpty()) {
+            for (int i = 0; i < referencias.size(); i++) {
+                if (referenciasList.get(i)[1].equals(portaria.getId())) {
+                    portaria.getReferencias().add(referencias.get(i));
+                }
+            /*if(referencias.get(i)[1].equals(portaria.getId())){
+                Referencia referencia = referenciaDAO.buscar(referencias.get(i)[0]);
                 portaria.getReferencias().add(referenciaDAO.buscar((long)referencias.get(i)[0]));
+            }*/
             }
         }
-
+        portarias.add(portaria);
+/*
         portariaDAO.abrirTransacao();
         portariaDAO.salvar(portaria);
-        portariaDAO.commitarTransacao();
+        portariaDAO.commitarTransacao();*/
     }
 
 

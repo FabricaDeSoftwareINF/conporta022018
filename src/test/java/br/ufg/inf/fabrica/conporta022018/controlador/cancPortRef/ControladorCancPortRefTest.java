@@ -272,7 +272,7 @@ public class ControladorCancPortRefTest {
 
         // Grupo de teste DadosExceções.
 
-        boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada(2);
+        boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada((long) 2);
         // O cenario acima testa parâmetro inválido. A exceção esperada é IllegalArgumentException
 
         // A exeção atribuida para as chamadas abaixo é UnsupportedOperationException, mas um tipo de Error

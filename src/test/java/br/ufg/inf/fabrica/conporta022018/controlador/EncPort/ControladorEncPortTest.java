@@ -84,19 +84,23 @@ public class ControladorEncPortTest {
     @Test
     public void casoTestDadosValidos() throws IOException {
 
+/*
 
         controladorEncPort.encPortariaCiencia("INF201802");
 
         
         controladorEncPort.encPortariaCiencia("INF201802");
+*/
 
     }
 
     @Test
     public void casoTestDadosExcecoes() throws IOException {
 
+/*
 
         controladorEncPort.encPortariaCiencia("INF201803");
+*/
 
     }
 
