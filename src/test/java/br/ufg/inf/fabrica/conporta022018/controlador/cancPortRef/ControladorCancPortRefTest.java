@@ -165,6 +165,25 @@ public class ControladorCancPortRefTest {
                                     referencia.setEhCancelamento(referenciaCSV.getEhCancelamento());
                                     referencias.add(referencia);
                                 }
+
+                                // Identifica a portaria que não deve existir no banco.
+                                if (idLogicoPortariaReferenciada.equals("INF20186")) {
+                                    Portaria portariaNaoSalvaNoBanco = new Portaria();
+                                    portariaNaoSalvaNoBanco.setSiglaUndId("INF");
+                                    portariaNaoSalvaNoBanco.setAnoId(2018);
+                                    portariaNaoSalvaNoBanco.setSeqId(6);
+                                    portariaNaoSalvaNoBanco.setStatus(PortariaStatus.ATIVA);
+                                    portariaNaoSalvaNoBanco.setAssunto("TESTE DE BANCO");
+                                    portariaNaoSalvaNoBanco.setExpedidor(pessoa);
+                                    portariaNaoSalvaNoBanco.setUnidadeExpedidora(undAdm);
+                                    portariaNaoSalvaNoBanco.setReferencias(referencias);
+
+                                    Referencia referencia = new Referencia();
+                                    referencia.setReferencia(portariaNaoSalvaNoBanco);
+                                    referencia.setEhCancelamento(referenciaCSV.getEhCancelamento());
+                                    referencias.add(referencia);
+                                }
+
                             }
                         }
                     }
@@ -249,16 +268,26 @@ public class ControladorCancPortRefTest {
 
         Long idPortariaOp2 = null;
         Long idPortariaOp3 = null;
+        Long idPortariaOp4 = null;
+        Long idPortariaOp5 = null;
 
         for (Portaria portaria: portarias) {
             String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
 
-            if (idLogicoDaPortaria.equals("INF201812")) {
+            if (idLogicoDaPortaria.equals("INF20185")) {
                 idPortariaOp2 = portaria.getId();
             }
 
-            if (idLogicoDaPortaria.equals("INF201813")) {
+            if (idLogicoDaPortaria.equals("INF201812")) {
                 idPortariaOp3 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF201813")) {
+                idPortariaOp4 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF20187")) {
+                idPortariaOp5 = portaria.getId();
             }
 
         }
@@ -270,12 +299,20 @@ public class ControladorCancPortRefTest {
         // O cenario acima testa a primeira exceção da seção de caso de uso, onde a portaria não é localizada na base de dados.
 
         boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp2);
-        // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
-        // cancelamento possui o status "Cancelada".
+        // O cenario acima testa um dos itens da regra de negócio da seção de caso de uso, PortVali , onde a portaria possui status
+        // diferente de "Ativa".
 
         boolean op3 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp3);
         // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
+        // cancelamento possui o status "Cancelada".
+
+        boolean op4 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp4);
+        // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
         // cancelamento possui o status "Proposta".
+
+        boolean op5 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp5);
+        // O cenario acima testa um dos itens da regra de negócio da seção de caso de uso, PortVali , onde a portaria uma
+        // das portarias que são referenciadas não existe no banco.
 
         // As variáveis de retorno não seram utilizadas pois a execução dos métodos vão gerar exceções.
     }
