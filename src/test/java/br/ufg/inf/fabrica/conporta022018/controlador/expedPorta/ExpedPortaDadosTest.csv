@@ -25,6 +25,10 @@ PKreferencia;PKreferenciadora;PKreferenciada;ehCancelamento
 2;10;11;True
 3;13;14;True
 4;15;16;True
+5;999;8888;False
+6;93;9;False
+7;92;5;False
+8;91;7;False
 designado
 PKdesg;dtCienciaDesig;tipFuncDesig;descrFuncDesig;horasDefFuncDesig;horasExecFuncDesig;PKportaria;PKpes
 1;;Coordenador;Novo coordenador de curso;220;;6;1

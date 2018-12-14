@@ -7,12 +7,15 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 import br.ufg.inf.fabrica.conporta022018.modelo.*;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorEncPort {
 
     private PessoaDAO pessoaDAO = new PessoaDAO();
-
+    private PortariaDAO portariaDAO = new PortariaDAO();
     /**
      * O método abaixo é responsável por execução do caso de uso, ou seja,
      * é responsável por chamar/invocar os demais métodos presente no
@@ -22,7 +25,7 @@ public class ControladorEncPort {
      */
     public boolean encPortariaCiencia(Portaria portaria){
 
-        if(portariaIsValida(portaria) == true){
+        if(portariaIsValida(portaria.getId()) == true){
             List<Designado> designados = portaria.getDesignados();
             JavaMail javaMail = new JavaMail();
             javaMail.enviarEmail(getEmailDesignados(designados), portaria);
@@ -37,18 +40,21 @@ public class ControladorEncPort {
     /**
      * O método abaixo verifica se a portaria é válida de acordo com a regra
      * de negócio PortValid definida em ConPorta022018-DesigFun-EncPorta
-     * @param portaria, recebe como parametro uma portaria
+     * @param id da portaria, recebe como parametro id da portaria portaria
      * @return falso (false) caso portaria não seja válida, ou seja, caso não
      * atenda os critérios estabelecidos e retorna true (verdadeiro) caso seja
      * uma portaria válida;
      */
-    public boolean portariaIsValida (Portaria portaria){
-        if ( portaria.getUnidadeExpedidora() != null &&
-                (portaria.getStatus() == PortariaStatus.ATIVA ||
-                        portaria.getStatus() == PortariaStatus.CANCELADA) ){
-            return true;
+    public boolean portariaIsValida (Long id) {
+
+            Portaria portaria = portariaDAO.buscar(id);
+
+            if (portaria != null && (portaria.getStatus() == PortariaStatus.ATIVA || portaria.getStatus() == PortariaStatus.CANCELADA)
+                    && portaria.getUnidadeExpedidora() != null   ) {
+                return  true;
+            }else{
+                throw new UnsupportedOperationException("Portaria não é válida.");
         }
-        return  false;
     }
 
     /**
@@ -58,7 +64,8 @@ public class ControladorEncPort {
      * @return
      */
      public List <String> getEmailDesignados ( List <Designado> designados){
-         List <String> listaEmail = null;
+         List <String> listaEmail = new ArrayList<>();
+
          for (Designado designado: designados) {
              String email = designado.getDesignado().getEmailPes();
              if (email != null) {

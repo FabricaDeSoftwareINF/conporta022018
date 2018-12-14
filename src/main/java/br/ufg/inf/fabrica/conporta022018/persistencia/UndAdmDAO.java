@@ -6,19 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UndAdmDAO extends GenericoDAO<UndAdm> {
-/*
-    public UndAdm pesquisarUndAdm(String sigla) {
-        List<UndAdm> undAdmList = buscarTodos();
-        for (UndAdm undAdm : undAdmList) {
-            if(undAdm.getSiglaUnAdm().equals(sigla)){
-                return undAdm;
-            }
-        }
 
-        return null;
-    }
+  /** Necessário Implementar **/
+  public UndAdmDAO pesquisarUndAdm(String sigla) {
+    /* TODO falta implementar */
+    return null;
+  }
 
-    public void editarTimeOut(int timeOut) {
-
-    }*/
+  /** Necessário Implementar **/
+  public void editarTimeOut(int timeOut) {
+    /* TODO falta implementar */
+  }
 }
