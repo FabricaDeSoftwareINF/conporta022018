@@ -24,6 +24,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * Essa classe é responsável pelo teste do caso de uso de encaminhamento da portaria.
+ */
 @RunWith(JUnit4.class)
 public class ControladorEncPortTest {
 
@@ -38,7 +41,6 @@ public class ControladorEncPortTest {
      * Preparação do ambiente para teste.
      * População do banco de Dados para atendam os pré-requisitos da seção de caso de uso.
      */
-
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException, ParseException {
         String CAMINHO_CSV = "EncPortDadosTest.csv";
@@ -122,8 +124,6 @@ public class ControladorEncPortTest {
 
                     pessoa = new Pessoa();
                     pessoa.setNomePes(dados[0]);
-                    System.out.println("==== DADO 1" +dados[1]);
-                    System.out.println("======== TABELA ATUAL:" + tabelaAtual);
                     pessoa.setCpfPes(dados[1]);
                     pessoa.setEmailPes(dados[2]);
                     pessoa.setSenhaUsu(dados[3]);
@@ -278,10 +278,11 @@ public class ControladorEncPortTest {
         }
     }
 
+    /**
+     * Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
+     */
     @Before
     public void casoTestPrepararExecucao() {
-
-        // Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
 
         controladorEncPort = new ControladorEncPort();
     }
@@ -320,21 +321,31 @@ public class ControladorEncPortTest {
             }
         }
 
+        // O cenário abaixo testa o caso de uso considerando uma portaria válida
+        // com status sendo "ATIVA" e com os demais parametros sendo válidos.
         boolean op1 = controladorEncPort.portariaIsValida(idPortariaOp1);
         Assert.assertEquals(true, op1);
 
+        // O cenário abaixo testa o caso de uso considerando uma portaria válida
+        // com status sendo "ATIVA" e com status sendo "ATIVA" e com os demais parametros sendo válidos.
         boolean op2 = controladorEncPort.portariaIsValida(idPortariaOp2);
         Assert.assertEquals(true, op2);
 
+        // O cenário abaixo testa o caso de uso considerando uma portaria válida
+        // com status sendo "CANCELADA" e com status sendo "ATIVA" e com os demais parametros sendo válidos.
         boolean op3 = controladorEncPort.portariaIsValida(idPortariaOp3);
         Assert.assertEquals(true, op3);
 
     }
 
+    /**
+     *  O Grupo de teste abaixo são referente a dados inválidos que tem como objetivo gerar exceções.
+     * @throws Exception
+     */
     @Test(expected = UnsupportedOperationException.class)
     public void casoTestDadosExcecoes() throws Exception {
 
-        // Grupo de teste DadosExceceos
+        //Grupo de teste DadosExceceos
 
         Long idPortariaOp1 = null;
         Long idPortariaOp2 = null;
@@ -343,7 +354,7 @@ public class ControladorEncPortTest {
 
         for (Portaria portaria: portarias) {
             String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
-
+            
             if (idLogicoDaPortaria.equals("INF201812")) {
                 idPortariaOp1 = portaria.getId();
             }
@@ -361,12 +372,19 @@ public class ControladorEncPortTest {
             }
         }
 
+        // O cenário abaixo testa o caso de uso considerando uma portaria não válida,
+        // tendo status sendo "EXPIRADA"
         boolean op1 = controladorEncPort.portariaIsValida(idPortariaOp1);
 
+        // O cenário abaixo testa o caso de uso considerando uma portaria NÃO válida,
+        // tendo status sendo "PROPOSTA"
         boolean op2 = controladorEncPort.portariaIsValida(idPortariaOp2);
 
+        // O cenário abaixo testa o caso de uso considerando uma portaria NÃO válida,
+        // tendo status sendo "PROPOSTA"
         boolean op3 = controladorEncPort.portariaIsValida(idPortariaOp3);
 
+        // O cenário abaixo testa o caso de uso considerando uma portaria que não existe.
         boolean op4 = controladorEncPort.encPortariaCiencia(portarias.get(0));
     }
 
