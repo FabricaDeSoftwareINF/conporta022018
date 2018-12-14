@@ -8,25 +8,21 @@ package br.ufg.inf.fabrica.conporta022018.controlador.notifPortSemCiencia;
 
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorNotifPortSemCiencia;
 import br.ufg.inf.fabrica.conporta022018.modelo.*;
-import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
-import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class ControladorNotifPortSemCienciaTest {
+public class ControladorNotifPortSemCienciaTest2 {
 
     private static ControladorNotifPortSemCiencia controladorNotifPortSemCiencia;
 
@@ -213,12 +209,13 @@ public class ControladorNotifPortSemCienciaTest {
      */
 
     @Test
-    public void casoSemNenhumaPendenciaDeCiencia() throws ParseException {
+    public void casoComUmaPendenciaDeCiencia() throws ParseException {
 
         /**
-         * Testa o cenário onde não há designados com ciência atrasada.
+         * Testa o cenário onde há um designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia();
+       // controladorNotifPortSemCiencia.verificarCiencia();
     }
+
 
 }

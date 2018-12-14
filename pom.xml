@@ -180,6 +180,7 @@
                     <source>1.7</source>
                     <target>1.7</target>
                     <compilerArguments>
+                        <!--suppress UnresolvedMavenProperty -->
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
                 </configuration>
