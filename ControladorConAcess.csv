@@ -10,6 +10,10 @@ José Carlos de Souza,785.123.543-78,jose@exemplo.com,1234,true,12/12/2011,01/01
 Fermanda Maria da Silva,342.897.456-34,fernanda@exemplo.com,1234,true,12/12/2011,01/01/2100,01/01/2100,01/01/2100,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,01/01/2100,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
 Pedro da Silva,764.098.612-09,pedro@exemple.com,1234,true,12/12/2011,01/01/2100,01/01/2100,01/01/2100,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,01/01/2100,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
 Maria José de Oliveira,456.095.124-98,maria@exemple.com,1234,true,12/12/2011,01/01/2100,01/01/2100,01/01/2100,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,01/01/2100,Diretor,CHEFIA,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
+Eduardo da Fonseca,777.876.908-98,eduardo@exemple.com,1234,true,12/12/2011,01/01/2100,01/01/2100,01/01/2100,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,tecnico administrativo,12/12/2010,01/01/2100,Perfil de Designados,tecnico administrativo,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
+Joaquim Vieira,456.987.231-99,Joaquim@exemple.com,1234,true,12/12/2011,01/01/2100,01/01/2100,01/01/2100,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,01/01/2100,Diretor,Perfil de Coordenador Administrativo,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
+Marcelo dasgraças,345.185.165-97,marcelo@exemple.com,1234,true,12/12/2011,01/01/2100,01/01/2100,01/01/2100,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,CHEFIA,12/12/2010,01/01/2100,Diretor,Chefe e Substituto de Chefe,Faculdade de Letras,FL,Unidade Academica,30,12,2018,10,19,null
+
 perfil
 url,operacao,nome,descricao
 /Moderado,Ciencia,ROLE_MODERADO,Perfil de Designados.
