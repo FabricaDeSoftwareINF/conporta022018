@@ -51,7 +51,7 @@ public enum RetornoEfetLogoutEnum {
          A parte da string que contem $$$ é usada no método replace() para adicionar campos extras ao JSON.
          */
         return String.format(
-            "{ \"status\": \"%s\", \"mensagem\": \"%s\", $$$ }",
+            "{ \"status\": \"%s\", \"mensagem\": \"%s\" $$$ }",
             this.getStatus(),
             this.getRetorno()
         );

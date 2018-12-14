@@ -41,12 +41,19 @@ public class ControladorEfetLogoutTest extends Mockito {
     // FIXME: retirar a mockagem de casoTestRespostaServidorOK, em ControladorEfetLogoutTest
     @Test
     public void casoTestRespostaServidorOK() {
-        // Mockagem do caso de teste cuja resposta é OK: bem-sucedido / logout eefetuado.
+        // Mockagem do caso de teste cuja resposta é OK: bem-sucedido / logout efetuado.
         when(controladorEfetLogout.efetuarLogout()).thenReturn(OK.toString());
 
         String resposta = controladorEfetLogout.efetuarLogout();
         Assert.assertNotNull(resposta);
         Assert.assertTrue(resposta.contains(OK.getStatus()));
+
+        log(
+                "casoTestRespostaServidorOK",
+                OK.toString().replace("$$$", ""),
+                OK.toString().replace("$$$", ""),
+                resposta.replace("$$$", "")
+        );
     }
 
     // FIXME: retirar a mockagem de casoTestRespostaServidorErroExecucao, em ControladorEfetLogoutTest
@@ -58,6 +65,13 @@ public class ControladorEfetLogoutTest extends Mockito {
         String resposta = controladorEfetLogout.efetuarLogout();
         Assert.assertNotNull(resposta);
         Assert.assertTrue(resposta.contains(ERRO_EXECUCAO.getStatus()));
+
+        log(
+                "casoTestRespostaServidorErroExecucao",
+                OK.toString().replace("$$$", ""),
+                ERRO_EXECUCAO.toString().replace("$$$", ""),
+                resposta.replace("$$$", "")
+        );
     }
 
     // FIXME: retirar a mockagem de casoTestRespostaServidorErroInesperado, em ControladorEfetLogoutTest
@@ -69,6 +83,26 @@ public class ControladorEfetLogoutTest extends Mockito {
         String resposta = controladorEfetLogout.efetuarLogout();
         Assert.assertNotNull(resposta);
         Assert.assertTrue(resposta.contains(ERRO_INESPERADO.getStatus()));
+
+        log(
+                "casoTestRespostaServidorErroInesperado",
+                OK.toString().replace("$$$", ""),
+                ERRO_INESPERADO.toString().replace("$$$", ""),
+                resposta.replace("$$$", "")
+        );
+    }
+
+    // Relatório do status atual da execução dos testes para acompanhamento em tempo real
+    private void log(
+            final String cenario, final String esperadoCasUs,
+            final String esperadoCen, final String obtidoExec
+    ) {
+        System.out.println("====================================================");
+        System.out.printf("- Cenário de testes atual:\t[ %s ]\n", cenario);
+        System.out.printf("- Resultado Esperado pelo caso de uso:\n\t[json] %s\n", esperadoCasUs);
+        System.out.printf("- Resultado Esperado pelo cenário:\n\t[json] %s\n", esperadoCen);
+        System.out.printf("- Resultado Obtido na execução:\n\t[json] %s\n", obtidoExec);
+        System.out.println("====================================================");
     }
 
 }
