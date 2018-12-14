@@ -14,6 +14,7 @@ import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
 import org.junit.*;
 import org.mockito.Mockito;
+import javax.persistence.NoResultException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -330,28 +331,28 @@ public class ControladorConAcessTest extends Mockito {
         usuario = null;
         try {
             usuario = controlador.buscarPorCPF("000.000.000-00");
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             //Tratamento apenas para o caso de teste não para.
         }
         Assert.assertEquals(null, usuario);
 
         try {
             usuario = controlador.buscarPorCPF("999.999.999-99");
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             //Tratamento apenas para o caso de teste não para.
         }
         Assert.assertEquals(null, usuario);
 
         try {
             usuario = controlador.buscarPorCPF("888.888.888-88");
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             //Tratamento apenas para o caso de teste não para.
         }
         Assert.assertEquals(null, usuario);
 
         try {
             usuario = controlador.buscarPorCPF("777.777.777-77");
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             //Tratamento apenas para o caso de teste não para.
         }
         Assert.assertEquals(null, usuario);
