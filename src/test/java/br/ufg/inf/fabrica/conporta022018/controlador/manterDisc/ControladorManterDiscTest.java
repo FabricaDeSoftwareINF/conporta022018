@@ -152,12 +152,8 @@ public class ControladorManterDiscTest extends Mockito {
                         pessoaDAO.rollBackTransacao();
                     }
                     break;
-
             }
         }
-
-        // Verifica a importação e criação de Discentes a partir de um arquivo CSV
-//        Assert.assertTrue(controladorDisc.importarDiscente("ControladorManterDisc.csv"));
     }
 
     @Test
@@ -166,7 +162,6 @@ public class ControladorManterDiscTest extends Mockito {
         // Verifica a consistência de um dos dados criados acima e testa a Busca de Discente
         Pessoa pessoa2 = controladorDisc.buscarDiscentePorCpf("123.123.123-12");
         Assert.assertEquals("123.123.123-12", pessoa2.getCpfPes());
-
     }
 
 
