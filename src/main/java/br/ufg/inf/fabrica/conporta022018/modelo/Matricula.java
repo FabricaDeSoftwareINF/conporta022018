@@ -2,8 +2,6 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import java.util.Date;
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table
@@ -24,7 +22,7 @@ public class Matricula extends ModeloAbstrato{
 
     @Temporal(TemporalType.DATE)
     @Column
-    private Date cdIniMatrCur;
+    private Date dtIniMatrCur;
 
 
     public Curso getCurso() {
@@ -51,11 +49,11 @@ public class Matricula extends ModeloAbstrato{
         this.dtFimMatrCur = dtFimMatrCur;
     }
 
-    public Date getCdIniMatrCur() {
-        return cdIniMatrCur;
+    public Date getDtIniMatrCur() {
+        return dtIniMatrCur;
     }
 
-    public void setCdIniMatrCur(Date cdIniMatrCur) {
-        this.cdIniMatrCur = cdIniMatrCur;
+    public void setDtIniMatrCur(Date cdIniMatrCur) {
+        this.dtIniMatrCur = cdIniMatrCur;
     }
 }

@@ -3,127 +3,77 @@
  * Fabrica de Software INF
  * Creative Commons Attribution 4.0 International License.
  */
-
 package br.ufg.inf.fabrica.conporta022018.controlador.manterDisc;
 
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorDisc;
-import br.ufg.inf.fabrica.conporta022018.modelo.Matricula;
-import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
-import br.ufg.inf.fabrica.conporta022018.util.Extrator;
-import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
-import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
+import br.ufg.inf.fabrica.conporta022018.modelo.*;
+
 import org.junit.*;
+import org.mockito.Mockito;
+
 import java.io.IOException;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class ControladorManterDiscTest {
 
-    private static ControladorDisc controladorDisc;
+/*
+ * Classe tem o intuito de exercitar o controlador referente aos casos de uso:
+ *   1. ManterDisc;
+ */
+public class ControladorManterDiscTest extends Mockito {
 
-    /*
-     * Preparação do ambiente para teste.
-     * População do banco de Dados para atendam os pré-requisitos do caso de uso.
-     */
+    private static ControladorDisc controladorDisc = new ControladorDisc();
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+
+
 
     @BeforeClass
-    public static void casoTestPepararCenario() throws IOException {
+    public static void casoTestImportacaoDiscente() throws IOException, ParseException {
 
-        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/manterDisc/ManterDiscTest.csv";
-        String REGRA = ";";
-        List<String> dadosSoftware = new ArrayList<>();
-        Extrator extrator = new ExtratorCSV();
-        LerArquivo lerArquivo = new LerArquivo();
-        String tabelaAtual = " ";
-        String dados[];
-        String linha;
-        //Criar as instâncias de todos os objetos DAO's necessários para preparar o cenario.
+        // Verifica a importação e criação de Discentes a partir de um arquivo CSV
+        Assert.assertTrue(controladorDisc.importarDiscente("ControladorManterDisc.csv"));
 
-        dadosSoftware = lerArquivo.lerArquivo(CAMINHO_CSV);
-
-        Pessoa pessoa = new Pessoa();
-        Matricula discente = new Matricula();
-
-        for (int index = 0; index < dadosSoftware.size(); index++) {
-            linha = dadosSoftware.get(index);
-
-            //Definir as tabelas que serão populadas no Banco de Dados.
-            if (linha.equals("pessoa")) {
-                tabelaAtual = linha;
-                index++;
-                continue;
-            }
-
-            switch (tabelaAtual) {
-                case "pessoa" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela discente no Banco de Dados.
-                    pessoa.setNomePes(dados[0]);
-                    pessoa.setCpfPes(dados[1]);
-                    pessoa.setEmailPes(dados[2]);
-                    pessoa.setEhUsuAtivo(Boolean.parseBoolean(dados[3]));
-
-
-
-
-
-                    break;
-            }
-        }
     }
 
-    @Before
-    public void casoTestPrepararExecucao() {
-
-        //Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
-        controladorDisc = new ControladorDisc();
-    }
-
-    /*
-     * Criar os cenários de testes para a aplicação:
-     * Os cenarios de testes devem obrigatóriamente ser divididos em dois grupos.
-     * DadosValidos : Grupo destinado ao cenatio típico e aos cenarios alternativos do caso de uso.
-     * DadosExcecoes : Grupo destinado as exceções do cenario típico e dos cenarios alternativos.
-     * Cada cenário e cada exceção deve necessáriamente ser testado no minimo uma vez, cada entrada e/ou combinação
-     * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
-     */
 
     @Test
-    public void casoTestDadosValidos() throws IOException {
+    public void casoTestBuscaDeDiscente() throws IOException {
 
-        
-        //Grupo de teste DadosValidos, exemplo:
-//        controladorDisc.regCiencDesig("123.456.789-12", "INF", 2018, 0001);
+        // Verifica a consistência de um dos dados criados acima e testa a Busca de Discente
+        Pessoa pessoa2 = controladorDisc.buscarDiscente("123.123.123-12");
+        Assert.assertEquals("123.123.123-12", pessoa2.getCpfPes());
 
     }
 
     @Test
-    public void casoTestDadosExcecoes() throws IOException {
+    public void casoTestCriacaoDeDiscente() throws IOException, ParseException {
 
-        //Grupo de teste DadosExcecoes, exemplo:
-//        controladorDisc.regCiencDesig("123.456.789-12", "FACE", 2018, 0001);
-        //O cenario acima testa a primeira exceção do caso de uso a unidade acadêmica não é localizada.
+        Curso curso = new Curso();
+        Date dtIniMatrCur = formato.parse("08/08/2018");
+
+        // Verifica a criação de uma Matrícula/Discente a uma pessoa existente
+        Assert.assertTrue(controladorDisc.criarDiscente("123.123.123-12", 69, dtIniMatrCur, curso));
+
     }
 
-    @AfterClass
-    public static void casoTestResultados() throws IOException {
+    @Test
+    public void casoTestExclusaoDeDiscente() throws IOException, ParseException {
 
-        //Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
-        // irá fica as suas pós-condições. Exemplo:
+        // Verifica a exclusão lógica de um Discente
+        Date dtFinMatrCur = formato.parse("14/12/2018");
+        Assert.assertTrue(controladorDisc.excluirDiscente("123.123.123-12", dtFinMatrCur));
+    }
 
-        //Busca a data atual.
-//        Date hoje = new Date();
-//        SimpleDateFormat df;
-//        df = new SimpleDateFormat("dd/MM/yyyy");
-//        String dataHoje = df.format(hoje);
+    @Test
+    public void casoTestAlteracaoDeDiscente() throws IOException, ParseException {
 
-        //pega a data que foi armazenada no banco de dados e verifica com a data de execução do teste, ou seja,
-        // a data de hoje.
+        Date dtIniMatrCur = formato.parse("08/12/2018");
+        Date dtFinMatrCur = formato.parse("08/12/2020");
+        Assert.assertTrue(controladorDisc.alterarDiscente("123.123.123-12", dtIniMatrCur, dtFinMatrCur));
 
-        //Assert.assertEquals(dataHoje, rodaSQLparaPegarADataGravadaNoBancoDeDados);
     }
 
 }
