@@ -21,7 +21,7 @@ import java.util.*;
 import static org.junit.Assert.fail;
 
 
-public class EdiPortaTest {
+public class ControladorEdiPortaTest {
     ControladorEdiPorta controladorEdiPorta = new ControladorEdiPorta();
     private static Extrator extrator = new ExtratorCSV();
     private static DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -428,7 +428,7 @@ public class EdiPortaTest {
         // Resumo
         try {
             portaria = listaPortarias.get(2);
-            
+
             // Coloca o resumo vazio
             String resumo = "";
             portaria.setResumo(resumo);

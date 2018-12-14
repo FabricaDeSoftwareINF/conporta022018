@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="baab05f9-9623-4222-b5fb-614796f74371" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/ControladorEdiPortaTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -21,7 +20,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="74">
               <caret line="69" column="89" selection-start-line="69" selection-start-column="48" selection-end-line="69" selection-end-column="89" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -35,10 +34,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/ControladorEdiPortaTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="430" column="12" selection-start-line="430" selection-start-column="12" selection-end-line="430" selection-end-column="12" />
+            <state relative-caret-position="195">
+              <caret line="25" column="57" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7447#7458#0" expanded="true" />
@@ -99,6 +98,7 @@
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/RecebedoraDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java" />
         <option value="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/ControladorEdiPortaTest.java" />
       </list>
     </option>
   </component>
@@ -236,7 +236,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544756325061" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544756352771" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/javax.persistence.jar!/META-INF" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
@@ -378,9 +378,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_conporta022018_(2) - 2018.12.13 at 18h 33m 10s.xml">
-      <configuration name="All in conporta022018 (2)" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="All_in_conporta022018_(3) - 2018.12.13 at 18h 34m 28s.xml">
       <configuration name="All in conporta022018 (3)" configurationId="JUnit" />
     </history-entry>
@@ -407,6 +404,9 @@
     </history-entry>
     <history-entry file="All_in_conporta022018_(5) - 2018.12.13 at 18h 54m 19s.xml">
       <configuration name="All in conporta022018 (5)" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_conporta022018 - 2018.12.13 at 18h 58m 59s.xml">
+      <configuration name="All in conporta022018" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -705,7 +705,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="74">
           <caret line="69" column="89" selection-start-line="69" selection-start-column="48" selection-end-line="69" selection-end-column="89" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -717,10 +717,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/ControladorEdiPortaTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="430" column="12" selection-start-line="430" selection-start-column="12" selection-end-line="430" selection-end-column="12" />
+        <state relative-caret-position="195">
+          <caret line="25" column="57" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7447#7458#0" expanded="true" />
