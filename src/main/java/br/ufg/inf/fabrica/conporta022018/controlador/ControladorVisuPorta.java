@@ -12,10 +12,13 @@ import com.google.gson.GsonBuilder;
 public class ControladorVisuPorta {
     
 
-    public String conversorPortariaJson(Long id) {
-        
+    public String conversorPortariaJson(Long id) throws Exception {
+       
         Portaria portaria = new PortariaDAO().buscar(id);
-      
+        
+        if(portaria == null) {
+            throw new Exception("ID de portaria inválido"); 
+        }
         
         Gson gson = new GsonBuilder()
                 .addSerializationExclusionStrategy(new ExclusionStrategy() {

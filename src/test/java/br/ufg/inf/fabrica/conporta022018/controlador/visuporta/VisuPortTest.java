@@ -3,7 +3,6 @@
  * Fabrica de Software INF
  * Creative Commons Attribution 4.0 International License.
  */
-
 package br.ufg.inf.fabrica.conporta022018.controlador.visuporta;
 
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorVisuPorta;
@@ -34,7 +33,6 @@ public class VisuPortTest {
      * PreparaÃ§Ã£o do ambiente para teste.
      * PopulaÃ§Ã£o do banco de Dados para atendam os prÃ©-requisitos do caso de uso.
      */
-
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException, ParseException {
 
@@ -53,19 +51,19 @@ public class VisuPortTest {
         for (int index = 0; index < dadosSoftware.size(); index++) {
             linha = dadosSoftware.get(index);
 
-            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("undAdm") || linha.equals("designado") || linha.equals("recebedora")){
+            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("undAdm") || linha.equals("designado") || linha.equals("recebedora")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
             }
 
-            switch (tabelaAtual){
-                case "pessoa" :
+            switch (tabelaAtual) {
+                case "pessoa":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     trataDadosPessoa(dados);
                     break;
-                case "undAdm" :
+                case "undAdm":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     trataDadosUndAdm(dados);
@@ -104,22 +102,31 @@ public class VisuPortTest {
      * Cada cenÃ¡rio e cada exceÃ§Ã£o deve necessÃ¡riamente ser testado no minimo uma vez, cada entrada e/ou combinaÃ§Ã£o
      * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
      */
-
     @Test
-    public void casoTestDadosValidos() throws IOException {
+    public void casoTestDadosValidos() throws IOException, Exception {
         PortariaDAO portariaDAO = new PortariaDAO();
         List<Portaria> lista = portariaDAO.buscarTodos();
 
         Portaria portaria = lista.get(0);
 
-        System.out.println("ID: " + portaria.getId());
-
         //Grupo de teste DadosValidos, exemplo
         String retorno = controladorVisuPorta.conversorPortariaJson(portaria.getId());
 
-        System.out.println(retorno);
-
         Assert.assertNotNull(portaria);
+        
+        System.out.println(retorno);
+    }
+    
+       @Test (expected = Exception.class)
+        public void casoTestDadosExcecoes() throws IOException, Exception {
+        PortariaDAO portariaDAO = new PortariaDAO();
+        List<Portaria> lista = portariaDAO.buscarTodos();
+
+        Portaria portaria = lista.get(0);
+
+        //Grupo de teste DadosValidos, exemplo
+        String retorno = controladorVisuPorta.conversorPortariaJson((long) -1);
+       
     }
 
 //    @Test
@@ -129,13 +136,11 @@ public class VisuPortTest {
 //        ControladorVisuPorta.
 //        //O cenario acima testa a primeira exceÃ§Ã£o do caso de uso a unidade acadÃªmica nÃ£o Ã© localizada.
 //    }
-
     @AfterClass
     public static void casoTestResultados() throws IOException {
 
         //Aqui deve ser verificado os resultados da exceÃ§Ã£o do Grupo G1 e G2, normalmente aqui
         // irÃ¡ fica as suas pÃ³s-condiÃ§Ãµes. Exemplo:
-
         //Busca a data atual.
         Date hoje = new Date();
         SimpleDateFormat df;
@@ -144,24 +149,23 @@ public class VisuPortTest {
 
         //pega a data que foi armazenada no banco de dados e verifica com a data de execuÃ§Ã£o do teste, ou seja,
         // a data de hoje.
-
         //Assert.assertEquals(dataHoje, rodaSQLparaPegarADataGravadaNoBancoDeDados);
     }
 
-    private static void trataDadosPessoa(String dados[]){
+    private static void trataDadosPessoa(String dados[]) {
         // Instancia os objetos
         PessoaDAO pessoaDAO = new PessoaDAO();
         Pessoa pessoa = new Pessoa();
 
         // Preenche o objeto
-        pessoa.setId( Long.parseLong(dados[0]) );
+        pessoa.setId(Long.parseLong(dados[0]));
         pessoa.setNomePes(dados[1]);
         pessoa.setCpfPes(dados[2]);
         pessoa.setEmailPes(dados[3]);
         pessoa.setSenhaUsu(dados[4]);
-        if(dados[5].equals("true")){
+        if (dados[5].equals("true")) {
             pessoa.setEhUsuAtivo(true);
-        }else{
+        } else {
             pessoa.setEhUsuAtivo(false);
         }
 
@@ -171,21 +175,21 @@ public class VisuPortTest {
         pessoaDAO.commitarTransacao();
     }
 
-    private static void trataDadosUndAdm(String dados[]){
+    private static void trataDadosUndAdm(String dados[]) {
         // Instancia os objetos
         UndAdmDAO undAdmDAO = new UndAdmDAO();
         UndAdm undAdm = new UndAdm();
 
         // Preenche o objeto
-        undAdm.setId( Long.parseLong(dados[0]) );
+        undAdm.setId(Long.parseLong(dados[0]));
         undAdm.setSiglaUnAdm(dados[1]);
-        undAdm.setMinInat( Integer.parseInt(dados[2]) );
+        undAdm.setMinInat(Integer.parseInt(dados[2]));
         undAdm.setNomeUnd(dados[3]);
         undAdm.setTipoUnd(1);
         undAdm.setUltPort(dados[5]);
-        undAdm.setAnoPort( Integer.parseInt(dados[6]) );
-        undAdm.setUltNumExped( Integer.parseInt(dados[7]) );
-        undAdm.setUltNumProp( Integer.parseInt(dados[8]) );
+        undAdm.setAnoPort(Integer.parseInt(dados[6]));
+        undAdm.setUltNumExped(Integer.parseInt(dados[7]));
+        undAdm.setUltNumProp(Integer.parseInt(dados[8]));
 
         // Salva o objeto no banco
         undAdmDAO.abrirTransacao();
@@ -199,15 +203,15 @@ public class VisuPortTest {
         Recebedora recebedora = new Recebedora();
 
         // Preenche o objeto
-        recebedora.setId( Long.parseLong(dados[0]) );
+        recebedora.setId(Long.parseLong(dados[0]));
 
-        if(!dados[1].isEmpty()){
+        if (!dados[1].isEmpty()) {
             Date dtCienciaReeb = formatter.parse(dados[1]);
             recebedora.setDtCienciaReeb(dtCienciaReeb);
         }
 
         UndAdmDAO undAdmDAO = new UndAdmDAO();
-        UndAdm undRecebedora = undAdmDAO.buscar( Long.parseLong(dados[2]) );
+        UndAdm undRecebedora = undAdmDAO.buscar(Long.parseLong(dados[2]));
         recebedora.setUnidadeRecebedora(undRecebedora);
 
         // Salva o objeto no banco
@@ -216,31 +220,31 @@ public class VisuPortTest {
         recebedoraDAO.commitarTransacao();
     }
 
-    private static void trataDadosDesignado(String dados[]) throws ParseException{
+    private static void trataDadosDesignado(String dados[]) throws ParseException {
         // Instancia os objetos
         DesignadoDAO designadoDAO = new DesignadoDAO();
         Designado designado = new Designado();
 
         // Preenche o objeto
-        designado.setId( Long.parseLong(dados[0]) );
+        designado.setId(Long.parseLong(dados[0]));
 
-        if(!dados[1].isEmpty()){
+        if (!dados[1].isEmpty()) {
             Date dtCienciaDesig = formatter.parse(dados[1]);
             designado.setDtCienciaDesig(dtCienciaDesig);
         }
 
         designado.setDescrFuncDesig(dados[2]);
 
-        if(!dados[3].isEmpty()){
-            designado.setHorasDefFuncDesig( Integer.parseInt(dados[3]) );
+        if (!dados[3].isEmpty()) {
+            designado.setHorasDefFuncDesig(Integer.parseInt(dados[3]));
         }
 
-        if(!dados[4].isEmpty()){
-            designado.setHorasExecFuncDesig( Integer.parseInt(dados[4]) );
+        if (!dados[4].isEmpty()) {
+            designado.setHorasExecFuncDesig(Integer.parseInt(dados[4]));
         }
 
         PessoaDAO pessoaDAO = new PessoaDAO();
-        Pessoa pessoa = pessoaDAO.buscar( Long.parseLong(dados[5]) );
+        Pessoa pessoa = pessoaDAO.buscar(Long.parseLong(dados[5]));
         designado.setPessoa(pessoa);
 
         designado.setFuncaoDesig(FuncaoDesig.valueOf(dados[6]));
@@ -257,12 +261,12 @@ public class VisuPortTest {
         Portaria portaria = new Portaria();
 
         // Preenche o objeto
-        portaria.setId( Long.parseLong(dados[0]) );
-        portaria.setAnoId( Integer.parseInt(dados[1]) );
-        portaria.setSeqId( Integer.parseInt(dados[2]) );
+        portaria.setId(Long.parseLong(dados[0]));
+        portaria.setAnoId(Integer.parseInt(dados[1]));
+        portaria.setSeqId(Integer.parseInt(dados[2]));
         portaria.setAssunto(dados[3]);
 
-        if(!dados[4].isEmpty()){
+        if (!dados[4].isEmpty()) {
             Date dtExped = formatter.parse(dados[4]);
             portaria.setDtExped(dtExped);
         }
@@ -270,18 +274,18 @@ public class VisuPortTest {
         Date dtIniVig = formatter.parse(dados[5]);
         portaria.setDtIniVig(dtIniVig);
 
-        if(!dados[6].isEmpty()){
+        if (!dados[6].isEmpty()) {
             Date dtFimVig = formatter.parse(dados[6]);
             portaria.setDtFimVig(dtFimVig);
         }
 
-        if(!dados[7].isEmpty()){
+        if (!dados[7].isEmpty()) {
             Date dtPublicDou = formatter.parse(dados[7]);
             portaria.setDtPublicDou(dtPublicDou);
         }
 
-        if(!dados[8].isEmpty()){
-            portaria.setHorasDesig( Integer.parseInt(dados[8]) );
+        if (!dados[8].isEmpty()) {
+            portaria.setHorasDesig(Integer.parseInt(dados[8]));
         }
 
         portaria.setResumo(dados[9]);
@@ -289,12 +293,12 @@ public class VisuPortTest {
         portaria.setTextoCompleto(dados[10]);
 
         // Verifica se existe arquivo pdf
-        if(!dados[11].isEmpty()){
+        if (!dados[11].isEmpty()) {
             // Pega o path do projeto
             String dir = System.getProperty("user.dir");
             // Cria o arquivo
-            File arquivo = new File(dir+"/src/test/resources/"+dados[11]);
-            if(arquivo.exists()){
+            File arquivo = new File(dir + "/src/test/resources/" + dados[11]);
+            if (arquivo.exists()) {
                 // Caso o arquivo exista, tenta gravar os bytes
                 try {
                     byte[] fileContent = Files.readAllBytes(arquivo.toPath());
@@ -310,40 +314,40 @@ public class VisuPortTest {
 
         portaria.setStatus(PortariaStatus.valueOf(dados[13]));
 
-        if(!dados[14].isEmpty()){
+        if (!dados[14].isEmpty()) {
             PessoaDAO pessoaDAO = new PessoaDAO();
-            Pessoa expeditor = pessoaDAO.buscar( Long.parseLong(dados[14]) );
+            Pessoa expeditor = pessoaDAO.buscar(Long.parseLong(dados[14]));
             portaria.setExpedidor(expeditor);
         }
 
-        if(!dados[15].isEmpty()){
+        if (!dados[15].isEmpty()) {
             UndAdmDAO undAdmDAO = new UndAdmDAO();
-            UndAdm undAdmExpedidora = undAdmDAO.buscar( Long.parseLong(dados[15]) );
+            UndAdm undAdmExpedidora = undAdmDAO.buscar(Long.parseLong(dados[15]));
             portaria.setUnidadeExpedidora(undAdmExpedidora);
         }
 
-        if(!dados[16].isEmpty()){
+        if (!dados[16].isEmpty()) {
             extrator.setTexto(dados[16]);
             String recebedorasId[] = extrator.getResultado("-");
             List<Recebedora> listaRecebedoras = new ArrayList<>();
             RecebedoraDAO recebedoraDAO = new RecebedoraDAO();
 
-            for(int i = 0; i < recebedorasId.length; i++){
-                Recebedora recebedora = recebedoraDAO.buscar( Long.parseLong(recebedorasId[i]) );
+            for (int i = 0; i < recebedorasId.length; i++) {
+                Recebedora recebedora = recebedoraDAO.buscar(Long.parseLong(recebedorasId[i]));
                 listaRecebedoras.add(recebedora);
             }
 
             portaria.setUndRecebedora(listaRecebedoras);
         }
 
-        if(!dados[17].isEmpty()){
+        if (!dados[17].isEmpty()) {
             extrator.setTexto(dados[17]);
             String designadosId[] = extrator.getResultado("-");
             List<Designado> listaDesignados = new ArrayList<>();
             DesignadoDAO designadoDAO = new DesignadoDAO();
 
-            for(int i = 0; i < designadosId.length; i++){
-                Designado designado = designadoDAO.buscar( Long.parseLong(designadosId[i]) );
+            for (int i = 0; i < designadosId.length; i++) {
+                Designado designado = designadoDAO.buscar(Long.parseLong(designadosId[i]));
                 listaDesignados.add(designado);
             }
 
@@ -355,6 +359,5 @@ public class VisuPortTest {
         portariaDAO.salvar(portaria);
         portariaDAO.commitarTransacao();
     }
-
 
 }
