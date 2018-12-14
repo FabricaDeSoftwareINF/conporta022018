@@ -465,7 +465,7 @@ public class ControladorExpedPortaTest {
             e.printStackTrace();
         }
 
-        portaria.setDesignados(new ArrayList<>());
+        portaria.setDesignados(new ArrayList<Designado>());
         if(!designados.isEmpty()) {
             for (int i = 0; i < designados.size(); i++) {
                 if (designadoList.get(i)[1].equals(portaria.getId())) {
@@ -476,7 +476,7 @@ public class ControladorExpedPortaTest {
             }*/
             }
         }
-        portaria.setReferencias(new ArrayList<>());
+        portaria.setReferencias(new ArrayList<Referencia>());
         if(!referencias.isEmpty()) {
             for (int i = 0; i < referencias.size(); i++) {
                 if (referenciasList.get(i)[1].equals(portaria.getId())) {
