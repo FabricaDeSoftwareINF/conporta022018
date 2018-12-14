@@ -51,7 +51,7 @@ public class Portaria extends ModeloAbstrato {
     private String textoCompleto;
 
     @Column
-    @Lob
+    @Lob @Basic(fetch = FetchType.EAGER)
     private byte[] arqPdf;
 
     @Column

@@ -45,25 +45,9 @@ public class ControladorEdiPorta {
         return this.portariaDAO.pesquisarJPQLCustomizada(query, params);
     }
 
-    public boolean salvar(String assunto, Date dtIniVig, Date dtFimVig, Date dPublicDou, int horasDesig, String resumo, File arqPdf, List<Designado> designados, List<Referencia> referencias, List<Recebedora> recebedoras) throws IOException {
-        if(!this.validarCampos(assunto, dtIniVig, resumo)){
+    public boolean salvar(Portaria portaria) {
+        if(!this.validarCampos(portaria.getAssunto(), portaria.getResumo())){
             return false;
-        }
-
-        Portaria portaria = new Portaria();
-        portaria.setAssunto(assunto);
-        portaria.setDtIniVig(dtIniVig);
-        portaria.setDtFimVig(dtFimVig);
-        portaria.setDtPublicDou(dPublicDou);
-        portaria.setHorasDesig(horasDesig);
-        portaria.setResumo(resumo);
-        portaria.setDesignados(designados);
-        portaria.setReferencias(referencias);
-        portaria.setUndRecebedora(recebedoras);
-
-        if(arqPdf.exists()) {
-            byte[] fileContent = Files.readAllBytes(arqPdf.toPath());
-            portaria.setArqPdf(fileContent);
         }
 
         portariaDAO.salvar(portaria);
@@ -71,22 +55,17 @@ public class ControladorEdiPorta {
         return true;
     }
 
-    public boolean validarCampos(String assunto, Date dtIniVig, String resumo){
-        if(assunto.isEmpty())
+    private boolean validarCampos(String assunto, String resumo){
+        if(assunto.isEmpty() || resumo.isEmpty()){
             return false;
-        if(resumo.isEmpty())
-            return false;
-
-        Date today = new Date();
-        if(today.after(dtIniVig))
-            return false;
+        }
 
         return true;
     }
 
     public List<UndAdm> buscarUndAdm() {
         List<UndAdm> lista = undAdmDAO.buscarTodos();
-        
+
         return lista;
     }
 }
