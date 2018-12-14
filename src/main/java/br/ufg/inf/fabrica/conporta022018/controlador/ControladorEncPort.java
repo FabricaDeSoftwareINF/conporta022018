@@ -9,6 +9,7 @@ import br.ufg.inf.fabrica.conporta022018.modelo.*;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorEncPort {
@@ -63,7 +64,8 @@ public class ControladorEncPort {
      * @return
      */
      public List <String> getEmailDesignados ( List <Designado> designados){
-         List <String> listaEmail = null;
+         List <String> listaEmail = new ArrayList<>();
+
          for (Designado designado: designados) {
              String email = designado.getDesignado().getEmailPes();
              if (email != null) {

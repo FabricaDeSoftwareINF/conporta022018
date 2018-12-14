@@ -329,7 +329,6 @@ public class ControladorEncPortTest {
         boolean op3 = controladorEncPort.portariaIsValida(idPortariaOp3);
         Assert.assertEquals(true, op3);
 
-
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -340,6 +339,7 @@ public class ControladorEncPortTest {
         Long idPortariaOp1 = null;
         Long idPortariaOp2 = null;
         Long idPortariaOp3 = null;
+        Long idPortariaOp4 = null;
 
         for (Portaria portaria: portarias) {
             String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
@@ -355,6 +355,10 @@ public class ControladorEncPortTest {
             if (idLogicoDaPortaria.equals("INF201814")) {
                 idPortariaOp3 = portaria.getId();
             }
+
+            if (idLogicoDaPortaria.equals("INF2018144")) {
+                idPortariaOp4 = portaria.getId();
+            }
         }
 
         boolean op1 = controladorEncPort.portariaIsValida(idPortariaOp1);
@@ -363,10 +367,32 @@ public class ControladorEncPortTest {
 
         boolean op3 = controladorEncPort.portariaIsValida(idPortariaOp3);
 
+        boolean op4 = controladorEncPort.encPortariaCiencia(portarias.get(0));
+    }
+
+    @AfterClass
+    public  static void casoTestResultados() throws IOException{
+        PortariaDAO portariaDAO = new PortariaDAO();
+
+        // Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
+        // irá fica as suas pós-condições.
+
+
+        Long idPortariaEncCienciaOp1 = null;
+
+        for (Portaria portaria: portarias) {
+            String idLogicoPortaria = getIdLogicoDaProtaria(portaria);
+
+            if (idLogicoPortaria.equals("INF201815")){
+                idPortariaEncCienciaOp1 = portaria.getId();
+            }
+        }
+
+        Assert.assertEquals(PortariaStatus.ATIVA, portariaDAO.buscar(idPortariaEncCienciaOp1).getStatus());
     }
 
     /**
-     * Método auxiliar utilizado para obter o id lógico a partir de uma instaância de Portaria.
+     * Método auxiliar utilizado para obter o id lógico a partir de uma instância de Portaria.
      * @param portaria
      * @return
      */
