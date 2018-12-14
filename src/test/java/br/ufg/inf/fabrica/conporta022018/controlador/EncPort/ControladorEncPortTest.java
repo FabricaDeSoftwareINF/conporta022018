@@ -9,6 +9,9 @@ package br.ufg.inf.fabrica.conporta022018.controlador.EncPort;
 import br.ufg.inf.fabrica.conporta022018.controlador.ControladorEncPort;
 import br.ufg.inf.fabrica.conporta022018.modelo.*;
 import br.ufg.inf.fabrica.conporta022018.persistencia.*;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
+import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
+import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
@@ -55,11 +58,13 @@ public class ControladorEncPortTest {
         RecebedoraDAO recebedoraDAO = new RecebedoraDAO();
         GestaoDAO gestaoDAO = new GestaoDAO();
         MensagemDAO mensagemDAO = new MensagemDAO();
+        UndAdmDAO undAdmDAO = new UndAdmDAO();
 
         // Objetos que são usados por externos
 
         Pessoa pessoa = null;
         UndAdm undAdm = null;
+        UndAdm unidadeExp = null;
 
         dadosSoftware = lerArquivo.lerArquivo(CAMINHO_CSV);
 
@@ -78,7 +83,7 @@ public class ControladorEncPortTest {
             }
 
 
-            if (linha.equals("")) {
+            if (linha.equals("undAdm")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
@@ -101,8 +106,14 @@ public class ControladorEncPortTest {
                 index++;
                 continue;
             }
-            System.out.println(linha);
-            switch (tabelaAtual) {
+
+            if (linha.equals("recebedora")) {
+                tabelaAtual = linha;
+                index++;
+                continue;
+            }
+
+             switch (tabelaAtual) {
                 case "pessoa":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
@@ -121,7 +132,7 @@ public class ControladorEncPortTest {
                     pessoaDAO.abrirTransacao();
 
                     try {
-                        pessoaDAO.salvar(pessoa);
+                        pessoa = pessoaDAO.salvar(pessoa);
                         pessoaDAO.commitarTransacao();
                     } catch (Exception ex) {
                         pessoaDAO.rollBackTransacao();
@@ -141,7 +152,7 @@ public class ControladorEncPortTest {
                     portaria.setUndRecebedora(recebedoras); //Essencial para o caso de uso ter as UndRecebedora da portaria
                     portaria.setExpedidor(pessoa);
                     portaria.setDesignados(designados); //Essencial para o caso de uso ter os designados da portaria
-                    portaria.setUnidadeExpedidora(undAdm);
+                    portaria.setUnidadeExpedidora(unidadeExp);
                     System.out.println("antes de abrir");
                     portariaDAO.abrirTransacao();
                     System.out.println("teste");
@@ -174,17 +185,48 @@ public class ControladorEncPortTest {
 
                     break;
 
+                case "undAdm":
+                    extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+
+                    undAdm = new UndAdm();
+                    undAdm.setNomeUnd(dados[0]);
+                    undAdm.setSiglaUnAdm(dados[1]);
+                    undAdm.setTipoUnd(Integer.parseInt(dados[2]));
+                    undAdm.setMinInat(Integer.parseInt(dados[3]));
+                    undAdm.setUltPort(dados[4]);
+                    undAdm.setAnoPort(Integer.parseInt(dados[5]));
+                    undAdm.setUltNumExped(Integer.parseInt(dados[6]));
+                    undAdm.setUltNumProp(Integer.parseInt(dados[7]));
+
+                    undAdmDAO.abrirTransacao();
+
+                    try {
+                        unidadeExp = undAdmDAO.salvar(undAdm);
+                        undAdmDAO.commitarTransacao();
+                    } catch (Exception ex) {
+                        undAdmDAO.rollBackTransacao();
+                    }
+
+                    break;
+
                 case "recebedora":
                     extrator.setTexto(linha);
+                    dados = extrator.getResultado(REGRA);
+
+                    String dataStringReeb = dados[0];
+                    SimpleDateFormat formataDataReeb = new SimpleDateFormat(dataStringReeb);
+                    Date dateFormat = formataDataReeb.parse(dataStringReeb);
 
                     Recebedora recebedora = new Recebedora();
+                    recebedora.setDtCienciaReeb(dateFormat);
                     recebedora.setUnidadeRecebedora(undAdm); //Essencial para o caso de uso ter as UndRecebedora da portaria
-
                     recebedoraDAO.abrirTransacao();
 
                     try {
-                        Recebedora recebedoraDoBanco = recebedoraDAO.salvar(recebedora);
-                        recebedoras.add(recebedoraDoBanco);
+
+                        recebedora = recebedoraDAO.salvar(recebedora);
+                        recebedoras.add(recebedora);
                         recebedoraDAO.commitarTransacao();
                     } catch (Exception ex) {
                         recebedoraDAO.rollBackTransacao();
@@ -197,8 +239,8 @@ public class ControladorEncPortTest {
                     dados = extrator.getResultado(REGRA);
 
                     String dataString = dados[0];
-                    SimpleDateFormat formataData=new SimpleDateFormat(dataString);
-                    Date date1=formataData.parse(dataString);
+                    SimpleDateFormat formataData= new SimpleDateFormat(dataString);
+                    Date date1 = formataData.parse(dataString);
 
                     Gestao gestao = new Gestao();
                     gestao.setdtFim(date1);
@@ -258,31 +300,78 @@ public class ControladorEncPortTest {
 
         // Grupo de teste DadosValidos
 
-        // O cenário abaixo verifica se uma portaria é válida passando uma portaria com status "Ativa"
+        Long idPortariaOp1 = null;
+        Long idPortariaOp2 = null;
+        Long idPortariaOp3 = null;
 
-        System.out.println(portarias.size());
+        for (Portaria portaria: portarias) {
+            String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
 
-//        boolean op1 = controladorEncPort.portariaIsValida(portarias.get(0));
- //       Assert.assertEquals(true, op1);
+            if (idLogicoDaPortaria.equals("INF201810")) {
+                idPortariaOp1 = portaria.getId();
+            }
 
-        // O cenário abaixo verifica se uma portaria é válida passando uma portaria com status "Cancelada"
-        boolean op2 = controladorEncPort.portariaIsValida(portarias.get(1));
+            if (idLogicoDaPortaria.equals("INF201815")) {
+                idPortariaOp2 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF20184")) {
+                idPortariaOp3 = portaria.getId();
+            }
+        }
+
+        boolean op1 = controladorEncPort.portariaIsValida(idPortariaOp1);
+        Assert.assertEquals(true, op1);
+
+        boolean op2 = controladorEncPort.portariaIsValida(idPortariaOp2);
         Assert.assertEquals(true, op2);
+
+        boolean op3 = controladorEncPort.portariaIsValida(idPortariaOp3);
+        Assert.assertEquals(true, op3);
+
 
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void casoTestDadosExcecoes() throws Exception {
-        // Grupo de teste DadosExceções.
 
-        // O cenário abaixo verifica se uma portaria é válida passando uma portaria com status "Proposta"
-        boolean op1 = controladorEncPort.portariaIsValida(portarias.get(2));
-        Assert.assertEquals(false, op1);
+        // Grupo de teste DadosExceceos
 
-        // O cenário abaixo verifica se uma portaria é válida passando uma portaria com status vazio
-        boolean op2= controladorEncPort .portariaIsValida(portarias.get(3));
-        Assert.assertEquals(false, op2);
+        Long idPortariaOp1 = null;
+        Long idPortariaOp2 = null;
+        Long idPortariaOp3 = null;
 
+        for (Portaria portaria: portarias) {
+            String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
+
+            if (idLogicoDaPortaria.equals("INF201812")) {
+                idPortariaOp1 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF201813")) {
+                idPortariaOp2 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF201814")) {
+                idPortariaOp3 = portaria.getId();
+            }
+        }
+
+        boolean op1 = controladorEncPort.portariaIsValida(idPortariaOp1);
+
+        boolean op2 = controladorEncPort.portariaIsValida(idPortariaOp2);
+
+        boolean op3 = controladorEncPort.portariaIsValida(idPortariaOp3);
+
+    }
+
+    /**
+     * Método auxiliar utilizado para obter o id lógico a partir de uma instaância de Portaria.
+     * @param portaria
+     * @return
+     */
+    private static String getIdLogicoDaProtaria(Portaria portaria) {
+        return portaria.getSiglaUndId() + portaria.getAnoId() + portaria.getSeqId();
     }
 
 }
