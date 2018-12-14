@@ -23,12 +23,13 @@ public class Main {
 
         Curso curso = new Curso();
 
-
         ControladorDisc controladorDisc = new ControladorDisc();
 
-//        controladorDisc.criarDiscente("222.789.333-89", 222, data, curso);
-//        controladorDisc.criarDiscente("222.789.333-89", 333, data, curso);
+        controladorDisc.criarDiscente("222.789.333-89", 35,  data, curso);
         controladorDisc.excluirDiscente("222.789.333-89", data);
+        controladorDisc.alterarDiscente("764.098.612-09", data, data);
+        controladorDisc.buscarDiscente("222.789.333-89");
+        controladorDisc.buscarDiscente("764.098.612-09");
 
     }
 }

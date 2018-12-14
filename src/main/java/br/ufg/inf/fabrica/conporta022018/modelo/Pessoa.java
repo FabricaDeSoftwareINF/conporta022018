@@ -15,15 +15,18 @@ public class Pessoa extends ModeloAbstrato {
     private String emailPes;
     private String senhaUsu;
     private Boolean ehUsuAtivo;
+
     @ManyToMany(cascade= {CascadeType.ALL})
     @JoinColumn(name ="gestao_id")
-    private List<Gestao> gestao = new ArrayList<>();
+    private List<Gestao> gestao;
+
     @ManyToMany(cascade= {CascadeType.ALL})
     @JoinColumn(name ="servidor_id")
-    private List<Lotacao> servidor = new ArrayList<>();
+    private List<Lotacao> servidor;
+
     @ManyToMany(cascade= {CascadeType.ALL})
     @JoinColumn(name ="discente_id")
-    private List<Matricula> discente = new ArrayList<>();
+    private List<Matricula> discente;
 
     public Pessoa(){
         this.gestao = new ArrayList<>();

@@ -5,11 +5,13 @@
  */
 
 package br.ufg.inf.fabrica.conporta022018.controlador;
+import com.google.gson.Gson;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Curso;
 import br.ufg.inf.fabrica.conporta022018.modelo.Matricula;
 import br.ufg.inf.fabrica.conporta022018.modelo.Pessoa;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -22,7 +24,7 @@ public class ControladorDisc {
     private Date defaultDate = new Date(01/01/2100);
 
 
-    public Boolean criarDiscente(String cpfPessoa, int matrDiscCur, Date cdIniMatrCur, Curso curso) {
+    public void criarDiscente(String cpfPessoa, int matrDiscCur, Date cdIniMatrCur, Curso curso) {
 
         Matricula discente = new Matricula();
         discente.setMatrDiscCur(matrDiscCur);
@@ -43,10 +45,9 @@ public class ControladorDisc {
 
         System.out.println(discente.getMatrDiscCur());
 
-        return true;
     }
 
-    public Boolean excluirDiscente(String cpfPessoa, Date dtFinalMatrCur) {
+    public void excluirDiscente(String cpfPessoa, Date dtFinalMatrCur) {
 
         PessoaDAO pessoaDAO = new PessoaDAO();
         map.put("CPF", cpfPessoa);
@@ -59,9 +60,10 @@ public class ControladorDisc {
         Matricula matricula = discente.get(discente.size() - 1);
         matricula.setDtFimMatrCur(dtFinalMatrCur);
 
+        pessoaDAO.abrirTransacao();
         pessoaDAO.salvar(pessoa);
+        pessoaDAO.commitarTransacao();
 
-        return true;
     };
 
     public Boolean importarDiscente() {
@@ -69,12 +71,48 @@ public class ControladorDisc {
 
     };
 
-    public void alterarDiscente() {
+    public void alterarDiscente(String cpfPessoa, Date dtFinalMatrCur, Date cdIniMatrCur) {
+
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        map.put("CPF", cpfPessoa);
+
+        Pessoa pessoa = pessoaDAO.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_USUARIO_POR_CPF,map);
+
+        List<Matricula> discente = new ArrayList<>();
+
+        discente = pessoa.getDiscente();
+
+        Matricula matricula = discente.get(discente.size() - 1);
+
+        matricula.setDtFimMatrCur(dtFinalMatrCur);
+        matricula.setDtFimMatrCur(dtFinalMatrCur);
+
+        pessoaDAO.abrirTransacao();
+        pessoaDAO.salvar(pessoa);
+        pessoaDAO.commitarTransacao();
+
+
 
     };
 
-    public void buscarDiscente() {
-        
+    public void buscarDiscente(String cpfPessoa) {
+
+        map.put("CPF", cpfPessoa);
+
+        PessoaDAO pessoaDAO = new PessoaDAO();
+
+        Pessoa pessoa = pessoaDAO.pesquisarUmJPQLCustomizada(JPQL_BUSCAR_USUARIO_POR_CPF,map);
+
+        Gson gson = new Gson();
+
+        List<Matricula> discente = new ArrayList<>();
+        discente = pessoa.getDiscente();
+
+        String matriculas = gson.toJson(discente);
+
+        System.out.println(matriculas);
+
+
     };
 
 }
