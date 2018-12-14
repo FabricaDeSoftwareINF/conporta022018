@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.fail;
+
 
 public class EdiPortaTest {
     ControladorEdiPorta controladorEdiPorta = new ControladorEdiPorta();
@@ -80,20 +82,84 @@ public class EdiPortaTest {
     }
 
     @Test
-    public void ediPortaParametrosValidosTest() {
+    public void casoTestBuscarPessoas()throws ParseException {
+        List<Pessoa> lista = controladorEdiPorta.buscarPessoas();
+        Assert.assertEquals(7, lista.size());
+        Assert.assertEquals("José Carlos Santos", lista.get(0).getNomePes());
+        Assert.assertEquals("Maria José", lista.get(1).getNomePes());
+        Assert.assertEquals("João Tavares", lista.get(2).getNomePes());
+        Assert.assertEquals("Matheus Costa", lista.get(3).getNomePes());
+        Assert.assertEquals("Beatriz Silva", lista.get(4).getNomePes());
+        Assert.assertEquals("Lucas Teixeira", lista.get(5).getNomePes());
+        Assert.assertEquals("Vitor Almeida", lista.get(6).getNomePes());
     }
 
     @Test
-    public void buscarPortariaDesejadaTest() {
+    public void casoTestBuscarUndAdm()throws ParseException {
+        List<UndAdm> lista = controladorEdiPorta.buscarUndAdm();
+        Assert.assertEquals(3, lista.size());
+        Assert.assertEquals("Instituto de Informática", lista.get(0).getNomeUnd());
+        Assert.assertEquals("Instituto de Matemática", lista.get(1).getNomeUnd());
+        Assert.assertEquals("Faculdade de Educação Física", lista.get(2).getNomeUnd());
+    }
+
+    @Test
+    public void casoTestBuscarPortarias()throws ParseException {
+        List<Portaria> lista = controladorEdiPorta.buscarPortarias();
+        Assert.assertEquals(3, lista.size());
+        Assert.assertEquals("Novo coordenador e vice-coordenador de curso", lista.get(0).getAssunto());
+        Assert.assertEquals("Novo presidente do NDE", lista.get(1).getAssunto());
+        Assert.assertEquals("Criação da Liga INF, IME e FEF", lista.get(2).getAssunto());
+    }
+
+    @Test
+    public void buscarPortariaDesejadaTest() throws ParseException {
         // Busca todas as portarias
         PortariaDAO portariaDAO = new PortariaDAO();
         List<Portaria> listaPortarias = portariaDAO.buscarTodos();
 
-        // Pega a primeira
-        Portaria p = listaPortarias.get(0);
+        // Pega a terceira, pois ela está como Proposta
+        Portaria p = listaPortarias.get(2);
         Long idPortaria = p.getId();
         Portaria portaria = controladorEdiPorta.editarPortaria(idPortaria);
         Assert.assertEquals(idPortaria, portaria.getId());
+        Assert.assertEquals(2018, portaria.getAnoId());
+        Assert.assertEquals(2018001, portaria.getSeqId());
+        Assert.assertEquals("Nomeação do novo diretor de esportes da FEF", portaria.getAssunto());
+        Assert.assertEquals("Resumo da nomeação do diretor", portaria.getResumo());
+        Assert.assertEquals("FEF", portaria.getSiglaUndId());
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
+        Assert.assertEquals(formatter.parse("01/02/2019"), portaria.getDtIniVig());
+        Assert.assertEquals(formatter.parse("01/02/2022"), portaria.getDtFimVig());
+    }
+
+    @Test
+    public void buscarPortariaStatusInvalidoTest() throws ParseException {
+        // Busca todas as portarias
+        PortariaDAO portariaDAO = new PortariaDAO();
+        List<Portaria> listaPortarias = portariaDAO.buscarTodos();
+
+        // Pega a primeira, com status Ativa
+        Portaria p = listaPortarias.get(0);
+        Long idPortaria = p.getId();
+
+        try {
+            Portaria portaria = controladorEdiPorta.editarPortaria(idPortaria);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            Assert.assertEquals(exception.getMessage(), "A portaria deve estar com o status Proposta");
+        }
+    }
+
+    @Test
+    public void buscarPortariaInexistenteTest() throws ParseException {
+        // Pega a decima (Não existe)
+        try {
+            Portaria portaria = controladorEdiPorta.editarPortaria((long) 10);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            Assert.assertEquals(exception.getMessage(), "Portaria não encontrada");
+        }
     }
 
     @Test

@@ -28,16 +28,36 @@ public class ControladorEdiPorta {
     }
 
     public Portaria editarPortaria(Long idPortaria){
+        // Busca a portaria com esse id
         Portaria portaria = this.portariaDAO.buscar(idPortaria);
+
+        // Verifica se encontrou a portaria
+        try{
+            Long id = portaria.getId();
+        }catch (Exception e){
+            throw new IllegalArgumentException("Portaria não encontrada");
+        }
+
+        // Verifica se é uma portaria Proposta
+        if(!PortariaStatus.Proposta.equals(portaria.getStatus())){
+            throw new IllegalArgumentException("A portaria deve estar com o status Proposta");
+        }
+
         return portaria;
     }
 
     public List<Pessoa> buscarPessoas(){
-        List<Pessoa> pessoas = this.pessoaDAO.buscarTodos();
-        return pessoas;
+        // Busca apenas as pessoas ativas
+        String query = "SELECT p FROM Pessoa p WHERE p.ehUsuAtivo = :ativo";
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("ativo", true);
+
+
+        return this.pessoaDAO.pesquisarJPQLCustomizada(query, params);
     }
 
-    public List<Portaria> buscarPortarias() {
+    public List<Portaria> buscarPortarias(){
+        // Busca apenas as portaria ativas
         String query = "SELECT p FROM Portaria p WHERE p.status = :status";
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("status", PortariaStatus.Ativa);
@@ -56,16 +76,10 @@ public class ControladorEdiPorta {
     }
 
     private boolean validarCampos(String assunto, String resumo){
-        if(assunto.isEmpty() || resumo.isEmpty()){
-            return false;
-        }
-
-        return true;
+        return !assunto.isEmpty() && !resumo.isEmpty();
     }
 
     public List<UndAdm> buscarUndAdm() {
-        List<UndAdm> lista = undAdmDAO.buscarTodos();
-
-        return lista;
+        return undAdmDAO.buscarTodos();
     }
 }

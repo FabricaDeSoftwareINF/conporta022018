@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="baab05f9-9623-4222-b5fb-614796f74371" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorManterUndAdm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediTemTim/ControladorEdiTemTim.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediTemTim/ControladorEdiTemTimTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/expedPorta/ControladorExpedPortaTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/expedPorta/ExpedPortaDadosTest.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/regCiencDesig/RegCienDesigDadosTest.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/persistencia/LotacaoDAOTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -27,10 +21,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+            <state relative-caret-position="169">
+              <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1178#1194#0" expanded="true" />
+                <element signature="e#2385#2386#0" expanded="true" />
+                <element signature="e#2447#2448#0" expanded="true" />
+                <element signature="e#2595#2596#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -39,8 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="92" column="43" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
+            <state relative-caret-position="109">
+              <caret line="161" selection-start-line="161" selection-end-line="161" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -51,8 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/RecebedoraDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
+            <state>
+              <caret column="37" selection-start-column="37" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -63,8 +61,8 @@
             <state showInfoPanel="true" rowLines="3" />
           </provider>
           <provider selected="true" editor-type-id="csv-text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="62" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="62" />
+            <state relative-caret-position="222">
+              <caret line="37" column="81" lean-forward="true" selection-start-line="37" selection-start-column="71" selection-end-line="37" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -100,13 +98,13 @@
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/ConnectionFactory.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$USER_HOME$/.m2/settings.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java" />
-        <option value="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Recebedora.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/Portaria.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/modelo/UndAdm.java" />
         <option value="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaDadosTest.csv" />
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/RecebedoraDAO.java" />
+        <option value="$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java" />
       </list>
     </option>
   </component>
@@ -244,7 +242,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544753533546" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544754926067" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/javax.persistence.jar!/META-INF" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
@@ -386,24 +384,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="EdiPortaTest_buscarPortariaDesejadaTest - 2018.12.06 at 20h 15m 23s.xml">
-      <configuration name="EdiPortaTest.buscarPortariaDesejadaTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="EdiPortaTest_buscarPortariaDesejadaTest - 2018.12.06 at 21h 06m 27s.xml">
-      <configuration name="EdiPortaTest.buscarPortariaDesejadaTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_conporta022018 - 2018.12.13 at 17h 31m 07s.xml">
-      <configuration name="All in conporta022018" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_conporta022018_(1) - 2018.12.13 at 17h 36m 44s.xml">
-      <configuration name="All in conporta022018 (1)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_conporta022018_(1) - 2018.12.13 at 17h 49m 55s.xml">
-      <configuration name="All in conporta022018 (1)" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_conporta022018_(1) - 2018.12.13 at 17h 52m 14s.xml">
-      <configuration name="All in conporta022018 (1)" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="All_in_conporta022018_(2) - 2018.12.13 at 17h 57m 31s.xml">
       <configuration name="All in conporta022018 (2)" configurationId="JUnit" />
     </history-entry>
@@ -415,6 +395,24 @@
     </history-entry>
     <history-entry file="All_in_conporta022018_(4) - 2018.12.13 at 18h 11m 08s.xml">
       <configuration name="All in conporta022018 (4)" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_conporta022018_(5) - 2018.12.13 at 18h 19m 50s.xml">
+      <configuration name="All in conporta022018 (5)" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="EdiPortaTest_buscarPortariaDesejadaTest - 2018.12.13 at 18h 24m 56s.xml">
+      <configuration name="EdiPortaTest.buscarPortariaDesejadaTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_conporta022018 - 2018.12.13 at 18h 26m 33s.xml">
+      <configuration name="All in conporta022018" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_conporta022018_(1) - 2018.12.13 at 18h 32m 43s.xml">
+      <configuration name="All in conporta022018 (1)" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_conporta022018_(2) - 2018.12.13 at 18h 33m 10s.xml">
+      <configuration name="All in conporta022018 (2)" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_conporta022018_(3) - 2018.12.13 at 18h 34m 28s.xml">
+      <configuration name="All in conporta022018 (3)" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -677,27 +675,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/RecebedoraDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/persistencia/LotacaoDAOTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
           <caret line="17" column="18" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="92" column="43" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -716,17 +697,38 @@
         <state showInfoPanel="true" rowLines="3" />
       </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="62" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="62" />
+        <state relative-caret-position="222">
+          <caret line="37" column="81" lean-forward="true" selection-start-line="37" selection-start-column="71" selection-end-line="37" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/persistencia/RecebedoraDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="37" selection-start-column="37" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/ediPorta/EdiPortaTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="161" selection-start-line="161" selection-end-line="161" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/fabrica/conporta022018/controlador/ControladorEdiPorta.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+        <state relative-caret-position="169">
+          <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1178#1194#0" expanded="true" />
+            <element signature="e#2385#2386#0" expanded="true" />
+            <element signature="e#2447#2448#0" expanded="true" />
+            <element signature="e#2595#2596#0" expanded="true" />
           </folding>
         </state>
       </provider>
