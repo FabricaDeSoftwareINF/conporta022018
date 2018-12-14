@@ -107,7 +107,7 @@ public class VisuInterf {
      * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
      */
     @Test
-    public void casoTestDadosValidos() throws IOException, Exception {
+    public void casoTestDadoValido() throws IOException, Exception {
         
         ControladorConAcess controladorConAcess = new ControladorConAcess();
         
@@ -117,9 +117,8 @@ public class VisuInterf {
 
         Pessoa pessoa = lista.get(0);
 
-        String retorno = controladorVisuInterf.exibidorURL(controladorConAcess.buscarPorCPF("241.687.124-51"));
-        
-        Assert.assertEquals(retorno, retorno);
+        controladorVisuInterf.exibidorURL(controladorConAcess.buscarPorCPF("241.687.124-51"));
+                
 
     }
     
