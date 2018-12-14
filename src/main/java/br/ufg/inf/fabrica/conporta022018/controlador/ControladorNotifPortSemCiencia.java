@@ -8,6 +8,7 @@ package br.ufg.inf.fabrica.conporta022018.controlador;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
+import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
 import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import sun.security.krb5.internal.crypto.Des;
@@ -51,17 +52,17 @@ public class ControladorNotifPortSemCiencia {
         Boolean flag = false;
 
         for (Portaria portaria : portarias){
-            for (Designado  designado: portaria.getDesignados()){
-                if (designado.getDtCienciaDesig() == null || designado.getDtCienciaDesig().equals("")){
-                    emails.add(designado.getDesignado().getEmailPes());
-                    flag = true;
+                for (Designado designado : portaria.getDesignados()) {
+                    if (designado.getDtCienciaDesig() == null || designado.getDtCienciaDesig().equals("")) {
+                        emails.add(designado.getDesignado().getEmailPes());
+                        flag = true;
+                    }
+                }
+                if (flag) {
+                    emails.add(portaria.getExpedidor().getEmailPes());
+                    flag = false;
                 }
             }
-            if (flag){
-                emails.add(portaria.getExpedidor().getEmailPes());
-                flag = false;
-            }
-        }
 
         return emails;
     }

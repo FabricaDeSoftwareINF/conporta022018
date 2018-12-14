@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ControladorNotifPortSemCienciaTest {
+public class ControladorNotifPortSemCienciaTest1 {
 
     private static ControladorNotifPortSemCiencia controladorNotifPortSemCiencia;
 
@@ -34,7 +34,7 @@ public class ControladorNotifPortSemCienciaTest {
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException, ParseException {
 
-        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest2.csv";
+        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest1.csv";
         String REGRA = ";";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
@@ -202,6 +202,7 @@ public class ControladorNotifPortSemCienciaTest {
      *  No contexto desse caso de uso, foi-se criado duas funções com o mesmo objetivo no controlador, sendo que uma
      *  recebe um parâmetro, sendo assim possível modificar a data que servirá como base da busca e evita que os
      *  resultados dos testes variem dependendo do momento que forem realizados.
+     *
      *
      *  Serão realizados 3 testes no total:
      *  1- Nenhum designado estpa com a ciência atrasada;

@@ -213,8 +213,11 @@ public class ControladorNotifPortSemCienciaTest2 {
 
         /**
          * Testa o cenário onde há um designados com ciência atrasada.
+         * No Banco de Dados existe uma portaria com 0 dias de idade, e uma expedida há 5 dias exatos
+         * É esperado que nenhum designado seja notificado
          */
-       // controladorNotifPortSemCiencia.verificarCiencia();
+
+        controladorNotifPortSemCiencia.verificarCiencia();
     }
 
 

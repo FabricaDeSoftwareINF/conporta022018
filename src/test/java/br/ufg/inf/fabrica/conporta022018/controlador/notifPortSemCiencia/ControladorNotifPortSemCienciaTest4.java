@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControladorNotifPortSemCienciaTest3 {
+public class ControladorNotifPortSemCienciaTest4 {
 
     private static ControladorNotifPortSemCiencia controladorNotifPortSemCiencia;
 
@@ -30,7 +30,7 @@ public class ControladorNotifPortSemCienciaTest3 {
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException, ParseException {
 
-        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest3.csv";
+        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/notifPortSemCiencia/NotifPortSemCienciaTest4.csv";
         String REGRA = ";";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
@@ -199,6 +199,7 @@ public class ControladorNotifPortSemCienciaTest3 {
      *  recebe um parâmetro, sendo assim possível modificar a data que servirá como base da busca e evita que os
      *  resultados dos testes variem dependendo do momento que forem realizados.
      *
+     *
      *  Serão realizados 3 testes no total:
      *  1- Nenhum designado estpa com a ciência atrasada;
      *  2- Apenas um designado está com a ciência atrasada;
@@ -209,12 +210,15 @@ public class ControladorNotifPortSemCienciaTest3 {
      */
 
     @Test
-    public void casoComVariasPendenciaDeCiencia() throws ParseException {
+    public void casoPortariasMuitoRecentes() throws ParseException {
 
         /**
-         * Testa o cenário onde há varios designados com ciência atrasada.
+         * Testa o cenário onde há designados sem ciência, mas ainda não se passaram 5 dias desde a expedição da portaria.
          */
+        
         controladorNotifPortSemCiencia.verificarCiencia();
+
+
     }
 
 }
