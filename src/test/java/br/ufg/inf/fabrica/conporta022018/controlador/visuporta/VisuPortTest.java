@@ -114,6 +114,11 @@ public class VisuPortTest {
 
         Assert.assertNotNull(portaria);
         
+        
+        String sb = "{\"anoId\":2018,\"dtExped\":\"Nov 12, 2018 12:00:00 AM\",\"dtIniVig\":\"Jan 1, 2019 12:00:00 AM\",\"dtFimVig\":\"Dec 31, 2021 12:00:00 AM\",\"dtPublicDou\":\"Dec 12, 2018 12:00:00 AM\",\"resumo\":\"Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho.\",\"textoCompleto\":\"Representa uma unidade que compÃµe a estrutura acadÃªmica e administrativa da universidade. Conforme o Art. 7Âº do Estatuto da UFG\",\"siglaUndId\":\"INF\",\"status\":\"Ativa\",\"undRecebedora\":[null],\"designados\":[null,null],\"expedidor\":{\"nomePes\":\"JosÃ© Carlos Santos\",\"cpfPes\":\"123.456.789-12\",\"emailPes\":\"jose@exemplo.com\",\"senhaUsu\":\"123456\",\"ehUsuAtivo\":true,\"id\":1},\"id\":26}";
+        
+        Assert.assertEquals(sb, retorno);
+        
         System.out.println(retorno);
     }
     
