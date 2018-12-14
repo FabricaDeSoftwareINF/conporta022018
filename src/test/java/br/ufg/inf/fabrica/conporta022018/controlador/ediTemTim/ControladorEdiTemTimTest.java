@@ -12,6 +12,7 @@ import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
+import javax.persistence.NoResultException;
 
 import java.io.IOException;
 import java.util.*;
@@ -206,17 +207,17 @@ public class ControladorEdiTemTimTest {
          */
         try {
             controladorEdiTemTim.editarTimeOut(60, "EFR");
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(30, "YRT");
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(45, "URF");
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
 
@@ -227,17 +228,17 @@ public class ControladorEdiTemTimTest {
          */
         try {
             controladorEdiTemTim.editarTimeOut(75, "EWQ");
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(-12, "TFR");
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
         try {
             controladorEdiTemTim.editarTimeOut(7, "ASD");
-        } catch (Exception e) {
+        } catch (NoResultException e) {
             Assert.assertEquals(UNIDADE_INVALIDA, e.getMessage());
         }
 
