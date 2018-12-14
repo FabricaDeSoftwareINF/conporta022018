@@ -10,6 +10,7 @@ import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 import java.nio.ByteBuffer;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Classe responsável por fazer as operações lógicas necessárias para realizar a expedição de portarias.
@@ -51,20 +52,19 @@ public class ControladorExpedPorta {
      */
     public int expedPorta(long idPorta, long idUsuario){
 
-        Portaria portaria, referenciada;
-        Pessoa expedidor, designado;
+        Portaria portaria = portaDAO.buscar(idPorta);
+        Portaria referenciada;
+        Pessoa expedidor = pessoaDAO.buscar(idUsuario);
+        Pessoa designado;
 
         ControladorCancPortRef controladorCancPortRef = new ControladorCancPortRef();
         ControladorEncPort controladorEncPortaria = new ControladorEncPort();
 
-        pessoaDAO.abrirTransacao();
-        portaDAO.abrirTransacao();
-
-        expedidor = pessoaDAO.buscar(idUsuario);
-        portaria = portaDAO.buscar(idPorta);
+//        pessoaDAO.abrirTransacao();
+//        portaDAO.abrirTransacao();
 
         // Portaria inexistente, a interface deve perguntar ao usuário se ele deseja criar uma portaria
-        if(portaria.equals(new Portaria())){
+        if(portaria == null || portaria.equals(new Portaria())){
             return 2;
         }
 
@@ -117,7 +117,11 @@ public class ControladorExpedPorta {
         portaria.setAssinatura(assinar(new Long[]{expedidor.getServidor().getId(), portaria.getId()}));
         portaria.setExpedidor(expedidor);
         controladorEncPortaria.encPortariaCiencia(portaria);
-        controladorCancPortRef.cancelarPortariaReferenciada(idPorta);
+        try{
+            controladorCancPortRef.cancelarPortariaReferenciada(idPorta);
+        } catch (UnsupportedOperationException e){
+            e.printStackTrace();
+        }
 
         portaDAO.salvar(portaria);
         undAdmDAO.salvar(expedidor.getServidor().getUndAdm());

@@ -27,7 +27,7 @@ public class JavaMail {
      * @param emailUsr
      * @param portaria
      */
-    public void enviarEmail(final List<String> emailUsr,Portaria portaria) {
+    public void enviarEmail(final List<String> emailUsr, final Portaria portaria) {
         new Thread(new Runnable() {
 
             @Override

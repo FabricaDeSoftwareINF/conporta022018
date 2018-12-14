@@ -6,6 +6,8 @@
 
 package br.ufg.inf.fabrica.conporta022018.controlador.PesqPorta;
 
+import static org.junit.Assert.assertTrue;
+
 import br.ufg.inf.fabrica.conporta022018.controlador.PortariaControlador;
 import br.ufg.inf.fabrica.conporta022018.dto.FiltroDTO;
 import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
@@ -213,15 +215,19 @@ public class ControladorPesqPortaTest {
 
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void casoTestDadosExcecoes() throws  ParseException {
 
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    try {
+      SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
-    FiltroDTO filtro = new FiltroDTO(null, null, null, formato.parse("02/01/2018"),
-        formato.parse("01/01/2018"));
+      FiltroDTO filtro = new FiltroDTO(null, null, null, formato.parse("02/01/2018"),
+          formato.parse("01/01/2018"));
 
-    controladorPesqPorta.pesquisa(filtro);
+      controladorPesqPorta.pesquisa(filtro);
+    } catch (IllegalArgumentException e) {
+      assertTrue(e.getMessage().equals("A data fim não deve ser menor que a de início"));
+    }
 
 
   }
