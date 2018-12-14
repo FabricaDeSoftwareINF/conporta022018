@@ -5,18 +5,13 @@ import br.ufg.inf.fabrica.conporta022018.persistencia.PessoaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Map;
 import java.util.HashMap;
 
-import java.util.Date;
 import java.util.List;
 
 public class ControladorEdiPorta {
 
-    private Portaria portaria;
     private PortariaDAO portariaDAO;
     private PessoaDAO pessoaDAO;
     private UndAdmDAO undAdmDAO;
