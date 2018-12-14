@@ -12,8 +12,8 @@ import static javafx.scene.input.KeyCode.T;
 
 public class ControladorManterUndAdm {
 
-    private final int TEMPO_MAXIMO = 60;
-    private final int TEMPO_MINIMO = 15;
+    private final Integer TEMPO_MAXIMO = 60;
+    private final Integer TEMPO_MINIMO = 15;
 
     public void editarTimeOut(int timeOut, String sigla) {
         //verificar se a unidade adm existe

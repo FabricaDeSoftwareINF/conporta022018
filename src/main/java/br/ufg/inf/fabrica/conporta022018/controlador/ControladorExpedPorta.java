@@ -45,7 +45,7 @@ public class ControladorExpedPorta {
      *     <li>Portaria inválida - Cancelada ou Ativa</li>
      *     <li>Portaria inválida - Período de vigência expirado</li>
      *     <li>Designado inválido - Inexistente</li>
-     *     <li>Portaria referenciada - Inexistentes, canceladas ou propostas (não é necessário(?))</li>
+     *     <li>Portaria referenciada - Inexistentes, canceladas ou propostas </li>
      *     <li>Expedidor inválido - Não pertence à unidade administrativa que propôs a portaria</li>
      * </ol>
      */
@@ -77,21 +77,25 @@ public class ControladorExpedPorta {
             // A data final do período de vigência já expirou
             return 4;
         }
-        if (expedidor.getServidor().getUndAdm().getSiglaUnAdm() == portaria.getUnidadeExpedidora().getSiglaUnAdm()) {
+        if (!expedidor.getServidor().getUndAdm().getSiglaUnAdm().
+                equals(portaria.getSiglaUndId())) {
             // O servidor não pertence à unidade administrativa que propôs a portaria
             return 7;
         }
+
         for(int i = 0; i < portaria.getReferencias().size(); i++){
             referenciada = portaDAO.buscar(portaria.getReferencias().get(i).getPortariaReferenciada().getId());
             if(referenciada.equals(new Portaria()) ||
                     referenciada == null ||
-                    portaria.getStatus().equals(PortariaStatus.CANCELADA)){
+                    !portaria.getStatus().equals(PortariaStatus.ATIVA)){
+                // Uma das portarias referenciadas não existe ou não está ativa
                 return 6;
             }
         }
         for(int i = 0; i < portaria.getDesignados().size(); i++){
             designado = pessoaDAO.buscar(portaria.getDesignados().get(i).getDesignado().getId());
             if(designado.equals(new Pessoa()) || designado == null){
+                // Um dos designados não existe
                 return 5;
             }
         }
@@ -99,10 +103,11 @@ public class ControladorExpedPorta {
         // Caso de sucesso
 
         // Atualização de dados
-        portaria.setSeqId(portaria.getUnidadeExpedidora().getUltNumExped());
+        portaria.setSeqId(expedidor.getServidor().getUndAdm().getUltNumExped());
+        portaria.setAnoId(expedidor.getServidor().getUndAdm().getAnoPort());
 
         // Incrementa o número de portarias expedidas pela unidade administrativa
-        portaria.getUnidadeExpedidora().setUltNumExped(portaria.getUnidadeExpedidora().getUltNumExped() + 1);
+        expedidor.getServidor().getUndAdm().setUltNumExped(expedidor.getServidor().getUndAdm().getUltNumExped() + 1);
         // Alterar o status da portaria para "ativa"
         portaria.setStatus(PortariaStatus.ATIVA);
         // Atribuir a data atual na data de expedição
@@ -110,11 +115,12 @@ public class ControladorExpedPorta {
 
         // Assinatura da expedição, persistência da portaria, encaminhamento para ciência e cancelamento de referenciadas
         portaria.setAssinatura(assinar(new Long[]{expedidor.getServidor().getId(), portaria.getId()}));
-        controladorEncPortaria.encPortariaCiencia(idPorta);
-        controladorCancPortRef.cancelarPortarias(idPorta);
+        portaria.setExpedidor(expedidor);
+        controladorEncPortaria.encPortariaCiencia(portaria);
+        controladorCancPortRef.cancelarPortariaReferenciada(idPorta);
 
         portaDAO.salvar(portaria);
-        undAdmDAO.salvar(portaria.getUnidadeExpedidora());
+        undAdmDAO.salvar(expedidor.getServidor().getUndAdm());
         portaDAO.commitarTransacao();
         undAdmDAO.commitarTransacao();
         return 1;

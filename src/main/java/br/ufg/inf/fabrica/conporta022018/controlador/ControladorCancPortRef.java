@@ -47,7 +47,7 @@ public class ControladorCancPortRef {
 
             while (iterator.hasNext()) {
                 referencia = iterator.next();
-                portariaReferenciada = referencia.getReferencia();
+                portariaReferenciada = referencia.getPortariaReferenciada();
                 portariaParaCancelamento = portariaDAO.buscar(portariaReferenciada.getId());
 
                 if (portariaParaCancelamento == null) {
