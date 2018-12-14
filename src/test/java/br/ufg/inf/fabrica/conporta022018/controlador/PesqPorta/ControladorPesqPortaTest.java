@@ -179,13 +179,8 @@ public class ControladorPesqPortaTest {
     controladorPesqPorta = new PortariaControlador();
   }
 
-  /*
-   * Criar os cenários de testes para a aplicação:
-   * Os cenarios de testes devem obrigatóriamente ser divididos em dois grupos.
-   * DadosValidos : Grupo destinado ao cenatio típico e aos cenarios alternativos do caso de uso.
-   * DadosExcecoes : Grupo destinado as exceções do cenario típico e dos cenarios alternativos.
-   * Cada cenário e cada exceção deve necessáriamente ser testado no minimo uma vez, cada entrada e/ou combinação
-   * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
+  /**
+   * Casos de teste válido para filtro de ano
    */
   @Test
   public void casoTestDadosValidos() throws IOException {
@@ -197,26 +192,71 @@ public class ControladorPesqPortaTest {
     //Teste para consuta por ano
     Assert.assertNotEquals(portarias.size(), 0);
 
+  }
 
+  /**
+   * Casos de teste válido para filtro de CPF
+   */
+  @Test
+  public void casoTesteFiltroCPF() {
     FiltroDTO filtroCPF = new FiltroDTO("784.456.818-12", null, null, null, null);
 
-    portarias = controladorPesqPorta.pesquisa(filtroCPF);
+    List<Portaria> portarias = controladorPesqPorta.pesquisa(filtroCPF);
 
     //Teste para consuta por CPF
     Assert.assertNotEquals(portarias.size(), 0);
+  }
 
-
+  /**
+   * Casos de teste válido para filtro de Sigla de unidade Adm.
+   */
+  @Test
+  public void casoTesteFiltroSiglaUnidade() {
     FiltroDTO filtroSigla = new FiltroDTO(null, "INF", null, null, null);
 
-    portarias = controladorPesqPorta.pesquisa(filtroSigla);
+    List<Portaria> portarias = controladorPesqPorta.pesquisa(filtroSigla);
 
     //Teste para consuta por Sigla Unidade
     Assert.assertNotEquals(portarias.size(), 0);
+  }
+
+  /**
+   * Casos de teste válido para filtro de Datas.
+   */
+  @Test
+  public void casoTesteFiltroDatas() throws ParseException {
+
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+    FiltroDTO filtro = new FiltroDTO(null, null, null, formato.parse("01/01/2019"),
+        formato.parse("01/05/2020"));
+
+    List<Portaria> portarias = controladorPesqPorta.pesquisa(filtro);
+
+    //Teste para consuta por Sigla Unidade
+    Assert.assertNotEquals(portarias.size(), 0);
+  }
+
+  /**
+   * Casos de teste válido para filtro sem retorno
+   */
+  @Test
+  public void casoTestDadosValidosSemResultado() throws IOException {
+
+    //Grupo de teste DadosValidos, exemplo:
+    FiltroDTO filtroAno = new FiltroDTO(null, null, 2030, null, null);
+    List<Portaria> portarias = controladorPesqPorta.pesquisa(filtroAno);
+
+    //Teste para consuta por ano
+    Assert.assertEquals(portarias.size(), 0);
 
   }
 
+  /**
+   * Caso de exceção, onde datas incoerentes são informadas.
+   */
   @Test
-  public void casoTestDadosExcecoes() throws  ParseException {
+  public void casoTestDadosExcecoes() throws ParseException {
 
     try {
       SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -228,7 +268,6 @@ public class ControladorPesqPortaTest {
     } catch (IllegalArgumentException e) {
       assertTrue(e.getMessage().equals("A data fim não deve ser menor que a de início"));
     }
-
 
   }
 
