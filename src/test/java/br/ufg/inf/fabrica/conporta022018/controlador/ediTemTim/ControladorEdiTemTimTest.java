@@ -4,9 +4,9 @@
  * Creative Commons Attribution 4.0 International License.
  */
 
-package br.ufg.inf.fabrica.conporta022018.controlador.regCiencDesig;
+package br.ufg.inf.fabrica.conporta022018.controlador.ediTemTim;
 
-import br.ufg.inf.fabrica.conporta022018.controlador.ControladorRegCiencDesig;
+import br.ufg.inf.fabrica.conporta022018.controlador.ControladorManterUndAdm;
 import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
@@ -16,28 +16,29 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import br.ufg.inf.fabrica.conporta022018.modelo.UndAdm;        
 
-public class ControladorRegCiencDesigTest {
+public class ControladorEdiTemTimTest {
 
-    private static ControladorRegCiencDesig controladorRegCiencDesig;
-
+    private static ControladorManterUndAdm controladorEdiTemTim;
+    //private dadosAcesso[]
     /*
      * Preparação do ambiente para teste.
      * População do banco de Dados para atendam os pré-requisitos do caso de uso.
-     */
+     *//*
 
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException {
 
-        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/regCiencDesig/RegCienDesigDadosTest.csv";
+        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/editTemTim/ControladorEdiTemTim.csv";
         String REGRA = ";";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
         LerArquivo lerArquivo = new LerArquivo();
         String tabelaAtual = " ";
-        String dados[];
-        String linha;
-        //Criar as instâncias de todos os objetos DAO's necessários para preparar o cenario.
+        String dadosUndAdm[];
+        String linha;  
+        UndAdm undAdm = new UndAdm();
 
         dadosSoftware = lerArquivo.lerArquivo(CAMINHO_CSV);
 
@@ -45,33 +46,20 @@ public class ControladorRegCiencDesigTest {
             linha = dadosSoftware.get(index);
 
             //Definir as tabelas que serão populadas no Banco de Dados.
-            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("undAdm") || linha.equals("designado")) {
+            if (linha.equals("undAdm")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
             }
 
-            switch (tabelaAtual) {
-                case "pessoa" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela pessoa no Banco de Dados.
-                    break;
-                case "portaria" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
-                    break;
+            switch (tabelaAtual) {               
                 case "undAdm" :
                     extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela Unidade Administrativa no Banco de Dados.
-                    break;
-                case "designado" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-                    //Aqui colocar os comandos para popular a tabela designados no Banco de dados.
-                    break;
+                    dadosUndAdm = extrator.getResultado(REGRA);  
+                    //undAdm.setSiglaUndAdm(dadosUndAdm[0]);
+                    //Aqui colocar comandos para envia ao BD
+                    
+                    break;         
             }
         }
     }
@@ -80,32 +68,51 @@ public class ControladorRegCiencDesigTest {
     public void casoTestPrepararExecucao() {
 
         //Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
-        controladorRegCiencDesig = new ControladorRegCiencDesig();
+        controladorEdiTemTim = new ControladorManterUndAdm();
     }
 
-    /*
+    *//*
      * Criar os cenários de testes para a aplicação:
      * Os cenarios de testes devem obrigatóriamente ser divididos em dois grupos.
      * DadosValidos : Grupo destinado ao cenatio típico e aos cenarios alternativos do caso de uso.
      * DadosExcecoes : Grupo destinado as exceções do cenario típico e dos cenarios alternativos.
      * Cada cenário e cada exceção deve necessáriamente ser testado no minimo uma vez, cada entrada e/ou combinação
      * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
-     */
+     *//*
 
     @Test
     public void casoTestDadosValidos() throws IOException {
 
-        //Grupo de teste DadosValidos, exemplo:
-        controladorRegCiencDesig.regCiencDesig("123.456.789-12", "INF", 2018, 0001);
+        //Grupo de teste DadosValidos, exemplo:   
+        //Limite máximo do tempo válido uma sessão.
+        UndAdm undAdm = new UndAdm();            
+        controladorEdiTemTim.editarTimeOut(60, "INF");
+        //Limite máximo do tempo válido uma sessão menos um.
+        UndAdm undAdm2 = new UndAdm();              
+        controladorEdiTemTim.editarTimeOut(59, "INF");
+        //Limite mínimo do tempo válido uma sessão.
+        UndAdm undAdm3 = new UndAdm();              
+        controladorEdiTemTim.editarTimeOut(15, "INF");
+        //Limite mínimo do tempo válido uma sessão mais um .
+        UndAdm undAdm4 = new UndAdm();              
+        controladorEdiTemTim.editarTimeOut(16, "INF");
 
     }
 
     @Test
     public void casoTestDadosExcecoes() throws IOException {
-
-        //Grupo de teste DadosExcecoes, exemplo:
-        controladorRegCiencDesig.regCiencDesig("123.456.789-12", "FACE", 2018, 0001);
-        //O cenario acima testa a primeira exceção do caso de uso a unidade acadêmica não é localizada.
+        //O cenario abaixo testa que a mudança do tempo de sessão para mais de uma período superior em um ao permitido.       
+        controladorEdiTemTim.editarTimeOut(61, "INF");
+        //O cenario abaixo testa que a mudança do tempo de sessão para um período inferior em um ao permitido.             
+        controladorEdiTemTim.editarTimeOut(14, "INF");                     
+        //O cenario abaixo testa que a mudança do tempo válido de sessão para uma unidade academica que não existe na base de dados.             
+        controladorEdiTemTim.editarTimeOut(30, "FAV");  
+        //O cenario abaixo testa que a mudança do tempo de sessão para um período inferior em um ao permitido de sessão para uma unidade
+        // academica que não existe na base de dados.             
+        controladorEdiTemTim.editarTimeOut(14, "FAV");  
+        //O cenario abaixo testa que a mudança do tempo de sessão para um período superior em um ao permitido de sessão para uma unidade
+        // academica que não existe na base de dados.             
+        controladorEdiTemTim.editarTimeOut(61, "FAV");  
     }
 
     @AfterClass
@@ -124,6 +131,6 @@ public class ControladorRegCiencDesigTest {
         // a data de hoje.
 
         //Assert.assertEquals(dataHoje, rodaSQLparaPegarADataGravadaNoBancoDeDados);
-    }
+    }*/
 
 }
