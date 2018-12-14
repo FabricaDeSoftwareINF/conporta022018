@@ -215,7 +215,7 @@ public class ControladorNotifPortSemCienciaTest4 {
         /**
          * Testa o cenário onde há designados sem ciência, mas ainda não se passaram 5 dias desde a expedição da portaria.
          */
-        
+
         controladorNotifPortSemCiencia.verificarCiencia();
 
 
