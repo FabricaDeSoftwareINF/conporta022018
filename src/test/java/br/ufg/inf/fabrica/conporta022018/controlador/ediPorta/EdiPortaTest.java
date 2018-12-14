@@ -16,9 +16,7 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.fail;
 
@@ -163,39 +161,283 @@ public class EdiPortaTest {
     }
 
     @Test
-    public  void salvarPortariaSemReferenciaSemDesignadoTest() throws IOException {
-        Portaria portaria = new Portaria();
+    public  void editarPortariaSemReferenciaSemDesignadoTest() throws IOException {
+        // Busca todas as portarias
+        PortariaDAO portariaDAO = new PortariaDAO();
+        List<Portaria> listaPortarias = portariaDAO.buscarTodos();
 
+        // Pega a terceira, pois ela está como Proposta
+        Portaria portaria = listaPortarias.get(2);
+
+        // Altera alguns dados da portaria
+        String assunto = "Portaria Sem Designacao e Sem referência";
+        portaria.setAssunto(assunto);
+
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        portaria.setDtIniVig(dtIniVig);
+
+        int horasDesig = 220;
+        portaria.setHorasDesig(horasDesig);
+
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        portaria.setResumo(resumo);
+
+        // Coloca uma lista de Referencias e Designados vazias na portaria
+        List<Designado> designados = new ArrayList<Designado>();
+        List<Referencia> referencias = new ArrayList<Referencia>();
+        portaria.setReferencias(referencias);
+        portaria.setDesignados(designados);
+
+        // Salva
+        portaria = controladorEdiPorta.salvar(portaria);
+
+
+        // Confere o retorno dos dados padrão
+        Assert.assertEquals(assunto, portaria.getAssunto());
+        Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
+        Assert.assertEquals(horasDesig, portaria.getHorasDesig());
+        Assert.assertEquals(resumo, portaria.getResumo());
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
+
+        // Confere o retorno dos designados e das referências
+        Assert.assertEquals(designados.size(), portaria.getDesignados().size());
+        Assert.assertEquals(referencias.size(), portaria.getReferencias().size());
     }
 
     @Test
-    public void salvarPortariaComReferenciaSemDesignadoTest() throws IOException {
-        Portaria portaria = new Portaria();
+    public void editarPortariaComReferenciaSemDesignadoTest() throws IOException {
+        // Busca todas as portarias
+        PortariaDAO portariaDAO = new PortariaDAO();
+        List<Portaria> listaPortarias = portariaDAO.buscarTodos();
 
+        // Pega a terceira, pois ela está como Proposta
+        Portaria portaria = listaPortarias.get(2);
+
+        // Altera alguns dados da portaria
+        String assunto = "Portaria Sem Designacao e Sem referência";
+        portaria.setAssunto(assunto);
+
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        portaria.setDtIniVig(dtIniVig);
+
+        int horasDesig = 220;
+        portaria.setHorasDesig(horasDesig);
+
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        portaria.setResumo(resumo);
+
+        // Cria a lista vazia de Referências
+        List<Referencia> referencias = new ArrayList<>();
+
+        // Busca as portarias cadastradas no banco (Ativas)
+        listaPortarias = controladorEdiPorta.buscarPortarias();
+
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto referencia
+        Referencia referencia = new Referencia();
+        referencia.setEhCancelamento(true);
+        referencia.setReferencia(listaPortarias.get(0));
+        referencias.add(referencia);
+        portaria.setReferencias(referencias);
+
+        // Salva
+        portaria = controladorEdiPorta.salvar(portaria);
+
+        // Confere o retorno dos dados padrão
+        Assert.assertEquals(assunto, portaria.getAssunto());
+        Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
+        Assert.assertEquals(horasDesig, portaria.getHorasDesig());
+        Assert.assertEquals(resumo, portaria.getResumo());
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
+
+        // Confere se a referência persistiu
+        Assert.assertEquals(referencias.size(), portaria.getReferencias().size());
+        Assert.assertEquals(portaria.getReferencias(), referencias);
+        Assert.assertEquals(portaria.getReferencias().get(0).isEhCancelamento(), referencias.get(0).isEhCancelamento());
     }
 
     @Test
-    public  void salvarPortariaSemReferenciaComDesignadoTest() throws IOException {
-        Portaria portaria = new Portaria();
+    public  void editarPortariaSemReferenciaComDesignadoTest() throws IOException {
+        // Busca todas as portarias
+        PortariaDAO portariaDAO = new PortariaDAO();
+        List<Portaria> listaPortarias = portariaDAO.buscarTodos();
 
+        // Pega a terceira, pois ela está como Proposta
+        Portaria portaria = listaPortarias.get(2);
+
+        // Altera alguns dados da portaria
+        String assunto = "Portaria Sem Designacao e Sem referência";
+        portaria.setAssunto(assunto);
+
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        portaria.setDtIniVig(dtIniVig);
+
+        int horasDesig = 220;
+        portaria.setHorasDesig(horasDesig);
+
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        portaria.setResumo(resumo);
+
+        // Coloca uma lista de Referencias vazia na portaria
+        List<Referencia> referencias = new ArrayList<Referencia>();
+        portaria.setReferencias(referencias);
+
+        // Cria a lista vazia de designados
+
+        List<Designado> designados = new ArrayList<>();
+
+        // Busca as pessoas no banco (Simula o que o front ia fazer)
+        List<Pessoa> listaPessoas = controladorEdiPorta.buscarPessoas();
+
+        // Seleciona a primeira e a segunda (O usuário iria escolher) já criando o objeto designado
+        Designado designado = new Designado();
+        designado.setPessoa(listaPessoas.get(0));
+        designado.setFuncaoDesig(FuncaoDesig.MEMBRO);
+        designado.setDescrFuncDesig("Descrição teste 1");
+        designados.add(designado);
+        Designado designado2 = new Designado();
+        designado2.setPessoa(listaPessoas.get(1));
+        designado2.setFuncaoDesig(FuncaoDesig.COORDENADOR);
+        designado2.setDescrFuncDesig("Descrição do Coordenador Teste");
+        designado2.setHorasDefFuncDesig(200);
+        designados.add(designado2);
+        portaria.setDesignados(designados);
+
+        // Salva
+        portaria = controladorEdiPorta.salvar(portaria);
+
+
+        // Confere o retorno dos dados padrão
+        Assert.assertEquals(assunto, portaria.getAssunto());
+        Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
+        Assert.assertEquals(horasDesig, portaria.getHorasDesig());
+        Assert.assertEquals(resumo, portaria.getResumo());
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
+
+        // Confere o retorno dos designados e das referências
+        Assert.assertEquals(referencias.size(), portaria.getReferencias().size());
+        Assert.assertEquals(designados, portaria.getDesignados());
+        Assert.assertEquals(designados.size(), portaria.getDesignados().size());
+        Assert.assertEquals(designados.get(0).getFuncaoDesig(), portaria.getDesignados().get(0).getFuncaoDesig());
+        Assert.assertEquals(designados.get(0).getDescrFuncDesig(), portaria.getDesignados().get(0).getDescrFuncDesig());
+        Assert.assertEquals(designados.get(0).getPessoa(), portaria.getDesignados().get(0).getPessoa());
     }
 
     @Test
     public void salvarPortariaComReferenciaComDesignadoTest() throws IOException {
-        Portaria portaria = new Portaria();
+        // Busca todas as portarias
+        PortariaDAO portariaDAO = new PortariaDAO();
+        List<Portaria> listaPortarias = portariaDAO.buscarTodos();
 
+        // Pega a terceira, pois ela está como Proposta
+        Portaria portaria = listaPortarias.get(2);
+
+        // Altera alguns dados da portaria
+        String assunto = "Portaria Sem Designacao e Sem referência";
+        portaria.setAssunto(assunto);
+
+        Date dtIniVig = new GregorianCalendar(2019, Calendar.FEBRUARY, 1).getTime();
+        portaria.setDtIniVig(dtIniVig);
+
+        int horasDesig = 220;
+        portaria.setHorasDesig(horasDesig);
+
+        String resumo = "Um resumo da portaria criada com designação e com referência";
+        portaria.setResumo(resumo);
+
+        // Cria a lista vazia de Referências
+        List<Referencia> referencias = new ArrayList<>();
+
+        // Busca as portarias cadastradas no banco (Ativas)
+        listaPortarias = controladorEdiPorta.buscarPortarias();
+
+        // Seleciona a primeira (O usuário iria escolher qual desejar) já criando o objeto referencia
+        Referencia referencia = new Referencia();
+        referencia.setEhCancelamento(true);
+        referencia.setReferencia(listaPortarias.get(0));
+        referencias.add(referencia);
+        portaria.setReferencias(referencias);
+
+        // Cria a lista vazia de designados
+
+        List<Designado> designados = new ArrayList<>();
+
+        // Busca as pessoas no banco (Simula o que o front ia fazer)
+        List<Pessoa> listaPessoas = controladorEdiPorta.buscarPessoas();
+
+        // Seleciona a primeira e a segunda (O usuário iria escolher) já criando o objeto designado
+        Designado designado = new Designado();
+        designado.setPessoa(listaPessoas.get(0));
+        designado.setFuncaoDesig(FuncaoDesig.MEMBRO);
+        designado.setDescrFuncDesig("Descrição teste 1");
+        designados.add(designado);
+        Designado designado2 = new Designado();
+        designado2.setPessoa(listaPessoas.get(1));
+        designado2.setFuncaoDesig(FuncaoDesig.COORDENADOR);
+        designado2.setDescrFuncDesig("Descrição do Coordenador Teste");
+        designado2.setHorasDefFuncDesig(200);
+        designados.add(designado2);
+        portaria.setDesignados(designados);
+
+        // Salva
+        portaria = controladorEdiPorta.salvar(portaria);
+
+
+        // Confere o retorno dos dados padrão
+        Assert.assertEquals(assunto, portaria.getAssunto());
+        Assert.assertEquals(dtIniVig, portaria.getDtIniVig());
+        Assert.assertEquals(horasDesig, portaria.getHorasDesig());
+        Assert.assertEquals(resumo, portaria.getResumo());
+        Assert.assertEquals(PortariaStatus.Proposta, portaria.getStatus());
+
+        // Confere o retorno dos designados e das referências
+        Assert.assertEquals(referencias.size(), portaria.getReferencias().size());
+        Assert.assertEquals(portaria.getReferencias(), referencias);
+        Assert.assertEquals(portaria.getReferencias().get(0).isEhCancelamento(), referencias.get(0).isEhCancelamento());
+        Assert.assertEquals(designados, portaria.getDesignados());
+        Assert.assertEquals(designados.size(), portaria.getDesignados().size());
+        Assert.assertEquals(designados.get(0).getFuncaoDesig(), portaria.getDesignados().get(0).getFuncaoDesig());
+        Assert.assertEquals(designados.get(0).getDescrFuncDesig(), portaria.getDesignados().get(0).getDescrFuncDesig());
+        Assert.assertEquals(designados.get(0).getPessoa(), portaria.getDesignados().get(0).getPessoa());
     }
 
     @Test
-    public void salvarPortariaDadosInvalidos() throws IOException {
-        Portaria portaria = new Portaria();
+    public void ediPortaRegraNegocioCamObri() throws IOException {
+        // Testa a regra de negócio CamObri
+        // O assunto, e o resumo são campos obrigatórios.
+        // Como a portaria já está cadastrada, campos como dtIniVig e expedidor já estão preenchidos
 
-    }
+        // Busca todas as portarias
+        PortariaDAO portariaDAO = new PortariaDAO();
+        List<Portaria> listaPortarias = portariaDAO.buscarTodos();
 
-    @Test
-    public void ediPortaDesignadosInvalidosTest() throws IOException {
-        Portaria portaria = new Portaria();
+        // Pega a terceira, pois ela está como Proposta
+        Portaria portaria = listaPortarias.get(2);
 
+        // Assunto vazio
+        try {
+            // Coloca o asssunto vazio
+            String assunto = "";
+            portaria.setAssunto(assunto);
+
+            portaria = controladorEdiPorta.salvar(portaria);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            Assert.assertEquals(exception.getMessage(), "O campo assunto e resumo são obrigatórios");
+        }
+
+        // Resumo
+        try {
+            portaria = listaPortarias.get(2);
+            
+            // Coloca o resumo vazio
+            String resumo = "";
+            portaria.setResumo(resumo);
+
+            portaria = controladorEdiPorta.salvar(portaria);
+            fail("Expected an IllegalArgumentException to be thrown");
+        } catch (IllegalArgumentException exception) {
+            Assert.assertEquals(exception.getMessage(), "O campo assunto e resumo são obrigatórios");
+        }
     }
 
     private static void trataDadosPessoa(String dados[]){

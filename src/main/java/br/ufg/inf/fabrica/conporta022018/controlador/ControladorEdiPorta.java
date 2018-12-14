@@ -65,14 +65,12 @@ public class ControladorEdiPorta {
         return this.portariaDAO.pesquisarJPQLCustomizada(query, params);
     }
 
-    public boolean salvar(Portaria portaria) {
+    public Portaria salvar(Portaria portaria) {
         if(!this.validarCampos(portaria.getAssunto(), portaria.getResumo())){
-            return false;
+            throw new IllegalArgumentException("O campo assunto e resumo são obrigatórios");
         }
 
-        portariaDAO.salvar(portaria);
-
-        return true;
+        return portariaDAO.salvar(portaria);
     }
 
     private boolean validarCampos(String assunto, String resumo){
