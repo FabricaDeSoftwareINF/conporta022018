@@ -12,7 +12,7 @@ import com.google.gson.GsonBuilder;
 public class ControladorVisuPorta {
     
 
-    public static String conversorPortariaJson(Long id) {
+    public String conversorPortariaJson(Long id) {
         
         Portaria portaria = new PortariaDAO().buscar(id);
       
@@ -29,14 +29,9 @@ public class ControladorVisuPorta {
                                 || f.getName().equals("nivel")
                                 || f.getName().equals("horasDefFuncDesig")
                                 || f.getName().equals("horasExecFuncDesig")
-                                || f.getName().equals("Perfil")
-                                || f.getName().equals("Permissao")
-                                || f.getName().equals("Pessoa")
-                                || f.getName().equals("Sessao")
-                                || f.getName().equals("Tipo")
                                 || f.getName().equals("ultNumExped")
                                 || f.getName().equals("ultNumProp")
-                                || f.getName().equals("minInat");                               
+                                || f.getName().equals("minInat");
                     }
 
                     @Override

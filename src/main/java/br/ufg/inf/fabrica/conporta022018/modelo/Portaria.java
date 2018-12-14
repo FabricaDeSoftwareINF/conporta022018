@@ -60,15 +60,15 @@ public class Portaria extends ModeloAbstrato {
     private PortariaStatus status;
 
     @JoinColumn
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Referencia> referencias;
 
     @JoinColumn
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Recebedora> undRecebedora;
 
     @JoinColumn
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Designado> designados;
 
     @JoinColumn

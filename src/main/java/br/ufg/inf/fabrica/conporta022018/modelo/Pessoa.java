@@ -14,11 +14,11 @@ public class Pessoa extends ModeloAbstrato {
     private String emailPes;
     private String senhaUsu;
     private Boolean ehUsuAtivo;
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Gestao> gestao;
     @OneToOne
     private Lotacao servidor;
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Matricula> discente;
 
     public String getNomePes() {
