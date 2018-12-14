@@ -185,12 +185,18 @@ public class ControladorPesqPortaTest {
   @Test
   public void casoTestDadosValidos() throws IOException {
 
+    System.out.println("Inicou testes para parâmetro de ano 2018 : casoTestDadosValidos");
+
     //Grupo de teste DadosValidos, exemplo:
     FiltroDTO filtroAno = new FiltroDTO(null, null, 2018, null, null);
+
+    System.out.println("Realiza a consulta: controladorPesqPorta.pesquisa(filtro)");
     List<Portaria> portarias = controladorPesqPorta.pesquisa(filtroAno);
 
     //Teste para consuta por ano
     Assert.assertNotEquals(portarias.size(), 0);
+
+    System.out.println("Teste executado com sucesso");
 
   }
 
@@ -199,12 +205,18 @@ public class ControladorPesqPortaTest {
    */
   @Test
   public void casoTesteFiltroCPF() {
+
+    System.out.println("Inicou testes para parâmetro de CPF \"784.456.818-12\" : casoTesteFiltroCPF");
+
     FiltroDTO filtroCPF = new FiltroDTO("784.456.818-12", null, null, null, null);
 
+    System.out.println("Realiza a consulta: controladorPesqPorta.pesquisa(filtro)");
     List<Portaria> portarias = controladorPesqPorta.pesquisa(filtroCPF);
 
     //Teste para consuta por CPF
     Assert.assertNotEquals(portarias.size(), 0);
+
+    System.out.println("Teste executado com sucesso");
   }
 
   /**
@@ -212,12 +224,18 @@ public class ControladorPesqPortaTest {
    */
   @Test
   public void casoTesteFiltroSiglaUnidade() {
+
+    System.out.println("Inicou testes para parâmetro de sigla \"INF\" : casoTesteFiltroSiglaUnidade");
+
     FiltroDTO filtroSigla = new FiltroDTO(null, "INF", null, null, null);
 
+    System.out.println("Realiza a consulta: controladorPesqPorta.pesquisa(filtro)");
     List<Portaria> portarias = controladorPesqPorta.pesquisa(filtroSigla);
 
     //Teste para consuta por Sigla Unidade
     Assert.assertNotEquals(portarias.size(), 0);
+
+    System.out.println("Teste executado com sucesso");
   }
 
   /**
@@ -226,15 +244,20 @@ public class ControladorPesqPortaTest {
   @Test
   public void casoTesteFiltroDatas() throws ParseException {
 
+    System.out.println("Inicou testes para parâmetro data de início \"01/01/2019\" e a data fim \"01/05/2020\" : casoTesteFiltroDatas");
+
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
     FiltroDTO filtro = new FiltroDTO(null, null, null, formato.parse("01/01/2019"),
         formato.parse("01/05/2020"));
 
+    System.out.println("Realiza a consulta: controladorPesqPorta.pesquisa(filtro)");
     List<Portaria> portarias = controladorPesqPorta.pesquisa(filtro);
 
     //Teste para consuta por Sigla Unidade
     Assert.assertNotEquals(portarias.size(), 0);
+
+    System.out.println("Teste executado com sucesso");
   }
 
   /**
@@ -243,12 +266,18 @@ public class ControladorPesqPortaTest {
   @Test
   public void casoTestDadosValidosSemResultado() throws IOException {
 
+    System.out.println("Inicou testes para parâmetro de ano 2030 : casoTestDadosValidosSemResultado");
+
     //Grupo de teste DadosValidos, exemplo:
     FiltroDTO filtroAno = new FiltroDTO(null, null, 2030, null, null);
+
+    System.out.println("Realiza a consulta: controladorPesqPorta.pesquisa(filtro)");
     List<Portaria> portarias = controladorPesqPorta.pesquisa(filtroAno);
 
     //Teste para consuta por ano
     Assert.assertEquals(portarias.size(), 0);
+    System.out.println("Teste executado com sucesso");
+
 
   }
 
@@ -259,6 +288,8 @@ public class ControladorPesqPortaTest {
   public void casoTestDadosExcecoes() throws ParseException {
 
     try {
+      System.out.println("Inicou testes para parâmetro de de data inválida, início \"02/01/2018\" e fim \"01/01/2018\" : casoTestDadosExcecoes");
+
       SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
       FiltroDTO filtro = new FiltroDTO(null, null, null, formato.parse("02/01/2018"),
@@ -266,6 +297,7 @@ public class ControladorPesqPortaTest {
 
       controladorPesqPorta.pesquisa(filtro);
     } catch (IllegalArgumentException e) {
+      System.out.println("Teste executado com sucesso");
       assertTrue(e.getMessage().equals("A data fim não deve ser menor que a de início"));
     }
 
