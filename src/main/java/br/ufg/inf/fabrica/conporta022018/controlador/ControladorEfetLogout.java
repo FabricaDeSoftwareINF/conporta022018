@@ -53,13 +53,13 @@ public class ControladorEfetLogout {
             // Tratamento das exceções previsíveis para dar feedback ao usuário.
             resposta = ERRO_EXECUCAO.toString().replace(
                     "$$$",
-                    String.format("\"excecao\": \"%s%n%s\"", excEsperada.getMessage(), excEsperada.getCause())
+                    String.format(", \"excecao\": \"%s%n%s\"", excEsperada.getMessage(), excEsperada.getCause())
             );
         } catch (Exception exceptionNaoPlanejada) {
             // Tratamento das possíveis exceções não previstas anteriormente.
             resposta = ERRO_INESPERADO.toString().replace(
                     "$$$",
-                    String.format("\"excecao\": \"%s%n%s\"",
+                    String.format(", \"excecao\": \"%s%n%s\"",
                             exceptionNaoPlanejada.getMessage(), exceptionNaoPlanejada.getCause())
             );
         }
