@@ -22,7 +22,7 @@ public class Designado extends ModeloAbstrato {
     private int horasDefFuncDesig;
     private int horasExecFuncDesig;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Pessoa designado;
     private FuncaoDesig tipFuncDesig;
 
