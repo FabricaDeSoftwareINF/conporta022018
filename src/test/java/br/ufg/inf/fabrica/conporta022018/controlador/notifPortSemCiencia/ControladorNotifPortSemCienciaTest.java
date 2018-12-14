@@ -15,6 +15,10 @@ import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
 import org.junit.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,8 +50,6 @@ public class ControladorNotifPortSemCienciaTest {
 
         Portaria portaria = new Portaria();
         Pessoa pessoa = new Pessoa();
-        Pessoa pessoa2 = new Pessoa();
-        Pessoa pessoa3 = new Pessoa();
         UndAdm undAdm = new UndAdm();
         Matricula matricula = new Matricula();
         Designado designado = new Designado();
@@ -77,6 +79,7 @@ public class ControladorNotifPortSemCienciaTest {
             switch (tabelaAtual) {
                 case "portaria":
 
+                    designados= new ArrayList<>();
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     portaria.setAnoId(0);
@@ -98,6 +101,7 @@ public class ControladorNotifPortSemCienciaTest {
                     portaria.setUndRecebedora(recebedoras);
 
                     //Primeiro discente da lista
+                    pessoa = new Pessoa();
                     pessoa.setCpfPes("");
                     pessoa.setDiscente(matricula);
                     pessoa.setEhUsuAtivo(true);
@@ -107,6 +111,7 @@ public class ControladorNotifPortSemCienciaTest {
                     pessoa.setSenhaUsu("");
                     pessoa.setServidor(new Lotacao());
 
+                    designado = new Designado();
                     designado.setDesignado(pessoa);
                     designado.setDescrFuncDesig("");
                     if (dados[6].equals("")){
@@ -120,6 +125,7 @@ public class ControladorNotifPortSemCienciaTest {
                     designados.add(designado);
 
                     //Segundo discente da lista
+                    pessoa = new Pessoa();
                     pessoa.setCpfPes("");
                     pessoa.setDiscente(matricula);
                     pessoa.setEhUsuAtivo(true);
@@ -129,6 +135,7 @@ public class ControladorNotifPortSemCienciaTest {
                     pessoa.setSenhaUsu("");
                     pessoa.setServidor(new Lotacao());
 
+                    designado = new Designado();
                     designado.setDesignado(pessoa);
                     designado.setDescrFuncDesig("");
                     if (dados[6] == ""){
@@ -142,6 +149,7 @@ public class ControladorNotifPortSemCienciaTest {
                     designados.add(designado);
 
                     //Terceiro discente da lista
+                    pessoa = new Pessoa();
                     pessoa.setCpfPes("");
                     pessoa.setDiscente(matricula);
                     pessoa.setEhUsuAtivo(true);
@@ -151,6 +159,7 @@ public class ControladorNotifPortSemCienciaTest {
                     pessoa.setSenhaUsu("");
                     pessoa.setServidor(new Lotacao());
 
+                    designado = new Designado();
                     designado.setDesignado(pessoa);
                     designado.setDescrFuncDesig("");
                     if (dados[6] == ""){
@@ -164,6 +173,7 @@ public class ControladorNotifPortSemCienciaTest {
                     designados.add(designado);
 
 
+                    pessoa = new Pessoa();
                     portaria.setDesignados(designados);
                     pessoa.setEmailPes(dados[13]);
                     portaria.setExpedidor(pessoa);
@@ -220,7 +230,7 @@ public class ControladorNotifPortSemCienciaTest {
         /**
          * Testa o cenário onde há um designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia();
+       // controladorNotifPortSemCiencia.verificarCiencia();
     }
 
     @Test
@@ -229,8 +239,12 @@ public class ControladorNotifPortSemCienciaTest {
         /**
          * Testa o cenário onde há varios designados com ciência atrasada.
          */
-        controladorNotifPortSemCiencia.verificarCiencia();
+        //controladorNotifPortSemCiencia.verificarCiencia();
     }
 
+
+    public void excluirTodos(Portaria cli) {
+    
+    }
 
 }
