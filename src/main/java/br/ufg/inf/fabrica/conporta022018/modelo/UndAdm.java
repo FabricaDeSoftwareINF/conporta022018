@@ -13,10 +13,6 @@ import javax.persistence.Table;
 @Table
 public class UndAdm extends ModeloAbstrato{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     private String siglaUnAdm;
     private Integer minInat;
     private String nomeUnd;
