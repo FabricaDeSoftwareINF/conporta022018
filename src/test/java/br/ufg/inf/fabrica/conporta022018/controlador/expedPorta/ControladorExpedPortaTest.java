@@ -195,13 +195,13 @@ public class ControladorExpedPortaTest {
         Assert.assertEquals(5, controladorExpedPorta.expedPorta(2469, 1));
 
         // Portaria com referências a portarias canceladas
-        Assert.assertEquals(6, controladorExpedPorta.expedPorta(92, 6);
+        Assert.assertEquals(6, controladorExpedPorta.expedPorta(92, 6));
 
         // Portaria com referências a portarias propostas:
-        Assert.assertEquals(6, controladorExpedPorta.expedPorta(93, 6);
+        Assert.assertEquals(6, controladorExpedPorta.expedPorta(93, 6));
 
         // Portaria com referências a portarias inexistentes:
-        Assert.assertEquals(6, controladorExpedPorta.expedPorta(999, 6);
+        Assert.assertEquals(6, controladorExpedPorta.expedPorta(999, 6));
     }
 
     @AfterClass
