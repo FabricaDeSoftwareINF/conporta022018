@@ -12,12 +12,14 @@ PKportaria;idPortaria; siglaUndId; anoId; seqId; status; assunto; dtExped; dtIni
 13;INF201813;INF;2018;13;Proposta;Novo coordenador de curso; 12/11/2019; 01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
 14;INF201814;INF;2018;14;Cancelada;Novo coordenador de curso; 12/11/2019;01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
 15;INF201815;INF;2018;15;Expirada;Novo coordenador de curso; 12/11/2019;01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
+16;INF201816;INF;2018;15;Proposta;Novo coordenador de curso; 12/11/2019;01/01/2020; 31/12/2022; 12/12/2019;220; Representa um colaborador que trabalha em uma unidade administrativa independentemente da forma de contrato deste trabalho
 designado
 PKdesg;dtCienciaDesig; tipFuncDesig; descrFuncDesig; horasDefFuncDesig; horasExecFuncDesig; PKportaria; PKpes
 11;12/11/2018; Coordenador; Novo coordenador de curso;220;8;1
 12;12/11/2018; Coordenador; Novo coordenador de curso;220;8;1
-13;12/11/2018; Coordenador; Novo coordenador de curso;220;8;2
+13;12/11/2018; Coordenador; Novo coordenador de curso;220;11;2
 referencia
 PKportariaReferenciada; idPortaria; idPortariaReferenciada; ehCancelamento
 14;INF201810;4;true
 15;INF201811;4;true
+16;INF201816;11;false
