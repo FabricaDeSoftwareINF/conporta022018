@@ -21,7 +21,7 @@ import java.util.*;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
 
-public class ControladorEmtRelTest{
+public class ControladorEmtRelTest {
     private static ControladorEmtRel controladorEmtRel;
 
     private static DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -38,25 +38,26 @@ public class ControladorEmtRelTest{
         String dados[];
         String linha;
 
+
         dadosSoftware = lerArquivo.lerArquivo(CAMINHO_CSV);
 
         for (int index = 0; index < dadosSoftware.size(); index++) {
 
             linha = dadosSoftware.get(index);
 
-            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("undAdm") || linha.equals("designado") || linha.equals("recebedora")){
+            if (linha.equals("pessoa") || linha.equals("portaria") || linha.equals("undAdm") || linha.equals("designado") || linha.equals("recebedora")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
             }
 
-            switch (tabelaAtual){
-                case "pessoa" :
+            switch (tabelaAtual) {
+                case "pessoa":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     trataDadosPessoa(dados);
                     break;
-                case "undAdm" :
+                case "undAdm":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
                     trataDadosUndAdm(dados);
@@ -81,12 +82,12 @@ public class ControladorEmtRelTest{
     }
 
     @Before
-    public void casoTestPrepararExecucao(){
+    public void casoTestPrepararExecucao() {
         controladorEmtRel = new ControladorEmtRel();
     }
 
     @Test
-    public void casoTestBuscarPortaria()throws ParseException {
+    public void casoTestBuscarPortaria() throws ParseException {
 
         PortariaDAO portariaDAO = new PortariaDAO();
         List<Portaria> listaPortarias = portariaDAO.buscarTodos();
@@ -99,25 +100,25 @@ public class ControladorEmtRelTest{
     }
 
     @Test
-    public void casoTestBuscarPortariaNaoExiste()throws ParseException {
-            boolean existe = controladorEmtRel.portariaExiste((long)1000);
-            Assert.assertFalse(existe);
-    }
-
-    @Test
-    public void casoTestBuscarUndAdmNaoExiste()throws ParseException {
-        boolean existe = controladorEmtRel.buscarUndAdm((long)1000);
+    public void casoTestBuscarPortariaNaoExiste() throws ParseException {
+        boolean existe = controladorEmtRel.portariaExiste((long) 1000);
         Assert.assertFalse(existe);
     }
 
     @Test
-    public void casosTesteBuscarDesigNaoExiste()throws ParseException {
-        boolean existe = controladorEmtRel.buscarDesignado((long)1000);
+    public void casoTestBuscarUndAdmNaoExiste() throws ParseException {
+        boolean existe = controladorEmtRel.buscarUndAdm((long) 1000);
         Assert.assertFalse(existe);
     }
 
     @Test
-    public void casoTesteBuscarDesignado()throws ParseException {
+    public void casosTesteBuscarDesigNaoExiste() throws ParseException {
+        boolean existe = controladorEmtRel.buscarDesignado((long) 1000);
+        Assert.assertFalse(existe);
+    }
+
+    @Test
+    public void casoTesteBuscarDesignado() throws ParseException {
 
         DesignadoDAO designadoDAO = new DesignadoDAO();
         List<Designado> listaDesignados = designadoDAO.buscarTodos();
@@ -127,6 +128,72 @@ public class ControladorEmtRelTest{
         boolean existe = controladorEmtRel.portariaExiste(id);
 
         Assert.assertTrue(existe);
+    }
+
+    @Test
+    public void casoBuscarListaDesignados(List <Designado> designados) throws ParseException {
+       List<String> listaDesignados = new ArrayList<>();
+
+       DesignadoDAO designadoDAO = new DesignadoDAO();
+        Designado designado = new Designado();
+        List<String> listaDesignadoslist = new ArrayList<>();
+        for (Designado designadofor: designados){
+            String acharDesigNome = designado.getDesignado().getNomePes();
+            if(acharDesigNome != ""){
+                listaDesignadoslist.add(acharDesigNome);
+            }
+        }
+
+        boolean existe = listaDesignados.contains(designado);
+
+        Assert.assertTrue(existe);
+
+
+
+    }
+
+    @Test
+    public void casoBuscarListaUndAdm(List <UndAdm> UndAdm) throws ParseException {
+        List<String> listaUnd = new ArrayList<>();
+
+        UndAdmDAO undAdmDAO = new UndAdmDAO();
+        List<String> listaDesignadoslist = new ArrayList<>();
+        for (UndAdm undAdm: UndAdm){
+            String acharDesigNome = undAdm.getNomeUnd();
+            if(acharDesigNome != ""){
+                listaDesignadoslist.add(acharDesigNome);
+            }
+        }
+
+        boolean existe = listaDesignadoslist.contains(UndAdm);
+
+        Assert.assertTrue(existe);
+
+
+
+    }
+
+    @Test
+    public void casoBuscarListaPortaria(List <Portaria> Portaria) throws ParseException {
+        int ANO = 2018;
+        int ANO2 = 2019;
+
+        List<String> listaPorta = new ArrayList<>();
+
+
+        PortariaDAO portariaDAO = new PortariaDAO();
+        List<Integer> listaDesignadoslist = new ArrayList<>();
+        for (Portaria portaria: Portaria){
+            int acharAnoPorta = portaria.getAnoId();
+            if(acharAnoPorta == ANO ){
+                listaDesignadoslist.add(acharAnoPorta);
+            }
+        }
+
+        boolean existe = listaDesignadoslist.contains(Portaria);
+
+        Assert.assertTrue(existe);
+
     }
 
 
@@ -339,6 +406,3 @@ public class ControladorEmtRelTest{
     }
 
 }
-
-
-

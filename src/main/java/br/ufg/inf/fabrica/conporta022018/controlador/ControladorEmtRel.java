@@ -4,6 +4,10 @@ import br.ufg.inf.fabrica.conporta022018.modelo.*;
 import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
+import net.bytebuddy.asm.Advice;
+
+import java.text.ParseException;
+import java.util.List;
 
 
 public class ControladorEmtRel {
@@ -26,11 +30,65 @@ public class ControladorEmtRel {
         return true;
     }
 
-    public boolean buscarUndAdm(Long id) {
-        // Busca a unidade com esse id
-        UndAdm undAdm = this.undAdmDAO.buscar(id);
 
-        // Verifica se encontrou a unidade
+    public boolean BuscarListaDesignado(){
+
+        try{
+
+        DesignadoDAO designadoDAO = new DesignadoDAO();
+        Portaria portariaDAO = new Portaria();
+        List<Designado> listaDesignados = designadoDAO.buscarTodos();
+
+        Long id = listaDesignados.get(listaDesignados.size()).getId();
+
+        boolean existe = portariaDAO.getId() == id;
+
+         return existe;
+            }catch (Exception e){
+            throw new IllegalArgumentException("Erro ao buscar dados de designados");
+     }
+  }
+
+    public boolean BuscarListaPortaria(){
+
+        try{
+
+            PortariaDAO portariaDAO = new PortariaDAO();
+            Portaria portaria = new Portaria();
+            List<Portaria> listaPortarias = portariaDAO.buscarTodos();
+
+            Long id = listaPortarias.get(listaPortarias.size()).getId();
+
+            boolean existe = portaria.getId() == id;
+
+            return existe;
+        }catch (Exception e){
+            throw new IllegalArgumentException("Erro ao buscar dados de designados");
+        }
+    }
+
+    public boolean BuscarListaUndAdm(){
+
+        try{
+
+            UndAdmDAO undAdmDAO = new UndAdmDAO();
+            Portaria portaria = new Portaria();
+            List<UndAdm> listaUnAdm = undAdmDAO.buscarTodos();
+
+            Long id = listaUnAdm.get(listaUnAdm.size()).getId();
+
+            boolean existe = portaria.getId() == id;
+
+            return existe;
+
+            }catch (Exception e){
+            throw new IllegalArgumentException("Erro ao buscar dados de designados");
+        }
+    }
+
+    public boolean buscarUndAdm(Long id) {
+
+        UndAdm undAdm = this.undAdmDAO.buscar(id);
         try {
             id = undAdm.getId();
         } catch (Exception e) {
@@ -41,10 +99,8 @@ public class ControladorEmtRel {
     }
 
     public boolean buscarDesignado(Long id) {
-        // Busca o designado com esse id
         Designado designado = this.designadoDAO.buscar(id);
 
-        // Verifica se encontrou a designado
         try {
             id = designado.getId();
         } catch (Exception e) {
