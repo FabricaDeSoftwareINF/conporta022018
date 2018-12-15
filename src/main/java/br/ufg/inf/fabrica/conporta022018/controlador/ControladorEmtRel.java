@@ -1,93 +1,101 @@
 package br.ufg.inf.fabrica.conporta022018.controlador;
 
-import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
-import br.ufg.inf.fabrica.conporta022018.modelo.PortariaExpedida;
-import br.ufg.inf.fabrica.conporta022018.modelo.PortariaRecebida;
+import br.ufg.inf.fabrica.conporta022018.modelo.*;
+import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
-import java.util.Iterator;
-import java.util.List;
+import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
+
 
 public class ControladorEmtRel {
 
-//   private PortariaDAO portariaDAO = new PortariaDAO();
-//
-//    public boolean cancelarPortarias(String idPortaria) {
-//        Portaria portaria = portariaDAO.buscarPort("IdentificadorPortaria:" + idPortaria);
-//
-//
-//         List<PortariaExpedida> portariasExpedidas = portaria.getPortariasExpedidas();
-//         List<PortariaRecebida> portariasRecebidas = portaria.getPortariasRecebidas();
-//
-//
-//         if (portariasExpedidas.equals(0)) {
-//            throw new UnsupportedOperationException("Não existem portarias Expedidas");
-//        }
-//
-//        if (portariasRecebidas.equals(0)) {
-//            throw new UnsupportedOperationException("Não existem portarias Recebidas");
-//        }
-//
-//        Iterator<PortariaRecebida> iterator = portariasRecebidas.iterator();
-//        Iterator<PortariaExpedida> iterators = portariasExpedidas.iterator();
-//
-//        PortariaRecebida portariaRecebida;
-//        PortariaExpedida portariaExpedida;
-//        Portaria portarias;
-//
-//        while (iterator.hasNext()) {
-//            portariaRecebida = iterator.next();
-//            portariaExpedida = iterators.next();
-//            String idPortariaRecebida;
-//
-//            portarias = portariaDAO.buscarPort("idPortariaRecebida = " + portariaRecebida.getIdPortariaRecebida());
-//            portarias = portariaDAO.buscarPort("idPortariaRecebida = " + portariaExpedida.getIdPortariaExpedida());
-//
-//            if (portarias.getPortariasExpedidas() == null) {
-//                throw new UnsupportedOperationException("Apenas portarias Expedidas podem gerar relatorio!");
-//            }
-//
-//            if (portarias.getPortariasRecebidas() == null) {
-//                throw new UnsupportedOperationException("Apenas portarias Recebidas podem gerar relatorio!");
-//            }
-//
-//            portarias.setPortariasExpedidas(portariasExpedidas);
-//            portarias.setPortariasRecebidas(portariasRecebidas);
-//            portariaDAO.atualizar(portarias);
-//        }
-//
-//        return true;
-//    }
-//
-//    public List<PortariaExpedida> getPortExped(List<PortariaExpedida> portariaExpedidas) {
-//        Iterator<PortariaExpedida> iterator = portariaExpedidas.iterator();
-//        PortariaExpedida portariaExpedida;
-//
-//        while (iterator.hasNext()) {
-//
-//            portariaExpedida = iterator.next();
-//
-//            if (portariaExpedida.isIsCancelada()!= true) {
-//                portariaExpedidas.remove(portariaExpedida);
-//            }
-//            }
-//            return portariaExpedidas;
-//    }
-//
-//        public List<PortariaRecebida> getPortRec(List<PortariaRecebida> portariaRecebidas) {
-//        Iterator<PortariaRecebida> iterator = portariaRecebidas.iterator();
-//        PortariaRecebida portariaRecebida;
-//
-//        while (iterator.hasNext()) {
-//
-//            portariaRecebida = iterator.next();
-//
-//            if (portariaRecebida.isIsCancelada()!= true) {
-//                portariaRecebidas.remove(portariaRecebida);
-//            }
-//            }
-//            return portariaRecebidas;
-//    }
+    private PortariaDAO portariaDAO = new PortariaDAO();
+    private UndAdmDAO undAdmDAO = new UndAdmDAO();
+    private DesignadoDAO designadoDAO = new DesignadoDAO();
+
+    public boolean buscarPortaria(Long id) {
+        // Busca a portaria com esse id
+        Portaria portaria = this.portariaDAO.buscar(id);
+
+        // Verifica se encontrou a portaria
+        try {
+            id = portaria.getId();
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean buscarUndAdm(Long id) {
+        // Busca a unidade com esse id
+        UndAdm undAdm = this.undAdmDAO.buscar(id);
+
+        // Verifica se encontrou a unidade
+        try {
+            id = undAdm.getId();
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean buscarDesignado(Long id) {
+        // Busca o designado com esse id
+        Designado designado = this.designadoDAO.buscar(id);
+
+        // Verifica se encontrou a designado
+        try {
+            id = designado.getId();
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean portariaExiste(Long id) {
+
+        Portaria portaria = portariaDAO.buscar(id);
+
+        if (portaria != null) {
+            if (portaria.getStatus() == PortariaStatus.ATIVA) {
+                if (!portaria.getDesignados().isEmpty()) {
+                    return true;
+                }
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    public String getDadosRel(long id) {
+        String String = "";
+        Portaria portaria = portariaDAO.buscar(id);
+        Designado designado = designadoDAO.buscar(id);
+        UndAdm undAdm = this.undAdmDAO.buscar(id);
+        try {
+            if (portaria.getStatus() == PortariaStatus.ATIVA) {
+                if (designado.getHorasDefFuncDesig() > 0) {
+                    if (portaria.getHorasDesig() > 0) {
+                        if (portaria.getDtExped() != null) {
+                            if (portaria.getArqPdf().length > 0) {
+                                String = "Dados encontrados, prontos para gerar relatorio";
+                            }
+                        }
+                    }
+                }
+            }
+        }catch(Exception e){
+                throw new IllegalArgumentException("Não foi encontrado dados para gerar o relatorio");
+        }
+        return String = "";
+    }
+
 }
+
+
         
 
 
