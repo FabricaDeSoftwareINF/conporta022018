@@ -32,8 +32,6 @@ public class ControladorExclPortTest {
     private static PessoaDAO pessoaDAO = new PessoaDAO();
     private static DesignadoDAO designadoDAO = new DesignadoDAO();
     private static PortariaReferenciadaDAO portariaReferenciadaDAO = new PortariaReferenciadaDAO();
-    private static List<Designado> designados = new ArrayList<Designado>();
-    private static List<Referencia> listaReferencias = new ArrayList<Referencia>();
 
     /*
      * Preparação do ambiente para teste.
@@ -114,7 +112,7 @@ public class ControladorExclPortTest {
         Portaria portaria = new Portaria();
         //o parâmetro de excluirPortaria será uma instância de Portaria e não uma string.
         try{
-            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e sem designados (INF201802):
+            // Portaria proposta, sem portarias referenciadas e sem designados (INF201802):
             portaria = portariaDAO.buscar((long) 5);
             controladorExclPort.excluirPortaria(portaria);
 
@@ -123,7 +121,7 @@ public class ControladorExclPortTest {
         }
 
         try{
-            // Portaria sem data final de vigência, proposta, com portarias referenciadas e sem designados (INF201800):
+            // Portaria proposta, com portarias referenciadas e sem designados (INF201800):
             portaria = portariaDAO.buscar((long) 4);
             controladorExclPort.excluirPortaria(portaria);
 
@@ -132,8 +130,16 @@ public class ControladorExclPortTest {
         }
 
         try{
-            // Portaria sem data final de vigência, proposta, sem portarias referenciadas e com designados (INF201813):
+            // Portaria proposta, sem portarias referenciadas e com designados (INF201813):
             portaria = portariaDAO.buscar((long) 8);
+            controladorExclPort.excluirPortaria(portaria);
+        }catch(Exception ex){
+            System.out.println("Erro ao excluir portaria proposta com designados");
+        }
+        
+         try{
+            // Portaria proposta, com portarias referenciadas e com designados (INF201816):
+            portaria = portariaDAO.buscar((long) 11);
             controladorExclPort.excluirPortaria(portaria);
         }catch(Exception ex){
             System.out.println("Erro ao excluir portaria proposta com designados");
@@ -225,7 +231,8 @@ public class ControladorExclPortTest {
         Designado designado = new Designado();
         Pessoa pessoa = pessoaDAO.buscar(Long.parseLong(dados[6]));
         Portaria portaria = portariaDAO.buscar(Long.parseLong(dados[5]));
-        
+        List<Designado> designados = portaria.getDesignados() == null ? new ArrayList<Designado>() : portaria.getDesignados();
+
         designado.setId(Long.parseLong(dados[0]));
         designado.setDtCienciaDesig(new Date(dados[1]));
         designado.setDescrFuncDesig(dados[2]);
@@ -248,6 +255,7 @@ public class ControladorExclPortTest {
     public static void trataDadosDaPortariaReferenciadaParaPersistencia(String dados[]){
         Referencia referenciada = new Referencia();
         Portaria portaria = portariaDAO.buscar(Long.parseLong(dados[2]));
+        List<Referencia> listaReferencias = portaria.getReferencias() == null ? new ArrayList<Referencia>() : portaria.getReferencias();
         
         referenciada.setId(Long.parseLong(dados[0]));
         referenciada.setReferencia(portaria);
