@@ -125,75 +125,44 @@ public class ControladorEmtRelTest {
 
         Long id = listaDesignados.get(0).getId();
 
-        boolean existe = controladorEmtRel.portariaExiste(id);
+        boolean existe = controladorEmtRel.buscarDesignado(id);
 
         Assert.assertTrue(existe);
     }
 
     @Test
-    public void casoBuscarListaDesignados(List <Designado> designados) throws ParseException {
-       List<String> listaDesignados = new ArrayList<>();
+    public void buscarPortariasPorAnoTest(){
+        int ano= 2018;
 
-       DesignadoDAO designadoDAO = new DesignadoDAO();
-        Designado designado = new Designado();
-        List<String> listaDesignadoslist = new ArrayList<>();
-        for (Designado designadofor: designados){
-            String acharDesigNome = designado.getDesignado().getNomePes();
-            if(acharDesigNome != ""){
-                listaDesignadoslist.add(acharDesigNome);
-            }
-        }
-
-        boolean existe = listaDesignados.contains(designado);
-
-        Assert.assertTrue(existe);
+        List<Portaria> lista = controladorEmtRel.buscarPortarias(ano);
+        Assert.assertEquals(3, lista.size());
+        Assert.assertEquals("Novo coordenador e vice-coordenador de curso", lista.get(0).getAssunto());
+        Assert.assertEquals("Novo presidente do NDE", lista.get(1).getAssunto());
+        Assert.assertEquals("Criação da Liga INF, IME e FEF", lista.get(2).getAssunto());
+    }
 
 
+    @Test
+    public void buscarListaUnidadeAdministrativa(){
 
+        List<UndAdm> lista = controladorEmtRel.buscarUnidadesAdministrativas();
+        Assert.assertEquals(3, lista.size());
+        Assert.assertEquals("Instituto de Informática", lista.get(0).getNomeUnd());
+        Assert.assertEquals("Instituto de Matemática", lista.get(1).getNomeUnd());
+        Assert.assertEquals("Faculdade de Educação Física", lista.get(2).getNomeUnd());
     }
 
     @Test
-    public void casoBuscarListaUndAdm(List <UndAdm> UndAdm) throws ParseException {
-        List<String> listaUnd = new ArrayList<>();
+    public void buscarListaDesignados(){
 
-        UndAdmDAO undAdmDAO = new UndAdmDAO();
-        List<String> listaDesignadoslist = new ArrayList<>();
-        for (UndAdm undAdm: UndAdm){
-            String acharDesigNome = undAdm.getNomeUnd();
-            if(acharDesigNome != ""){
-                listaDesignadoslist.add(acharDesigNome);
-            }
-        }
-
-        boolean existe = listaDesignadoslist.contains(UndAdm);
-
-        Assert.assertTrue(existe);
-
-
-
-    }
-
-    @Test
-    public void casoBuscarListaPortaria(List <Portaria> Portaria) throws ParseException {
-        int ANO = 2018;
-        int ANO2 = 2019;
-
-        List<String> listaPorta = new ArrayList<>();
-
-
-        PortariaDAO portariaDAO = new PortariaDAO();
-        List<Integer> listaDesignadoslist = new ArrayList<>();
-        for (Portaria portaria: Portaria){
-            int acharAnoPorta = portaria.getAnoId();
-            if(acharAnoPorta == ANO ){
-                listaDesignadoslist.add(acharAnoPorta);
-            }
-        }
-
-        boolean existe = listaDesignadoslist.contains(Portaria);
-
-        Assert.assertTrue(existe);
-
+        List<Designado> lista = controladorEmtRel.buscarDesignados();
+        Assert.assertEquals(6, lista.size());
+        Assert.assertEquals("Coordenar o Curso de ES", lista.get(0).getDescrFuncDesig());
+        Assert.assertEquals("Presidente do NDE", lista.get(1).getDescrFuncDesig());
+        Assert.assertEquals("Vice-coordenador do Curso de ES", lista.get(2).getDescrFuncDesig());
+        Assert.assertEquals("Presidente da Liga INF, IME e FEF", lista.get(3).getDescrFuncDesig());
+        Assert.assertEquals("Presidente suplente da Liga INF, IME e FEF", lista.get(4).getDescrFuncDesig());
+        Assert.assertEquals("Diretor de esportes da FEF", lista.get(5).getDescrFuncDesig());
     }
 
 

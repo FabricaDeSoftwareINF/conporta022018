@@ -7,7 +7,7 @@ import br.ufg.inf.fabrica.conporta022018.persistencia.UndAdmDAO;
 import net.bytebuddy.asm.Advice;
 
 import java.text.ParseException;
-import java.util.List;
+import java.util.*;
 
 
 public class ControladorEmtRel {
@@ -80,7 +80,6 @@ public class ControladorEmtRel {
             boolean existe = portaria.getId() == id;
 
             return existe;
-
             }catch (Exception e){
             throw new IllegalArgumentException("Erro ao buscar dados de designados");
         }
@@ -147,6 +146,27 @@ public class ControladorEmtRel {
                 throw new IllegalArgumentException("Não foi encontrado dados para gerar o relatorio");
         }
         return String = "";
+    }
+
+    public List<Portaria> buscarPortarias(int ano){
+        // Busca apenas as portaria ativas
+        String query = "SELECT p FROM Portaria p WHERE p.dtExped >= :dt_inicio AND p.dtExped <= :dt_fim";
+        Map<String, Object> params = new HashMap<String, Object>();
+
+        Date dt_inicio = new GregorianCalendar(ano, Calendar.JANUARY, 1).getTime();
+        Date dt_fim = new GregorianCalendar(ano, Calendar.DECEMBER, 31).getTime();
+        params.put("dt_inicio", dt_inicio);
+        params.put("dt_fim", dt_fim);
+
+        return this.portariaDAO.pesquisarJPQLCustomizada(query, params);
+    }
+
+    public List<UndAdm> buscarUnidadesAdministrativas(){
+        return this.undAdmDAO.buscarTodos();
+    }
+
+    public List<Designado> buscarDesignados(){
+        return this.designadoDAO.buscarTodos();
     }
 
 }
