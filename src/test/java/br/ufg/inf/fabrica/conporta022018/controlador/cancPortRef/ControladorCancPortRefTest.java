@@ -15,26 +15,30 @@ import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
 import org.junit.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorCancPortRefTest {
-
     private static ControladorCancPortRef controladorCancPortRef;
-    private static ArrayList<Portaria> portarias = new ArrayList();
-    private static ArrayList<Portaria> portariasReferenciadas = new ArrayList();
-
+    private static List<Portaria> portarias = new ArrayList<>();
 
     /*
      * Preparação do ambiente para teste.
      * População do banco de Dados para atendam os pré-requisitos da seção de caso de uso.
      */
-
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException {
+        PessoaDAO pessoaDAO = new PessoaDAO();
+        UndAdmDAO undAdmDAO = new UndAdmDAO();
+        PortariaDAO portariaDAO = new PortariaDAO();
 
-        String CAMINHO_CSV = "src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/cancPortRef/CancPortRefDadosTest.csv";
+        Pessoa pessoa = null;
+        UndAdm undAdm = null;
+        List<ReferenciaDoCSV> referenciasDoCSV = new ArrayList<>();
+
+        String CAMINHO_CSV = "./src/test/java/br/ufg/inf/fabrica/conporta022018/controlador/cancPortRef/CancPortRefDadosTest.csv";
         String REGRA = ",";
         List<String> dadosSoftware = new ArrayList<>();
         Extrator extrator = new ExtratorCSV();
@@ -42,18 +46,6 @@ public class ControladorCancPortRefTest {
         String tabelaAtual = " ";
         String dados[];
         String linha;
-
-        // Criar as instâncias de todos os objetos DAO's necessários para preparar o cenario.
-
-        PessoaDAO pessoaDAO = new PessoaDAO();
-        UndAdmDAO undAdmDAO = new UndAdmDAO();
-        PortariaDAO portariaDAO = new PortariaDAO();
-
-        // Objetos utilizados por outros
-
-        Pessoa pessoa = null;
-        UndAdm undAdm = null;
-        ArrayList<ReferenciaCSV> referenciasCSV = new ArrayList();
 
         dadosSoftware = lerArquivo.lerArquivo(CAMINHO_CSV);
 
@@ -67,13 +59,7 @@ public class ControladorCancPortRefTest {
                 continue;
             }
 
-            if (linha.equals("undAdmin")) {
-                tabelaAtual = linha;
-                index++;
-                continue;
-            }
-
-            if (linha.equals("portariaReferenciada")) {
+            if (linha.equals("undAdm")) {
                 tabelaAtual = linha;
                 index++;
                 continue;
@@ -92,11 +78,9 @@ public class ControladorCancPortRefTest {
             }
 
             switch (tabelaAtual) {
-                case "pessoa" :
+                case "pessoa":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-
-                    //Aqui colocar os comandos para popular a tabela pessoa no Banco de Dados.
 
                     pessoa = new Pessoa();
                     pessoa.setNomePes(dados[0]);
@@ -108,18 +92,16 @@ public class ControladorCancPortRefTest {
                     pessoaDAO.abrirTransacao();
 
                     try {
-                        pessoaDAO.salvar(pessoa);
+                        pessoa = pessoaDAO.salvar(pessoa);
                         pessoaDAO.commitarTransacao();
                     } catch (Exception ex) {
                         pessoaDAO.rollBackTransacao();
                     }
 
                     break;
-                case "undAdm" :
+                case "undAdm":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-
-                    //Aqui colocar os comandos para popular a tabela unidade administrativa no Banco de Dados.
 
                     undAdm = new UndAdm();
                     undAdm.setNomeUnd(dados[0]);
@@ -134,36 +116,10 @@ public class ControladorCancPortRefTest {
                     undAdmDAO.abrirTransacao();
 
                     try {
-                        undAdmDAO.salvar(undAdm);
+                        undAdm = undAdmDAO.salvar(undAdm);
                         undAdmDAO.commitarTransacao();
                     } catch (Exception ex) {
                         undAdmDAO.rollBackTransacao();
-                    }
-
-                    break;
-                case "portariaReferenciada" :
-                    extrator.setTexto(linha);
-                    dados = extrator.getResultado(REGRA);
-
-                    // Aqui colocar os comandos para popular a tabela portariaReferenciada no Banco de Dados.
-
-                    Portaria portariaReferenciada = new Portaria();
-                    portariaReferenciada.setSiglaUndId(dados[0]);
-                    portariaReferenciada.setAnoId(Integer.parseInt(dados[1]));
-                    portariaReferenciada.setSeqId(Integer.parseInt(dados[2]));
-                    portariaReferenciada.setStatus(PortariaStatus.valueOf(dados[3]));
-                    portariaReferenciada.setAssunto(dados[4]);
-                    portariaReferenciada.setExpedidor(pessoa);
-                    portariaReferenciada.setUnidadeExpedidora(undAdm);
-
-                    portariaDAO.abrirTransacao();
-
-                    try {
-                        Portaria portariaReferenciadaDoBanco = portariaDAO.salvar(portariaReferenciada);
-                        portariasReferenciadas.add(portariaReferenciadaDoBanco);
-                        portariaDAO.commitarTransacao();
-                    } catch (Exception ex) {
-                        portariaDAO.rollBackTransacao();
                     }
 
                     break;
@@ -171,19 +127,17 @@ public class ControladorCancPortRefTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
 
-                    ReferenciaCSV referenciaCSV = new ReferenciaCSV();
-                    referenciaCSV.setIdPortaria(dados[0]);
-                    referenciaCSV.setIdPortariaReferenciada(dados[1]);
-                    referenciaCSV.setEhCancelamento(Boolean.parseBoolean(dados[2]));
+                    ReferenciaDoCSV referenciaDoCSV = new ReferenciaDoCSV();
+                    referenciaDoCSV.setIdPortaria(dados[0]);
+                    referenciaDoCSV.setIdPortariaReferenciada(dados[1]);
+                    referenciaDoCSV.setEhCancelamento(Boolean.parseBoolean(dados[2]));
 
-                    referenciasCSV.add(referenciaCSV);
+                    referenciasDoCSV.add(referenciaDoCSV);
 
                     break;
-                case "portaria" :
+                case "portaria":
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
-
-                    // Aqui colocar os comandos para popular a tabela portaria no Banco de Dados.
 
                     Portaria portaria = new Portaria();
                     portaria.setSiglaUndId(dados[0]);
@@ -194,25 +148,47 @@ public class ControladorCancPortRefTest {
                     portaria.setExpedidor(pessoa);
                     portaria.setUnidadeExpedidora(undAdm);
 
-                    List<Referencia> referencias = null;
-                    String idLogicoPortaria = portaria.getSiglaUndId() + portaria.getAnoId() + portaria.getSeqId();
+                    List<Referencia> referencias = new ArrayList<>();
 
-                    for (ReferenciaCSV referencia: referenciasCSV) {
-                        if (referencia.getIdPortaria() == idLogicoPortaria) {
-                            String idLogicoPortariaReferenciada = referencia.getIdPortariaReferenciada();
+                    String idLogicoPortaria = getIdLogicoDaProtaria(portaria);
 
-                            for (Portaria p : portariasReferenciadas) {
-                                String idLogico = p.getSiglaUndId() + p.getAnoId() + p.getSeqId();
+                    for (ReferenciaDoCSV referenciaCSV : referenciasDoCSV) {
+                        if (referenciaCSV.getIdPortaria().equals(idLogicoPortaria)) {
+                            String idLogicoPortariaReferenciada = referenciaCSV.getIdPortariaReferenciada();
 
-                                if (idLogico == idLogicoPortariaReferenciada) {
-                                    Referencia r = new Referencia();
-                                    r.setReferencia(p);
-                                    r.setEhCancelamento(referencia.getEhCancelamento());
-                                    referencias.add(r);
+                            for (Portaria portariaReferenciada : portarias) {
+                                String idLogico = getIdLogicoDaProtaria(portariaReferenciada);
+
+                                if (idLogico.equals(idLogicoPortariaReferenciada)) {
+                                    Referencia referencia = new Referencia();
+                                    referencia.setReferencia(portariaReferenciada);
+                                    referencia.setEhCancelamento(referenciaCSV.getEhCancelamento());
+                                    referencias.add(referencia);
                                 }
+
+                                // Identifica a portaria que não deve existir no banco.
+                                if (idLogicoPortariaReferenciada.equals("INF20186")) {
+                                    Portaria portariaNaoSalvaNoBanco = new Portaria();
+                                    portariaNaoSalvaNoBanco.setSiglaUndId("INF");
+                                    portariaNaoSalvaNoBanco.setAnoId(2018);
+                                    portariaNaoSalvaNoBanco.setSeqId(6);
+                                    portariaNaoSalvaNoBanco.setStatus(PortariaStatus.ATIVA);
+                                    portariaNaoSalvaNoBanco.setAssunto("TESTE DE BANCO");
+                                    portariaNaoSalvaNoBanco.setExpedidor(pessoa);
+                                    portariaNaoSalvaNoBanco.setUnidadeExpedidora(undAdm);
+                                    portariaNaoSalvaNoBanco.setReferencias(referencias);
+
+                                    Referencia referencia = new Referencia();
+                                    referencia.setReferencia(portariaNaoSalvaNoBanco);
+                                    referencia.setEhCancelamento(referenciaCSV.getEhCancelamento());
+                                    referencias.add(referencia);
+                                }
+
                             }
                         }
                     }
+
+                    portaria.setReferencias(referencias);
 
                     portariaDAO.abrirTransacao();
 
@@ -231,7 +207,6 @@ public class ControladorCancPortRefTest {
 
     @Before
     public void casoTestPrepararExecucao() {
-
         // Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
 
         controladorCancPortRef = new ControladorCancPortRef();
@@ -251,43 +226,93 @@ public class ControladorCancPortRefTest {
 
         // Grupo de teste DadosValidos
 
-        // O parâmetro para a função será a instância de um Portaria (contendo suas referâncias) ou uma
-        // lista de referências... Isso será confirmado dia 29/12 com os responsáveis pela expedição de portaria.
-        // Apesar disso, os testes abaixo ainda podem ser compreendidos.
+        Long idPortariaOp1 = null;
+        Long idPortariaOp2 = null;
+        Long idPortariaOp3 = null;
 
-        boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(0).getId());
+        for (Portaria portaria: portarias) {
+            String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
+
+            if (idLogicoDaPortaria.equals("INF201810")) {
+                idPortariaOp1 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF201815")) {
+                idPortariaOp2 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF20184")) {
+                idPortariaOp3 = portaria.getId();
+            }
+        }
+
+        boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp1);
+        Assert.assertEquals(true, op1);
         // O cenário acima testa o cancelamento de uma portaria referenciada com indicativo de cancelamento
         // pela portaria em questão.
-        Assert.assertEquals(true, op1);
 
-        boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(1).getId());
+        boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp2);
+        Assert.assertEquals(true, op2);
         // O cenário acima testa o cancelamento de uma portaria referenciada a partir de uma portaria que possui
         // duas portarias referenciadas, onde apenas uma possui indicativo de cancelamento.
-        Assert.assertEquals(true, op2);
 
+        boolean op3 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp3);
+        Assert.assertEquals(true, op3);
+        // O cenário acima testa a chamada do método com uma portaria que não possue referências.
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void casoTestDadosExcecoes() throws Exception {
 
         // Grupo de teste DadosExceções.
 
-        boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada((long) 2);
-        // O cenario acima testa parâmetro inválido. A exceção esperada é IllegalArgumentException
+        Long idPortariaOp2 = null;
+        Long idPortariaOp3 = null;
+        Long idPortariaOp4 = null;
+        Long idPortariaOp5 = null;
+
+        for (Portaria portaria: portarias) {
+            String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
+
+            if (idLogicoDaPortaria.equals("INF20185")) {
+                idPortariaOp2 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF201812")) {
+                idPortariaOp3 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF201813")) {
+                idPortariaOp4 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF20187")) {
+                idPortariaOp5 = portaria.getId();
+            }
+
+        }
 
         // A exeção atribuida para as chamadas abaixo é UnsupportedOperationException, mas um tipo de Error
         // expecífico pode ser implemantado e utilizado posteriormente.
 
-        boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada((long) 32);
+        boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada((long) -1);
         // O cenario acima testa a primeira exceção da seção de caso de uso, onde a portaria não é localizada na base de dados.
 
-        boolean op3 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(2).getId());
+        boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp2);
+        // O cenario acima testa um dos itens da regra de negócio da seção de caso de uso, PortVali , onde a portaria possui status
+        // diferente de "Ativa".
+
+        boolean op3 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp3);
         // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
         // cancelamento possui o status "Cancelada".
 
-        boolean op4 = controladorCancPortRef.cancelarPortariaReferenciada(portarias.get(3).getId());
+        boolean op4 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp4);
         // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
         // cancelamento possui o status "Proposta".
+
+        boolean op5 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp5);
+        // O cenario acima testa um dos itens da regra de negócio da seção de caso de uso, PortVali , onde a portaria uma
+        // das portarias que são referenciadas não existe no banco.
 
         // As variáveis de retorno não seram utilizadas pois a execução dos métodos vão gerar exceções.
     }
@@ -299,24 +324,50 @@ public class ControladorCancPortRefTest {
         // Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
         // irá fica as suas pós-condições.
 
+        Long idPortariaCanceladaOp1 = null;
+        Long idPortariaCanceladaOp2 = null;
+        Long idPortariaNaoCanceladaOp2 = null;
+
+        for (Portaria portaria: portarias) {
+            String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
+
+            if (idLogicoDaPortaria.equals("INF20180")) {
+                idPortariaCanceladaOp1 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF201814")) {
+                idPortariaCanceladaOp2 = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF201811")) {
+                idPortariaNaoCanceladaOp2 = portaria.getId();
+            }
+        }
+
         // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos,
         // onde a portaria referenciada teve o status alterado para cancelada.
-        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(portariasReferenciadas.get(0).getId()).getStatus());
+        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(idPortariaCanceladaOp1).getStatus());
 
         // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos,
         // onde a primeira portaria referenciada teve o status alterado para cancelada e
         // a segunda, que não contia indicativo de cancelamento, permanece com o status inalterado.
-        Assert.assertEquals(PortariaStatus.ATIVA, portariaDAO.buscar(portariasReferenciadas.get(3).getId()));
-        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(portariasReferenciadas.get(4).getId()).getStatus());
+        Assert.assertEquals(PortariaStatus.ATIVA, portariaDAO.buscar(idPortariaNaoCanceladaOp2).getStatus());
+        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(idPortariaCanceladaOp2).getStatus());
 
         // Como o caso de uso realiza alterações nos dados manipulados apenas caso exceções não sejam lançadas, verificar
         // o resultado das chamadas que geram exceção é basicamente averiguar a igualdade das portarias
         // manipuladas antes e depois da chamada do método.
     }
 
+    // Método auxiliar utilizado para obter o id lógico
+    // a partir de uma instaância de Portaria.
+    private static String getIdLogicoDaProtaria(Portaria portaria) {
+        return portaria.getSiglaUndId() + portaria.getAnoId() + portaria.getSeqId();
+    }
+
     // Classe auxiliar utilizada para mapear o relacionamento
     // de referência entre as portarias.
-    private static class ReferenciaCSV {
+    private static class ReferenciaDoCSV {
         private String idPortaria;
         private String idPortariaReferenciada;
         private boolean ehCancelamento;
