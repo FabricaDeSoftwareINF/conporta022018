@@ -152,8 +152,7 @@ public class ControladorDisc {
 
             Matricula matricula = discente.get(discente.size() - 1);
 
-            matricula.setDtFimMatrCur(dtFinalMatrCur);
-            matricula.setDtFimMatrCur(dtFinalMatrCur);
+            matricula.setDtIniMatrCur(cdIniMatrCur);
 
             pessoaDAO.abrirTransacao();
             pessoaDAO.salvar(pessoa);
