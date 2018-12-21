@@ -7,8 +7,6 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
  * @since 1.0
  */
 public enum Cargo {
-    CHEFIA,
-    COORDENADOR_ADM,
-    SUBSTITUTO;
+
 
 }

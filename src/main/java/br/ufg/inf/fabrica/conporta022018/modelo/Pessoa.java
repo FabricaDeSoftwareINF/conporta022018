@@ -2,7 +2,6 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,24 +14,12 @@ public class Pessoa extends ModeloAbstrato {
     private String emailPes;
     private String senhaUsu;
     private Boolean ehUsuAtivo;
-
-    @ManyToMany(cascade= {CascadeType.ALL})
-    @JoinColumn(name ="gestao_id")
+    @OneToMany
     private List<Gestao> gestao;
-
-    @ManyToMany(cascade= {CascadeType.ALL})
-    @JoinColumn(name ="servidor_id")
-    private List<Lotacao> servidor;
-
-    @ManyToMany(cascade= {CascadeType.ALL})
-    @JoinColumn(name ="discente_id")
+    @OneToOne
+    private Lotacao servidor;
+    @OneToMany
     private List<Matricula> discente;
-
-    public Pessoa(){
-        this.gestao = new ArrayList<>();
-        this.servidor = new ArrayList<>();
-        this.discente = new ArrayList<>();
-    }
 
     public String getNomePes() {
         return nomePes;
@@ -58,6 +45,10 @@ public class Pessoa extends ModeloAbstrato {
         this.emailPes = emailPes;
     }
 
+    public String getSenhaUsu() {
+        return senhaUsu;
+    }
+
     public void setSenhaUsu(String senhaUsu) {
         this.senhaUsu = senhaUsu;
     }
@@ -70,10 +61,6 @@ public class Pessoa extends ModeloAbstrato {
         if(!credential.isEmpty() && credential.length() >= 6)
             return  true;
         return false;
-    }
-
-    public String getSenhaUsu() {
-        return this.senhaUsu;
     }
 
     public void setEhUsuAtivo(Boolean ehUsuAtivo) {
@@ -93,10 +80,10 @@ public class Pessoa extends ModeloAbstrato {
     }
 
     public void setServidor(Lotacao servidor) {
-        this.servidor.add(servidor);
+        this.servidor = servidor;
     }
 
-    public List<Lotacao> getServidor() {
+    public Lotacao getServidor() {
         return this.servidor;
     }
 

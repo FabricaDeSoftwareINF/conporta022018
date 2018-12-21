@@ -1,15 +1,18 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
-//import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-//import javax.validation.constraints.PastOrPresent;
 
 /**
  * Modelo da Entidade de Lotação.
@@ -42,8 +45,8 @@ public class Lotacao extends ModeloAbstrato {
   @Column
   private Cargo cargoServ;
 
-  @ManyToOne(cascade= {CascadeType.ALL})
-  @JoinColumn(name ="undAdm_id")
+  @JoinColumn
+  @ManyToOne
   private UndAdm undAdm;
 
   public Date getDtIniLotServ() {

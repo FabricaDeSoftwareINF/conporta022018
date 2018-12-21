@@ -1,26 +1,28 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table
-public class UndAdm extends ModeloAbstrato {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class UndAdm extends ModeloAbstrato{
 
     private String siglaUnAdm;
     private Integer minInat;
     private String nomeUnd;
-    private TipoUnd tipoUnd;
+    private Integer tipoUnd;
     private String ultPort;
     private Integer anoPort;
     private Integer ultNumExped;
     private Integer ultNumProp;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany
     private List<UndAdm> subordinadas;
 
     /**
@@ -68,14 +70,14 @@ public class UndAdm extends ModeloAbstrato {
     /**
      * @return Integer return the tipoUnd
      */
-    public TipoUnd getTipoUnd() {
+    public Integer getTipoUnd() {
         return tipoUnd;
     }
 
     /**
      * @param tipoUnd the tipoUnd to set
      */
-    public void setTipoUnd(TipoUnd tipoUnd) {
+    public void setTipoUnd(Integer tipoUnd) {
         this.tipoUnd = tipoUnd;
     }
 

@@ -1,21 +1,17 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import com.sun.istack.internal.NotNull;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-@Table
 public class Permissao extends ModeloAbstrato {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
-    @Column
     private String urlFuncionalidade;
-    @NotNull
-    @Column
     private String operacao;
 
     public String getUrlFuncionalidade() {

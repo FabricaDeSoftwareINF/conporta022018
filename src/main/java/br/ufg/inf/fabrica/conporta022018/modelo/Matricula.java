@@ -2,6 +2,8 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import java.util.Date;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table
@@ -9,8 +11,8 @@ public class Matricula extends ModeloAbstrato{
 
     private static final long serialVersionUID = 1343L;
 
-    @ManyToOne(cascade= {CascadeType.ALL})
-    @JoinColumn(name ="curso_id")
+    @JoinColumn
+    @ManyToOne
     private Curso curso;
 
     @Column
@@ -22,7 +24,7 @@ public class Matricula extends ModeloAbstrato{
 
     @Temporal(TemporalType.DATE)
     @Column
-    private Date dtIniMatrCur;
+    private Date cdIniMatrCur;
 
 
     public Curso getCurso() {
@@ -49,11 +51,11 @@ public class Matricula extends ModeloAbstrato{
         this.dtFimMatrCur = dtFimMatrCur;
     }
 
-    public Date getDtIniMatrCur() {
-        return dtIniMatrCur;
+    public Date getCdIniMatrCur() {
+        return cdIniMatrCur;
     }
 
-    public void setDtIniMatrCur(Date cdIniMatrCur) {
-        this.dtIniMatrCur = cdIniMatrCur;
+    public void setCdIniMatrCur(Date cdIniMatrCur) {
+        this.cdIniMatrCur = cdIniMatrCur;
     }
 }
