@@ -15,9 +15,15 @@
 
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+<<<<<<< HEAD
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/COMPORTA" />
       <property name="javax.persistence.jdbc.user" value="root" />
       <property name="javax.persistence.jdbc.password" value="root" />
+=======
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/CONPORTA" />
+      <property name="javax.persistence.jdbc.user" value="root" />
+      <property name="javax.persistence.jdbc.password" value="lisoliso" />
+>>>>>>> 06e0b4e60c7f22e13f5cf2452b6f67aa9cab9723
 
       <!-- propriedades do hibernate -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

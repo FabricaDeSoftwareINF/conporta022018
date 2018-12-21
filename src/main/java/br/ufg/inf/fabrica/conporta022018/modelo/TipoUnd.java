@@ -17,4 +17,8 @@ public enum TipoUnd {
     public String getTipo() {
         return tipo;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 06e0b4e60c7f22e13f5cf2452b6f67aa9cab9723
 }
