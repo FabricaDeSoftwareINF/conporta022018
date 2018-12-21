@@ -25,7 +25,7 @@ public class ControladorEdiTemTimTest {
     /*
      * Preparação do ambiente para teste.
      * População do banco de Dados para atendam os pré-requisitos do caso de uso.
-     */
+     *//*
 
     @BeforeClass
     public static void casoTestPepararCenario() throws IOException {
@@ -71,14 +71,14 @@ public class ControladorEdiTemTimTest {
         controladorEdiTemTim = new ControladorManterUndAdm();
     }
 
-    /*
+    *//*
      * Criar os cenários de testes para a aplicação:
      * Os cenarios de testes devem obrigatóriamente ser divididos em dois grupos.
      * DadosValidos : Grupo destinado ao cenatio típico e aos cenarios alternativos do caso de uso.
      * DadosExcecoes : Grupo destinado as exceções do cenario típico e dos cenarios alternativos.
      * Cada cenário e cada exceção deve necessáriamente ser testado no minimo uma vez, cada entrada e/ou combinação
      * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
-     */
+     *//*
 
     @Test
     public void casoTestDadosValidos() throws IOException {
@@ -131,6 +131,6 @@ public class ControladorEdiTemTimTest {
         // a data de hoje.
 
         //Assert.assertEquals(dataHoje, rodaSQLparaPegarADataGravadaNoBancoDeDados);
-    }
+    }*/
 
 }

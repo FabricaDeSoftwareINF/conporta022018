@@ -372,6 +372,7 @@ public class ControladorEncPortTest {
             }
         }
 
+
         // O cenário abaixo testa o caso de uso considerando uma portaria não válida,
         // tendo status sendo "EXPIRADA"
         boolean op1 = controladorEncPort.portariaIsValida(idPortariaOp1);
@@ -419,4 +420,3 @@ public class ControladorEncPortTest {
     }
 
 }
-
