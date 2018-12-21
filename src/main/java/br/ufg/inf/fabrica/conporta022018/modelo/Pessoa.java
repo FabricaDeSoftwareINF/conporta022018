@@ -15,12 +15,24 @@ public class Pessoa extends ModeloAbstrato {
     private String emailPes;
     private String senhaUsu;
     private Boolean ehUsuAtivo;
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List<Gestao> gestao = new ArrayList<>();
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List<Lotacao> servidor = new ArrayList<>();
-    @ManyToMany(cascade = {CascadeType.ALL})
-    private List<Matricula> discente = new ArrayList<>();
+
+    @ManyToMany(cascade= {CascadeType.ALL})
+    @JoinColumn(name ="gestao_id")
+    private List<Gestao> gestao;
+
+    @ManyToMany(cascade= {CascadeType.ALL})
+    @JoinColumn(name ="servidor_id")
+    private List<Lotacao> servidor;
+
+    @ManyToMany(cascade= {CascadeType.ALL})
+    @JoinColumn(name ="discente_id")
+    private List<Matricula> discente;
+
+    public Pessoa(){
+        this.gestao = new ArrayList<>();
+        this.servidor = new ArrayList<>();
+        this.discente = new ArrayList<>();
+    }
 
     public String getNomePes() {
         return nomePes;
@@ -46,10 +58,6 @@ public class Pessoa extends ModeloAbstrato {
         this.emailPes = emailPes;
     }
 
-    public String getSenhaUsu() {
-        return senhaUsu;
-    }
-
     public void setSenhaUsu(String senhaUsu) {
         this.senhaUsu = senhaUsu;
     }
@@ -62,6 +70,10 @@ public class Pessoa extends ModeloAbstrato {
         if(!credential.isEmpty() && credential.length() >= 6)
             return  true;
         return false;
+    }
+
+    public String getSenhaUsu() {
+        return this.senhaUsu;
     }
 
     public void setEhUsuAtivo(Boolean ehUsuAtivo) {
