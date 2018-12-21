@@ -81,10 +81,10 @@ public class Pessoa extends ModeloAbstrato {
     }
 
     public void setServidor(Lotacao servidor) {
-        this.servidor.add(servidor);
+        this.servidor = servidor;
     }
 
-    public List<Lotacao> getServidor() {
+    public Lotacao getServidor() {
         return this.servidor;
     }
 

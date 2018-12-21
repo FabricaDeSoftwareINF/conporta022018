@@ -5,11 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class UndAdm {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class UndAdm extends ModeloAbstrato{
 
     private String siglaUnAdm;
     private Integer minInat;
