@@ -8,14 +8,8 @@ package br.ufg.inf.fabrica.conporta022018.controlador;
 
 import br.ufg.inf.fabrica.conporta022018.modelo.Designado;
 import br.ufg.inf.fabrica.conporta022018.modelo.Portaria;
-import br.ufg.inf.fabrica.conporta022018.modelo.PortariaStatus;
-import br.ufg.inf.fabrica.conporta022018.persistencia.DesignadoDAO;
 import br.ufg.inf.fabrica.conporta022018.persistencia.PortariaDAO;
-import sun.security.krb5.internal.crypto.Des;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,7 +25,7 @@ public class ControladorNotifPortSemCiencia {
 
         if (emails.size()>0) {
 
-            javaMail.enviarEmail(emails, "Você possui pendências de ciência da plataforma Conporta:\n");
+            javaMail.enviarEmailNPSC(emails, "Você possui pendências de ciência da plataforma Conporta:\n");
 
         }
     }

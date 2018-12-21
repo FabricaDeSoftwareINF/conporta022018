@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class JavaMail {
 
-    public void enviarEmail(List<String> emails, String mensagem)
+    public void enviarEmailNPSC(List<String> emails, String mensagem)
     {
         Properties props = new Properties();
         /** Parâmetros de conexão com servidor Gmail */
