@@ -13,7 +13,7 @@ import br.ufg.inf.fabrica.conporta022018.util.Extrator;
 import br.ufg.inf.fabrica.conporta022018.util.LerArquivo;
 import br.ufg.inf.fabrica.conporta022018.util.csv.ExtratorCSV;
 import org.junit.*;
-import org.mockito.Mockito;
+
 
 import java.io.IOException;
 
@@ -28,7 +28,7 @@ import java.util.List;
  * Classe tem o intuito de exercitar o controlador referente aos casos de uso:
  *   1. ManterDisc;
  */
-public class ControladorManterDiscTest extends Mockito {
+public class ControladorManterDiscTest {
 
     private static ControladorDisc controladorDisc = new ControladorDisc();
     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");

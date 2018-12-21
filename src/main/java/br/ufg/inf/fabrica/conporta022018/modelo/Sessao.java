@@ -9,11 +9,14 @@ import java.util.List;
  * @author Breno Gomes
  */
 
+@Entity
 public class Sessao extends ModeloAbstrato  {
 
     private static final long serialVersionUID = 1L;
 
     private Long timeOut;
+
+    @ManyToMany
     private List<Permissao> permissoes;
 
 
