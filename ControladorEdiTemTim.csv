@@ -1,9 +1,5 @@
 undAdm
 PKundAdm,nomeUnd, siglaUnd, tipoUnd, minInat, ultPort, anoPort, ultNumExped, ultNumProp
-<<<<<<< HEAD
-1,Instituto de Informática, INF, Unidade Acadêmica,15,2018001,2018,1,-1
-2,Instituto de Matemática,IME, Unidade Acadêmica,15,2018002,2018,1,-1
-=======
 1,Instituto de Informatica,INF, Unidade Academica,25,2018001,2018,1,-1
 2,Instituto de Matematica e Estatistica,IME, Unidade Academica,35,2018002,2018,1,-1
 3,Faculdade de ártes visuais,FAV, Unidade Academica,40,2018003,2018,1,-1
@@ -22,4 +18,3 @@ PKundAdm,nomeUnd, siglaUnd, tipoUnd, minInat, ultPort, anoPort, ultNumExped, ult
 16,Faculdade de Enfermagem ,FEN, Unidade Academica,30,20180016,2018,1,-1
 17,Faculdade de Administração Ciências Contábeis e Ciências Econômicas ,FACE, Unidade Academica,30,20180016,2018,1,-1
 18,Faculdade de Filosofia ,FAFIL, Unidade Academica,30,20180018,2018,1,-1
->>>>>>> ediTemTim
