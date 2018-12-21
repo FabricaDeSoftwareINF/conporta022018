@@ -37,7 +37,7 @@ public class ConnectionFactory {
   public static EntityManager obterManager() {
     EntityManager em = threadLocal.get();
 
-    if (em == null || !em.isOpen()) {
+    if (em == null) {
       em = emf.createEntityManager();
       threadLocal.set(em);
     }

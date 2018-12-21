@@ -73,7 +73,7 @@
             <artifactId>mail</artifactId>
             <version>1.4</version>
         </dependency>
-        
+
         <!--Testes-->
         <dependency>
             <groupId>junit</groupId>
@@ -81,6 +81,19 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
+        <!--Validador-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.4.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+
 
         <!--JPA-->
         <dependency>
@@ -152,7 +165,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JSF -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
@@ -236,11 +248,6 @@
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
-            <version>2.2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-impl</artifactId>
             <version>2.2.4</version>
         </dependency>
 
@@ -316,10 +323,9 @@
 
         <!--JPA-->
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.9.5</version>
-            <scope>test</scope>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
         </dependency>
 
 
@@ -357,9 +363,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>8</source>
+                    <target>8</target>
                     <compilerArguments>
+                        <!--suppress UnresolvedMavenProperty -->
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
                 </configuration>

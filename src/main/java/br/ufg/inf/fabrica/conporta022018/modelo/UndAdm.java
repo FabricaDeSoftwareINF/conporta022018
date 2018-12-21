@@ -5,7 +5,11 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class UndAdm extends ModeloAbstrato{
+public class UndAdm {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String siglaUnAdm;
     private Integer minInat;
@@ -16,7 +20,7 @@ public class UndAdm extends ModeloAbstrato{
     private Integer ultNumExped;
     private Integer ultNumProp;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<UndAdm> subordinadas;
 
     /**
