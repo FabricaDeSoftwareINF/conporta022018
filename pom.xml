@@ -10,7 +10,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-
+    
     <dependencies>
         <!-- JSF -->
         <dependency>
@@ -33,7 +33,7 @@
             <artifactId>primefaces</artifactId>
             <version>6.1</version>
         </dependency>
-
+        
         <!--Autenticação e autorização-->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -45,19 +45,14 @@
             <artifactId>spring-security-config</artifactId>
             <version>5.0.4.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>5.0.4.RELEASE</version>
-        </dependency>
-
+        
         <!--Envio de email-->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4</version>
         </dependency>
-
+        
         <!--Testes-->
         <dependency>
             <groupId>junit</groupId>
@@ -74,31 +69,15 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>5.4.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.4.0.CR2</version>
+            <version>4.3.1.Final</version>
         </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-
-
+        
         <!--Conexão com banco-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.41</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
         </dependency>
 
     </dependencies>
