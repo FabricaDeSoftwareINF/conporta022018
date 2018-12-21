@@ -10,7 +10,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-
+    
     <dependencies>
         <!-- JSF -->
         <dependency>
@@ -33,7 +33,7 @@
             <artifactId>primefaces</artifactId>
             <version>6.1</version>
         </dependency>
-
+        
         <!--Autenticação e autorização-->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -45,19 +45,14 @@
             <artifactId>spring-security-config</artifactId>
             <version>5.0.4.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>5.0.4.RELEASE</version>
-        </dependency>
-
+        
         <!--Envio de email-->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4</version>
         </dependency>
-
+        
         <!--Testes-->
         <dependency>
             <groupId>junit</groupId>
