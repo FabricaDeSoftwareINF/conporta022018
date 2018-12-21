@@ -21,7 +21,7 @@ public class Referencia extends ModeloAbstrato {
     }
 
     /**
-     * @param Referencia the Referencia to set
+     * @param portariaReferenciada the Referencia to set
      */
     public void setReferencia(Portaria portariaReferenciada) {
         this.portariaReferenciada = portariaReferenciada;

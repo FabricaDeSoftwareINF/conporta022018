@@ -1,34 +1,19 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import java.util.Date;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Gestao extends ModeloAbstrato {
 
-    @Column
-    @Temporal(TemporalType.DATE)
-    @NotNull
     private Date dtInicio;
-    @Column
-    @Temporal(TemporalType.DATE)
-    @NotNull
     private Date dtFim;
-    @Column
-    @Temporal(TemporalType.DATE)
-    @NotNull
     private Date dtIniSubChefe;
-    @Column
-    @Temporal(TemporalType.DATE)
-    @NotNull
     private Date dtFimSubChefe;
-
-    @ManyToOne(cascade= {CascadeType.ALL})
-    @JoinColumn(name ="unAdm_id")
+    
+    @ManyToOne
     private UndAdm unAdm;
-
     private Tipo funcao;
     private Tipo tipo;
 

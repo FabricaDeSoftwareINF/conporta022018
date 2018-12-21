@@ -1,7 +1,5 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
@@ -68,23 +66,23 @@ public class Portaria extends ModeloAbstrato {
     private PortariaStatus status;
 
     @JoinColumn
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany
     private List<Referencia> referencias;
 
     @JoinColumn
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany
     private List<Recebedora> undRecebedora;
 
     @JoinColumn
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Designado> designados;
 
     @JoinColumn
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     private Pessoa expedidor;
 
     @JoinColumn
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     private UndAdm unidadeExpedidora;
 
     public int getAnoId() {
