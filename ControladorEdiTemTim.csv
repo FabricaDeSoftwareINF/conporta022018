@@ -1,0 +1,20 @@
+undAdm
+PKundAdm,nomeUnd, siglaUnd, tipoUnd, minInat, ultPort, anoPort, ultNumExped, ultNumProp
+1,Instituto de Informatica,INF, Unidade Academica,25,2018001,2018,1,-1
+2,Instituto de Matematica e Estatistica,IME, Unidade Academica,35,2018002,2018,1,-1
+3,Faculdade de ártes visuais,FAV, Unidade Academica,40,2018003,2018,1,-1
+4,Escola de Engenharia Eletrica Mecanica e Computacao,EMC, Unidade Academica,20,2018004,2018,1,-1
+5,Instituto de Estudos Socioambientais,IESA, Unidade Academica,20,2018005,2018,1,-1
+6,Faculdade de Direito,FD, Unidade Academica,35,2018006,2018,1,-1
+7,Instituto de Física,IF, Unidade Academica,50,2018007,2018,1,-1
+8,Instituto de Química,IQ, Unidade Academica,25,2018008,2018,1,-1
+9,Instituto de Ciências Biológicas ,ICB, Unidade Academica,30,2018009,2018,1,-1
+10,Faculdade de Letras ,FL, Unidade Academica,30,20180010,2018,1,-1
+11,Faculdade de Farmácia ,FF, Unidade Academica,50,20180011,2018,1,-1
+12,Faculdade de Medicina ,FM, Unidade Academica,50,20180012,2018,1,-1
+13,Escola de Engenharia Civil e Ambiental ,EECA, Unidade Academica,30,20180013,2018,1,-1
+14,Escola de Agronomia ,EA, Unidade Academica,15,20180014,2018,1,-1
+15,Escola de Veterinária e Zootecnia ,EVZ, Unidade Academica,60,20180015,2018,1,-1
+16,Faculdade de Enfermagem ,FEN, Unidade Academica,30,20180016,2018,1,-1
+17,Faculdade de Administração Ciências Contábeis e Ciências Econômicas ,FACE, Unidade Academica,30,20180016,2018,1,-1
+18,Faculdade de Filosofia ,FAFIL, Unidade Academica,30,20180018,2018,1,-1
