@@ -2,14 +2,7 @@ package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import java.util.Date;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -22,7 +15,7 @@ public class Recebedora extends ModeloAbstrato {
     private Date dtCienciaReeb;
     
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private UndAdm unidadeRecebedora;
 
     public void setDtCienciaReeb(Date dtCienciaReeb){

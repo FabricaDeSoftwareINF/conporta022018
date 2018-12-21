@@ -1,5 +1,6 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
+
 import java.util.Date;
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Designado extends ModeloAbstrato{
+public class Designado extends ModeloAbstrato {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,7 +22,7 @@ public class Designado extends ModeloAbstrato{
     private int horasDefFuncDesig;
     private int horasExecFuncDesig;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Pessoa designado;
     private FuncaoDesig tipFuncDesig;
 
