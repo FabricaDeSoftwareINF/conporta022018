@@ -78,6 +78,7 @@ public class ControladorManterDiscTest {
                     extrator.setTexto(linha);
                     dados = extrator.getResultado(REGRA);
 
+                    
                     usuario.setNomePes(dados[0]);
                     usuario.setCpfPes(dados[1]);
                     usuario.setEmailPes(dados[2]);
