@@ -26,7 +26,7 @@ public class ConnectionFactory {
    */
   private ConnectionFactory() {
     throw new java.lang.UnsupportedOperationException(
-        "Essa é uma classe utilitária e não pode ser inicializada!");
+            "Essa é uma classe utilitária e não pode ser inicializada!");
   }
 
   /**
@@ -37,7 +37,7 @@ public class ConnectionFactory {
   public static EntityManager obterManager() {
     EntityManager em = threadLocal.get();
 
-    if (em == null || !em.isOpen()) {
+    if (em == null) {
       em = emf.createEntityManager();
       threadLocal.set(em);
     }
