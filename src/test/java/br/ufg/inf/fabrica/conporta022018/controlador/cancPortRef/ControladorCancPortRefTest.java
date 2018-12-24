@@ -205,168 +205,231 @@ public class ControladorCancPortRefTest {
         }
     }
 
+    /*
+     * Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
+     */
     @Before
-    public void casoTestPrepararExecucao() {
-        // Neste Grupo ficará tudo que é necessário para a execução dos cenarios definidos para os testes.
-
+    public void prepararExecucao() {
         controladorCancPortRef = new ControladorCancPortRef();
     }
 
+    /* GRUPO DE TESTES COM DADOS VÁLIDOS */
+
     /*
-     * Criar os cenários de testes para a aplicação:
-     * Os cenarios de testes devem obrigatóriamente ser divididos em dois grupos.
-     * DadosValidos : Grupo destinado ao cenatio típico e aos cenarios alternativos da seção de caso de uso.
-     * DadosExcecoes : Grupo destinado as exceções do cenario típico e dos cenarios alternativos.
-     * Cada cenário e cada exceção deve necessáriamente ser testado no minimo uma vez, cada entrada e/ou combinação
-     * de entrada deve ser testadas pelo menos os seus limites quando houver para o G1 e para o G2.
+     * O cenário abaixo testa o cancelamento de uma portaria referenciada com indicativo de cancelamento
+     * pela portaria em questão.
      */
-
     @Test
-    public void casoTestDadosValidos() throws IOException {
+    public void portariaComUmaReferenciaParaCancelar() throws IOException {
+        PortariaDAO portariaDAO = new PortariaDAO();
 
-        // Grupo de teste DadosValidos
-
-        Long idPortariaOp1 = null;
-        Long idPortariaOp2 = null;
-        Long idPortariaOp3 = null;
+        Long idPortaria = null;
+        Long idPortariaCancelada = null;
 
         for (Portaria portaria: portarias) {
             String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
 
             if (idLogicoDaPortaria.equals("INF201810")) {
-                idPortariaOp1 = portaria.getId();
+                idPortaria = portaria.getId();
             }
 
-            if (idLogicoDaPortaria.equals("INF201815")) {
-                idPortariaOp2 = portaria.getId();
-            }
-
-            if (idLogicoDaPortaria.equals("INF20184")) {
-                idPortariaOp3 = portaria.getId();
+            if (idLogicoDaPortaria.equals("INF20180")) {
+                idPortariaCancelada = portaria.getId();
             }
         }
 
-        boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp1);
-        Assert.assertEquals(true, op1);
-        // O cenário acima testa o cancelamento de uma portaria referenciada com indicativo de cancelamento
-        // pela portaria em questão.
+        boolean op = controladorCancPortRef.cancelarPortariaReferenciada(idPortaria);
+        Assert.assertEquals(true, op);
 
-        boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp2);
-        Assert.assertEquals(true, op2);
-        // O cenário acima testa o cancelamento de uma portaria referenciada a partir de uma portaria que possui
-        // duas portarias referenciadas, onde apenas uma possui indicativo de cancelamento.
-
-        boolean op3 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp3);
-        Assert.assertEquals(true, op3);
-        // O cenário acima testa a chamada do método com uma portaria que não possue referências.
+        // Verifica se a portaria referenciada teve o status alterado para cancelada.
+        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(idPortariaCancelada).getStatus());
     }
 
+    /*
+    * O cenário abaixo testa o cancelamento de uma portaria referenciada a partir de uma portaria que possui
+     * duas portarias referenciadas, onde apenas uma possui indicativo de cancelamento.
+     */
+    @Test
+    public void portariaComDuasReferenciasUmaParaCancelar() throws IOException {
+        PortariaDAO portariaDAO = new PortariaDAO();
+
+        Long idPortaria = null;
+        Long idPortariaCancelada = null;
+        Long idPortariaNaoCancelada = null;
+
+        for (Portaria portaria: portarias) {
+            String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
+
+            if (idLogicoDaPortaria.equals("INF201815")) {
+                idPortaria = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF201814")) {
+                idPortariaCancelada = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF201811")) {
+                idPortariaNaoCancelada = portaria.getId();
+            }
+        }
+
+        boolean op = controladorCancPortRef.cancelarPortariaReferenciada(idPortaria);
+        Assert.assertEquals(true, op);
+
+        // Verifica se a primeira portaria referenciada teve o status alterado para cancelada e
+        // a segunda, que não contia indicativo de cancelamento, permanece com o status inalterado.
+        Assert.assertEquals(PortariaStatus.ATIVA, portariaDAO.buscar(idPortariaNaoCancelada).getStatus());
+        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(idPortariaCancelada).getStatus());
+    }
+
+    /*
+     * O cenário abaixo testa a chamada do método com uma portaria que não possue referências.
+     */
+    @Test
+    public void portariaSemReferencias() throws IOException {
+        Long idPortaria = null;
+
+        for (Portaria portaria: portarias) {
+            String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
+
+            if (idLogicoDaPortaria.equals("INF20184")) {
+                idPortaria = portaria.getId();
+            }
+        }
+
+        boolean op = controladorCancPortRef.cancelarPortariaReferenciada(idPortaria);
+        Assert.assertEquals(true, op);
+    }
+
+    /* GRUPO DE TESTES COM DADOS QUE GERAM EXCEÇÃO */
+
+    /*
+     * O cenario abaixo testa a primeira exceção da seção de caso de uso,
+     * onde a portaria não é localizada na base de dados.
+     */
     @Test(expected = UnsupportedOperationException.class)
-    public void casoTestDadosExcecoes() throws Exception {
+    public void excecaoPortariaNaoLocalizada() throws Exception {
+        boolean op = controladorCancPortRef.cancelarPortariaReferenciada((long) -1);
+        Assert.assertEquals(false, op);
+    }
 
-        // Grupo de teste DadosExceções.
-
-        Long idPortariaOp2 = null;
-        Long idPortariaOp3 = null;
-        Long idPortariaOp4 = null;
-        Long idPortariaOp5 = null;
+    /*
+     * O cenario abaixo testa um dos itens da regra de negócio da seção de caso de uso, PortVali, onde a portaria possui status
+     * diferente de "Ativa".
+     */
+    @Test(expected = UnsupportedOperationException.class)
+    public void excecaoPortariaNaoAtiva() throws Exception {
+        Long idPortaria = null;
 
         for (Portaria portaria: portarias) {
             String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
 
             if (idLogicoDaPortaria.equals("INF20185")) {
-                idPortariaOp2 = portaria.getId();
+                idPortaria = portaria.getId();
             }
-
-            if (idLogicoDaPortaria.equals("INF201812")) {
-                idPortariaOp3 = portaria.getId();
-            }
-
-            if (idLogicoDaPortaria.equals("INF201813")) {
-                idPortariaOp4 = portaria.getId();
-            }
-
-            if (idLogicoDaPortaria.equals("INF20187")) {
-                idPortariaOp5 = portaria.getId();
-            }
-
         }
 
-        // A exeção atribuida para as chamadas abaixo é UnsupportedOperationException, mas um tipo de Error
-        // expecífico pode ser implemantado e utilizado posteriormente.
-
-        boolean op1 = controladorCancPortRef.cancelarPortariaReferenciada((long) -1);
-        // O cenario acima testa a primeira exceção da seção de caso de uso, onde a portaria não é localizada na base de dados.
-
-        boolean op2 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp2);
-        // O cenario acima testa um dos itens da regra de negócio da seção de caso de uso, PortVali , onde a portaria possui status
-        // diferente de "Ativa".
-
-        boolean op3 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp3);
-        // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
-        // cancelamento possui o status "Cancelada".
-
-        boolean op4 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp4);
-        // O cenario acima testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
-        // cancelamento possui o status "Proposta".
-
-        boolean op5 = controladorCancPortRef.cancelarPortariaReferenciada(idPortariaOp5);
-        // O cenario acima testa um dos itens da regra de negócio da seção de caso de uso, PortVali , onde a portaria uma
-        // das portarias que são referenciadas não existe no banco.
-
-        // As variáveis de retorno não seram utilizadas pois a execução dos métodos vão gerar exceções.
+        boolean op = controladorCancPortRef.cancelarPortariaReferenciada(idPortaria);
+        Assert.assertEquals(false, op);
     }
 
-    @AfterClass
-    public static void casoTestResultados() throws IOException {
+    /*
+     * O cenario abaixo testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
+     * cancelamento possui o status "Cancelada".
+     */
+    @Test(expected = UnsupportedOperationException.class)
+    public void excecaoReferenciaComPortariaComStatusCancelada() throws Exception {
         PortariaDAO portariaDAO = new PortariaDAO();
 
-        // Aqui deve ser verificado os resultados da exceção do Grupo G1 e G2, normalmente aqui
-        // irá fica as suas pós-condições.
-
-        Long idPortariaCanceladaOp1 = null;
-        Long idPortariaCanceladaOp2 = null;
-        Long idPortariaNaoCanceladaOp2 = null;
+        Long idPortaria = null;
+        Long idPortariaReferenciada = null;
 
         for (Portaria portaria: portarias) {
             String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
 
-            if (idLogicoDaPortaria.equals("INF20180")) {
-                idPortariaCanceladaOp1 = portaria.getId();
+            if (idLogicoDaPortaria.equals("INF201812")) {
+                idPortaria = portaria.getId();
             }
 
-            if (idLogicoDaPortaria.equals("INF201814")) {
-                idPortariaCanceladaOp2 = portaria.getId();
-            }
-
-            if (idLogicoDaPortaria.equals("INF201811")) {
-                idPortariaNaoCanceladaOp2 = portaria.getId();
+            if (idLogicoDaPortaria.equals("INF20182")) {
+                idPortariaReferenciada = portaria.getId();
             }
         }
 
-        // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos,
-        // onde a portaria referenciada teve o status alterado para cancelada.
-        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(idPortariaCanceladaOp1).getStatus());
+        boolean op = controladorCancPortRef.cancelarPortariaReferenciada(idPortaria);
+        Assert.assertEquals(false, op);
 
-        // Verifica a pós-condição do da execução da op1 contida no casoTestDadosValidos,
-        // onde a primeira portaria referenciada teve o status alterado para cancelada e
-        // a segunda, que não contia indicativo de cancelamento, permanece com o status inalterado.
-        Assert.assertEquals(PortariaStatus.ATIVA, portariaDAO.buscar(idPortariaNaoCanceladaOp2).getStatus());
-        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(idPortariaCanceladaOp2).getStatus());
-
-        // Como o caso de uso realiza alterações nos dados manipulados apenas caso exceções não sejam lançadas, verificar
-        // o resultado das chamadas que geram exceção é basicamente averiguar a igualdade das portarias
-        // manipuladas antes e depois da chamada do método.
+        // Verifica se a portaria referenciada permanece com o status inalterado.
+        Assert.assertEquals(PortariaStatus.CANCELADA, portariaDAO.buscar(idPortariaReferenciada).getStatus());
     }
 
-    // Método auxiliar utilizado para obter o id lógico
-    // a partir de uma instaância de Portaria.
+    /*
+     * O cenario abaixo testa a segunda exceção da seção de caso de uso, onde uma das portarias referenciadas para
+     * cancelamento possui o status "Proposta".
+     */
+    @Test(expected = UnsupportedOperationException.class)
+    public void excecaoReferenciaComPortariaComStatusProposta() throws Exception {
+        PortariaDAO portariaDAO = new PortariaDAO();
+
+        Long idPortaria = null;
+        Long idPortariaReferenciada = null;
+
+        for (Portaria portaria: portarias) {
+            String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
+
+            if (idLogicoDaPortaria.equals("INF201813")) {
+                idPortaria = portaria.getId();
+            }
+
+            if (idLogicoDaPortaria.equals("INF20183")) {
+                idPortariaReferenciada = portaria.getId();
+            }
+        }
+
+        boolean op = controladorCancPortRef.cancelarPortariaReferenciada(idPortaria);
+        Assert.assertEquals(false, op);
+
+        // Verifica se a portaria referenciada permanece com o status inalterado.
+        Assert.assertEquals(PortariaStatus.PROPOSTA, portariaDAO.buscar(idPortariaReferenciada).getStatus());
+    }
+
+    /*
+     * O cenario acima testa um dos itens da regra de negócio da seção de caso de uso, PortVali , onde uma
+     * das portarias que são referenciadas não existe no banco.
+     */
+    @Test(expected = UnsupportedOperationException.class)
+    public void excecaoReferenciaComPortariaNaoLocalizada() throws Exception {
+        Long idPortaria = null;
+
+        for (Portaria portaria: portarias) {
+            String idLogicoDaPortaria = getIdLogicoDaProtaria(portaria);
+
+            if (idLogicoDaPortaria.equals("INF20187")) {
+                idPortaria = portaria.getId();
+            }
+        }
+
+        boolean op = controladorCancPortRef.cancelarPortariaReferenciada(idPortaria);
+        Assert.assertEquals(false, op);
+    }
+
+    /*
+     * Como a verificação do estado das portarias no banco já é realizado em cada cenário de teste
+     * a seção `casoTestResultados` não se faz necessária.
+     */
+
+    /*
+     * Método auxiliar utilizado para obter o id lógico
+     * a partir de uma instância de Portaria.
+     */
     private static String getIdLogicoDaProtaria(Portaria portaria) {
         return portaria.getSiglaUndId() + portaria.getAnoId() + portaria.getSeqId();
     }
 
-    // Classe auxiliar utilizada para mapear o relacionamento
-    // de referência entre as portarias.
+    /*
+     * Classe auxiliar utilizada para mapear o relacionamento
+     * de referência entre as portarias.
+     */
     private static class ReferenciaDoCSV {
         private String idPortaria;
         private String idPortariaReferenciada;
