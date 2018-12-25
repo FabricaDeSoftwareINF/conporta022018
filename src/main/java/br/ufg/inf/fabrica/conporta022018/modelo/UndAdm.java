@@ -1,28 +1,41 @@
 package br.ufg.inf.fabrica.conporta022018.modelo;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 public class UndAdm extends ModeloAbstrato{
 
-    private String siglaUnAdm;
-    private Integer minInat;
-    private String nomeUnd;
-    private Integer tipoUnd;
-    private String ultPort;
-    private Integer anoPort;
-    private Integer ultNumExped;
-    private Integer ultNumProp;
+public class UndAdm extends ModeloAbstrato {
+    private static final long serialVersionUID = 1L;
 
-    @OneToMany
+    @Column
+    private String siglaUnAdm;
+
+    @Column
+    private int minInat;
+
+    @Column
+    private String nomeUnd;
+
+    @Column
+    private int tipoUnd;
+
+    @Column
+    private String ultPort;
+
+    @Column
+    private int anoPort;
+
+    @Column
+    private int ultNumExped;
+
+    @Column
+    private int ultNumProp;
+
+    @Column
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<UndAdm> subordinadas;
 
     /**
@@ -42,14 +55,14 @@ public class UndAdm extends ModeloAbstrato{
     /**
      * @return Integer return the minInat
      */
-    public Integer getMinInat() {
+    public int getMinInat() {
         return minInat;
     }
 
     /**
      * @param minInat the minInat to set
      */
-    public void setMinInat(Integer minInat) {
+    public void setMinInat(int minInat) {
         this.minInat = minInat;
     }
 
@@ -70,14 +83,14 @@ public class UndAdm extends ModeloAbstrato{
     /**
      * @return Integer return the tipoUnd
      */
-    public Integer getTipoUnd() {
+    public int getTipoUnd() {
         return tipoUnd;
     }
 
     /**
      * @param tipoUnd the tipoUnd to set
      */
-    public void setTipoUnd(Integer tipoUnd) {
+    public void setTipoUnd(int tipoUnd) {
         this.tipoUnd = tipoUnd;
     }
 
@@ -98,42 +111,42 @@ public class UndAdm extends ModeloAbstrato{
     /**
      * @return Integer return the anoPort
      */
-    public Integer getAnoPort() {
+    public int getAnoPort() {
         return anoPort;
     }
 
     /**
      * @param anoPort the anoPort to set
      */
-    public void setAnoPort(Integer anoPort) {
+    public void setAnoPort(int anoPort) {
         this.anoPort = anoPort;
     }
 
     /**
      * @return Integer return the ultNumExped
      */
-    public Integer getUltNumExped() {
+    public int getUltNumExped() {
         return ultNumExped;
     }
 
     /**
      * @param ultNumExped the ultNumExped to set
      */
-    public void setUltNumExped(Integer ultNumExped) {
+    public void setUltNumExped(int ultNumExped) {
         this.ultNumExped = ultNumExped;
     }
 
     /**
      * @return Integer return the ultNumProp
      */
-    public Integer getUltNumProp() {
+    public int getUltNumProp() {
         return ultNumProp;
     }
 
     /**
      * @param ultNumProp the ultNumProp to set
      */
-    public void setUltNumProp(Integer ultNumProp) {
+    public void setUltNumProp(int ultNumProp) {
         this.ultNumProp = ultNumProp;
     }
 

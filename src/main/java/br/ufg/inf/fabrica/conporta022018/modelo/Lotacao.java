@@ -10,10 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-
 /**
  * Modelo da Entidade de Lotação.
  *
@@ -29,7 +27,6 @@ public class Lotacao extends ModeloAbstrato {
   @Column
   @Temporal(TemporalType.DATE)
   @NotNull
-  @PastOrPresent
   private Date dtIniLotServ;
 
   @Column

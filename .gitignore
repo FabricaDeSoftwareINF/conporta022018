@@ -141,10 +141,6 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
-# Compiled class file
-*.class
-
-# Log file
 *.log
 
 # BlueJ files

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table
@@ -15,7 +16,6 @@ public class Portaria extends ModeloAbstrato {
     private int anoId;
 
     @Column
-    @NotBlank
     private int seqId;
 
     @Column
@@ -23,22 +23,18 @@ public class Portaria extends ModeloAbstrato {
 
     @Column
     @Temporal(TemporalType.DATE)
-    @PastOrPresent
     private Date dtExped;
 
     @Column
     @Temporal(TemporalType.DATE)
-    @FutureOrPresent
     private Date dtIniVig;
 
     @Column
     @Temporal(TemporalType.DATE)
-    @FutureOrPresent
     private Date dtFimVig;
 
     @Column
     @Temporal(TemporalType.DATE)
-    @FutureOrPresent
     private Date dtPublicDou;
 
     @Column
@@ -55,26 +51,28 @@ public class Portaria extends ModeloAbstrato {
     private byte[] arqPdf;
 
     @Column
-    @NotBlank
     private String siglaUndId;
 
     @Column
     private String assinatura;
 
     @Column
-    @NotBlank
     private PortariaStatus status;
 
     @JoinColumn
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+
     @OneToMany(cascade = CascadeType.ALL)
+
     private List<Referencia> referencias;
 
     @JoinColumn
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Recebedora> undRecebedora;
 
     @JoinColumn
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<Designado> designados;
 
     @JoinColumn
